@@ -2,170 +2,98 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ОПТЭЛ — Строганые пиломатериалы оптом</title>
-<meta name="description" content="Оптовые поставки строганых пиломатериалов по России. Ручная переборка, гарантия сортности 99,9%. Работаем с НДС 22%. г. Ижевск.">
-<link rel="stylesheet" href="style.css">
-<style>
-/* HERO специфичные стили */
-.hero {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 0 60px;
-  position: relative;
-  overflow: hidden;
-  background: var(--bg);
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#0a0f0a">
+  <title>ОПТЭЛ — Строганые пиломатериалы оптом | Ижевск</title>
+  <meta name="description" content="Оптовые поставки строганых пиломатериалов из ангарской сосны по России. Вагонка штиль, имитация бруса. Ручная переборка, гарантия сортности 99,9%. НДС 22%. г. Ижевск.">
+  <meta name="keywords" content="пиломатериалы оптом, строганые пиломатериалы, ангарская сосна оптом, вагонка штиль оптом, имитация бруса оптом, пиломатериалы Ижевск, купить вагонку оптом">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://optel-les.ru/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://optel-les.ru/">
+  <meta property="og:title" content="ОПТЭЛ — Строганые пиломатериалы оптом | Ижевск">
+  <meta property="og:description" content="Оптовые поставки строганых пиломатериалов из ангарской сосны по России. Вагонка штиль, имитация бруса. Ручная переборка, гарантия сортности 99,9%. НДС 22%. г. Ижевск.">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="ОПТЭЛ">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ОПТЭЛ — Строганые пиломатериалы оптом | Ижевск">
+  <meta name="twitter:description" content="Оптовые поставки строганых пиломатериалов из ангарской сосны по России. Вагонка штиль, имитация бруса. Ручная переборка, гарантия сортности 99,9%. НДС 22%. г. Ижевск.">
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0f0a'/><text y='24' x='3' font-size='20' font-family='Arial Black,sans-serif' fill='%23aaff00'>О</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://optel-les.ru/#organization",
+      "name": "ОПТЭЛ",
+      "url": "https://optel-les.ru/",
+      "telephone": "+79999238888",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Воткинское шоссе 204А",
+        "addressLocality": "Ижевск",
+        "addressRegion": "Удмуртская Республика",
+        "addressCountry": "RU"
+      },
+      "sameAs": ["https://t.me/pinkers5"]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://optel-les.ru/#localbusiness",
+      "name": "ОПТЭЛ — строганые пиломатериалы оптом",
+      "image": "https://optel-les.ru/img/og.jpg",
+      "url": "https://optel-les.ru/",
+      "telephone": "+79999238888",
+      "priceRange": "₽₽",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Воткинское шоссе 204А",
+        "addressLocality": "Ижевск",
+        "addressRegion": "Удмуртская Республика",
+        "postalCode": "426000",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 56.8519,
+        "longitude": 53.2115
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "14:00"
+        }
+      ],
+      "description": "Оптовые поставки строганых пиломатериалов из ангарской сосны по России. Вагонка штиль и имитация бруса. Ручная переборка, гарантия сортности 99,9%.",
+      "areaServed": "RU"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://optel-les.ru/#website",
+      "url": "https://optel-les.ru/",
+      "name": "ОПТЭЛ",
+      "inLanguage": "ru-RU"
+    }
+  ]
 }
-.hero-bg-text {
-  position: absolute;
-  font-family: var(--font-display);
-  font-size: clamp(160px, 25vw, 360px);
-  letter-spacing: 10px;
-  color: rgba(170,255,0,0.025);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-}
-.hero-glow {
-  position: absolute;
-  width: 700px; height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(170,255,0,0.07) 0%, transparent 60%);
-  top: -200px; right: -150px;
-  pointer-events: none;
-}
-.hero-glow2 {
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,184,48,0.04) 0%, transparent 60%);
-  bottom: -100px; left: -80px;
-  pointer-events: none;
-}
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 60px;
-  align-items: center;
-}
-.hero-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--lime);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--lime); }
-.hero h1 { margin-bottom: 24px; }
-.hero h1 .accent { color: var(--lime); }
-.hero-desc {
-  font-size: 17px;
-  color: var(--text2);
-  line-height: 1.75;
-  max-width: 520px;
-  margin-bottom: 36px;
-}
-.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-card {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--lime), var(--amber));
-}
-.hero-phone {
-  font-family: var(--font-display);
-  font-size: 38px;
-  letter-spacing: 1px;
-  color: var(--lime);
-  display: block;
-  margin-bottom: 6px;
-  text-decoration: none;
-  transition: all 0.2s;
-  line-height: 1.1;
-}
-.hero-phone:hover { color: #fff; text-shadow: 0 0 20px var(--lime); }
-.hero-addr { font-size: 13px; color: var(--text3); line-height: 1.7; margin-bottom: 20px; margin-top: 8px; }
-.hero-addr strong { color: var(--text2); }
-
-/* фичи в шапке */
-.features-bar {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  padding: 20px 0;
-}
-.features-inner {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-}
-.feature-item {
-  flex: 1;
-  min-width: 180px;
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-right: 1px solid var(--border);
-  white-space: nowrap;
-}
-.feature-item:last-child { border-right: none; }
-.feature-icon { color: var(--lime); flex-shrink: 0; }
-.feature-text { font-size: 13px; font-weight: 600; color: var(--text2); }
-
-/* advantage cards */
-.adv-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  transition: all 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-.adv-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--lime);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s;
-}
-.adv-card:hover { border-color: var(--border2); transform: translateY(-4px); }
-.adv-card:hover::after { transform: scaleX(1); }
-.adv-num { font-family: var(--font-display); font-size: 56px; color: var(--lime); line-height: 1; margin-bottom: 6px; }
-.adv-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.adv-desc { font-size: 13px; color: var(--text3); line-height: 1.6; }
-
-@media(max-width: 960px) {
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-card { display: none; }
-  .hero { min-height: auto; padding: 60px 0 40px; }
-  .features-inner { flex-wrap: wrap; }
-}
-</style>
+</script>
 </head>
 <body>
 

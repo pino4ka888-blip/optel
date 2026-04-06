@@ -938,3 +938,52 @@ footer {
   .sticky-cta .cta-text { display: none; }
   .contacts-main-grid { grid-template-columns: 1fr; }
 }
+
+/* ================================================================
+   CROSSBROWSER FIXES
+   ================================================================ */
+
+/* Safari: backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  header { background: rgba(10,15,10,0.97) !important; }
+  .modal-overlay.open { background: rgba(0,0,0,0.85) !important; }
+  .mobile-nav { background: rgba(10,15,10,0.99) !important; }
+}
+
+/* Firefox: scrollbar */
+* { scrollbar-width: thin; scrollbar-color: #213321 #0a0f0a; }
+
+/* iOS Safari: input zoom prevention */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .form-input, .form-select, .form-textarea,
+  .field-input, .field-select {
+    font-size: 16px;
+  }
+}
+
+/* IE/Edge legacy: CSS variables fallback handled via JS below */
+
+/* Prevent tap highlight on mobile */
+a, button { -webkit-tap-highlight-color: transparent; }
+
+/* Smooth font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Safari: appearance reset */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+/* Focus-visible for keyboard nav */
+:focus-visible {
+  outline: 2px solid #aaff00;
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
