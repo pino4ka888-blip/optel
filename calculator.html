@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор пиломатериалов — ОПТЭЛ</title>
+<meta name="description" content="Онлайн-калькулятор для расчёта объёма пиломатериалов. м³ → м², м² → м³, штук в кубе, полный расчёт.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-block">
+      <svg class="logo-svg" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- кабина -->
+        <rect x="2" y="20" width="14" height="16" rx="2" fill="#4A8030" stroke="#2d5016" stroke-width="1"/>
+        <rect x="4" y="22" width="5" height="5" rx="1" fill="#A8D8EA" opacity="0.8"/>
+        <!-- прицеп -->
+        <rect x="14" y="16" width="38" height="20" rx="2" fill="#5FA832" stroke="#3A7520" stroke-width="1"/>
+        <!-- брёвна / доски в прицепе -->
+        <rect x="17" y="18" width="32" height="4" rx="1" fill="#C8960A" opacity="0.9"/>
+        <rect x="17" y="23" width="32" height="4" rx="1" fill="#B07A08" opacity="0.9"/>
+        <rect x="17" y="28" width="32" height="4" rx="1" fill="#C8960A" opacity="0.9"/>
+        <!-- стяжки -->
+        <line x1="26" y1="16" x2="26" y2="36" stroke="#2d5016" stroke-width="1.2"/>
+        <line x1="38" y1="16" x2="38" y2="36" stroke="#2d5016" stroke-width="1.2"/>
+        <!-- колёса -->
+        <circle cx="9" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="9" cy="37" r="1.5" fill="#555"/>
+        <circle cx="22" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="22" cy="37" r="1.5" fill="#555"/>
+        <circle cx="34" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="34" cy="37" r="1.5" fill="#555"/>
+        <circle cx="46" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="46" cy="37" r="1.5" fill="#555"/>
+      </svg>
+      <div>
+        <div class="logo-name">ОПТЭЛ</div>
+        <div class="logo-sub">пиломатериалы оптом</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="gallery.html">Галерея</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="technical.html">Тех. условия</a>
+      <a href="suppliers.html">Поставщикам</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <div class="header-contact">
+      <a href="tel:+79999238888" class="header-phone">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h3l1.5 3.5-1.5 1a7 7 0 003.5 3.5l1-1.5L13 10v3a1 1 0 01-1 1C5.373 14 0 8.627 0 2a1 1 0 011-1h1z" fill="white"/></svg>
+        +7 9999-23-8888
+      </a>
+      <span class="header-hours">Пн–Пт 9:00–18:00 (МСК+2)</span>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="gallery.html">Галерея</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="technical.html">Тех. условия</a>
+  <a href="suppliers.html">Поставщикам</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="tel:+79999238888" style="color:#fff;font-weight:700;margin-top:8px;">📞 +7 9999-23-8888</a>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">Онлайн-инструмент</div>
+    <h1 style="font-size:36px;">Калькулятор пиломатериалов</h1>
+    <p style="font-size:16px;color:var(--tm);margin-top:8px;">Рассчитайте объём, количество досок или площадь покрытия</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="calc-tabs">
+      <button class="calc-tab active" onclick="switchCalcTab(this,'ctab-m3m2')">м³ → м²</button>
+      <button class="calc-tab" onclick="switchCalcTab(this,'ctab-m2m3')">м² → м³</button>
+      <button class="calc-tab" onclick="switchCalcTab(this,'ctab-boards')">Штук в м³</button>
+      <button class="calc-tab" onclick="switchCalcTab(this,'ctab-full')">Полный расчёт</button>
+    </div>
+
+    <!-- м³ → м² -->
+    <div class="calc-panel active" id="ctab-m3m2">
+      <div>
+        <div class="field-group">
+          <label class="field-label">Объём (м³)</label>
+          <input type="number" class="field-input" id="c1v" placeholder="напр. 2.5" step="0.1" min="0" oninput="c1calc()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Материал</label>
+          <select class="field-select" id="c1t" onchange="c1calc()">
+            <option value="">— выберите —</option>
+            <option value="12.5,85">Вагонка Штиль 12,5×96 мм</option>
+            <option value="13,92">Вагонка Штиль 13×105 мм</option>
+            <option value="20,133">Имитация бруса 20×140 мм</option>
+            <option value="28,133">Имитация бруса 28×140 мм</option>
+            <option value="20,183">Имитация бруса 20×190 мм</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Или толщина вручную (мм)</label>
+          <input type="number" class="field-input" id="c1th" placeholder="напр. 12.5" step="0.5" min="1" oninput="c1calc()">
+        </div>
+        <button class="btn-calc" onclick="c1calc()">Рассчитать</button>
+      </div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r1a">—</div><div class="result-label">Квадратных метров (м²)</div></div>
+        <div class="result-row"><div class="result-num" id="r1b">—</div><div class="result-label" id="r1bl">Штук досок (длина 3 м)</div></div>
+      </div>
+    </div>
+
+    <!-- м² → м³ -->
+    <div class="calc-panel" id="ctab-m2m3">
+      <div>
+        <div class="field-group">
+          <label class="field-label">Площадь (м²)</label>
+          <input type="number" class="field-input" id="c2v" placeholder="напр. 50" step="1" min="0" oninput="c2calc()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Материал</label>
+          <select class="field-select" id="c2t" onchange="c2calc()">
+            <option value="">— выберите —</option>
+            <option value="12.5">Вагонка Штиль 12,5 мм</option>
+            <option value="13">Вагонка Штиль 13 мм</option>
+            <option value="20">Имитация бруса 20 мм</option>
+            <option value="28">Имитация бруса 28 мм</option>
+            <option value="25">Половая доска 25 мм</option>
+            <option value="40">Половая доска 40 мм</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Или толщина (мм)</label>
+          <input type="number" class="field-input" id="c2th" placeholder="напр. 20" step="0.5" min="1" oninput="c2calc()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Запас на подрезку</label>
+          <select class="field-select" id="c2r" onchange="c2calc()">
+            <option value="0">Без запаса</option>
+            <option value="5" selected>5% — стандарт</option>
+            <option value="10">10% — сложная раскладка</option>
+            <option value="15">15% — диагональ</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="c2calc()">Рассчитать</button>
+      </div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r2a">—</div><div class="result-label">м³ с запасом на подрезку</div></div>
+        <div class="result-row"><div class="result-num" id="r2b">—</div><div class="result-label">м³ чистый объём (без запаса)</div></div>
+      </div>
+    </div>
+
+    <!-- Штук в м³ -->
+    <div class="calc-panel" id="ctab-boards">
+      <div>
+        <div class="field-group">
+          <label class="field-label">Толщина (мм)</label>
+          <input type="number" class="field-input" id="c3a" placeholder="напр. 12.5" step="0.5" min="1" oninput="c3calc()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Ширина (мм)</label>
+          <input type="number" class="field-input" id="c3b" placeholder="напр. 96" step="1" min="1" oninput="c3calc()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Длина доски</label>
+          <select class="field-select" id="c3c" onchange="c3calc()">
+            <option value="2">2 метра</option>
+            <option value="3" selected>3 метра</option>
+            <option value="4">4 метра</option>
+            <option value="6">6 метров</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Объём партии (м³)</label>
+          <input type="number" class="field-input" id="c3d" placeholder="напр. 5" step="0.1" min="0" oninput="c3calc()">
+        </div>
+        <button class="btn-calc" onclick="c3calc()">Рассчитать</button>
+      </div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r3a">—</div><div class="result-label" id="r3al">Штук в 1 м³</div></div>
+        <div class="result-row"><div class="result-num" id="r3b">—</div><div class="result-label" id="r3bl">Штук в партии</div></div>
+        <div class="result-row"><div class="result-num" id="r3c">—</div><div class="result-label">м² в 1 м³</div></div>
+      </div>
+    </div>
+
+    <!-- Полный расчёт -->
+    <div class="calc-panel" id="ctab-full">
+      <div>
+        <div class="field-group">
+          <label class="field-label">Площадь (м²)</label>
+          <input type="number" class="field-input" id="c4a" placeholder="напр. 80" step="1" min="0" oninput="c4calc()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Материал</label>
+          <select class="field-select" id="c4t" onchange="c4calc()">
+            <option value="">— выберите —</option>
+            <option value="12.5,85,3">Вагонка Штиль 12,5×96 мм, 3 м</option>
+            <option value="12.5,85,4">Вагонка Штиль 12,5×96 мм, 4 м</option>
+            <option value="13,92,3">Вагонка Штиль 13×105 мм, 3 м</option>
+            <option value="20,133,3">Имитация бруса 20×140 мм, 3 м</option>
+            <option value="20,133,4">Имитация бруса 20×140 мм, 4 м</option>
+            <option value="28,133,3">Имитация бруса 28×140 мм, 3 м</option>
+            <option value="20,183,3">Имитация бруса 20×190 мм, 3 м</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Запас</label>
+          <select class="field-select" id="c4r" onchange="c4calc()">
+            <option value="5" selected>5%</option>
+            <option value="10">10%</option>
+            <option value="15">15%</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="c4calc()">Рассчитать</button>
+        <div class="info-box" style="margin-top:14px;margin-bottom:0;font-size:12px;">
+          Расчёт ориентировочный. Точная стоимость зависит от объёма и сорта. Уточняйте по телефону.
+        </div>
+      </div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Полный результат</div>
+        <div class="result-row"><div class="result-num" id="r4a">—</div><div class="result-label">Кубометров с запасом</div></div>
+        <div class="result-row"><div class="result-num" id="r4b">—</div><div class="result-label">Количество досок</div></div>
+        <div class="result-row"><div class="result-num" id="r4c">—</div><div class="result-label">Стоимость</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="call-strip">
+      <div>
+        <div class="call-strip-text">Рассчитали объём? Позвоните — подтвердим цену и наличие.</div>
+        <div class="call-strip-sub">Скажем точную стоимость с НДС 22% для вашего объёма</div>
+      </div>
+      <a href="tel:+79999238888" class="call-strip-phone">+7 9999-23-8888</a>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY CTA -->
+<button class="sticky-cta" onclick="openModal('Получить прайс')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5" fill="none"/><path d="M5 8h6M8 5v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <span class="cta-text">Получить прайс</span>
+</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Получить прайс-лист</h3>
+    <p class="modal-desc">Заполните форму — менеджер перезвонит и рассчитает стоимость.</p>
+    <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
+      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <div class="form-group">
+        <label class="form-label">Ваше имя *</label>
+        <input type="text" name="name" class="form-input" placeholder="Иванов Иван" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон *</label>
+        <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Компания / Регион</label>
+        <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания", г. Казань'>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Интересующий материал</label>
+        <select name="product" class="form-select">
+          <option value="">— выберите —</option>
+          <option>Вагонка Штиль — уточнить цену</option>
+          <option>Имитация бруса — уточнить цену</option>
+          <option>Оба вида — получить прайс</option>
+          <option>Дилерская программа</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Примерный объём (м³)</label>
+        <input type="text" name="volume" class="form-input" placeholder="напр. 10 м³">
+      </div>
+      <button type="submit" class="modal-submit">Отправить заявку →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong style="color:rgba(255,255,255,0.85);">ОПТЭЛ</strong> — строганые пиломатериалы оптом · г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:rgba(255,255,255,0.65);">+7 9999-23-8888</a>
+    </div>
+    <div class="footer-links">
+      <span class="footer-vat">НДС 22%</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="data-policy.html">Политика данных</a>
+      <span style="color:rgba(255,255,255,0.35);">© ОПТЭЛ 2026</span>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>

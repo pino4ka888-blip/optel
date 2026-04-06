@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Технические условия — ОПТЭЛ</title>
+<meta name="description" content="Технические требования к пиломатериалам ОПТЭЛ. Сорта Экстра, Прима, А, В, С — полные требования по каждому сорту.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-block">
+      <svg class="logo-svg" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- кабина -->
+        <rect x="2" y="20" width="14" height="16" rx="2" fill="#4A8030" stroke="#2d5016" stroke-width="1"/>
+        <rect x="4" y="22" width="5" height="5" rx="1" fill="#A8D8EA" opacity="0.8"/>
+        <!-- прицеп -->
+        <rect x="14" y="16" width="38" height="20" rx="2" fill="#5FA832" stroke="#3A7520" stroke-width="1"/>
+        <!-- брёвна / доски в прицепе -->
+        <rect x="17" y="18" width="32" height="4" rx="1" fill="#C8960A" opacity="0.9"/>
+        <rect x="17" y="23" width="32" height="4" rx="1" fill="#B07A08" opacity="0.9"/>
+        <rect x="17" y="28" width="32" height="4" rx="1" fill="#C8960A" opacity="0.9"/>
+        <!-- стяжки -->
+        <line x1="26" y1="16" x2="26" y2="36" stroke="#2d5016" stroke-width="1.2"/>
+        <line x1="38" y1="16" x2="38" y2="36" stroke="#2d5016" stroke-width="1.2"/>
+        <!-- колёса -->
+        <circle cx="9" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="9" cy="37" r="1.5" fill="#555"/>
+        <circle cx="22" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="22" cy="37" r="1.5" fill="#555"/>
+        <circle cx="34" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="34" cy="37" r="1.5" fill="#555"/>
+        <circle cx="46" cy="37" r="4" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <circle cx="46" cy="37" r="1.5" fill="#555"/>
+      </svg>
+      <div>
+        <div class="logo-name">ОПТЭЛ</div>
+        <div class="logo-sub">пиломатериалы оптом</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="gallery.html">Галерея</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="technical.html">Тех. условия</a>
+      <a href="suppliers.html">Поставщикам</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <div class="header-contact">
+      <a href="tel:+79999238888" class="header-phone">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h3l1.5 3.5-1.5 1a7 7 0 003.5 3.5l1-1.5L13 10v3a1 1 0 01-1 1C5.373 14 0 8.627 0 2a1 1 0 011-1h1z" fill="white"/></svg>
+        +7 9999-23-8888
+      </a>
+      <span class="header-hours">Пн–Пт 9:00–18:00 (МСК+2)</span>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="gallery.html">Галерея</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="technical.html">Тех. условия</a>
+  <a href="suppliers.html">Поставщикам</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="tel:+79999238888" style="color:#fff;font-weight:700;margin-top:8px;">📞 +7 9999-23-8888</a>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">Нормативная база</div>
+    <h1 style="font-size:36px;">Технические условия</h1>
+    <p style="font-size:16px;color:var(--tm);margin-top:8px;">Требования к качеству пиломатериалов по каждому сорту</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+
+    <!-- СВОДНАЯ ТАБЛИЦА -->
+    <div class="teh-block">
+      <h3>Краткая сводка по сортам</h3>
+      <div style="overflow-x:auto;">
+        <table style="min-width:600px;">
+          <thead>
+            <tr>
+              <th>Показатель</th>
+              <th><span class="sort-tag sort-extra">Экстра</span></th>
+              <th><span class="sort-tag sort-prima">Прима</span></th>
+              <th><span class="sort-tag sort-a">Сорт А</span></th>
+              <th><span class="sort-tag sort-b">Сорт В</span></th>
+              <th><span class="sort-tag sort-c">Сорт С</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Сучки здоровые сросшиеся</td><td>Не доп.</td><td>до 20 мм, ≤1 шт/п.м.</td><td>до 30 мм, неогр.</td><td>Доп.</td><td>Доп.</td></tr>
+            <tr><td>Сучки не сросшиеся</td><td>Не доп.</td><td>Не доп.</td><td>Не доп.</td><td>Доп.</td><td>Доп.</td></tr>
+            <tr><td>Отверстия от выпавших сучков</td><td>Не доп.</td><td>Не доп.</td><td>Не доп.</td><td>Несквозные, ≤3 шт, ≤Ø10 мм</td><td>Доп.</td></tr>
+            <tr><td>Смоляные кармашки</td><td>Не доп.</td><td>2 шт/п.м., ≤1,5 мм</td><td>до 30% изделия</td><td>≤5 мм шир., ≤100 мм дл.</td><td>Доп.</td></tr>
+            <tr><td>Синева</td><td>Не доп.</td><td>Не доп.</td><td>Не доп.</td><td>Доп.</td><td>Доп.</td></tr>
+            <tr><td>Заболонь</td><td>до 10%</td><td>до 20%</td><td>до 50%</td><td>Доп.</td><td>Доп.</td></tr>
+            <tr><td>Покоробленность по кромке</td><td>до 2 мм</td><td>до 4 мм</td><td>до 6 мм</td><td>Доп.</td><td>Доп.</td></tr>
+            <tr><td>Твёрдая заболонная гниль</td><td>Не доп.</td><td>Не доп.</td><td>Не доп.</td><td>Не доп.</td><td>до 10%</td></tr>
+            <tr><td>Влажность (сосна, кедр, ольха)</td><td colspan="5" style="text-align:center;">10–14%</td></tr>
+            <tr><td>Влажность (лиственница)</td><td colspan="5" style="text-align:center;">10–16%</td></tr>
+            <tr><td>Откл. по толщине/ширине/длине</td><td colspan="5" style="text-align:center;">±0,5 мм</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ЭКСТРА -->
+    <div class="teh-block">
+      <h3><span class="sort-tag sort-extra" style="font-size:13px;padding:4px 10px;">Экстра</span> — технические требования</h3>
+      <div class="info-box">Исключает какие-либо повреждения, сучки, смоляные карманы, производственные дефекты.</div>
+      <div class="grid-2">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--g4);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Допускается:</div>
+          <ul class="check-list">
+            <li>Торцевая несквозная трещина на ширину изделия; микротрещины по торцу не более 5 мм</li>
+            <li>Заболонные грибные окраски (кроме синевы)</li>
+            <li>Заболонь — до 10% площади</li>
+            <li>Покоробленность по кромке — до 2 мм</li>
+            <li>Отклонения от размеров: ±0,5 мм</li>
+            <li>Влажность: 10–14% (сосна, кедр, ольха), 10–16% (лиственница)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#B03020;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Не допускается:</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="padding:5px 0;font-size:13px;color:var(--tm);display:flex;gap:8px;"><span style="color:#B03020;font-weight:700;">✕</span>Смоляные полосы и пятна (кроме лиственницы)</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--tm);display:flex;gap:8px;"><span style="color:#B03020;font-weight:700;">✕</span>Сучки любые</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--tm);display:flex;gap:8px;"><span style="color:#B03020;font-weight:700;">✕</span>Смоляные карманы</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--tm);display:flex;gap:8px;"><span style="color:#B03020;font-weight:700;">✕</span>Производственные дефекты</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--tm);display:flex;gap:8px;"><span style="color:#B03020;font-weight:700;">✕</span>Синева</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ПРИМА -->
+    <div class="teh-block">
+      <h3><span class="sort-tag sort-prima" style="font-size:13px;padding:4px 10px;">Прима</span> — технические требования</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Показатель</th><th>Требование</th></tr></thead>
+          <tbody>
+            <tr><td>Сучки здоровые сросшиеся</td><td>До 20 мм, не более 1 шт/п.м. или 2 сучка до 0,8 см</td></tr>
+            <tr><td>Сучки здоровые тёмные (нетабачные)</td><td>До 20 мм, не более 1 шт/п.м. или 2 по 0,8 мм</td></tr>
+            <tr><td>Сучки частично сросшиеся</td><td>До 20 мм, не более 1 шт/п.м. или 2 по 0,8 мм</td></tr>
+            <tr><td>Сучки не сросшиеся</td><td>Не допускаются</td></tr>
+            <tr><td>Сучки с трещинами</td><td>Не допускаются</td></tr>
+            <tr><td>Отверстия от выпавших сучков</td><td>Не допускаются</td></tr>
+            <tr><td>Трещины</td><td>Торцевая несквозная на ширину изделия; микротрещины по торцу ≤5 мм</td></tr>
+            <tr><td>Смоляные пятна и полосы</td><td>Не допускаются (кроме лиственницы)</td></tr>
+            <tr><td>Смоляные кармашки</td><td>2 шт/п.м., прикрытые, ≤1,5 мм шир., ≤20 мм дл.</td></tr>
+            <tr><td>Сердцевина</td><td>Не допускается</td></tr>
+            <tr><td>Заболонные грибные окраски</td><td>Допускаются (кроме синевы)</td></tr>
+            <tr><td>Синева</td><td>Не допускается</td></tr>
+            <tr><td>Червоточина</td><td>Не допускается</td></tr>
+            <tr><td>Вырыв, запил, вмятина, скол</td><td>Не допускаются</td></tr>
+            <tr><td>Ворсистость</td><td>Не допускается</td></tr>
+            <tr><td>Прорость</td><td>Не допускается</td></tr>
+            <tr><td>Гниль (твёрдая, мягкая, ядровая)</td><td>Не допускается</td></tr>
+            <tr><td>Волнистость</td><td>Не допускается</td></tr>
+            <tr><td>Покоробленность по кромке</td><td>До 4 мм</td></tr>
+            <tr><td>Обзол тупой / острый</td><td>Не допускается</td></tr>
+            <tr><td>Заболонь</td><td>До 20% площади изделия</td></tr>
+            <tr><td>Отклонения размеров</td><td>Толщина, ширина, длина: ±0,5 мм</td></tr>
+            <tr><td>Влажность</td><td>10–14% (сосна, кедр, ольха); 10–16% (лиственница)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- СОРТ А -->
+    <div class="teh-block">
+      <h3><span class="sort-tag sort-a" style="font-size:13px;padding:4px 10px;">Сорт А</span> — технические требования</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Показатель</th><th>Требование</th></tr></thead>
+          <tbody>
+            <tr><td>Сучки здоровые сросшиеся</td><td>До 30 мм, в неограниченном количестве</td></tr>
+            <tr><td>Сучки здоровые тёмные</td><td>До 25 мм, в количестве учитываемых сучков</td></tr>
+            <tr><td>Сучки частично сросшиеся</td><td>Допускаются</td></tr>
+            <tr><td>Сучки не сросшиеся</td><td>Не допускаются</td></tr>
+            <tr><td>Сучки с трещинами</td><td>Не допускаются</td></tr>
+            <tr><td>Отверстия от выпавших сучков</td><td>Не допускаются</td></tr>
+            <tr><td>Трещины</td><td>Несквозные, неглубокие, нерваные, ≤1 мм шир., ≤0,5 м дл. Сквозная по торцу на ширину изделия</td></tr>
+            <tr><td>Смоляные пятна, полосы и кармашки</td><td>В виде пятен и полос, до 30% изделия</td></tr>
+            <tr><td>Сердцевина</td><td>Визуально не отражающаяся, ≤5 мм шир., не более 1/3 изделия</td></tr>
+            <tr><td>Заболонные грибные окраски</td><td>Допускаются (кроме синевы)</td></tr>
+            <tr><td>Синева</td><td>Не допускается</td></tr>
+            <tr><td>Червоточина</td><td>Не допускается</td></tr>
+            <tr><td>Вырыв, запил, вмятина, скол</td><td>Не допускаются</td></tr>
+            <tr><td>Ворсистость</td><td>Не допускается</td></tr>
+            <tr><td>Прорость</td><td>Длиной 50 мм, шириной 5 мм</td></tr>
+            <tr><td>Гниль (твёрдая, мягкая, ядровая)</td><td>Не допускается</td></tr>
+            <tr><td>Волнистость</td><td>Не допускается</td></tr>
+            <tr><td>Покоробленность по кромке</td><td>До 6 мм</td></tr>
+            <tr><td>Обзол тупой</td><td>На нелицевой пласти, без выхода на кромку, при сохранении геометрии</td></tr>
+            <tr><td>Обзол острый</td><td>Не допускается</td></tr>
+            <tr><td>Заболонь</td><td>До 50% площади изделия</td></tr>
+            <tr><td>Отклонения размеров</td><td>Толщина, ширина, длина: ±0,5 мм</td></tr>
+            <tr><td>Влажность</td><td>10–14% (сосна, кедр, ольха); 10–16% (лиственница)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- СОРТ В -->
+    <div class="teh-block">
+      <h3><span class="sort-tag sort-b" style="font-size:13px;padding:4px 10px;">Сорт В</span> — технические требования</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Показатель</th><th>Требование</th></tr></thead>
+          <tbody>
+            <tr><td>Сучки здоровые (все виды сросшихся)</td><td>Допускаются</td></tr>
+            <tr><td>Сучки не сросшиеся</td><td>Допускаются</td></tr>
+            <tr><td>Сучки с трещинами</td><td>Несквозные по пласти; двойная трещина в сучке — не доп.; по кромке — не доп.</td></tr>
+            <tr><td>Отверстия от выпавших сучков</td><td>Сквозные — не доп. Несквозные по пласти/кромке до 1/3 изделия, ≤Ø10 мм, ≤3 шт/изд.</td></tr>
+            <tr><td>Трещины</td><td>Несквозные, неглубокие, нерваные, с сохранением целостности. Сквозная по торцу на ширину изделия</td></tr>
+            <tr><td>Смоляные пятна и полосы</td><td>До 40% площади изделия</td></tr>
+            <tr><td>Смоляные кармашки</td><td>Прикрытые, ≤5 мм шир., ≤100 мм дл.</td></tr>
+            <tr><td>Сердцевина</td><td>≤10 мм шир., не более 1/2 длины доски</td></tr>
+            <tr><td>Заболонные грибные окраски, синева</td><td>Допускаются</td></tr>
+            <tr><td>Червоточина</td><td>Несквозная — допускается</td></tr>
+            <tr><td>Вырыв, запил, вмятина, скол</td><td>Глубиной не более 0,75 мм</td></tr>
+            <tr><td>Ворсистость</td><td>Допускается</td></tr>
+            <tr><td>Прорость</td><td>Длиной 200 мм, шириной 10 мм, несквозная</td></tr>
+            <tr><td>Твёрдая заболонная гниль</td><td>Не допускается</td></tr>
+            <tr><td>Мягкая заболонная гниль, ядровая гниль</td><td>Не допускается</td></tr>
+            <tr><td>Волнистость</td><td>Допускается</td></tr>
+            <tr><td>Покоробленность по кромке</td><td>Допускается</td></tr>
+            <tr><td>Обзол тупой</td><td>На нелицевой пласти, без выхода на кромку, при сохранении геометрии</td></tr>
+            <tr><td>Обзол острый</td><td>Не допускается</td></tr>
+            <tr><td>Заболонь</td><td>Допускается</td></tr>
+            <tr><td>Отклонения размеров</td><td>Толщина, ширина, длина: ±0,5 мм</td></tr>
+            <tr><td>Влажность</td><td>10–14% (сосна, кедр, ольха); 10–16% (лиственница)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- СОРТ С -->
+    <div class="teh-block" style="margin-bottom:0;">
+      <h3><span class="sort-tag sort-c" style="font-size:13px;padding:4px 10px;">Сорт С</span> — технические требования (строительный)</h3>
+      <div class="info-box info-box-warn">Строительный сорт. Применяется для черновых работ, обрешётки, временных конструкций.</div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Показатель</th><th>Требование</th></tr></thead>
+          <tbody>
+            <tr><td>Сучки (все виды)</td><td>Допускаются</td></tr>
+            <tr><td>Отверстия от выпавших сучков</td><td>Допускаются</td></tr>
+            <tr><td>Трещины</td><td>Допускаются</td></tr>
+            <tr><td>Смоляные пятна, полосы, кармашки</td><td>Допускаются</td></tr>
+            <tr><td>Сердцевина</td><td>Допускается</td></tr>
+            <tr><td>Заболонные грибные окраски, синева</td><td>Допускаются</td></tr>
+            <tr><td>Червоточина</td><td>Допускается</td></tr>
+            <tr><td>Вырыв, запил, вмятина, скол</td><td>Допускаются</td></tr>
+            <tr><td>Ворсистость</td><td>Не допускается</td></tr>
+            <tr><td>Прорость</td><td>Допускается</td></tr>
+            <tr><td>Твёрдая заболонная гниль</td><td>До 10% изделия</td></tr>
+            <tr><td>Мягкая заболонная гниль, ядровая гниль</td><td>До 10% изделия</td></tr>
+            <tr><td>Волнистость</td><td>Допускается</td></tr>
+            <tr><td>Покоробленность по кромке</td><td>Допускается</td></tr>
+            <tr><td>Обзол тупой / острый</td><td>Допускается</td></tr>
+            <tr><td>Заболонь</td><td>Допускается</td></tr>
+            <tr><td>Отклонения размеров</td><td>Толщина, ширина, длина: ±0,5 мм</td></tr>
+            <tr><td>Влажность</td><td>10–14% (сосна, кедр, ольха); 10–16% (лиственница)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- УПАКОВКА -->
+    <div class="teh-block" style="margin-top:18px;">
+      <h3>Упаковка и хранение</h3>
+      <div class="grid-2">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--g4);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Упаковка:</div>
+          <ul class="check-list">
+            <li>Пакеты обвязаны стальной или полипропиленовой лентой (3–4 пояса)</li>
+            <li>Торцы защищены от механических повреждений</li>
+            <li>Упаковка укрыта влагозащитным материалом</li>
+            <li>Каждый пакет промаркирован: порода, сорт, размер, дата</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--g4);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Условия хранения:</div>
+          <ul class="check-list">
+            <li>Хранить в сухом, проветриваемом помещении</li>
+            <li>Укладывать на подкладки, исключая контакт с землёй</li>
+            <li>Не допускать прямого попадания осадков</li>
+            <li>Гарантийный срок хранения — 12 месяцев с даты отгрузки</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- КОНТРОЛЬ КАЧЕСТВА -->
+    <div class="teh-block">
+      <h3>Контроль качества и переборка</h3>
+      <div class="info-box">
+        <strong>Гарантия сортности 99,9%</strong> — каждая партия проходит обязательную ручную переборку перед отгрузкой. В случае обнаружения несоответствующих досок при приёмке — замена или возврат средств.
+      </div>
+      <table>
+        <thead><tr><th>Этап контроля</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>Входной контроль сырья</td><td>Проверка бревна на сортность, пороки, влажность до начала обработки</td></tr>
+          <tr><td>Контроль при строгании</td><td>Оператор станка отбраковывает несоответствующие доски в процессе</td></tr>
+          <tr><td>Ручная финальная переборка</td><td>100% осмотр каждой доски бригадой переборщиков</td></tr>
+          <tr><td>Контроль влажности</td><td>Замер электронным влагомером выборкой из каждого пакета</td></tr>
+          <tr><td>Контроль геометрии</td><td>Замер штангенциркулем, допуск ±0,5 мм</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- STICKY CTA -->
+<button class="sticky-cta" onclick="openModal('Получить прайс')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5" fill="none"/><path d="M5 8h6M8 5v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <span class="cta-text">Получить прайс</span>
+</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Получить прайс-лист</h3>
+    <p class="modal-desc">Заполните форму — менеджер перезвонит и рассчитает стоимость.</p>
+    <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
+      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <div class="form-group">
+        <label class="form-label">Ваше имя *</label>
+        <input type="text" name="name" class="form-input" placeholder="Иванов Иван" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон *</label>
+        <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Компания / Регион</label>
+        <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания", г. Казань'>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Интересующий материал</label>
+        <select name="product" class="form-select">
+          <option value="">— выберите —</option>
+          <option>Вагонка Штиль — уточнить цену</option>
+          <option>Имитация бруса — уточнить цену</option>
+          <option>Оба вида — получить прайс</option>
+          <option>Дилерская программа</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Примерный объём (м³)</label>
+        <input type="text" name="volume" class="form-input" placeholder="напр. 10 м³">
+      </div>
+      <button type="submit" class="modal-submit">Отправить заявку →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong style="color:rgba(255,255,255,0.85);">ОПТЭЛ</strong> — строганые пиломатериалы оптом · г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:rgba(255,255,255,0.65);">+7 9999-23-8888</a>
+    </div>
+    <div class="footer-links">
+      <span class="footer-vat">НДС 22%</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="data-policy.html">Политика данных</a>
+      <span style="color:rgba(255,255,255,0.35);">© ОПТЭЛ 2026</span>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
