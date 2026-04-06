@@ -128,3 +128,83 @@ function c4calc() {
   document.getElementById('r4b').textContent=fmt(Math.ceil(m3/(th*wb*len)),0)+' шт';
   document.getElementById('r4c').textContent='Уточните по телефону';
 }
+
+/* ── EASTER EGG: тройной клик по логотипу ── */
+function initEasterEgg() {
+  const logo = document.querySelector('.logo-text');
+  if (!logo) return;
+  let clicks = 0, timer;
+  logo.style.cursor = 'pointer';
+  logo.addEventListener('click', () => {
+    clicks++;
+    clearTimeout(timer);
+    if (clicks >= 3) {
+      clicks = 0;
+      showEasterEgg();
+    } else {
+      timer = setTimeout(() => { clicks = 0; }, 600);
+    }
+  });
+
+  // Закрыть по клику или ESC
+  document.addEventListener('click', e => {
+    const ov = document.getElementById('egg-overlay');
+    if (ov && e.target === ov) hideEasterEgg();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hideEasterEgg();
+  });
+}
+
+function showEasterEgg() {
+  const ov = document.getElementById('egg-overlay');
+  const cv = document.getElementById('matrix-canvas');
+  if (!ov || !cv) return;
+  ov.classList.add('show');
+  cv.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  startMatrix(cv);
+}
+function hideEasterEgg() {
+  const ov = document.getElementById('egg-overlay');
+  const cv = document.getElementById('matrix-canvas');
+  if (!ov) return;
+  ov.classList.remove('show');
+  cv.classList.remove('show');
+  document.body.style.overflow = '';
+  stopMatrix();
+}
+
+let matrixRaf;
+function startMatrix(canvas) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const cols = Math.floor(canvas.width / 18);
+  const drops = Array(cols).fill(1);
+  const chars = 'ОПТЭЛANGARSОСНА01лес01WOOD01';
+  function draw() {
+    ctx.fillStyle = 'rgba(10,15,10,0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#aaff00';
+    ctx.font = '14px monospace';
+    for (let i = 0; i < drops.length; i++) {
+      const ch = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(ch, i * 18, drops[i] * 18);
+      if (drops[i] * 18 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+    matrixRaf = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopMatrix() {
+  if (matrixRaf) cancelAnimationFrame(matrixRaf);
+  const cv = document.getElementById('matrix-canvas');
+  if (cv) { const ctx = cv.getContext('2d'); ctx.clearRect(0,0,cv.width,cv.height); }
+}
+
+/* обновляем DOMContentLoaded */
+document.addEventListener('DOMContentLoaded', () => {
+  initEasterEgg();
+});

@@ -987,3 +987,87 @@ input[type="number"] { -moz-appearance: textfield; }
   outline-offset: 2px;
 }
 :focus:not(:focus-visible) { outline: none; }
+
+/* ── PAGE HERO compact ── */
+.page-hero {
+  padding: 40px 0 36px !important;
+}
+.page-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+.page-hero-icon {
+  opacity: 0.12;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+@media(max-width:960px) {
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .page-hero-icon { display: none; }
+}
+
+/* ── COMPACT FORM ── */
+.form-compact .form-group { margin-bottom: 10px; }
+.form-compact .form-label { font-size: 10px; margin-bottom: 4px; }
+.form-compact .form-input,
+.form-compact .form-select,
+.form-compact .form-textarea { padding: 9px 12px; font-size: 13px; }
+.form-compact .form-textarea { min-height: 70px; }
+.form-compact .grid-2 { gap: 10px; }
+
+/* ── CONTACTS GRID fix ── */
+.contacts-main-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 28px;
+  align-items: start;
+}
+@media(max-width:900px) {
+  .contacts-main-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── EASTER EGG ── */
+.easter-egg-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+}
+.easter-egg-overlay.show { display: flex; }
+.easter-egg-text {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 10vw, 120px);
+  color: var(--lime);
+  letter-spacing: 4px;
+  text-align: center;
+  animation: egg-pulse 1.5s ease-in-out infinite;
+}
+.easter-egg-sub {
+  font-size: 14px;
+  color: var(--text3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+@keyframes egg-pulse {
+  0%, 100% { opacity: 1; text-shadow: 0 0 40px rgba(170,255,0,0.4); }
+  50% { opacity: 0.6; text-shadow: 0 0 80px rgba(170,255,0,0.8); }
+}
+/* matrix rain canvas */
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 899;
+  display: none;
+  opacity: 0.35;
+}
+#matrix-canvas.show { display: block; }
