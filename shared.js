@@ -351,3 +351,100 @@ document.addEventListener('DOMContentLoaded', () => {
   // Слушаем изменения localStorage с других вкладок
   window.addEventListener('storage', e => { if (e.key === 'optel_cart') renderGlobalCart(); });
 })();
+
+/* ═══════════════════════════════════════════
+   УВЕДОМЛЕНИЕ ОБ ОТПРАВКЕ ФОРМЫ
+═══════════════════════════════════════════ */
+(function() {
+  // Создаём тост-элемент
+  function getOrCreateToast() {
+    let el = document.getElementById('form-sent-toast');
+    if (el) return el;
+    el = document.createElement('div');
+    el.id = 'form-sent-toast';
+    el.style.cssText = [
+      'display:none',
+      'position:fixed',
+      'top:80px',
+      'left:50%',
+      'transform:translateX(-50%)',
+      'background:var(--surface)',
+      'border:1px solid rgba(170,255,0,0.35)',
+      'border-left:3px solid var(--lime)',
+      'border-radius:8px',
+      'padding:14px 24px',
+      'z-index:9000',
+      'font-family:var(--font-body)',
+      'font-size:14px',
+      'font-weight:600',
+      'color:var(--text)',
+      'box-shadow:0 8px 30px rgba(0,0,0,0.5)',
+      'white-space:nowrap',
+      'display:none',
+      'align-items:center',
+      'gap:10px',
+      'max-width:90vw',
+    ].join(';');
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function showFormToast(msg, isError) {
+    const el = getOrCreateToast();
+    const color = isError ? '#ff5555' : 'var(--lime)';
+    const icon  = isError
+      ? '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#ff5555" stroke-width="1.5"/><path d="M6 6l6 6M12 6l-6 6" stroke="#ff5555" stroke-width="1.5" stroke-linecap="round"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#aaff00" stroke-width="1.5"/><path d="M5.5 9l2.5 2.5 5-5" stroke="#aaff00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    el.style.borderLeftColor = color;
+    el.innerHTML = icon + '<span>' + msg + '</span>';
+    el.style.display = 'flex';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.display = 'none'; }, 4500);
+  }
+
+  function initFormListeners() {
+    document.querySelectorAll('form[action*="formsubmit"]').forEach(function(form) {
+      if (form._sentListenerAdded) return;
+      form._sentListenerAdded = true;
+      form.addEventListener('submit', function(e) {
+        // FormSubmit отправляет через fetch или redirect.
+        // Мы используем обычный POST — браузер уходит на страницу формсабмита.
+        // Чтобы перехватить и показать уведомление — используем fetch.
+        e.preventDefault();
+        const data = new FormData(form);
+        // Добавим _next чтобы FormSubmit не редиректил
+        data.set('_next', window.location.href + '?sent=1');
+
+        fetch(form.action, { method:'POST', body:data })
+          .then(function(r) {
+            if (r.ok || r.status === 200 || r.redirected) {
+              showFormToast('✓ Сообщение отправлено — свяжемся сразу!', false);
+              form.reset();
+              // Закрыть модалку если форма внутри
+              const modal = form.closest('.modal-overlay, .pm-overlay');
+              if (modal && window.closeModal) {
+                setTimeout(function() {
+                  if (modal.id === 'modal-overlay') closeModal();
+                  else if (modal.classList.contains('pm-overlay')) {
+                    const id = modal.id.replace('pm-','');
+                    if (window.closePM) closePM(id);
+                  }
+                }, 800);
+              }
+            } else {
+              showFormToast('Ошибка отправки. Позвоните нам: +7 9999-23-8888', true);
+            }
+          })
+          .catch(function() {
+            showFormToast('Ошибка сети. Позвоните нам: +7 9999-23-8888', true);
+          });
+      });
+    });
+  }
+
+  // Вешаем на DOMContentLoaded и повторно через MutationObserver
+  // (для форм, добавленных динамически — корзина и т.д.)
+  document.addEventListener('DOMContentLoaded', initFormListeners);
+  // Для форм внутри динамически инжектированных модалок
+  window.addEventListener('load', initFormListeners);
+})();

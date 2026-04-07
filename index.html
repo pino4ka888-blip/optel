@@ -304,9 +304,10 @@
     setTimeout(() => el.remove(), 950);
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  // DOM уже готов — скрипт в конце body
+  (function attachBoards() {
     const trigger = document.getElementById('boards-trigger');
-    if (!trigger) return;
+    if (!trigger) { setTimeout(attachBoards, 50); return; }
 
     trigger.addEventListener('click', function(e) {
       const rect = trigger.getBoundingClientRect();
@@ -323,7 +324,7 @@
         }, i * 35);
       }
     });
-  });
+  })();
 })();
 </script>
 
