@@ -349,67 +349,81 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.submitCartForm = function() {
-    var name    = (document.getElementById('gcart-name')    || {}).value || '';
-    var phone   = (document.getElementById('gcart-phone')   || {}).value || '';
-    var company = (document.getElementById('gcart-company') || {}).value || '';
-    var comment = (document.getElementById('gcart-comment') || {}).value || '';
-    var summary = (document.getElementById('global-cart-summary') || {}).textContent || '';
+    var nameVal    = document.getElementById('gcart-name')    ? document.getElementById('gcart-name').value.trim()    : '';
+    var phoneVal   = document.getElementById('gcart-phone')   ? document.getElementById('gcart-phone').value.trim()   : '';
+    var companyVal = document.getElementById('gcart-company') ? document.getElementById('gcart-company').value.trim() : '';
+    var commentVal = document.getElementById('gcart-comment') ? document.getElementById('gcart-comment').value.trim() : '';
+    var summaryEl  = document.getElementById('global-cart-summary');
+    var summaryVal = summaryEl ? summaryEl.textContent.trim() : '';
 
-    if (!phone || phone.length < 6) {
+    if (!phoneVal || phoneVal.replace(/\D/g,'').length < 10) {
       var ph = document.getElementById('gcart-phone');
       if (ph) { ph.style.borderColor = '#ff5555'; ph.focus(); }
       return;
     }
 
-    // Строим временную форму и сабмитим в скрытый iframe — как рабочие формы
-    var iframeName = 'cart_iframe_' + Date.now();
-    var iframe = document.createElement('iframe');
-    iframe.name = iframeName;
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
+    // Создаём форму с латинскими именами полей
     var form = document.createElement('form');
-    form.action  = 'https://formsubmit.co/non_86@mail.ru';
     form.method  = 'POST';
-    form.target  = iframeName;
-    form.style.display = 'none';
+    form.action  = 'https://formsubmit.co/non_86@mail.ru';
+    form.style.cssText = 'position:absolute;left:-9999px;top:-9999px;visibility:hidden;';
 
-    var fields = {
-      '_subject':  'Запрос из корзины — ОПТЭЛ',
+    var data = {
+      '_subject':  'Заявка из корзины ОПТЭЛ',
       '_captcha':  'false',
       '_template': 'box',
-      'Источник':  'Корзина сайта',
-      'Состав заказа': summary,
-      'Имя':       name,
-      'Телефон':   phone,
-      'Компания':  company,
-      'Комментарий': comment,
+      '_next':     window.location.href,
+      'source':    'Корзина',
+      'cart':      summaryVal,
+      'name':      nameVal || 'Не указано',
+      'phone':     phoneVal,
+      'company':   companyVal,
+      'comment':   commentVal,
     };
-    Object.keys(fields).forEach(function(k) {
+
+    Object.keys(data).forEach(function(key) {
       var inp = document.createElement('input');
-      inp.type  = 'hidden';
-      inp.name  = k;
-      inp.value = fields[k];
+      inp.type = 'hidden';
+      inp.name = key;
+      inp.value = data[key];
       form.appendChild(inp);
     });
 
     document.body.appendChild(form);
+
+    // Отправляем в скрытый iframe
+    var iframeId = 'optel_cart_frame';
+    var existing = document.getElementById(iframeId);
+    if (existing) existing.parentNode.removeChild(existing);
+
+    var iframe = document.createElement('iframe');
+    iframe.id   = iframeId;
+    iframe.name = iframeId;
+    iframe.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;';
+    document.body.appendChild(iframe);
+
+    form.target = iframeId;
     form.submit();
 
-    // Показываем тост и закрываем
+    // Уведомление пользователю
     if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
     closeGlobalCartSend();
 
-    // Очищаем форму
+    // Очищаем поля
     ['gcart-name','gcart-phone','gcart-company','gcart-comment'].forEach(function(id) {
       var el = document.getElementById(id);
-      if (el) el.value = '';
+      if (el) { el.value = ''; el.style.borderColor = ''; }
     });
 
+    // Удаляем форму через паузу
     setTimeout(function() {
-      if (form.parentNode) document.body.removeChild(form);
-      if (iframe.parentNode) document.body.removeChild(iframe);
-    }, 5000);
+      if (form.parentNode) form.parentNode.removeChild(form);
+      // iframe оставляем — нужен для завершения запроса
+      setTimeout(function() {
+        var fr = document.getElementById(iframeId);
+        if (fr) fr.parentNode.removeChild(fr);
+      }, 10000);
+    }, 1000);
   };
 
   document.addEventListener('DOMContentLoaded', injectCartUI);
