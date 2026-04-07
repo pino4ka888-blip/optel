@@ -260,5 +260,72 @@
   </div>
 </footer>
 <script src="shared.js"></script>
+
+<!-- EASTER EGG: летящие доски при клике на "Строганые" -->
+<style>
+.flying-board {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 28px;
+  line-height: 1;
+  will-change: transform, opacity;
+  user-select: none;
+}
+</style>
+<script>
+(function() {
+  const BOARDS = ['🪵','🌲','🌿','🪚','⚡','🟩','📦','🪵','🌳'];
+
+  function spawnBoard(originX, originY) {
+    const el = document.createElement('div');
+    el.className = 'flying-board';
+    el.textContent = BOARDS[Math.floor(Math.random() * BOARDS.length)];
+
+    // Случайное направление: веером вверх и в стороны
+    const angle = (Math.random() * 200 - 100); // -100..+100 градусов от вертикали вверх
+    const speed = 180 + Math.random() * 260;   // px
+    const rad   = (angle - 90) * Math.PI / 180;
+    const tx = Math.cos(rad) * speed;
+    const ty = Math.sin(rad) * speed;
+    const rot = (Math.random() - 0.5) * 720;
+
+    el.style.left = (originX - 14) + 'px';
+    el.style.top  = (originY - 14) + 'px';
+    el.style.transition = 'none';
+    document.body.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.transition = 'transform 0.9s cubic-bezier(.2,.8,.4,1), opacity 0.9s ease';
+      el.style.transform  = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+      el.style.opacity    = '0';
+    });
+
+    setTimeout(() => el.remove(), 950);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const trigger = document.getElementById('boards-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', function(e) {
+      const rect = trigger.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top  + rect.height / 2;
+
+      // 18 досок с небольшой задержкой
+      for (let i = 0; i < 18; i++) {
+        setTimeout(() => {
+          // Немного рандомизируем точку вылета
+          const ox = cx + (Math.random() - 0.5) * rect.width;
+          const oy = cy + (Math.random() - 0.5) * rect.height * 0.6;
+          spawnBoard(ox, oy);
+        }, i * 35);
+      }
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
