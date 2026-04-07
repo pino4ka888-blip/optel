@@ -394,14 +394,8 @@
 
       <!-- КАРТОЧКА 1: ВАГОНКА -->
       <div class="catalog-card reveal" onclick="openProduct('vaganka')">
-        <div class="catalog-visual vaganka">
-          <svg width="260" height="100" viewBox="0 0 260 100" fill="none" opacity="0.6">
-            <rect y="4"  width="260" height="14" rx="2" fill="#D4A84B"/>
-            <rect y="22" width="260" height="14" rx="2" fill="#C5983A"/>
-            <rect y="40" width="260" height="14" rx="2" fill="#D4A84B"/>
-            <rect y="58" width="260" height="14" rx="2" fill="#B08030"/>
-            <rect y="76" width="260" height="14" rx="2" fill="#D4A84B"/>
-          </svg>
+        <div class="catalog-visual vaganka" style="padding:0;overflow:hidden;">
+          <img src="img/vaganka.jpg" alt="Вагонка Штиль из ангарской сосны" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
         </div>
         <div class="catalog-info">
           <div class="catalog-name">Вагонка "Штиль"</div>
@@ -418,13 +412,8 @@
 
       <!-- КАРТОЧКА 2: ИМИТАЦИЯ БРУСА -->
       <div class="catalog-card reveal" style="transition-delay:.1s;" onclick="openProduct('imitation')">
-        <div class="catalog-visual imitation">
-          <svg width="260" height="100" viewBox="0 0 260 100" fill="none" opacity="0.6">
-            <rect y="2"  width="260" height="22" rx="2" fill="#3a6a20"/>
-            <rect y="28" width="260" height="22" rx="2" fill="#4a7a30"/>
-            <rect y="54" width="260" height="22" rx="2" fill="#3a6a20"/>
-            <rect y="80" width="260" height="18" rx="2" fill="#4a7a30"/>
-          </svg>
+        <div class="catalog-visual imitation" style="padding:0;overflow:hidden;">
+          <img src="img/imitation.jpg" alt="Имитация бруса из ангарской сосны" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
         </div>
         <div class="catalog-info">
           <div class="catalog-name">Имитация бруса</div>
@@ -461,14 +450,8 @@
 <div class="product-modal-overlay" id="modal-vaganka">
   <div class="product-modal">
     <button class="pm-close" onclick="closeProduct('vaganka')">✕</button>
-    <div class="pm-visual vaganka" style="background:linear-gradient(135deg,#2a1204,#6b4010,#2a1204);">
-      <svg width="320" height="90" viewBox="0 0 320 90" fill="none" opacity="0.55">
-        <rect y="4"  width="320" height="14" rx="2" fill="#D4A84B"/>
-        <rect y="22" width="320" height="14" rx="2" fill="#C5983A"/>
-        <rect y="40" width="320" height="14" rx="2" fill="#D4A84B"/>
-        <rect y="58" width="320" height="14" rx="2" fill="#B08030"/>
-        <rect y="76" width="320" height="12" rx="2" fill="#D4A84B"/>
-      </svg>
+    <div class="pm-visual" style="height:160px;padding:0;overflow:hidden;border-radius:14px 14px 0 0;">
+      <img src="img/vaganka.jpg" alt="Вагонка Штиль сечение" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
     </div>
     <div class="pm-body">
       <div class="pm-title">Вагонка "Штиль"</div>
@@ -489,7 +472,7 @@
             </select>
           </div>
           <div class="config-field">
-            <label>Толщина × ширина</label>
+            <label>Сечение</label>
             <select class="config-select" id="v-size" onchange="calcVaganka()">
               <option value="12.5x96">12,5 × 96 мм</option>
               <option value="13x105">13 × 105 мм</option>
@@ -509,12 +492,18 @@
             <input type="number" class="config-select" id="v-vol" value="1" min="0.1" step="0.1" oninput="calcVaganka()" style="font-family:var(--font-body);">
           </div>
         </div>
+      <!-- Наличие -->
+      <div id="v-avail-block" style="margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div id="v-avail-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
+          <!-- заполняется JS -->
+        </div>
+        <div id="v-avail-note" style="font-size:12px;color:var(--text3);"></div>
       </div>
 
       <!-- ЦЕНА -->
       <div class="price-result" id="v-price-block">
         <div class="price-result-left">
-          <div class="price-result-label">Стоимость</div>
+          <div class="price-result-label">Стоимость (тестовые цены)</div>
           <div class="price-result-value" id="v-price">—</div>
           <div class="price-result-unit" id="v-price-unit">за м³</div>
         </div>
@@ -527,8 +516,8 @@
           <h4>Характеристики</h4>
           <table class="spec-table"><tbody>
             <tr><td>Профиль</td><td>Штиль (скруглённый)</td></tr>
-            <tr><td>Сечение</td><td id="v-spec-size">12,5×96 / 13×105 мм</td></tr>
-            <tr><td>Рабочая ширина</td><td id="v-spec-width">85–92 мм</td></tr>
+            <tr><td>Сечение</td><td id="v-spec-size" class="spec-dynamic">12,5×96 / 13×105 мм</td></tr>
+            <tr><td>Ширина</td><td id="v-spec-width">85–92 мм</td></tr>
             <tr><td>Длина</td><td id="v-spec-len">2 / 3 / 4 / 6 м</td></tr>
             <tr><td>Влажность</td><td>не более 14%</td></tr>
             <tr><td>Допуск</td><td>±0,5 мм</td></tr>
@@ -582,13 +571,8 @@
 <div class="product-modal-overlay" id="modal-imitation">
   <div class="product-modal">
     <button class="pm-close" onclick="closeProduct('imitation')">✕</button>
-    <div class="pm-visual imitation" style="background:linear-gradient(135deg,#0a1e0a,#1e4e1e,#0a1e0a);">
-      <svg width="320" height="90" viewBox="0 0 320 90" fill="none" opacity="0.55">
-        <rect y="2"  width="320" height="22" rx="2" fill="#3a6a20"/>
-        <rect y="28" width="320" height="22" rx="2" fill="#4a7a30"/>
-        <rect y="54" width="320" height="22" rx="2" fill="#3a6a20"/>
-        <rect y="80" width="320" height="10" rx="2" fill="#4a7a30"/>
-      </svg>
+    <div class="pm-visual" style="height:160px;padding:0;overflow:hidden;border-radius:14px 14px 0 0;">
+      <img src="img/imitation.jpg" alt="Имитация бруса сечение" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
     </div>
     <div class="pm-body">
       <div class="pm-title">Имитация бруса</div>
@@ -609,7 +593,7 @@
             </select>
           </div>
           <div class="config-field">
-            <label>Толщина × ширина</label>
+            <label>Сечение</label>
             <select class="config-select" id="i-size" onchange="calcImitation()">
               <option value="20x140">20 × 140 мм</option>
               <option value="28x140">28 × 140 мм</option>
@@ -629,12 +613,18 @@
             <input type="number" class="config-select" id="i-vol" value="1" min="0.1" step="0.1" oninput="calcImitation()" style="font-family:var(--font-body);">
           </div>
         </div>
+      <!-- Наличие -->
+      <div id="i-avail-block" style="margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div id="i-avail-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
+          <!-- заполняется JS -->
+        </div>
+        <div id="i-avail-note" style="font-size:12px;color:var(--text3);"></div>
       </div>
 
       <!-- ЦЕНА -->
       <div class="price-result" id="i-price-block">
         <div class="price-result-left">
-          <div class="price-result-label">Стоимость</div>
+          <div class="price-result-label">Стоимость (тестовые цены)</div>
           <div class="price-result-value" id="i-price">—</div>
           <div class="price-result-unit" id="i-price-unit">за м³</div>
         </div>
@@ -647,8 +637,8 @@
           <h4>Характеристики</h4>
           <table class="spec-table"><tbody>
             <tr><td>Профиль</td><td>Имитация оцилиндрованного бруса</td></tr>
-            <tr><td>Сечение</td><td id="i-spec-size">20×140 / 28×140 / 20×190 мм</td></tr>
-            <tr><td>Рабочая ширина</td><td id="i-spec-width">133–183 мм</td></tr>
+            <tr><td>Сечение</td><td id="i-spec-size" class="spec-dynamic">20×140 / 28×140 / 20×190 мм</td></tr>
+            <tr><td>Ширина</td><td id="i-spec-width">133–183 мм</td></tr>
             <tr><td>Длина</td><td id="i-spec-len">3 / 4 / 6 м</td></tr>
             <tr><td>Влажность</td><td>не более 14%</td></tr>
             <tr><td>Допуск</td><td>±0,5 мм</td></tr>
@@ -807,16 +797,81 @@ const SIZE_FACTOR = {
 const LEN_FACTOR = { '2': 1.05, '3': 1.0, '4': 1.02, '6': 1.04 };
 
 // Соответствие размер → описание для спецификации
+// width — это фактическая ширина (равна выбранному сечению)
 const VAGANKA_SPECS = {
-  '12.5x96': { section: '12,5 × 96 мм', width: '85 мм (рабочая)' },
-  '13x105':  { section: '13 × 105 мм',  width: '92 мм (рабочая)' },
+  '12.5x96': { section: '12,5 × 96 мм', width: '96 мм' },
+  '13x105':  { section: '13 × 105 мм',  width: '105 мм' },
 };
 const IMITATION_SPECS = {
-  '20x140': { section: '20 × 140 мм', width: '133 мм (рабочая)' },
-  '28x140': { section: '28 × 140 мм', width: '133 мм (рабочая)' },
-  '20x190': { section: '20 × 190 мм', width: '183 мм (рабочая)' },
+  '20x140': { section: '20 × 140 мм', width: '140 мм' },
+  '28x140': { section: '28 × 140 мм', width: '140 мм' },
+  '20x190': { section: '20 × 190 мм', width: '190 мм' },
 };
 const SORT_LABEL = { extra: 'Экстра', prima: 'Прима', a: 'Сорт А', b: 'Сорт В', c: 'Сорт С' };
+
+// ════════════════════════════════════════
+// НАЛИЧИЕ (заполнять по мере обновления)
+// Формат: 'ключ_сорт': 'в наличии' | 'под заказ'
+// ════════════════════════════════════════
+const STOCK = {
+  // Вагонка Штиль
+  'extra_12.5x96': 'в наличии',
+  'extra_13x105':  'под заказ',
+  'prima_12.5x96': 'в наличии',
+  'prima_13x105':  'под заказ',
+  'a_12.5x96':     'в наличии',
+  'a_13x105':      'в наличии',
+  'b_12.5x96':     'в наличии',
+  'b_13x105':      'под заказ',
+  'c_12.5x96':     'в наличии',
+  'c_13x105':      'под заказ',
+  // Имитация бруса
+  'extra_20x140':  'в наличии',
+  'extra_28x140':  'под заказ',
+  'extra_20x190':  'под заказ',
+  'prima_20x140':  'в наличии',
+  'prima_28x140':  'под заказ',
+  'prima_20x190':  'под заказ',
+  'a_20x140':      'в наличии',
+  'a_28x140':      'в наличии',
+  'a_20x190':      'под заказ',
+  'b_20x140':      'в наличии',
+  'b_28x140':      'в наличии',
+  'b_20x190':      'в наличии',
+  'c_20x140':      'в наличии',
+  'c_28x140':      'в наличии',
+  'c_20x190':      'в наличии',
+};
+
+function getStock(sort, size) {
+  return STOCK[sort + '_' + size] || 'уточнить';
+}
+
+function renderAvail(badgeId, noteId, sort, size) {
+  const badge = document.getElementById(badgeId);
+  const note  = document.getElementById(noteId);
+  if (!badge) return;
+  const status = getStock(sort, size);
+  if (status === 'в наличии') {
+    badge.style.background = 'rgba(170,255,0,0.12)';
+    badge.style.border = '1px solid rgba(170,255,0,0.4)';
+    badge.style.color = '#aaff00';
+    badge.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="rgba(170,255,0,0.3)" stroke="#aaff00" stroke-width="1"/><path d="M3.5 6l1.5 1.5 3.5-3.5" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round"/></svg> В наличии';
+    if (note) note.textContent = '';
+  } else if (status === 'под заказ') {
+    badge.style.background = 'rgba(255,184,48,0.1)';
+    badge.style.border = '1px solid rgba(255,184,48,0.3)';
+    badge.style.color = '#ffb830';
+    badge.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#ffb830" stroke-width="1.2" fill="none"/><path d="M6 3v3.5l2 1.2" stroke="#ffb830" stroke-width="1.2" stroke-linecap="round"/></svg> Под заказ';
+    if (note) note.textContent = 'Срок изготовления — не более 3 недель';
+  } else {
+    badge.style.background = 'rgba(255,255,255,0.05)';
+    badge.style.border = '1px solid rgba(255,255,255,0.15)';
+    badge.style.color = 'var(--text3)';
+    badge.textContent = 'Уточнить наличие';
+    if (note) note.textContent = '';
+  }
+}
 
 function fmtPrice(n) {
   return Math.round(n).toLocaleString('ru') + ' ₽';
@@ -830,13 +885,16 @@ function calcVaganka() {
   const size = document.getElementById('v-size').value;
   const len  = document.getElementById('v-len').value;
   const vol  = parseFloat(document.getElementById('v-vol').value) || 1;
-  // Цена
+  // Цена пересчитывается с учётом объёма
   const base = PRICES[sort + '_vaganka'];
   if (base) {
-    const price = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
-    document.getElementById('v-price').textContent = fmtPrice(price);
+    const pricePerM3 = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+    const total = pricePerM3 * vol;
+    document.getElementById('v-price').textContent = fmtPrice(total);
     document.getElementById('v-price-unit').textContent =
-      vol > 1 ? 'итого за ' + vol + ' м³: ' + fmtPrice(price * vol) : 'за 1 м³';
+      vol > 1
+        ? fmtPrice(pricePerM3) + '/м³ × ' + vol + ' м³'
+        : 'за 1 м³';
   }
   // Динамическое описание
   const sd = VAGANKA_SPECS[size];
@@ -848,6 +906,8 @@ function calcVaganka() {
   }
   const el = document.getElementById('v-spec-len');
   if (el) { el.textContent = len + ' м'; el.className = 'spec-dynamic'; }
+  // Наличие
+  renderAvail('v-avail-badge', 'v-avail-note', sort, size);
   updateCartItem('vaganka');
 }
 
@@ -858,10 +918,13 @@ function calcImitation() {
   const vol  = parseFloat(document.getElementById('i-vol').value) || 1;
   const base = PRICES[sort + '_imitation'];
   if (base) {
-    const price = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
-    document.getElementById('i-price').textContent = fmtPrice(price);
+    const pricePerM3 = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+    const total = pricePerM3 * vol;
+    document.getElementById('i-price').textContent = fmtPrice(total);
     document.getElementById('i-price-unit').textContent =
-      vol > 1 ? 'итого за ' + vol + ' м³: ' + fmtPrice(price * vol) : 'за 1 м³';
+      vol > 1
+        ? fmtPrice(pricePerM3) + '/м³ × ' + vol + ' м³'
+        : 'за 1 м³';
   }
   const sd = IMITATION_SPECS[size];
   if (sd) {
@@ -872,6 +935,8 @@ function calcImitation() {
   }
   const el = document.getElementById('i-spec-len');
   if (el) { el.textContent = len + ' м'; el.className = 'spec-dynamic'; }
+  // Наличие
+  renderAvail('i-avail-badge', 'i-avail-note', sort, size);
   updateCartItem('imitation');
 }
 
