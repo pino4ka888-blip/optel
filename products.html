@@ -720,7 +720,14 @@ function addToCart(type) {
   cart.push(getItemConfig(type));
   saveCurrent(cart);
   // Обновляем глобальную корзину из shared.js
-  if (window.renderGlobalCart) window.renderGlobalCart();
+  // Если shared.js ещё не инжектировал UI — дождёмся
+  if (window.renderGlobalCart) {
+    window.renderGlobalCart();
+  } else {
+    setTimeout(function() {
+      if (window.renderGlobalCart) window.renderGlobalCart();
+    }, 300);
+  }
   // Тост
   showToast('✓ Добавлено в корзину');
   // Кнопка

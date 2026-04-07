@@ -97,7 +97,7 @@
     <div class="hero-inner">
       <div>
         <div class="hero-eyebrow">Прямой поставщик · 5 лет на рынке</div>
-        <h1>Строганые<br>пиломатериалы<br><span style="color:var(--lime);">оптом</span></h1>
+        <h1><span id="boards-trigger" style="cursor:pointer;border-bottom:2px dashed rgba(170,255,0,0.4);transition:border-color 0.2s;" onclick="if(window._spawnBoards)window._spawnBoards(event)">Строганые</span><br>пиломатериалы<br><span style="color:var(--lime);">оптом</span></h1>
         <p class="hero-desc">Высококачественные строганые пиломатериалы по всей России. Ручная переборка каждой партии. Гарантия сортности 99,9%. Доставка до двери — стоимость обсуждается индивидуально.</p>
         <div class="hero-ctas">
           <a href="tel:+79999238888" class="btn btn-lime btn-lg">
@@ -242,7 +242,7 @@
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
     <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ"><input type="hidden" name="_source" value="Главная страница — модальная форма"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
@@ -304,26 +304,27 @@
     setTimeout(() => el.remove(), 950);
   }
 
-  // DOM уже готов — скрипт в конце body
-  (function attachBoards() {
-    const trigger = document.getElementById('boards-trigger');
-    if (!trigger) { setTimeout(attachBoards, 50); return; }
-
-    trigger.addEventListener('click', function(e) {
-      const rect = trigger.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top  + rect.height / 2;
-
-      // 18 досок с небольшой задержкой
-      for (let i = 0; i < 18; i++) {
-        setTimeout(() => {
-          // Немного рандомизируем точку вылета
-          const ox = cx + (Math.random() - 0.5) * rect.width;
-          const oy = cy + (Math.random() - 0.5) * rect.height * 0.6;
+  // Экспортируем функцию для onclick
+  window._spawnBoards = function(e) {
+    const trigger = e.currentTarget || e.target;
+    const rect = trigger.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top  + rect.height / 2;
+    for (var i = 0; i < 18; i++) {
+      (function(delay) {
+        setTimeout(function() {
+          var ox = cx + (Math.random() - 0.5) * rect.width;
+          var oy = cy + (Math.random() - 0.5) * rect.height * 0.6;
           spawnBoard(ox, oy);
-        }, i * 35);
-      }
-    });
+        }, delay);
+      })(i * 35);
+    }
+  };
+  // Также вешаем через addEventListener как запасной вариант
+  (function attachBoards() {
+    var trigger = document.getElementById('boards-trigger');
+    if (!trigger) { setTimeout(attachBoards, 50); return; }
+    trigger.addEventListener('click', window._spawnBoards);
   })();
 })();
 </script>

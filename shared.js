@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function fmtP(n) { return Math.round(n).toLocaleString('ru') + ' ₽'; }
 
+  window.renderGlobalCart = renderGlobalCart;
   function renderGlobalCart() {
     const bar  = document.getElementById('global-cart-bar');
     const list = document.getElementById('global-cart-list');
@@ -257,11 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = loadCart().filter(i => i.type !== type);
     saveCart(cart);
     renderGlobalCart();
+    // Вешаем listeners на формы инжектированных модалок
+    if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   };
 
   window.globalClearCart = function() {
     saveCart([]);
     renderGlobalCart();
+    // Вешаем listeners на формы инжектированных модалок
+    if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   };
 
   window.globalSendCart = function() {
@@ -332,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <input type="hidden" name="_subject" value="Запрос из корзины — ОПТЭЛ">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="_source" value="Корзина — страница продукции">
           <input type="hidden" name="cart" id="global-cart-hidden">
           <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
           <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
@@ -345,6 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ov.addEventListener('click', e => { if (e.target === ov) closeGlobalCartSend(); });
 
     renderGlobalCart();
+    // Вешаем listeners на формы инжектированных модалок
+    if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   }
 
   document.addEventListener('DOMContentLoaded', injectCartUI);
@@ -402,6 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el._t = setTimeout(() => { el.style.display = 'none'; }, 4500);
   }
 
+  window.initFormListeners = initFormListeners;
   function initFormListeners() {
     document.querySelectorAll('form[action*="formsubmit"]').forEach(function(form) {
       if (form._sentListenerAdded) return;
@@ -415,9 +424,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Добавим _next чтобы FormSubmit не редиректил
         data.set('_next', window.location.href + '?sent=1');
 
-        fetch(form.action, { method:'POST', body:data })
+        // Добавим служебные поля если их нет
+        if (!data.get('_next')) data.set('_next', window.location.href);
+        if (!data.get('_source')) {
+          var src = document.title || window.location.pathname;
+          data.set('_source', src);
+        }
+
+        fetch(form.action, { method:'POST', body:data, redirect:'follow' })
           .then(function(r) {
-            if (r.ok || r.status === 200 || r.redirected) {
+            if (r.ok || r.status === 200 || r.redirected || r.status === 0) {
               showFormToast('✓ Сообщение отправлено — свяжемся сразу!', false);
               form.reset();
               // Закрыть модалку если форма внутри
