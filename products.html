@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="theme-color" content="#0a0f0a">
 <title>Продукция — Строганые пиломатериалы оптом | ОПТЭЛ</title>
-<meta name="description" content="Строганые пиломатериалы из ангарской сосны оптом. Вагонка Штиль, имитация бруса. Сорта Экстра, Прима, А, В, С. Выберите размер и узнайте цену.">
+<meta name="description" content="Строганые пиломатериалы из ангарской сосны оптом. Вагонка Штиль, имитация бруса. Сорта Экстра, Прима, А, В, С.">
 <meta name="keywords" content="строганые пиломатериалы оптом, вагонка штиль цена, имитация бруса цена, ангарская сосна оптом">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://optel-les.ru/products.html">
@@ -25,313 +25,137 @@
 {"@context":"https://schema.org","@type":"ItemList","name":"Строганые пиломатериалы ОПТЭЛ","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Вагонка Штиль из ангарской сосны","brand":{"@type":"Brand","name":"ОПТЭЛ"},"offers":{"@type":"Offer","priceCurrency":"RUB","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Имитация бруса из ангарской сосны","brand":{"@type":"Brand","name":"ОПТЭЛ"},"offers":{"@type":"Offer","priceCurrency":"RUB","availability":"https://schema.org/InStock"}}}]}
 </script>
 <style>
-/* ── КАТАЛОГ / ВИТРИНА ── */
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 48px;
-}
+/* ── ВИТРИНА ── */
+.catalog-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-bottom:48px; }
 .catalog-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.25s;
-  position: relative;
-}
-.catalog-card::after {
-  content: 'Смотреть →';
-  position: absolute;
-  bottom: 20px; right: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--lime);
-  opacity: 0;
-  transition: opacity 0.2s;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden;
+  cursor:pointer; transition:all 0.25s; position:relative;
 }
 .catalog-card:hover {
-  border-color: rgba(170,255,0,0.4);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(170,255,0,0.06);
+  border-color:rgba(170,255,0,0.4);
+  transform:translateY(-6px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(170,255,0,0.06);
 }
-.catalog-card:hover::after { opacity: 1; }
 .catalog-visual {
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+  height:200px; overflow:hidden; position:relative;
 }
-.catalog-visual.vaganka {
-  background: linear-gradient(135deg, #2a1204 0%, #6b4010 50%, #2a1204 100%);
+.catalog-visual img {
+  width:100%; height:100%; object-fit:cover;
+  object-position:center center;
+  display:block; transition:transform 0.4s;
 }
-.catalog-visual.imitation {
-  background: linear-gradient(135deg, #0a1e0a 0%, #1e4e1e 50%, #0a1e0a 100%);
+.catalog-card:hover .catalog-visual img { transform:scale(1.04); }
+.catalog-info { padding:20px 22px 24px; }
+.catalog-name { font-family:var(--font-display); font-size:26px; letter-spacing:1px; color:var(--text); margin-bottom:6px; line-height:1.1; }
+.catalog-sub  { font-size:13px; color:var(--text3); margin-bottom:12px; }
+.catalog-hint {
+  position:absolute; bottom:16px; right:16px;
+  background:rgba(170,255,0,0.15); border:1px solid rgba(170,255,0,0.3);
+  border-radius:4px; padding:4px 10px; font-size:11px;
+  font-weight:700; letter-spacing:0.5px; color:var(--lime);
+  opacity:0; transition:opacity 0.2s;
 }
-.catalog-info { padding: 20px 22px 24px; }
-.catalog-name {
-  font-family: var(--font-display);
-  font-size: 28px;
-  letter-spacing: 1px;
-  color: var(--text);
-  margin-bottom: 6px;
-  line-height: 1;
-}
-.catalog-sub { font-size: 13px; color: var(--text3); margin-bottom: 12px; }
-.catalog-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.catalog-card:hover .catalog-hint { opacity:1; }
 
-/* ── МОДАЛЬНАЯ КАРТОЧКА ТОВАРА ── */
-.product-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
-  z-index: 400;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px 20px;
-  overflow-y: auto;
+/* ── МОДАЛЬНАЯ КАРТОЧКА ── */
+.pm-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.78); backdrop-filter:blur(8px);
+  z-index:400; align-items:flex-start; justify-content:center;
+  padding:24px 20px; overflow-y:auto;
 }
-.product-modal-overlay.open { display: flex; }
-.product-modal {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  border-radius: 16px;
-  width: 100%;
-  max-width: 860px;
-  position: relative;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.7);
-  margin: auto;
+.pm-overlay.open { display:flex; }
+.pm-box {
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:16px; width:100%; max-width:860px;
+  position:relative; box-shadow:0 40px 80px rgba(0,0,0,0.7);
+  margin:auto;
 }
 .pm-close {
-  position: absolute;
-  top: 16px; right: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  width: 32px; height: 32px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  color: var(--text3);
-  transition: all 0.2s;
-  z-index: 1;
+  position:absolute; top:14px; right:16px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:6px; width:32px; height:32px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:16px; color:var(--text3);
+  transition:all 0.2s; z-index:1;
 }
-.pm-close:hover { border-color: var(--lime); color: var(--lime); }
-.pm-visual {
-  height: 120px;
-  border-radius: 14px 14px 0 0;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
+.pm-close:hover { border-color:var(--lime); color:var(--lime); }
+.pm-photo {
+  height:200px; border-radius:14px 14px 0 0;
+  overflow:hidden; position:relative;
 }
-.pm-body { padding: 24px 28px 28px; }
-.pm-title {
-  font-family: var(--font-display);
-  font-size: 36px;
-  letter-spacing: 1.5px;
-  color: var(--text);
-  margin-bottom: 4px;
+.pm-photo img {
+  width:100%; height:100%; object-fit:cover;
+  object-position:center center; display:block;
 }
-.pm-sub { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+.pm-body { padding:24px 28px 28px; }
+.pm-title { font-family:var(--font-display); font-size:32px; letter-spacing:1.5px; color:var(--text); margin-bottom:4px; line-height:1.1; }
+.pm-sub   { font-size:13px; color:var(--text3); margin-bottom:22px; }
 
-/* Конфигуратор */
-.configurator {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 22px;
+/* ── КОНФИГУРАТОР ── */
+.configurator { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px; margin-bottom:16px; }
+.config-title { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--lime); margin-bottom:16px; }
+.config-grid  { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.config-field label { display:block; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text3); margin-bottom:6px; }
+.config-sel {
+  width:100%; padding:9px 12px; background:var(--bg3); border:1px solid var(--border);
+  border-radius:6px; font-family:var(--font-body); font-size:13px; color:var(--text);
+  outline:none; cursor:pointer; transition:border-color 0.18s; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238aaa78' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 10px center; padding-right:30px;
 }
-.config-title {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--lime);
-  margin-bottom: 16px;
-}
-.config-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.config-field label {
-  display: block;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 6px;
-}
-.config-select {
-  width: 100%;
-  padding: 9px 12px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--text);
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.18s;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238aaa78' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 30px;
-}
-.config-select:focus { border-color: var(--lime); }
-.config-select:hover { border-color: rgba(170,255,0,0.4); }
+.config-sel:focus { border-color:var(--lime-dim); }
 
-/* Ценовой блок */
-.price-result {
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  border-radius: 10px;
-  padding: 18px 20px;
-  margin-bottom: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+/* ── НАЛИЧИЕ ── */
+.avail-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+.avail-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 14px; border-radius:6px; font-size:13px; font-weight:700;
 }
-.price-result-left {}
-.price-result-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 6px;
-}
-.price-result-value {
-  font-family: var(--font-display);
-  font-size: 48px;
-  color: var(--lime);
-  line-height: 1;
-}
-.price-result-unit { font-size: 14px; color: var(--text3); margin-top: 4px; }
-.price-result-note { font-size: 12px; color: var(--text3); max-width: 280px; line-height: 1.5; }
-.price-unavail {
-  font-family: var(--font-display);
-  font-size: 32px;
-  color: var(--text3);
-  line-height: 1;
-}
+.avail-note { font-size:12px; color:var(--text3); }
 
-/* Спецификация */
-.pm-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-.pm-spec-block h4 {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--lime);
-  margin-bottom: 10px;
+/* ── ЦЕНА ── */
+.price-row {
+  background:var(--bg); border:1px solid var(--border2);
+  border-radius:10px; padding:16px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap; margin-bottom:22px;
+  position:relative; overflow:hidden;
+}
+.price-row::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--lime),transparent); }
+.price-lbl { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:6px; }
+.price-val { font-family:var(--font-display); font-size:48px; color:var(--lime); line-height:1; }
+.price-unit { font-size:12px; color:var(--text3); margin-top:4px; }
+.price-note { font-size:12px; color:var(--text3); max-width:260px; line-height:1.5; }
+
+/* ── СПЕКИ ── */
+.pm-specs { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.pm-spec-block h4 { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--lime); margin-bottom:10px; }
+.spec-dynamic { color:var(--lime) !important; font-weight:700; }
+
+/* ── КОРЗИНА-КНОПКА ── */
+.btn-cart { background:var(--surface2); color:var(--lime); border:1px solid var(--border2); }
+.btn-cart:hover { background:rgba(170,255,0,0.15); border-color:var(--lime); color:var(--lime); }
+.btn-cart.added { background:rgba(170,255,0,0.15); border-color:var(--lime); }
+
+/* ── ТОСТ ── */
+.pm-toast {
+  display:none; position:fixed; top:80px; left:50%; transform:translateX(-50%);
+  background:var(--surface); border:1px solid var(--border2);
+  border-left:3px solid var(--lime); border-radius:8px;
+  padding:12px 20px; z-index:600; font-size:14px; font-weight:600;
+  color:var(--text); box-shadow:0 8px 30px rgba(0,0,0,0.5);
+  white-space:nowrap;
 }
 
 @media(max-width:700px) {
-  .catalog-grid { grid-template-columns: 1fr; }
-  .config-grid { grid-template-columns: repeat(2,1fr); }
-  .pm-specs { grid-template-columns: 1fr; }
-  .pm-body { padding: 18px 18px 22px; }
-  .price-result { flex-direction: column; align-items: flex-start; }
+  .catalog-grid { grid-template-columns:1fr; }
+  .config-grid  { grid-template-columns:repeat(2,1fr); }
+  .pm-specs     { grid-template-columns:1fr; }
+  .pm-body      { padding:18px 18px 22px; }
+  .price-row    { flex-direction:column; align-items:flex-start; }
 }
-
-/* ── КОРЗИНА ── */
-.cart-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: var(--bg2);
-  border-top: 1px solid var(--border2);
-  z-index: 350;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-  padding: 14px 0;
-}
-.cart-bar.visible { transform: translateY(0); }
-.cart-bar-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.cart-items-list { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; align-items: center; }
-.cart-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 12px;
-  color: var(--text);
-  font-weight: 600;
-}
-.cart-tag-remove {
-  cursor: pointer;
-  color: var(--text3);
-  font-size: 14px;
-  line-height: 1;
-  margin-left: 2px;
-}
-.cart-tag-remove:hover { color: #ff5555; }
-.cart-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--lime);
-  margin-right: 8px;
-  white-space: nowrap;
-}
-.cart-send-btn {
-  background: var(--lime);
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 22px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.cart-send-btn:hover { background: #fff; }
-.cart-clear {
-  font-size: 12px;
-  color: var(--text3);
-  cursor: pointer;
-  white-space: nowrap;
-  background: none;
-  border: none;
-  font-family: var(--font-body);
-  padding: 4px;
-}
-.cart-clear:hover { color: #ff5555; }
-
-/* ── КНОПКА "В КОРЗИНУ" ── */
-.btn-cart {
-  background: var(--surface2);
-  color: var(--lime);
-  border: 1px solid var(--border2);
-}
-.btn-cart:hover { background: rgba(170,255,0,0.15); border-color: var(--lime); }
-.btn-cart.added { background: rgba(170,255,0,0.15); border-color: var(--lime); }
-
-/* Динамический spec highlight */
-.spec-dynamic { color: var(--lime) !important; font-weight: 700; transition: color 0.2s; }
 </style>
 </head>
 <body>
@@ -364,7 +188,6 @@
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="container">
     <div class="page-hero-inner">
@@ -389,18 +212,17 @@
 <!-- ВИТРИНА -->
 <section>
   <div class="container">
-    <div class="section-label" style="margin-bottom:20px;">Выберите товар</div>
     <div class="catalog-grid">
 
-      <!-- КАРТОЧКА 1: ВАГОНКА -->
-      <div class="catalog-card reveal" onclick="openProduct('vaganka')">
-        <div class="catalog-visual vaganka" style="padding:0;overflow:hidden;">
-          <img src="img/vaganka.jpg" alt="Вагонка Штиль из ангарской сосны" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
+      <!-- ВАГОНКА -->
+      <div class="catalog-card reveal" onclick="openPM('vaganka')">
+        <div class="catalog-visual">
+          <img src="img/vaganka.jpg" alt="Вагонка Штиль из ангарской сосны — сечение и профиль">
         </div>
         <div class="catalog-info">
-          <div class="catalog-name">Вагонка "Штиль"</div>
-          <div class="catalog-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
-          <div class="catalog-tags">
+          <div class="catalog-name">Вагонка&nbsp;"Штиль"<br>из ангарской сосны</div>
+          <div class="catalog-sub">Строганый пиломатериал · влажность не более 14%</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
             <span class="sort-tag sort-extra">Экстра</span>
             <span class="sort-tag sort-prima">Прима</span>
             <span class="sort-tag sort-a">А</span>
@@ -408,17 +230,18 @@
             <span class="sort-tag sort-c">С</span>
           </div>
         </div>
+        <span class="catalog-hint">Подробнее →</span>
       </div>
 
-      <!-- КАРТОЧКА 2: ИМИТАЦИЯ БРУСА -->
-      <div class="catalog-card reveal" style="transition-delay:.1s;" onclick="openProduct('imitation')">
-        <div class="catalog-visual imitation" style="padding:0;overflow:hidden;">
-          <img src="img/imitation.jpg" alt="Имитация бруса из ангарской сосны" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
+      <!-- ИМИТАЦИЯ БРУСА -->
+      <div class="catalog-card reveal" style="transition-delay:.1s;" onclick="openPM('imitation')">
+        <div class="catalog-visual">
+          <img src="img/imitation.jpg" alt="Имитация бруса из ангарской сосны — сечение и профиль">
         </div>
         <div class="catalog-info">
-          <div class="catalog-name">Имитация бруса</div>
-          <div class="catalog-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
-          <div class="catalog-tags">
+          <div class="catalog-name">Имитация бруса<br>из ангарской сосны</div>
+          <div class="catalog-sub">Строганый пиломатериал · влажность не более 14%</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
             <span class="sort-tag sort-extra">Экстра</span>
             <span class="sort-tag sort-prima">Прима</span>
             <span class="sort-tag sort-a">А</span>
@@ -426,11 +249,11 @@
             <span class="sort-tag sort-c">С</span>
           </div>
         </div>
+        <span class="catalog-hint">Подробнее →</span>
       </div>
 
     </div>
 
-    <!-- CTA -->
     <div class="call-strip reveal">
       <div>
         <div class="call-strip-title">Нужна цена или консультация?</div>
@@ -442,28 +265,25 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════
-     МОДАЛЬНЫЕ КАРТОЧКИ ТОВАРОВ
-═══════════════════════════════════════════ -->
-
-<!-- ВАГОНКА ШТИЛЬ -->
-<div class="product-modal-overlay" id="modal-vaganka">
-  <div class="product-modal">
-    <button class="pm-close" onclick="closeProduct('vaganka')">✕</button>
-    <div class="pm-visual" style="height:160px;padding:0;overflow:hidden;border-radius:14px 14px 0 0;">
-      <img src="img/vaganka.jpg" alt="Вагонка Штиль сечение" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
+<!-- ═══════════════════════════════════
+     КАРТОЧКА: ВАГОНКА
+═══════════════════════════════════ -->
+<div class="pm-overlay" id="pm-vaganka">
+  <div class="pm-box">
+    <button class="pm-close" onclick="closePM('vaganka')">✕</button>
+    <div class="pm-photo">
+      <img src="img/vaganka.jpg" alt="Вагонка Штиль из ангарской сосны">
     </div>
     <div class="pm-body">
-      <div class="pm-title">Вагонка "Штиль"</div>
-      <div class="pm-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
+      <div class="pm-title">Вагонка&nbsp;"Штиль"<br>из ангарской сосны</div>
+      <div class="pm-sub">Строганый пиломатериал · влажность не более 14%</div>
 
-      <!-- КОНФИГУРАТОР -->
       <div class="configurator">
         <div class="config-title">Выберите параметры</div>
         <div class="config-grid">
           <div class="config-field">
             <label>Сорт</label>
-            <select class="config-select" id="v-sort" onchange="calcVaganka()">
+            <select class="config-sel" id="v-sort" onchange="calcV()">
               <option value="extra">Экстра</option>
               <option value="prima">Прима</option>
               <option value="a" selected>Сорт А</option>
@@ -473,14 +293,14 @@
           </div>
           <div class="config-field">
             <label>Сечение</label>
-            <select class="config-select" id="v-size" onchange="calcVaganka()">
+            <select class="config-sel" id="v-size" onchange="calcV()">
               <option value="12.5x96">12,5 × 96 мм</option>
               <option value="13x105">13 × 105 мм</option>
             </select>
           </div>
           <div class="config-field">
             <label>Длина</label>
-            <select class="config-select" id="v-len" onchange="calcVaganka()">
+            <select class="config-sel" id="v-len" onchange="calcV()">
               <option value="2">2 м</option>
               <option value="3" selected>3 м</option>
               <option value="4">4 м</option>
@@ -489,36 +309,36 @@
           </div>
           <div class="config-field">
             <label>Кол-во, м³</label>
-            <input type="number" class="config-select" id="v-vol" value="1" min="0.1" step="0.1" oninput="calcVaganka()" style="font-family:var(--font-body);">
+            <input type="number" class="config-sel" id="v-vol" value="1" min="0.1" step="0.1" oninput="calcV()" style="font-family:var(--font-body);">
           </div>
         </div>
+      </div>
+
       <!-- Наличие -->
-      <div id="v-avail-block" style="margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <div id="v-avail-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
-          <!-- заполняется JS -->
-        </div>
-        <div id="v-avail-note" style="font-size:12px;color:var(--text3);"></div>
+      <div class="avail-row">
+        <div class="avail-badge" id="v-avail-badge"></div>
+        <div class="avail-note"  id="v-avail-note"></div>
       </div>
 
-      <!-- ЦЕНА -->
-      <div class="price-result" id="v-price-block">
-        <div class="price-result-left">
-          <div class="price-result-label">Стоимость (тестовые цены)</div>
-          <div class="price-result-value" id="v-price">—</div>
-          <div class="price-result-unit" id="v-price-unit">за м³</div>
+      <!-- Цена -->
+      <div class="price-row">
+        <div>
+          <div class="price-lbl">Стоимость (тестовые цены, без НДС)</div>
+          <div class="price-val"  id="v-price">—</div>
+          <div class="price-unit" id="v-price-unit">за 1 м³</div>
         </div>
-        <div class="price-result-note">Цены тестовые — актуальные уточняйте по телефону. Цены указаны без учёта НДС 22%.</div>
+        <div class="price-note">Актуальные цены уточняйте по телефону. НДС 22% сверху.</div>
       </div>
 
-      <!-- СПЕЦИФИКАЦИЯ -->
+      <!-- Спецификация -->
       <div class="pm-specs">
         <div class="pm-spec-block">
           <h4>Характеристики</h4>
           <table class="spec-table"><tbody>
             <tr><td>Профиль</td><td>Штиль (скруглённый)</td></tr>
-            <tr><td>Сечение</td><td id="v-spec-size" class="spec-dynamic">12,5×96 / 13×105 мм</td></tr>
-            <tr><td>Ширина</td><td id="v-spec-width">85–92 мм</td></tr>
-            <tr><td>Длина</td><td id="v-spec-len">2 / 3 / 4 / 6 м</td></tr>
+            <tr><td>Сечение</td><td id="v-spec-size" class="spec-dynamic">12,5 × 96 мм</td></tr>
+            <tr><td>Ширина</td><td id="v-spec-width" class="spec-dynamic">96 мм</td></tr>
+            <tr><td>Длина</td><td id="v-spec-len" class="spec-dynamic">3 м</td></tr>
             <tr><td>Влажность</td><td>не более 14%</td></tr>
             <tr><td>Допуск</td><td>±0,5 мм</td></tr>
           </tbody></table>
@@ -534,11 +354,8 @@
           <div style="margin-top:16px;">
             <h4>Сорта</h4>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
-              <span class="sort-tag sort-extra">Экстра</span>
-              <span class="sort-tag sort-prima">Прима</span>
-              <span class="sort-tag sort-a">А</span>
-              <span class="sort-tag sort-b">В</span>
-              <span class="sort-tag sort-c">С</span>
+              <span class="sort-tag sort-extra">Экстра</span><span class="sort-tag sort-prima">Прима</span>
+              <span class="sort-tag sort-a">А</span><span class="sort-tag sort-b">В</span><span class="sort-tag sort-c">С</span>
             </div>
           </div>
         </div>
@@ -546,19 +363,19 @@
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <a href="tel:+79999238888" class="btn btn-lime btn-lg">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
           Позвонить
         </a>
         <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
           Написать в ТГ
         </a>
         <a href="https://max.ru/chat/+79999238888" target="_blank" class="btn" style="background:#5856D6;color:#fff;">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
           MAX
         </a>
-        <button class="btn btn-cart" id="v-cart-btn" onclick="addToCart('vaganka')">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
+        <button class="btn btn-cart btn-lg" id="v-cart-btn" onclick="addToCart('vaganka')">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
           В корзину
         </button>
       </div>
@@ -567,24 +384,25 @@
 </div>
 
 
-<!-- ИМИТАЦИЯ БРУСА -->
-<div class="product-modal-overlay" id="modal-imitation">
-  <div class="product-modal">
-    <button class="pm-close" onclick="closeProduct('imitation')">✕</button>
-    <div class="pm-visual" style="height:160px;padding:0;overflow:hidden;border-radius:14px 14px 0 0;">
-      <img src="img/imitation.jpg" alt="Имитация бруса сечение" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;">
+<!-- ═══════════════════════════════════
+     КАРТОЧКА: ИМИТАЦИЯ БРУСА
+═══════════════════════════════════ -->
+<div class="pm-overlay" id="pm-imitation">
+  <div class="pm-box">
+    <button class="pm-close" onclick="closePM('imitation')">✕</button>
+    <div class="pm-photo">
+      <img src="img/imitation.jpg" alt="Имитация бруса из ангарской сосны">
     </div>
     <div class="pm-body">
-      <div class="pm-title">Имитация бруса</div>
-      <div class="pm-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
+      <div class="pm-title">Имитация бруса<br>из ангарской сосны</div>
+      <div class="pm-sub">Строганый пиломатериал · влажность не более 14%</div>
 
-      <!-- КОНФИГУРАТОР -->
       <div class="configurator">
         <div class="config-title">Выберите параметры</div>
         <div class="config-grid">
           <div class="config-field">
             <label>Сорт</label>
-            <select class="config-select" id="i-sort" onchange="calcImitation()">
+            <select class="config-sel" id="i-sort" onchange="calcI()">
               <option value="extra">Экстра</option>
               <option value="prima">Прима</option>
               <option value="a" selected>Сорт А</option>
@@ -594,7 +412,7 @@
           </div>
           <div class="config-field">
             <label>Сечение</label>
-            <select class="config-select" id="i-size" onchange="calcImitation()">
+            <select class="config-sel" id="i-size" onchange="calcI()">
               <option value="20x140">20 × 140 мм</option>
               <option value="28x140">28 × 140 мм</option>
               <option value="20x190">20 × 190 мм</option>
@@ -602,7 +420,7 @@
           </div>
           <div class="config-field">
             <label>Длина</label>
-            <select class="config-select" id="i-len" onchange="calcImitation()">
+            <select class="config-sel" id="i-len" onchange="calcI()">
               <option value="3" selected>3 м</option>
               <option value="4">4 м</option>
               <option value="6">6 м</option>
@@ -610,36 +428,36 @@
           </div>
           <div class="config-field">
             <label>Кол-во, м³</label>
-            <input type="number" class="config-select" id="i-vol" value="1" min="0.1" step="0.1" oninput="calcImitation()" style="font-family:var(--font-body);">
+            <input type="number" class="config-sel" id="i-vol" value="1" min="0.1" step="0.1" oninput="calcI()" style="font-family:var(--font-body);">
           </div>
         </div>
+      </div>
+
       <!-- Наличие -->
-      <div id="i-avail-block" style="margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <div id="i-avail-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
-          <!-- заполняется JS -->
-        </div>
-        <div id="i-avail-note" style="font-size:12px;color:var(--text3);"></div>
+      <div class="avail-row">
+        <div class="avail-badge" id="i-avail-badge"></div>
+        <div class="avail-note"  id="i-avail-note"></div>
       </div>
 
-      <!-- ЦЕНА -->
-      <div class="price-result" id="i-price-block">
-        <div class="price-result-left">
-          <div class="price-result-label">Стоимость (тестовые цены)</div>
-          <div class="price-result-value" id="i-price">—</div>
-          <div class="price-result-unit" id="i-price-unit">за м³</div>
+      <!-- Цена -->
+      <div class="price-row">
+        <div>
+          <div class="price-lbl">Стоимость (тестовые цены, без НДС)</div>
+          <div class="price-val"  id="i-price">—</div>
+          <div class="price-unit" id="i-price-unit">за 1 м³</div>
         </div>
-        <div class="price-result-note">Цены тестовые — актуальные уточняйте по телефону. Цены указаны без учёта НДС 22%.</div>
+        <div class="price-note">Актуальные цены уточняйте по телефону. НДС 22% сверху.</div>
       </div>
 
-      <!-- СПЕЦИФИКАЦИЯ -->
+      <!-- Спецификация -->
       <div class="pm-specs">
         <div class="pm-spec-block">
           <h4>Характеристики</h4>
           <table class="spec-table"><tbody>
             <tr><td>Профиль</td><td>Имитация оцилиндрованного бруса</td></tr>
-            <tr><td>Сечение</td><td id="i-spec-size" class="spec-dynamic">20×140 / 28×140 / 20×190 мм</td></tr>
-            <tr><td>Ширина</td><td id="i-spec-width">133–183 мм</td></tr>
-            <tr><td>Длина</td><td id="i-spec-len">3 / 4 / 6 м</td></tr>
+            <tr><td>Сечение</td><td id="i-spec-size" class="spec-dynamic">20 × 140 мм</td></tr>
+            <tr><td>Ширина</td><td id="i-spec-width" class="spec-dynamic">140 мм</td></tr>
+            <tr><td>Длина</td><td id="i-spec-len" class="spec-dynamic">3 м</td></tr>
             <tr><td>Влажность</td><td>не более 14%</td></tr>
             <tr><td>Допуск</td><td>±0,5 мм</td></tr>
           </tbody></table>
@@ -655,11 +473,8 @@
           <div style="margin-top:16px;">
             <h4>Сорта</h4>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
-              <span class="sort-tag sort-extra">Экстра</span>
-              <span class="sort-tag sort-prima">Прима</span>
-              <span class="sort-tag sort-a">А</span>
-              <span class="sort-tag sort-b">В</span>
-              <span class="sort-tag sort-c">С</span>
+              <span class="sort-tag sort-extra">Экстра</span><span class="sort-tag sort-prima">Прима</span>
+              <span class="sort-tag sort-a">А</span><span class="sort-tag sort-b">В</span><span class="sort-tag sort-c">С</span>
             </div>
           </div>
         </div>
@@ -667,19 +482,19 @@
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <a href="tel:+79999238888" class="btn btn-lime btn-lg">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
           Позвонить
         </a>
         <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
           Написать в ТГ
         </a>
         <a href="https://max.ru/chat/+79999238888" target="_blank" class="btn" style="background:#5856D6;color:#fff;">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
           MAX
         </a>
-        <button class="btn btn-cart" id="i-cart-btn" onclick="addToCart('imitation')">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
+        <button class="btn btn-cart btn-lg" id="i-cart-btn" onclick="addToCart('imitation')">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
           В корзину
         </button>
       </div>
@@ -688,7 +503,10 @@
 </div>
 
 
-<!-- Easter egg -->
+<!-- Тост -->
+<div class="pm-toast" id="pm-toast"><span id="pm-toast-text"></span></div>
+
+<!-- Easter egg (инжектируется shared.js, canvas нужен) -->
 <canvas id="matrix-canvas"></canvas>
 <div class="easter-egg-overlay" id="egg-overlay">
   <div class="easter-egg-text">ОПТЭЛ</div>
@@ -696,7 +514,7 @@
   <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
 </div>
 
-<!-- Sticky + Modal -->
+<!-- Sticky + общий modal (заказать звонок) -->
 <button class="sticky-cta" onclick="openModal('Заказать звонок')">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
   <span class="cta-text">Заказать звонок</span>
@@ -707,7 +525,9 @@
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
     <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
@@ -725,367 +545,223 @@
   </div>
 </footer>
 
-
-
-<!-- Тост уведомление -->
-<div id="cart-toast" style="
-  display:none;position:fixed;top:80px;left:50%;transform:translateX(-50%);
-  background:var(--surface);border:1px solid var(--border2);border-left:3px solid var(--lime);
-  border-radius:8px;padding:12px 20px;z-index:600;
-  font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--text);
-  box-shadow:0 8px 30px rgba(0,0,0,0.5);white-space:nowrap;
-  animation: none;
-">
-  <span id="cart-toast-text">✓ Добавлено в корзину</span>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     КОРЗИНА (фиксированная снизу)
-═══════════════════════════════════════════ -->
-<div class="cart-bar" id="cart-bar">
-  <div class="cart-bar-inner">
-    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;flex:1;">
-      <span class="cart-title">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="#aaff00" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="#aaff00"/><circle cx="12" cy="13.5" r="1" fill="#aaff00"/></svg>
-        Корзина
-      </span>
-      <div class="cart-items-list" id="cart-items-list"><!-- заполняется JS --></div>
-    </div>
-    <button class="cart-clear" onclick="clearCart()">Очистить</button>
-    <button class="cart-send-btn" onclick="sendCartRequest()">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
-      Отправить запрос
-    </button>
-  </div>
-</div>
-
-<!-- Модалка отправки корзины -->
-<div class="modal-overlay" id="cart-send-overlay">
-  <div class="modal">
-    <button class="modal-close" onclick="document.getElementById('cart-send-overlay').classList.remove('open')">✕</button>
-    <h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:1px;">Отправить запрос</h3>
-    <p class="modal-desc" id="cart-summary-text" style="background:var(--surface);border-radius:6px;padding:10px 14px;font-size:13px;color:var(--text2);margin-bottom:16px;"></p>
-    <form id="cart-form" action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Запрос из корзины — ОПТЭЛ">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="box">
-      <input type="hidden" name="cart" id="cart-hidden-field">
-      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
-      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
-      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
-      <div class="form-group"><label class="form-label">Комментарий</label><textarea name="comment" class="form-textarea" placeholder="Дополнительные пожелания..." style="min-height:60px;"></textarea></div>
-      <button type="submit" class="modal-submit">Отправить запрос →</button>
-    </form>
-    <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" style="color:var(--lime);">политикой конфиденциальности</a>.</div>
-  </div>
-</div>
-
 <script>
 // ════════════════════════════════════════
-// ПРАЙС-МАТРИЦА (тестовые цены, руб/м³ без НДС)
+// ДАННЫЕ
 // ════════════════════════════════════════
 const PRICES = {
-  'extra_vaganka':   26000, 'prima_vaganka':   24000,
-  'a_vaganka':       21000, 'b_vaganka':       18000, 'c_vaganka':   14000,
-  'extra_imitation': 24000, 'prima_imitation': 22000,
-  'a_imitation':     19000, 'b_imitation':     16500, 'c_imitation': 13000,
+  extra_vaganka:26000,  prima_vaganka:24000,  a_vaganka:21000,  b_vaganka:18000,  c_vaganka:14000,
+  extra_imitation:24000,prima_imitation:22000,a_imitation:19000,b_imitation:16500,c_imitation:13000,
 };
-const SIZE_FACTOR = {
-  '12.5x96': 1.0, '13x105': 1.03,
-  '20x140': 1.0,  '28x140': 1.08, '20x190': 1.05,
-};
-const LEN_FACTOR = { '2': 1.05, '3': 1.0, '4': 1.02, '6': 1.04 };
+const SIZE_FACTOR = { '12.5x96':1.0,'13x105':1.03,'20x140':1.0,'28x140':1.08,'20x190':1.05 };
+const LEN_FACTOR  = { '2':1.05,'3':1.0,'4':1.02,'6':1.04 };
 
-// Соответствие размер → описание для спецификации
-// width — это фактическая ширина (равна выбранному сечению)
-const VAGANKA_SPECS = {
-  '12.5x96': { section: '12,5 × 96 мм', width: '96 мм' },
-  '13x105':  { section: '13 × 105 мм',  width: '105 мм' },
+const V_SPECS = {
+  '12.5x96':{ section:'12,5 × 96 мм', width:'96 мм' },
+  '13x105': { section:'13 × 105 мм',  width:'105 мм' },
 };
-const IMITATION_SPECS = {
-  '20x140': { section: '20 × 140 мм', width: '140 мм' },
-  '28x140': { section: '28 × 140 мм', width: '140 мм' },
-  '20x190': { section: '20 × 190 мм', width: '190 мм' },
+const I_SPECS = {
+  '20x140':{ section:'20 × 140 мм', width:'140 мм' },
+  '28x140':{ section:'28 × 140 мм', width:'140 мм' },
+  '20x190':{ section:'20 × 190 мм', width:'190 мм' },
 };
-const SORT_LABEL = { extra: 'Экстра', prima: 'Прима', a: 'Сорт А', b: 'Сорт В', c: 'Сорт С' };
+const SORT_LABEL = { extra:'Экстра',prima:'Прима',a:'Сорт А',b:'Сорт В',c:'Сорт С' };
 
-// ════════════════════════════════════════
-// НАЛИЧИЕ (заполнять по мере обновления)
-// Формат: 'ключ_сорт': 'в наличии' | 'под заказ'
-// ════════════════════════════════════════
+// Наличие: ключ = 'сорт_размер'
 const STOCK = {
-  // Вагонка Штиль
-  'extra_12.5x96': 'в наличии',
-  'extra_13x105':  'под заказ',
-  'prima_12.5x96': 'в наличии',
-  'prima_13x105':  'под заказ',
-  'a_12.5x96':     'в наличии',
-  'a_13x105':      'в наличии',
-  'b_12.5x96':     'в наличии',
-  'b_13x105':      'под заказ',
-  'c_12.5x96':     'в наличии',
-  'c_13x105':      'под заказ',
-  // Имитация бруса
-  'extra_20x140':  'в наличии',
-  'extra_28x140':  'под заказ',
-  'extra_20x190':  'под заказ',
-  'prima_20x140':  'в наличии',
-  'prima_28x140':  'под заказ',
-  'prima_20x190':  'под заказ',
-  'a_20x140':      'в наличии',
-  'a_28x140':      'в наличии',
-  'a_20x190':      'под заказ',
-  'b_20x140':      'в наличии',
-  'b_28x140':      'в наличии',
-  'b_20x190':      'в наличии',
-  'c_20x140':      'в наличии',
-  'c_28x140':      'в наличии',
-  'c_20x190':      'в наличии',
+  'extra_12.5x96':'в наличии','extra_13x105':'под заказ',
+  'prima_12.5x96':'в наличии','prima_13x105':'под заказ',
+  'a_12.5x96':'в наличии',   'a_13x105':'в наличии',
+  'b_12.5x96':'в наличии',   'b_13x105':'под заказ',
+  'c_12.5x96':'в наличии',   'c_13x105':'под заказ',
+  'extra_20x140':'в наличии','extra_28x140':'под заказ','extra_20x190':'под заказ',
+  'prima_20x140':'в наличии','prima_28x140':'под заказ','prima_20x190':'под заказ',
+  'a_20x140':'в наличии',    'a_28x140':'в наличии',   'a_20x190':'под заказ',
+  'b_20x140':'в наличии',    'b_28x140':'в наличии',   'b_20x190':'в наличии',
+  'c_20x140':'в наличии',    'c_28x140':'в наличии',   'c_20x190':'в наличии',
 };
 
-function getStock(sort, size) {
-  return STOCK[sort + '_' + size] || 'уточнить';
-}
+function fmt(n){ return Math.round(n).toLocaleString('ru') + ' ₽'; }
 
 function renderAvail(badgeId, noteId, sort, size) {
   const badge = document.getElementById(badgeId);
   const note  = document.getElementById(noteId);
   if (!badge) return;
-  const status = getStock(sort, size);
-  if (status === 'в наличии') {
-    badge.style.background = 'rgba(170,255,0,0.12)';
-    badge.style.border = '1px solid rgba(170,255,0,0.4)';
-    badge.style.color = '#aaff00';
+  const st = STOCK[sort + '_' + size] || 'уточнить';
+  if (st === 'в наличии') {
+    badge.style.cssText = 'background:rgba(170,255,0,0.12);border:1px solid rgba(170,255,0,0.4);color:#aaff00;display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:6px;font-size:13px;font-weight:700;';
     badge.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="rgba(170,255,0,0.3)" stroke="#aaff00" stroke-width="1"/><path d="M3.5 6l1.5 1.5 3.5-3.5" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round"/></svg> В наличии';
     if (note) note.textContent = '';
-  } else if (status === 'под заказ') {
-    badge.style.background = 'rgba(255,184,48,0.1)';
-    badge.style.border = '1px solid rgba(255,184,48,0.3)';
-    badge.style.color = '#ffb830';
+  } else if (st === 'под заказ') {
+    badge.style.cssText = 'background:rgba(255,184,48,0.1);border:1px solid rgba(255,184,48,0.3);color:#ffb830;display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:6px;font-size:13px;font-weight:700;';
     badge.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#ffb830" stroke-width="1.2" fill="none"/><path d="M6 3v3.5l2 1.2" stroke="#ffb830" stroke-width="1.2" stroke-linecap="round"/></svg> Под заказ';
     if (note) note.textContent = 'Срок изготовления — не более 3 недель';
   } else {
-    badge.style.background = 'rgba(255,255,255,0.05)';
-    badge.style.border = '1px solid rgba(255,255,255,0.15)';
-    badge.style.color = 'var(--text3)';
+    badge.style.cssText = 'background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);color:var(--text3);display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:6px;font-size:13px;font-weight:700;';
     badge.textContent = 'Уточнить наличие';
     if (note) note.textContent = '';
   }
 }
 
-function fmtPrice(n) {
-  return Math.round(n).toLocaleString('ru') + ' ₽';
-}
-
 // ════════════════════════════════════════
-// КАЛЬКУЛЯТОР + ОБНОВЛЕНИЕ ОПИСАНИЯ
+// КАЛЬКУЛЯТОРЫ
 // ════════════════════════════════════════
-function calcVaganka() {
+function calcV() {
   const sort = document.getElementById('v-sort').value;
   const size = document.getElementById('v-size').value;
   const len  = document.getElementById('v-len').value;
   const vol  = parseFloat(document.getElementById('v-vol').value) || 1;
-  // Цена пересчитывается с учётом объёма
-  const base = PRICES[sort + '_vaganka'];
-  if (base) {
-    const pricePerM3 = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
-    const total = pricePerM3 * vol;
-    document.getElementById('v-price').textContent = fmtPrice(total);
-    document.getElementById('v-price-unit').textContent =
-      vol > 1
-        ? fmtPrice(pricePerM3) + '/м³ × ' + vol + ' м³'
-        : 'за 1 м³';
-  }
-  // Динамическое описание
-  const sd = VAGANKA_SPECS[size];
+  const base = PRICES['a_vaganka']; // fallback
+  const key  = sort + '_vaganka';
+  const p1m3 = (PRICES[key] || base) * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+  const total = p1m3 * vol;
+  document.getElementById('v-price').textContent = fmt(total);
+  document.getElementById('v-price-unit').textContent =
+    vol > 1 ? fmt(p1m3) + '/м³ × ' + vol + ' м³' : 'за 1 м³';
+  const sd = V_SPECS[size];
   if (sd) {
-    const el = document.getElementById('v-spec-size');
+    const es = document.getElementById('v-spec-size');
     const ew = document.getElementById('v-spec-width');
-    if (el) { el.textContent = sd.section; el.className = 'spec-dynamic'; }
-    if (ew) { ew.textContent = sd.width;   ew.className = 'spec-dynamic'; }
+    if (es) es.textContent = sd.section;
+    if (ew) ew.textContent = sd.width;
   }
   const el = document.getElementById('v-spec-len');
-  if (el) { el.textContent = len + ' м'; el.className = 'spec-dynamic'; }
-  // Наличие
-  renderAvail('v-avail-badge', 'v-avail-note', sort, size);
-  updateCartItem('vaganka');
+  if (el) el.textContent = len + ' м';
+  renderAvail('v-avail-badge','v-avail-note', sort, size);
+  updateGlobalCartItem('vaganka');
 }
 
-function calcImitation() {
+function calcI() {
   const sort = document.getElementById('i-sort').value;
   const size = document.getElementById('i-size').value;
   const len  = document.getElementById('i-len').value;
   const vol  = parseFloat(document.getElementById('i-vol').value) || 1;
-  const base = PRICES[sort + '_imitation'];
-  if (base) {
-    const pricePerM3 = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
-    const total = pricePerM3 * vol;
-    document.getElementById('i-price').textContent = fmtPrice(total);
-    document.getElementById('i-price-unit').textContent =
-      vol > 1
-        ? fmtPrice(pricePerM3) + '/м³ × ' + vol + ' м³'
-        : 'за 1 м³';
-  }
-  const sd = IMITATION_SPECS[size];
+  const key  = sort + '_imitation';
+  const p1m3 = (PRICES[key] || PRICES['a_imitation']) * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+  const total = p1m3 * vol;
+  document.getElementById('i-price').textContent = fmt(total);
+  document.getElementById('i-price-unit').textContent =
+    vol > 1 ? fmt(p1m3) + '/м³ × ' + vol + ' м³' : 'за 1 м³';
+  const sd = I_SPECS[size];
   if (sd) {
-    const el = document.getElementById('i-spec-size');
+    const es = document.getElementById('i-spec-size');
     const ew = document.getElementById('i-spec-width');
-    if (el) { el.textContent = sd.section; el.className = 'spec-dynamic'; }
-    if (ew) { ew.textContent = sd.width;   ew.className = 'spec-dynamic'; }
+    if (es) es.textContent = sd.section;
+    if (ew) ew.textContent = sd.width;
   }
   const el = document.getElementById('i-spec-len');
-  if (el) { el.textContent = len + ' м'; el.className = 'spec-dynamic'; }
-  // Наличие
-  renderAvail('i-avail-badge', 'i-avail-note', sort, size);
-  updateCartItem('imitation');
-}
-
-// ════════════════════════════════════════
-// КОРЗИНА
-// ════════════════════════════════════════
-let cart = [];
-
-function getItemConfig(type) {
-  const pfx = type === 'vaganka' ? 'v' : 'i';
-  const sort = document.getElementById(pfx + '-sort').value;
-  const size = document.getElementById(pfx + '-size').value;
-  const len  = document.getElementById(pfx + '-len').value;
-  const vol  = parseFloat(document.getElementById(pfx + '-vol').value) || 1;
-  const base = PRICES[sort + '_' + type];
-  const price = base ? Math.round(base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1)) : null;
-  const name = type === 'vaganka' ? 'Вагонка "Штиль"' : 'Имитация бруса';
-  return { type, name, sort: SORT_LABEL[sort], size, len: len + ' м', vol: vol + ' м³',
-           price: price ? fmtPrice(price) + '/м³' : 'уточнить' };
-}
-
-function addToCart(type) {
-  const item = getItemConfig(type);
-  cart = cart.filter(i => i.type !== type);
-  cart.push(item);
-  saveCart();
-  renderCart();
-  showToast('✓ ' + item.name + ' добавлен в корзину');
-  const btnId = type === 'vaganka' ? 'v-cart-btn' : 'i-cart-btn';
-  const btn = document.getElementById(btnId);
-  if (btn) {
-    btn.classList.add('added');
-    const orig = btn.innerHTML;
-    btn.innerHTML = btn.innerHTML.replace('В корзину', '✓ Добавлено');
-    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('added'); }, 2000);
-  }
-}
-
-function saveCart() {
-  try { localStorage.setItem('optel_cart', JSON.stringify(cart)); } catch(e){}
-}
-function loadCart() {
-  try {
-    const saved = localStorage.getItem('optel_cart');
-    if (saved) { cart = JSON.parse(saved); renderCart(); }
-  } catch(e){}
-}
-
-function showToast(msg) {
-  const t = document.getElementById('cart-toast');
-  const tx = document.getElementById('cart-toast-text');
-  if (!t || !tx) return;
-  tx.textContent = msg;
-  t.style.display = 'block';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => { t.style.display = 'none'; }, 3000);
-}
-
-function updateCartItem(type) {
-  if (cart.find(i => i.type === type)) {
-    cart = cart.map(i => i.type === type ? getItemConfig(type) : i);
-    saveCart();
-    renderCart();
-  }
-}
-
-function removeFromCart(type) {
-  cart = cart.filter(i => i.type !== type);
-  saveCart();
-  renderCart();
-}
-
-function clearCart() {
-  cart = [];
-  saveCart();
-  renderCart();
-  document.body.style.overflow = '';
-  document.body.classList.remove('cart-open');
-}
-
-function renderCart() {
-  const bar  = document.getElementById('cart-bar');
-  const list = document.getElementById('cart-items-list');
-  if (!bar || !list) return;
-  if (!cart.length) {
-    bar.classList.remove('visible');
-    document.body.classList.remove('cart-open');
-    return;
-  }
-  bar.classList.add('visible');
-  document.body.classList.add('cart-open');
-  list.innerHTML = cart.map(item =>
-    `<div class="cart-tag">
-      <span>${item.name} · ${item.size} · ${item.len} · ${item.sort} · ${item.vol} · <b>${item.price}</b></span>
-      <span class="cart-tag-remove" onclick="removeFromCart('${item.type}')">×</span>
-    </div>`
-  ).join('');
-}
-
-function sendCartRequest() {
-  if (!cart.length) return;
-  const summary = cart.map(i =>
-    `${i.name}: ${i.size}, ${i.len}, ${i.sort}, ${i.vol}, цена: ${i.price}`
-  ).join('\n');
-  const el = document.getElementById('cart-summary-text');
-  const hf = document.getElementById('cart-hidden-field');
-  if (el) el.textContent = summary;
-  if (hf) hf.value = summary;
-  const ov = document.getElementById('cart-send-overlay');
-  if (ov) { ov.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  const tel = document.querySelector('#cart-send-overlay input[type="tel"]');
-  if (tel && window.applyPhoneMask) applyPhoneMask(tel);
+  if (el) el.textContent = len + ' м';
+  renderAvail('i-avail-badge','i-avail-note', sort, size);
+  updateGlobalCartItem('imitation');
 }
 
 // ════════════════════════════════════════
 // ОТКРЫТИЕ / ЗАКРЫТИЕ КАРТОЧЕК
 // ════════════════════════════════════════
-function openProduct(id) {
-  const ov = document.getElementById('modal-' + id);
+function openPM(id) {
+  const ov = document.getElementById('pm-' + id);
   if (!ov) return;
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (id === 'vaganka')   calcVaganka();
-  if (id === 'imitation') calcImitation();
+  if (id === 'vaganka')   calcV();
+  if (id === 'imitation') calcI();
 }
-
-function closeProduct(id) {
-  const ov = document.getElementById('modal-' + id);
+function closePM(id) {
+  const ov = document.getElementById('pm-' + id);
   if (!ov) return;
   ov.classList.remove('open');
-  document.body.style.overflow = '';
+  // Восстанавливаем overflow только если нет других открытых оверлеев
+  const anyOpen = document.querySelector('.pm-overlay.open, .modal-overlay.open');
+  if (!anyOpen) document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.product-modal-overlay').forEach(ov => {
+document.querySelectorAll('.pm-overlay').forEach(ov => {
   ov.addEventListener('click', e => {
-    if (e.target === ov) closeProduct(ov.id.replace('modal-', ''));
+    if (e.target === ov) closePM(ov.id.replace('pm-', ''));
   });
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    ['vaganka','imitation'].forEach(closeProduct);
-    const co = document.getElementById('cart-send-overlay');
-    if (co) { co.classList.remove('open'); document.body.style.overflow = ''; }
-    closeModal && closeModal();
-    hideEasterEgg && hideEasterEgg();
-  }
+  if (e.key !== 'Escape') return;
+  ['vaganka','imitation'].forEach(closePM);
+  if (window.closeModal) closeModal();
+  if (window.hideEasterEgg) hideEasterEgg();
 });
-document.addEventListener('DOMContentLoaded', () => { loadCart(); });
+
+// ════════════════════════════════════════
+// КОРЗИНА — используем глобальный localStorage
+// Не дублируем HTML — shared.js инжектирует global-cart-bar
+// ════════════════════════════════════════
+const CART_KEY = 'optel_cart';
+
+function loadSaved() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; }
+}
+function saveCurrent(cart) {
+  try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e){}
+}
+
+function getItemConfig(type) {
+  const pfx = type === 'vaganka' ? 'v' : 'i';
+  const sort = document.getElementById(pfx+'-sort').value;
+  const size = document.getElementById(pfx+'-size').value;
+  const len  = document.getElementById(pfx+'-len').value;
+  const vol  = parseFloat(document.getElementById(pfx+'-vol').value) || 1;
+  const key  = sort + '_' + type;
+  const p1m3 = (PRICES[key] || 0) * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+  const name = type === 'vaganka' ? 'Вагонка "Штиль"' : 'Имитация бруса';
+  return { type, name, sort:SORT_LABEL[sort], size, len:len+' м', vol:vol+' м³',
+           price: p1m3 ? fmt(p1m3)+'/м³' : 'уточнить' };
+}
+
+function addToCart(type) {
+  let cart = loadSaved();
+  cart = cart.filter(i => i.type !== type);
+  cart.push(getItemConfig(type));
+  saveCurrent(cart);
+  // Обновляем глобальную корзину из shared.js
+  if (window.renderGlobalCart) window.renderGlobalCart();
+  // Тост
+  showToast('✓ Добавлено в корзину');
+  // Кнопка
+  const btnId = type === 'vaganka' ? 'v-cart-btn' : 'i-cart-btn';
+  const btn = document.getElementById(btnId);
+  if (btn) {
+    btn.classList.add('added');
+    const orig = btn.innerHTML;
+    btn.innerHTML = btn.innerHTML.replace('В корзину','✓ Добавлено');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('added'); }, 2000);
+  }
+}
+
+function updateGlobalCartItem(type) {
+  let cart = loadSaved();
+  if (cart.find(i => i.type === type)) {
+    cart = cart.map(i => i.type === type ? getItemConfig(type) : i);
+    saveCurrent(cart);
+    if (window.renderGlobalCart) window.renderGlobalCart();
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('pm-toast');
+  const tx = document.getElementById('pm-toast-text');
+  if (!t || !tx) return;
+  tx.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._tmr);
+  t._tmr = setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Подсветить кнопки если товар уже в корзине
+  const cart = loadSaved();
+  cart.forEach(item => {
+    const btnId = item.type === 'vaganka' ? 'v-cart-btn' : 'i-cart-btn';
+    const btn = document.getElementById(btnId);
+    if (btn) btn.classList.add('added');
+  });
+});
 </script>
 <script src="shared.js"></script>
 </body>
