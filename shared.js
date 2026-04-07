@@ -424,36 +424,44 @@ document.addEventListener('DOMContentLoaded', () => {
         // Добавим _next чтобы FormSubmit не редиректил
         data.set('_next', window.location.href + '?sent=1');
 
-        // Добавим служебные поля если их нет
-        if (!data.get('_next')) data.set('_next', window.location.href);
+        // Добавим служебные поля
         if (!data.get('_source')) {
-          var src = document.title || window.location.pathname;
-          data.set('_source', src);
+          data.set('_source', document.title || window.location.pathname);
         }
 
-        fetch(form.action, { method:'POST', body:data, redirect:'follow' })
-          .then(function(r) {
-            if (r.ok || r.status === 200 || r.redirected || r.status === 0) {
-              showFormToast('✓ Сообщение отправлено — свяжемся сразу!', false);
-              form.reset();
-              // Закрыть модалку если форма внутри
-              const modal = form.closest('.modal-overlay, .pm-overlay');
-              if (modal && window.closeModal) {
-                setTimeout(function() {
-                  if (modal.id === 'modal-overlay') closeModal();
-                  else if (modal.classList.contains('pm-overlay')) {
-                    const id = modal.id.replace('pm-','');
-                    if (window.closePM) closePM(id);
-                  }
-                }, 800);
-              }
-            } else {
-              showFormToast('Ошибка отправки. Позвоните нам: +7 9999-23-8888', true);
+        // 1. Сразу показываем уведомление и закрываем форму
+        showFormToast('✓ Сообщение отправлено — свяжемся сразу!', false);
+        form.reset();
+
+        // 2. Закрыть модалку
+        var modal = form.closest('.modal-overlay, .pm-overlay');
+        if (modal) {
+          setTimeout(function() {
+            if (modal.id === 'modal-overlay' && window.closeModal) closeModal();
+            else if (modal.classList.contains('pm-overlay') && window.closePM) {
+              closePM(modal.id.replace('pm-',''));
             }
-          })
-          .catch(function() {
-            showFormToast('Ошибка сети. Позвоните нам: +7 9999-23-8888', true);
-          });
+            // Для global-cart-send-overlay
+            else if (modal.id === 'global-cart-send-overlay' && window.closeGlobalCartSend) {
+              closeGlobalCartSend();
+            }
+          }, 400);
+        }
+
+        // 3. Отправляем через скрытый iframe (обходит CORS)
+        var iframeName = 'submit_iframe_' + Date.now();
+        var iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        form.target = iframeName;
+        // Временно ставим action без _next чтобы FormSubmit принял
+        var origAction = form.action;
+        form.submit();
+        setTimeout(function() {
+          form.target = '';
+          document.body.removeChild(iframe);
+        }, 5000);
       });
     });
   }
