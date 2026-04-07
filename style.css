@@ -704,15 +704,20 @@ tr:hover td { background: var(--surface); color: var(--text); }
 .map-block {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: none;
+  background: transparent;
+  position: relative;
+}
+/* map-block заглушка (когда нет iframe) */
+.map-block.placeholder {
   min-height: 420px;
   background: var(--bg2);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 14px;
-  position: relative;
 }
 
 /* ── GALLERY ── */
@@ -1004,6 +1009,8 @@ input[type="number"] { -moz-appearance: textfield; }
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  overflow: hidden;
+  max-width: 220px;
 }
 @media(max-width:960px) {
   .page-hero-inner { grid-template-columns: 1fr; }
@@ -1071,3 +1078,8 @@ input[type="number"] { -moz-appearance: textfield; }
   opacity: 0.35;
 }
 #matrix-canvas.show { display: block; }
+
+/* ── КОРЗИНА: отступ при открытой панели ── */
+body.cart-open { padding-bottom: 72px; }
+body.cart-open footer { margin-bottom: 0; }
+

@@ -505,7 +505,7 @@
             </select>
           </div>
           <div class="config-field">
-            <label>Объём (м³)</label>
+            <label>Кол-во, м³</label>
             <input type="number" class="config-select" id="v-vol" value="1" min="0.1" step="0.1" oninput="calcVaganka()" style="font-family:var(--font-body);">
           </div>
         </div>
@@ -564,6 +564,10 @@
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
           Написать в ТГ
         </a>
+        <a href="https://max.ru/chat/+79999238888" target="_blank" class="btn" style="background:#5856D6;color:#fff;">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          MAX
+        </a>
         <button class="btn btn-cart" id="v-cart-btn" onclick="addToCart('vaganka')">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
           В корзину
@@ -621,7 +625,7 @@
             </select>
           </div>
           <div class="config-field">
-            <label>Объём (м³)</label>
+            <label>Кол-во, м³</label>
             <input type="number" class="config-select" id="i-vol" value="1" min="0.1" step="0.1" oninput="calcImitation()" style="font-family:var(--font-body);">
           </div>
         </div>
@@ -680,6 +684,10 @@
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
           Написать в ТГ
         </a>
+        <a href="https://max.ru/chat/+79999238888" target="_blank" class="btn" style="background:#5856D6;color:#fff;">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          MAX
+        </a>
         <button class="btn btn-cart" id="i-cart-btn" onclick="addToCart('imitation')">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
           В корзину
@@ -727,6 +735,19 @@
   </div>
 </footer>
 
+
+
+<!-- Тост уведомление -->
+<div id="cart-toast" style="
+  display:none;position:fixed;top:80px;left:50%;transform:translateX(-50%);
+  background:var(--surface);border:1px solid var(--border2);border-left:3px solid var(--lime);
+  border-radius:8px;padding:12px 20px;z-index:600;
+  font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--text);
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);white-space:nowrap;
+  animation: none;
+">
+  <span id="cart-toast-text">✓ Добавлено в корзину</span>
+</div>
 
 <!-- ═══════════════════════════════════════════
      КОРЗИНА (фиксированная снизу)
@@ -876,7 +897,9 @@ function addToCart(type) {
   const item = getItemConfig(type);
   cart = cart.filter(i => i.type !== type);
   cart.push(item);
+  saveCart();
   renderCart();
+  showToast('✓ ' + item.name + ' добавлен в корзину');
   const btnId = type === 'vaganka' ? 'v-cart-btn' : 'i-cart-btn';
   const btn = document.getElementById(btnId);
   if (btn) {
@@ -887,26 +910,53 @@ function addToCart(type) {
   }
 }
 
+function saveCart() {
+  try { localStorage.setItem('optel_cart', JSON.stringify(cart)); } catch(e){}
+}
+function loadCart() {
+  try {
+    const saved = localStorage.getItem('optel_cart');
+    if (saved) { cart = JSON.parse(saved); renderCart(); }
+  } catch(e){}
+}
+
+function showToast(msg) {
+  const t = document.getElementById('cart-toast');
+  const tx = document.getElementById('cart-toast-text');
+  if (!t || !tx) return;
+  tx.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
 function updateCartItem(type) {
   if (cart.find(i => i.type === type)) {
     cart = cart.map(i => i.type === type ? getItemConfig(type) : i);
+    saveCart();
     renderCart();
   }
 }
 
 function removeFromCart(type) {
   cart = cart.filter(i => i.type !== type);
+  saveCart();
   renderCart();
 }
 
-function clearCart() { cart = []; renderCart(); }
+function clearCart() { cart = []; saveCart(); renderCart(); }
 
 function renderCart() {
   const bar  = document.getElementById('cart-bar');
   const list = document.getElementById('cart-items-list');
   if (!bar || !list) return;
-  if (!cart.length) { bar.classList.remove('visible'); return; }
+  if (!cart.length) {
+    bar.classList.remove('visible');
+    document.body.classList.remove('cart-open');
+    return;
+  }
   bar.classList.add('visible');
+  document.body.classList.add('cart-open');
   list.innerHTML = cart.map(item =>
     `<div class="cart-tag">
       <span>${item.name} · ${item.size} · ${item.len} · ${item.sort} · ${item.vol} · <b>${item.price}</b></span>
@@ -964,6 +1014,7 @@ document.addEventListener('keydown', e => {
     hideEasterEgg && hideEasterEgg();
   }
 });
+document.addEventListener('DOMContentLoaded', () => { loadCart(); });
 </script>
 <script src="shared.js"></script>
 </body>
