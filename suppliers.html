@@ -21,6 +21,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* suppliers grid fix */
+.suppliers-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+.suppliers-grid > * { min-width:0; }
+.suppliers-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.suppliers-cards > * { min-width:0; }
+@media(max-width:960px){
+  .suppliers-grid { grid-template-columns:1fr; }
+  .suppliers-cards { grid-template-columns:1fr; }
+}
+</style>
 
 </head>
 <body>
@@ -70,7 +81,7 @@
     <div style="margin-bottom:32px;">
       <div class="section-label">Что нас интересует</div>
       <h2 style="margin-bottom:28px;">Ищем качественный<br>и уникальный товар</h2>
-      <div class="grid-3">
+      <div class="suppliers-cards">
         <div class="card reveal">
           <div style="margin-bottom:14px;">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -105,7 +116,7 @@
     </div>
 
     <!-- ФОРМА + ОПИСАНИЕ -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+    <div class="suppliers-grid">
       <div class="reveal">
         <div class="section-label">Почему работать с нами</div>
         <h2 style="margin-bottom:16px;font-size:clamp(28px,4vw,44px);">Ответственный<br>покупатель</h2>

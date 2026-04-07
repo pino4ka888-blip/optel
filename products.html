@@ -241,6 +241,97 @@
   .pm-body { padding: 18px 18px 22px; }
   .price-result { flex-direction: column; align-items: flex-start; }
 }
+
+/* ── КОРЗИНА ── */
+.cart-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  z-index: 350;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  padding: 14px 0;
+}
+.cart-bar.visible { transform: translateY(0); }
+.cart-bar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cart-items-list { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; align-items: center; }
+.cart-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+}
+.cart-tag-remove {
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 2px;
+}
+.cart-tag-remove:hover { color: #ff5555; }
+.cart-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.cart-send-btn {
+  background: var(--lime);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cart-send-btn:hover { background: #fff; }
+.cart-clear {
+  font-size: 12px;
+  color: var(--text3);
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  padding: 4px;
+}
+.cart-clear:hover { color: #ff5555; }
+
+/* ── КНОПКА "В КОРЗИНУ" ── */
+.btn-cart {
+  background: var(--surface2);
+  color: var(--lime);
+  border: 1px solid var(--border2);
+}
+.btn-cart:hover { background: rgba(170,255,0,0.15); border-color: var(--lime); }
+.btn-cart.added { background: rgba(170,255,0,0.15); border-color: var(--lime); }
+
+/* Динамический spec highlight */
+.spec-dynamic { color: var(--lime) !important; font-weight: 700; transition: color 0.2s; }
 </style>
 </head>
 <body>
@@ -436,9 +527,9 @@
           <h4>Характеристики</h4>
           <table class="spec-table"><tbody>
             <tr><td>Профиль</td><td>Штиль (скруглённый)</td></tr>
-            <tr><td>Сечение</td><td>12,5×96 / 13×105 мм</td></tr>
-            <tr><td>Рабочая ширина</td><td>85–92 мм</td></tr>
-            <tr><td>Длина</td><td>2 / 3 / 4 / 6 м</td></tr>
+            <tr><td>Сечение</td><td id="v-spec-size">12,5×96 / 13×105 мм</td></tr>
+            <tr><td>Рабочая ширина</td><td id="v-spec-width">85–92 мм</td></tr>
+            <tr><td>Длина</td><td id="v-spec-len">2 / 3 / 4 / 6 м</td></tr>
             <tr><td>Влажность</td><td>не более 14%</td></tr>
             <tr><td>Допуск</td><td>±0,5 мм</td></tr>
           </tbody></table>
@@ -473,7 +564,10 @@
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
           Написать в ТГ
         </a>
-        <a href="calculator.html" class="btn btn-ghost">Калькулятор →</a>
+        <button class="btn btn-cart" id="v-cart-btn" onclick="addToCart('vaganka')">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
+          В корзину
+        </button>
       </div>
     </div>
   </div>
@@ -549,9 +643,9 @@
           <h4>Характеристики</h4>
           <table class="spec-table"><tbody>
             <tr><td>Профиль</td><td>Имитация оцилиндрованного бруса</td></tr>
-            <tr><td>Сечение</td><td>20×140 / 28×140 / 20×190 мм</td></tr>
-            <tr><td>Рабочая ширина</td><td>133–183 мм</td></tr>
-            <tr><td>Длина</td><td>3 / 4 / 6 м</td></tr>
+            <tr><td>Сечение</td><td id="i-spec-size">20×140 / 28×140 / 20×190 мм</td></tr>
+            <tr><td>Рабочая ширина</td><td id="i-spec-width">133–183 мм</td></tr>
+            <tr><td>Длина</td><td id="i-spec-len">3 / 4 / 6 м</td></tr>
             <tr><td>Влажность</td><td>не более 14%</td></tr>
             <tr><td>Допуск</td><td>±0,5 мм</td></tr>
           </tbody></table>
@@ -586,7 +680,10 @@
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
           Написать в ТГ
         </a>
-        <a href="calculator.html" class="btn btn-ghost">Калькулятор →</a>
+        <button class="btn btn-cart" id="i-cart-btn" onclick="addToCart('imitation')">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
+          В корзину
+        </button>
       </div>
     </div>
   </div>
@@ -630,62 +727,107 @@
   </div>
 </footer>
 
+
+<!-- ═══════════════════════════════════════════
+     КОРЗИНА (фиксированная снизу)
+═══════════════════════════════════════════ -->
+<div class="cart-bar" id="cart-bar">
+  <div class="cart-bar-inner">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;flex:1;">
+      <span class="cart-title">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="#aaff00" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="6" cy="13.5" r="1" fill="#aaff00"/><circle cx="12" cy="13.5" r="1" fill="#aaff00"/></svg>
+        Корзина
+      </span>
+      <div class="cart-items-list" id="cart-items-list"><!-- заполняется JS --></div>
+    </div>
+    <button class="cart-clear" onclick="clearCart()">Очистить</button>
+    <button class="cart-send-btn" onclick="sendCartRequest()">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+      Отправить запрос
+    </button>
+  </div>
+</div>
+
+<!-- Модалка отправки корзины -->
+<div class="modal-overlay" id="cart-send-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('cart-send-overlay').classList.remove('open')">✕</button>
+    <h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:1px;">Отправить запрос</h3>
+    <p class="modal-desc" id="cart-summary-text" style="background:var(--surface);border-radius:6px;padding:10px 14px;font-size:13px;color:var(--text2);margin-bottom:16px;"></p>
+    <form id="cart-form" action="https://formsubmit.co/non_86@mail.ru" method="POST">
+      <input type="hidden" name="_subject" value="Запрос из корзины — ОПТЭЛ">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="cart" id="cart-hidden-field">
+      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
+      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+      <div class="form-group"><label class="form-label">Комментарий</label><textarea name="comment" class="form-textarea" placeholder="Дополнительные пожелания..." style="min-height:60px;"></textarea></div>
+      <button type="submit" class="modal-submit">Отправить запрос →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" style="color:var(--lime);">политикой конфиденциальности</a>.</div>
+  </div>
+</div>
+
 <script>
-// ══════════════════════════════════════════
+// ════════════════════════════════════════
 // ПРАЙС-МАТРИЦА (тестовые цены, руб/м³ без НДС)
-// ключ: "сорт_профиль"  значение: базовая цена
-// ══════════════════════════════════════════
+// ════════════════════════════════════════
 const PRICES = {
-  // Вагонка Штиль
-  'extra_vaganka':  26000,
-  'prima_vaganka':  24000,
-  'a_vaganka':      21000,
-  'b_vaganka':      18000,
-  'c_vaganka':      14000,
-  // Имитация бруса
-  'extra_imitation': 24000,
-  'prima_imitation': 22000,
-  'a_imitation':     19000,
-  'b_imitation':     16500,
-  'c_imitation':     13000,
+  'extra_vaganka':   26000, 'prima_vaganka':   24000,
+  'a_vaganka':       21000, 'b_vaganka':       18000, 'c_vaganka':   14000,
+  'extra_imitation': 24000, 'prima_imitation': 22000,
+  'a_imitation':     19000, 'b_imitation':     16500, 'c_imitation': 13000,
 };
-
-// Наценка за профиль (множитель)
 const SIZE_FACTOR = {
-  // вагонка
-  '12.5x96': 1.0,
-  '13x105':  1.03,
-  // имитация
-  '20x140':  1.0,
-  '28x140':  1.08,
-  '20x190':  1.05,
+  '12.5x96': 1.0, '13x105': 1.03,
+  '20x140': 1.0,  '28x140': 1.08, '20x190': 1.05,
 };
+const LEN_FACTOR = { '2': 1.05, '3': 1.0, '4': 1.02, '6': 1.04 };
 
-// Наценка за длину
-const LEN_FACTOR = {
-  '2': 1.05,
-  '3': 1.0,
-  '4': 1.02,
-  '6': 1.04,
+// Соответствие размер → описание для спецификации
+const VAGANKA_SPECS = {
+  '12.5x96': { section: '12,5 × 96 мм', width: '85 мм (рабочая)' },
+  '13x105':  { section: '13 × 105 мм',  width: '92 мм (рабочая)' },
 };
+const IMITATION_SPECS = {
+  '20x140': { section: '20 × 140 мм', width: '133 мм (рабочая)' },
+  '28x140': { section: '28 × 140 мм', width: '133 мм (рабочая)' },
+  '20x190': { section: '20 × 190 мм', width: '183 мм (рабочая)' },
+};
+const SORT_LABEL = { extra: 'Экстра', prima: 'Прима', a: 'Сорт А', b: 'Сорт В', c: 'Сорт С' };
 
 function fmtPrice(n) {
   return Math.round(n).toLocaleString('ru') + ' ₽';
 }
 
+// ════════════════════════════════════════
+// КАЛЬКУЛЯТОР + ОБНОВЛЕНИЕ ОПИСАНИЯ
+// ════════════════════════════════════════
 function calcVaganka() {
   const sort = document.getElementById('v-sort').value;
   const size = document.getElementById('v-size').value;
   const len  = document.getElementById('v-len').value;
   const vol  = parseFloat(document.getElementById('v-vol').value) || 1;
-
-  const base  = PRICES[sort + '_vaganka'] || null;
-  if (!base) { document.getElementById('v-price').textContent = '—'; return; }
-
-  const price = base * (SIZE_FACTOR[size] || 1) * (LEN_FACTOR[len] || 1);
-  document.getElementById('v-price').textContent = fmtPrice(price);
-  document.getElementById('v-price-unit').textContent =
-    vol > 1 ? `итого за ${vol} м³: ${fmtPrice(price * vol)}` : 'за 1 м³';
+  // Цена
+  const base = PRICES[sort + '_vaganka'];
+  if (base) {
+    const price = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+    document.getElementById('v-price').textContent = fmtPrice(price);
+    document.getElementById('v-price-unit').textContent =
+      vol > 1 ? 'итого за ' + vol + ' м³: ' + fmtPrice(price * vol) : 'за 1 м³';
+  }
+  // Динамическое описание
+  const sd = VAGANKA_SPECS[size];
+  if (sd) {
+    const el = document.getElementById('v-spec-size');
+    const ew = document.getElementById('v-spec-width');
+    if (el) { el.textContent = sd.section; el.className = 'spec-dynamic'; }
+    if (ew) { ew.textContent = sd.width;   ew.className = 'spec-dynamic'; }
+  }
+  const el = document.getElementById('v-spec-len');
+  if (el) { el.textContent = len + ' м'; el.className = 'spec-dynamic'; }
+  updateCartItem('vaganka');
 }
 
 function calcImitation() {
@@ -693,26 +835,110 @@ function calcImitation() {
   const size = document.getElementById('i-size').value;
   const len  = document.getElementById('i-len').value;
   const vol  = parseFloat(document.getElementById('i-vol').value) || 1;
-
-  const base  = PRICES[sort + '_imitation'] || null;
-  if (!base) { document.getElementById('i-price').textContent = '—'; return; }
-
-  const price = base * (SIZE_FACTOR[size] || 1) * (LEN_FACTOR[len] || 1);
-  document.getElementById('i-price').textContent = fmtPrice(price);
-  document.getElementById('i-price-unit').textContent =
-    vol > 1 ? `итого за ${vol} м³: ${fmtPrice(price * vol)}` : 'за 1 м³';
+  const base = PRICES[sort + '_imitation'];
+  if (base) {
+    const price = base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
+    document.getElementById('i-price').textContent = fmtPrice(price);
+    document.getElementById('i-price-unit').textContent =
+      vol > 1 ? 'итого за ' + vol + ' м³: ' + fmtPrice(price * vol) : 'за 1 м³';
+  }
+  const sd = IMITATION_SPECS[size];
+  if (sd) {
+    const el = document.getElementById('i-spec-size');
+    const ew = document.getElementById('i-spec-width');
+    if (el) { el.textContent = sd.section; el.className = 'spec-dynamic'; }
+    if (ew) { ew.textContent = sd.width;   ew.className = 'spec-dynamic'; }
+  }
+  const el = document.getElementById('i-spec-len');
+  if (el) { el.textContent = len + ' м'; el.className = 'spec-dynamic'; }
+  updateCartItem('imitation');
 }
 
-// ══════════════════════════════════════════
+// ════════════════════════════════════════
+// КОРЗИНА
+// ════════════════════════════════════════
+let cart = [];
+
+function getItemConfig(type) {
+  const pfx = type === 'vaganka' ? 'v' : 'i';
+  const sort = document.getElementById(pfx + '-sort').value;
+  const size = document.getElementById(pfx + '-size').value;
+  const len  = document.getElementById(pfx + '-len').value;
+  const vol  = parseFloat(document.getElementById(pfx + '-vol').value) || 1;
+  const base = PRICES[sort + '_' + type];
+  const price = base ? Math.round(base * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1)) : null;
+  const name = type === 'vaganka' ? 'Вагонка "Штиль"' : 'Имитация бруса';
+  return { type, name, sort: SORT_LABEL[sort], size, len: len + ' м', vol: vol + ' м³',
+           price: price ? fmtPrice(price) + '/м³' : 'уточнить' };
+}
+
+function addToCart(type) {
+  const item = getItemConfig(type);
+  cart = cart.filter(i => i.type !== type);
+  cart.push(item);
+  renderCart();
+  const btnId = type === 'vaganka' ? 'v-cart-btn' : 'i-cart-btn';
+  const btn = document.getElementById(btnId);
+  if (btn) {
+    btn.classList.add('added');
+    const orig = btn.innerHTML;
+    btn.innerHTML = btn.innerHTML.replace('В корзину', '✓ Добавлено');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('added'); }, 2000);
+  }
+}
+
+function updateCartItem(type) {
+  if (cart.find(i => i.type === type)) {
+    cart = cart.map(i => i.type === type ? getItemConfig(type) : i);
+    renderCart();
+  }
+}
+
+function removeFromCart(type) {
+  cart = cart.filter(i => i.type !== type);
+  renderCart();
+}
+
+function clearCart() { cart = []; renderCart(); }
+
+function renderCart() {
+  const bar  = document.getElementById('cart-bar');
+  const list = document.getElementById('cart-items-list');
+  if (!bar || !list) return;
+  if (!cart.length) { bar.classList.remove('visible'); return; }
+  bar.classList.add('visible');
+  list.innerHTML = cart.map(item =>
+    `<div class="cart-tag">
+      <span>${item.name} · ${item.size} · ${item.len} · ${item.sort} · ${item.vol} · <b>${item.price}</b></span>
+      <span class="cart-tag-remove" onclick="removeFromCart('${item.type}')">×</span>
+    </div>`
+  ).join('');
+}
+
+function sendCartRequest() {
+  if (!cart.length) return;
+  const summary = cart.map(i =>
+    `${i.name}: ${i.size}, ${i.len}, ${i.sort}, ${i.vol}, цена: ${i.price}`
+  ).join('\n');
+  const el = document.getElementById('cart-summary-text');
+  const hf = document.getElementById('cart-hidden-field');
+  if (el) el.textContent = summary;
+  if (hf) hf.value = summary;
+  const ov = document.getElementById('cart-send-overlay');
+  if (ov) { ov.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  const tel = document.querySelector('#cart-send-overlay input[type="tel"]');
+  if (tel && window.applyPhoneMask) applyPhoneMask(tel);
+}
+
+// ════════════════════════════════════════
 // ОТКРЫТИЕ / ЗАКРЫТИЕ КАРТОЧЕК
-// ══════════════════════════════════════════
+// ════════════════════════════════════════
 function openProduct(id) {
   const ov = document.getElementById('modal-' + id);
   if (!ov) return;
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
-  // Инициализируем калькулятор сразу при открытии
-  if (id === 'vaganka') calcVaganka();
+  if (id === 'vaganka')   calcVaganka();
   if (id === 'imitation') calcImitation();
 }
 
@@ -723,17 +949,17 @@ function closeProduct(id) {
   document.body.style.overflow = '';
 }
 
-// Клик по оверлею — закрыть
 document.querySelectorAll('.product-modal-overlay').forEach(ov => {
   ov.addEventListener('click', e => {
     if (e.target === ov) closeProduct(ov.id.replace('modal-', ''));
   });
 });
 
-// ESC — закрыть всё
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     ['vaganka','imitation'].forEach(closeProduct);
+    const co = document.getElementById('cart-send-overlay');
+    if (co) { co.classList.remove('open'); document.body.style.overflow = ''; }
     closeModal && closeModal();
     hideEasterEgg && hideEasterEgg();
   }
