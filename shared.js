@@ -238,12 +238,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('cart-open');
     if (cnt) cnt.textContent = cart.length;
     if (list) {
-      list.innerHTML = cart.map(item =>
-        `<div class="cart-tag">
-          <span>${item.name} · ${item.size} · ${item.len} · ${item.sort} · ${item.vol} · <b>${item.price}</b></span>
-          <span class="cart-tag-remove" onclick="globalRemoveFromCart('${item.type}')">×</span>
-        </div>`
-      ).join('');
+      if (cart.length > 0) {
+        list.style.display = 'flex';
+        list.innerHTML = cart.map(item =>
+          `<div class="cart-tag">
+            <span>${item.name} · ${item.size} · ${item.len} · ${item.sort} · ${item.vol} · <b>${item.price}</b></span>
+            <span class="cart-tag-remove" onclick="globalRemoveFromCart('${item.type}')">×</span>
+          </div>`
+        ).join('');
+      } else {
+        list.style.display = 'none';
+        list.innerHTML = '';
+      }
     }
   }
 
@@ -286,26 +292,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const bar = document.createElement('div');
     bar.id = 'global-cart-bar';
     bar.className = 'cart-bar';
+    bar.style.cssText = '';
     bar.innerHTML = `
       <div class="cart-bar-inner">
-        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;flex:1;">
+        <div class="cart-bar-left">
           <span class="cart-title">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
               <path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="#aaff00" stroke-width="1.4" fill="none" stroke-linecap="round"/>
               <circle cx="6" cy="13.5" r="1" fill="#aaff00"/><circle cx="12" cy="13.5" r="1" fill="#aaff00"/>
             </svg>
-            Корзина <span id="global-cart-count" style="background:var(--lime);color:#000;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-left:4px;"></span>
+            Корзина
+            <span id="global-cart-count" style="background:var(--lime);color:#000;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;"></span>
           </span>
           <div class="cart-items-list" id="global-cart-list"></div>
         </div>
-        <button class="cart-clear" onclick="globalClearCart()">Очистить</button>
-        <a href="products.html" class="btn btn-ghost" style="font-size:13px;padding:8px 16px;white-space:nowrap;">Изменить</a>
-        <button class="cart-send-btn" onclick="globalSendCart()">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;">
-            <path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/>
-          </svg>
-          Отправить запрос
-        </button>
+        <div class="cart-bar-actions">
+          <button class="cart-clear" onclick="globalClearCart()">Очистить</button>
+          <a href="products.html" class="btn btn-ghost" style="font-size:12px;padding:7px 14px;white-space:nowrap;">Изменить</a>
+          <button class="cart-send-btn" onclick="globalSendCart()">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:-1px;margin-right:4px;">
+              <path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/>
+            </svg>
+            Отправить запрос
+          </button>
+        </div>
       </div>`;
     document.body.appendChild(bar);
 
