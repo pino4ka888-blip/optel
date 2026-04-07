@@ -6,35 +6,251 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="theme-color" content="#0a0f0a">
 <title>Продукция — Строганые пиломатериалы оптом | ОПТЭЛ</title>
-<meta name="description" content="Строганые пиломатериалы из ангарской сосны оптом. Сорта Экстра, Прима, А, В, С. Ручная переборка. Поставки по России.">
-<meta name="keywords" content="строганые пиломатериалы оптом, вагонка штиль оптом, имитация бруса оптом, пиломатериалы ангарская сосна">
+<meta name="description" content="Строганые пиломатериалы из ангарской сосны оптом. Вагонка Штиль, имитация бруса. Сорта Экстра, Прима, А, В, С. Выберите размер и узнайте цену.">
+<meta name="keywords" content="строганые пиломатериалы оптом, вагонка штиль цена, имитация бруса цена, ангарская сосна оптом">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://optel-les.ru/products.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://optel-les.ru/products.html">
-<meta property="og:title" content="Продукция — Строганые пиломатериалы оптом | ОПТЭЛ">
-<meta property="og:description" content="Строганые пиломатериалы из ангарской сосны оптом. Сорта Экстра, Прима, А, В, С. Ручная переборка. Поставки по России.">
+<meta property="og:title" content="Продукция — Строганые пиломатериалы | ОПТЭЛ">
+<meta property="og:description" content="Строганые пиломатериалы из ангарской сосны. Выберите размер и сорт — получите цену.">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="ОПТЭЛ">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Продукция — Строганые пиломатериалы оптом | ОПТЭЛ">
-<meta name="twitter:description" content="Строганые пиломатериалы из ангарской сосны оптом. Сорта Экстра, Прима, А, В, С. Ручная переборка. Поставки по России.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ItemList","name":"Строганые пиломатериалы ОПТЭЛ","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Вагонка Штиль из ангарской сосны","description":"Вагонка "Штиль" из ангарской сосны. Сорта Экстра, Прима, А, В, С.","brand":{"@type":"Brand","name":"ОПТЭЛ"},"offers":{"@type":"Offer","priceCurrency":"RUB","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Имитация бруса из ангарской сосны","description":"Имитация бруса из ангарской сосны. Сорта Экстра, Прима, А, В, С.","brand":{"@type":"Brand","name":"ОПТЭЛ"},"offers":{"@type":"Offer","priceCurrency":"RUB","availability":"https://schema.org/InStock"}}}]}
+{"@context":"https://schema.org","@type":"ItemList","name":"Строганые пиломатериалы ОПТЭЛ","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Вагонка Штиль из ангарской сосны","brand":{"@type":"Brand","name":"ОПТЭЛ"},"offers":{"@type":"Offer","priceCurrency":"RUB","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Имитация бруса из ангарской сосны","brand":{"@type":"Brand","name":"ОПТЭЛ"},"offers":{"@type":"Offer","priceCurrency":"RUB","availability":"https://schema.org/InStock"}}}]}
 </script>
+<style>
+/* ── КАТАЛОГ / ВИТРИНА ── */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.catalog-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+}
+.catalog-card::after {
+  content: 'Смотреть →';
+  position: absolute;
+  bottom: 20px; right: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--lime);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.catalog-card:hover {
+  border-color: rgba(170,255,0,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(170,255,0,0.06);
+}
+.catalog-card:hover::after { opacity: 1; }
+.catalog-visual {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.catalog-visual.vaganka {
+  background: linear-gradient(135deg, #2a1204 0%, #6b4010 50%, #2a1204 100%);
+}
+.catalog-visual.imitation {
+  background: linear-gradient(135deg, #0a1e0a 0%, #1e4e1e 50%, #0a1e0a 100%);
+}
+.catalog-info { padding: 20px 22px 24px; }
+.catalog-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1;
+}
+.catalog-sub { font-size: 13px; color: var(--text3); margin-bottom: 12px; }
+.catalog-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ── МОДАЛЬНАЯ КАРТОЧКА ТОВАРА ── */
+.product-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  z-index: 400;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow-y: auto;
+}
+.product-modal-overlay.open { display: flex; }
+.product-modal {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 860px;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+  margin: auto;
+}
+.pm-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text3);
+  transition: all 0.2s;
+  z-index: 1;
+}
+.pm-close:hover { border-color: var(--lime); color: var(--lime); }
+.pm-visual {
+  height: 120px;
+  border-radius: 14px 14px 0 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.pm-body { padding: 24px 28px 28px; }
+.pm-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.pm-sub { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+
+/* Конфигуратор */
+.configurator {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+.config-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 16px;
+}
+.config-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.config-field label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+.config-select {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.18s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238aaa78' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+.config-select:focus { border-color: var(--lime); }
+.config-select:hover { border-color: rgba(170,255,0,0.4); }
+
+/* Ценовой блок */
+.price-result {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.price-result-left {}
+.price-result-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+.price-result-value {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--lime);
+  line-height: 1;
+}
+.price-result-unit { font-size: 14px; color: var(--text3); margin-top: 4px; }
+.price-result-note { font-size: 12px; color: var(--text3); max-width: 280px; line-height: 1.5; }
+.price-unavail {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--text3);
+  line-height: 1;
+}
+
+/* Спецификация */
+.pm-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.pm-spec-block h4 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 10px;
+}
+
+@media(max-width:700px) {
+  .catalog-grid { grid-template-columns: 1fr; }
+  .config-grid { grid-template-columns: repeat(2,1fr); }
+  .pm-specs { grid-template-columns: 1fr; }
+  .pm-body { padding: 18px 18px 22px; }
+  .price-result { flex-direction: column; align-items: flex-start; }
+}
+</style>
 </head>
 <body>
+
 <header>
   <div class="header-wrap">
     <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
     <nav>
       <a href="index.html">Главная</a>
-      <a href="products.html">Продукция</a>
+      <a href="products.html" class="active">Продукция</a>
       <a href="gallery.html">Галерея</a>
       <a href="calculator.html">Калькулятор</a>
       <a href="technical.html">Тех. условия</a>
@@ -48,7 +264,7 @@
 </header>
 <nav class="mobile-nav" id="mobileNav">
   <a href="index.html">Главная</a>
-  <a href="products.html">Продукция</a>
+  <a href="products.html" class="active">Продукция</a>
   <a href="gallery.html">Галерея</a>
   <a href="calculator.html">Калькулятор</a>
   <a href="technical.html">Тех. условия</a>
@@ -56,6 +272,8 @@
   <a href="contacts.html">Контакты</a>
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
+
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="container">
     <div class="page-hero-inner">
@@ -64,90 +282,326 @@
         <h1 style="font-size:clamp(38px,6vw,72px);">Продукция</h1>
         <p style="color:var(--text2);margin-top:10px;font-size:15px;">Строганые пиломатериалы из ангарской сосны · Ручная переборка · 5 сортов</p>
       </div>
-      <div class="page-hero-icon"><svg width="200" height="150" viewBox="0 0 200 150" fill="none">
-  <rect x="0" y="14" width="200" height="22" rx="3" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
-  <rect x="0" y="44" width="200" height="22" rx="3" fill="rgba(170,255,0,0.07)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
-  <rect x="0" y="74" width="200" height="22" rx="3" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
-  <rect x="0" y="104" width="200" height="22" rx="3" fill="rgba(170,255,0,0.07)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
-  <line x1="30" y1="14" x2="30" y2="126" stroke="#aaff00" stroke-width="0.8" opacity="0.4"/>
-  <line x1="60" y1="14" x2="60" y2="126" stroke="#aaff00" stroke-width="0.5" opacity="0.2"/>
-</svg></div>
+      <div class="page-hero-icon">
+        <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+          <rect x="0" y="14" width="200" height="22" rx="3" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
+          <rect x="0" y="44" width="200" height="22" rx="3" fill="rgba(170,255,0,0.07)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <rect x="0" y="74" width="200" height="22" rx="3" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
+          <rect x="0" y="104" width="200" height="22" rx="3" fill="rgba(170,255,0,0.07)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <line x1="30" y1="14" x2="30" y2="126" stroke="#aaff00" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- ВИТРИНА -->
 <section>
   <div class="container">
+    <div class="section-label" style="margin-bottom:20px;">Выберите товар</div>
+    <div class="catalog-grid">
 
-    <div class="product-card reveal" style="margin-bottom:24px;">
-      <div class="product-visual vaganka" style="height:80px;background:linear-gradient(135deg,#3a1e05,#7a5018,#3a1e05);display:flex;align-items:center;justify-content:center;">
-        <svg width="240" height="50" viewBox="0 0 240 50" fill="none" opacity="0.55"><rect y="0" width="240" height="11" rx="2" fill="#D4A84B"/><rect y="14" width="240" height="11" rx="2" fill="#C5983A"/><rect y="28" width="240" height="11" rx="2" fill="#D4A84B"/><rect y="42" width="240" height="11" rx="2" fill="#B08030"/></svg>
-      </div>
-      <div class="product-card-header">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
-          <div><div class="product-card-name">Вагонка "Штиль" из ангарской сосны</div><div class="product-card-sub">Строганый пиломатериал · ручная переборка · 5 сортов</div></div>
-          <a href="contacts.html" class="btn btn-outline">Узнать цену →</a>
+      <!-- КАРТОЧКА 1: ВАГОНКА -->
+      <div class="catalog-card reveal" onclick="openProduct('vaganka')">
+        <div class="catalog-visual vaganka">
+          <svg width="260" height="100" viewBox="0 0 260 100" fill="none" opacity="0.6">
+            <rect y="4"  width="260" height="14" rx="2" fill="#D4A84B"/>
+            <rect y="22" width="260" height="14" rx="2" fill="#C5983A"/>
+            <rect y="40" width="260" height="14" rx="2" fill="#D4A84B"/>
+            <rect y="58" width="260" height="14" rx="2" fill="#B08030"/>
+            <rect y="76" width="260" height="14" rx="2" fill="#D4A84B"/>
+          </svg>
+        </div>
+        <div class="catalog-info">
+          <div class="catalog-name">Вагонка "Штиль"</div>
+          <div class="catalog-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
+          <div class="catalog-tags">
+            <span class="sort-tag sort-extra">Экстра</span>
+            <span class="sort-tag sort-prima">Прима</span>
+            <span class="sort-tag sort-a">А</span>
+            <span class="sort-tag sort-b">В</span>
+            <span class="sort-tag sort-c">С</span>
+          </div>
         </div>
       </div>
-      <div class="product-card-body">
-        <div>
-          <p>Профилированный строганый пиломатериал с округлым профилем «штиль». Применяется для внутренней отделки бань, саун, жилых и общественных помещений.</p>
-          <div style="margin:14px 0 6px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);">Сорта:</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;"><span class="sort-tag sort-extra">Экстра</span><span class="sort-tag sort-prima">Прима</span><span class="sort-tag sort-a">А</span><span class="sort-tag sort-b">В</span><span class="sort-tag sort-c">С</span></div>
-          <div class="info-box"><strong>Применение:</strong> бани, сауны, внутренняя отделка, потолки, стены</div>
+
+      <!-- КАРТОЧКА 2: ИМИТАЦИЯ БРУСА -->
+      <div class="catalog-card reveal" style="transition-delay:.1s;" onclick="openProduct('imitation')">
+        <div class="catalog-visual imitation">
+          <svg width="260" height="100" viewBox="0 0 260 100" fill="none" opacity="0.6">
+            <rect y="2"  width="260" height="22" rx="2" fill="#3a6a20"/>
+            <rect y="28" width="260" height="22" rx="2" fill="#4a7a30"/>
+            <rect y="54" width="260" height="22" rx="2" fill="#3a6a20"/>
+            <rect y="80" width="260" height="18" rx="2" fill="#4a7a30"/>
+          </svg>
         </div>
-        <div>
-          <table class="spec-table"><thead><tr><th>Параметр</th><th>Значение</th></tr></thead><tbody>
-            <tr><td>Сечение</td><td>12,5×96 / 13×105 мм</td></tr>
-            <tr><td>Рабочая ширина</td><td>85–92 мм</td></tr>
-            <tr><td>Длина</td><td>2 / 3 / 4 / 6 м</td></tr>
-            <tr><td>Влажность</td><td>10–14%</td></tr>
-            <tr><td>Допуск</td><td>±0,5 мм</td></tr>
-          </tbody></table>
+        <div class="catalog-info">
+          <div class="catalog-name">Имитация бруса</div>
+          <div class="catalog-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
+          <div class="catalog-tags">
+            <span class="sort-tag sort-extra">Экстра</span>
+            <span class="sort-tag sort-prima">Прима</span>
+            <span class="sort-tag sort-a">А</span>
+            <span class="sort-tag sort-b">В</span>
+            <span class="sort-tag sort-c">С</span>
+          </div>
         </div>
       </div>
+
     </div>
 
-    <div class="product-card reveal" style="transition-delay:.1s;margin-bottom:24px;">
-      <div class="product-visual imitation" style="height:80px;background:linear-gradient(135deg,#0f2a0f,#1e4e1e,#0f2a0f);display:flex;align-items:center;justify-content:center;">
-        <svg width="240" height="60" viewBox="0 0 240 60" fill="none" opacity="0.55"><rect y="0" width="240" height="18" rx="2" fill="#3a6a20"/><rect y="22" width="240" height="18" rx="2" fill="#4a7a30"/><rect y="44" width="240" height="18" rx="2" fill="#3a6a20"/></svg>
+    <!-- CTA -->
+    <div class="call-strip reveal">
+      <div>
+        <div class="call-strip-title">Нужна цена или консультация?</div>
+        <div class="call-strip-sub">Позвоните или напишите — свяжемся сразу</div>
       </div>
-      <div class="product-card-header">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
-          <div><div class="product-card-name">Имитация бруса из ангарской сосны</div><div class="product-card-sub">Строганый пиломатериал · ручная переборка · 5 сортов</div></div>
-          <a href="contacts.html" class="btn btn-outline">Узнать цену →</a>
-        </div>
-      </div>
-      <div class="product-card-body">
-        <div>
-          <p>Строганый пиломатериал с профилем под оцилиндрованный брус. Пазо-гребневое соединение — плотный замок без щелей. Для наружной и внутренней облицовки.</p>
-          <div style="margin:14px 0 6px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);">Сорта:</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;"><span class="sort-tag sort-extra">Экстра</span><span class="sort-tag sort-prima">Прима</span><span class="sort-tag sort-a">А</span><span class="sort-tag sort-b">В</span><span class="sort-tag sort-c">С</span></div>
-          <div class="info-box"><strong>Применение:</strong> фасады, наружная облицовка, внутренние стены</div>
-        </div>
-        <div>
-          <table class="spec-table"><thead><tr><th>Параметр</th><th>Значение</th></tr></thead><tbody>
-            <tr><td>Сечение</td><td>20×140 / 28×140 / 20×190 мм</td></tr>
-            <tr><td>Рабочая ширина</td><td>133–183 мм</td></tr>
-            <tr><td>Длина</td><td>3 / 4 / 6 м</td></tr>
-            <tr><td>Влажность</td><td>10–14%</td></tr>
-            <tr><td>Допуск</td><td>±0,5 мм</td></tr>
-          </tbody></table>
-        </div>
-      </div>
-    </div>
-
-    
       <a href="tel:+79999238888" class="call-strip-phone">+7 9999-23-8888</a>
     </div>
   </div>
 </section>
+
+
+<!-- ══════════════════════════════════════════
+     МОДАЛЬНЫЕ КАРТОЧКИ ТОВАРОВ
+═══════════════════════════════════════════ -->
+
+<!-- ВАГОНКА ШТИЛЬ -->
+<div class="product-modal-overlay" id="modal-vaganka">
+  <div class="product-modal">
+    <button class="pm-close" onclick="closeProduct('vaganka')">✕</button>
+    <div class="pm-visual vaganka" style="background:linear-gradient(135deg,#2a1204,#6b4010,#2a1204);">
+      <svg width="320" height="90" viewBox="0 0 320 90" fill="none" opacity="0.55">
+        <rect y="4"  width="320" height="14" rx="2" fill="#D4A84B"/>
+        <rect y="22" width="320" height="14" rx="2" fill="#C5983A"/>
+        <rect y="40" width="320" height="14" rx="2" fill="#D4A84B"/>
+        <rect y="58" width="320" height="14" rx="2" fill="#B08030"/>
+        <rect y="76" width="320" height="12" rx="2" fill="#D4A84B"/>
+      </svg>
+    </div>
+    <div class="pm-body">
+      <div class="pm-title">Вагонка "Штиль"</div>
+      <div class="pm-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
+
+      <!-- КОНФИГУРАТОР -->
+      <div class="configurator">
+        <div class="config-title">Выберите параметры</div>
+        <div class="config-grid">
+          <div class="config-field">
+            <label>Сорт</label>
+            <select class="config-select" id="v-sort" onchange="calcVaganka()">
+              <option value="extra">Экстра</option>
+              <option value="prima">Прима</option>
+              <option value="a" selected>Сорт А</option>
+              <option value="b">Сорт В</option>
+              <option value="c">Сорт С</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label>Толщина × ширина</label>
+            <select class="config-select" id="v-size" onchange="calcVaganka()">
+              <option value="12.5x96">12,5 × 96 мм</option>
+              <option value="13x105">13 × 105 мм</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label>Длина</label>
+            <select class="config-select" id="v-len" onchange="calcVaganka()">
+              <option value="2">2 м</option>
+              <option value="3" selected>3 м</option>
+              <option value="4">4 м</option>
+              <option value="6">6 м</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label>Объём (м³)</label>
+            <input type="number" class="config-select" id="v-vol" value="1" min="0.1" step="0.1" oninput="calcVaganka()" style="font-family:var(--font-body);">
+          </div>
+        </div>
+      </div>
+
+      <!-- ЦЕНА -->
+      <div class="price-result" id="v-price-block">
+        <div class="price-result-left">
+          <div class="price-result-label">Стоимость</div>
+          <div class="price-result-value" id="v-price">—</div>
+          <div class="price-result-unit" id="v-price-unit">за м³</div>
+        </div>
+        <div class="price-result-note">Цены тестовые — актуальные уточняйте по телефону. Цены указаны без учёта НДС 22%.</div>
+      </div>
+
+      <!-- СПЕЦИФИКАЦИЯ -->
+      <div class="pm-specs">
+        <div class="pm-spec-block">
+          <h4>Характеристики</h4>
+          <table class="spec-table"><tbody>
+            <tr><td>Профиль</td><td>Штиль (скруглённый)</td></tr>
+            <tr><td>Сечение</td><td>12,5×96 / 13×105 мм</td></tr>
+            <tr><td>Рабочая ширина</td><td>85–92 мм</td></tr>
+            <tr><td>Длина</td><td>2 / 3 / 4 / 6 м</td></tr>
+            <tr><td>Влажность</td><td>не более 14%</td></tr>
+            <tr><td>Допуск</td><td>±0,5 мм</td></tr>
+          </tbody></table>
+        </div>
+        <div class="pm-spec-block">
+          <h4>Применение</h4>
+          <ul class="check-list">
+            <li>Бани и сауны</li>
+            <li>Внутренняя отделка помещений</li>
+            <li>Потолки и стены</li>
+            <li>Жилые и общественные здания</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <h4>Сорта</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+              <span class="sort-tag sort-extra">Экстра</span>
+              <span class="sort-tag sort-prima">Прима</span>
+              <span class="sort-tag sort-a">А</span>
+              <span class="sort-tag sort-b">В</span>
+              <span class="sort-tag sort-c">С</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="tel:+79999238888" class="btn btn-lime btn-lg">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+          Позвонить
+        </a>
+        <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
+          Написать в ТГ
+        </a>
+        <a href="calculator.html" class="btn btn-ghost">Калькулятор →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ИМИТАЦИЯ БРУСА -->
+<div class="product-modal-overlay" id="modal-imitation">
+  <div class="product-modal">
+    <button class="pm-close" onclick="closeProduct('imitation')">✕</button>
+    <div class="pm-visual imitation" style="background:linear-gradient(135deg,#0a1e0a,#1e4e1e,#0a1e0a);">
+      <svg width="320" height="90" viewBox="0 0 320 90" fill="none" opacity="0.55">
+        <rect y="2"  width="320" height="22" rx="2" fill="#3a6a20"/>
+        <rect y="28" width="320" height="22" rx="2" fill="#4a7a30"/>
+        <rect y="54" width="320" height="22" rx="2" fill="#3a6a20"/>
+        <rect y="80" width="320" height="10" rx="2" fill="#4a7a30"/>
+      </svg>
+    </div>
+    <div class="pm-body">
+      <div class="pm-title">Имитация бруса</div>
+      <div class="pm-sub">Строганый пиломатериал из ангарской сосны · влажность не более 14%</div>
+
+      <!-- КОНФИГУРАТОР -->
+      <div class="configurator">
+        <div class="config-title">Выберите параметры</div>
+        <div class="config-grid">
+          <div class="config-field">
+            <label>Сорт</label>
+            <select class="config-select" id="i-sort" onchange="calcImitation()">
+              <option value="extra">Экстра</option>
+              <option value="prima">Прима</option>
+              <option value="a" selected>Сорт А</option>
+              <option value="b">Сорт В</option>
+              <option value="c">Сорт С</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label>Толщина × ширина</label>
+            <select class="config-select" id="i-size" onchange="calcImitation()">
+              <option value="20x140">20 × 140 мм</option>
+              <option value="28x140">28 × 140 мм</option>
+              <option value="20x190">20 × 190 мм</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label>Длина</label>
+            <select class="config-select" id="i-len" onchange="calcImitation()">
+              <option value="3" selected>3 м</option>
+              <option value="4">4 м</option>
+              <option value="6">6 м</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label>Объём (м³)</label>
+            <input type="number" class="config-select" id="i-vol" value="1" min="0.1" step="0.1" oninput="calcImitation()" style="font-family:var(--font-body);">
+          </div>
+        </div>
+      </div>
+
+      <!-- ЦЕНА -->
+      <div class="price-result" id="i-price-block">
+        <div class="price-result-left">
+          <div class="price-result-label">Стоимость</div>
+          <div class="price-result-value" id="i-price">—</div>
+          <div class="price-result-unit" id="i-price-unit">за м³</div>
+        </div>
+        <div class="price-result-note">Цены тестовые — актуальные уточняйте по телефону. Цены указаны без учёта НДС 22%.</div>
+      </div>
+
+      <!-- СПЕЦИФИКАЦИЯ -->
+      <div class="pm-specs">
+        <div class="pm-spec-block">
+          <h4>Характеристики</h4>
+          <table class="spec-table"><tbody>
+            <tr><td>Профиль</td><td>Имитация оцилиндрованного бруса</td></tr>
+            <tr><td>Сечение</td><td>20×140 / 28×140 / 20×190 мм</td></tr>
+            <tr><td>Рабочая ширина</td><td>133–183 мм</td></tr>
+            <tr><td>Длина</td><td>3 / 4 / 6 м</td></tr>
+            <tr><td>Влажность</td><td>не более 14%</td></tr>
+            <tr><td>Допуск</td><td>±0,5 мм</td></tr>
+          </tbody></table>
+        </div>
+        <div class="pm-spec-block">
+          <h4>Применение</h4>
+          <ul class="check-list">
+            <li>Наружная облицовка фасадов</li>
+            <li>Внутренние стены и перегородки</li>
+            <li>Загородные дома и коттеджи</li>
+            <li>Беседки и веранды</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <h4>Сорта</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+              <span class="sort-tag sort-extra">Экстра</span>
+              <span class="sort-tag sort-prima">Прима</span>
+              <span class="sort-tag sort-a">А</span>
+              <span class="sort-tag sort-b">В</span>
+              <span class="sort-tag sort-c">С</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="tel:+79999238888" class="btn btn-lime btn-lg">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+          Позвонить
+        </a>
+        <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
+          Написать в ТГ
+        </a>
+        <a href="calculator.html" class="btn btn-ghost">Калькулятор →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Easter egg -->
 <canvas id="matrix-canvas"></canvas>
 <div class="easter-egg-overlay" id="egg-overlay">
   <div class="easter-egg-text">ОПТЭЛ</div>
   <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
   <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
 </div>
+
+<!-- Sticky + Modal -->
 <button class="sticky-cta" onclick="openModal('Заказать звонок')">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
   <span class="cta-text">Заказать звонок</span>
@@ -168,11 +622,123 @@
     <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой</a>.</div>
   </div>
 </div>
+
 <footer>
   <div class="footer-inner">
     <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
     <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
   </div>
 </footer>
+
+<script>
+// ══════════════════════════════════════════
+// ПРАЙС-МАТРИЦА (тестовые цены, руб/м³ без НДС)
+// ключ: "сорт_профиль"  значение: базовая цена
+// ══════════════════════════════════════════
+const PRICES = {
+  // Вагонка Штиль
+  'extra_vaganka':  26000,
+  'prima_vaganka':  24000,
+  'a_vaganka':      21000,
+  'b_vaganka':      18000,
+  'c_vaganka':      14000,
+  // Имитация бруса
+  'extra_imitation': 24000,
+  'prima_imitation': 22000,
+  'a_imitation':     19000,
+  'b_imitation':     16500,
+  'c_imitation':     13000,
+};
+
+// Наценка за профиль (множитель)
+const SIZE_FACTOR = {
+  // вагонка
+  '12.5x96': 1.0,
+  '13x105':  1.03,
+  // имитация
+  '20x140':  1.0,
+  '28x140':  1.08,
+  '20x190':  1.05,
+};
+
+// Наценка за длину
+const LEN_FACTOR = {
+  '2': 1.05,
+  '3': 1.0,
+  '4': 1.02,
+  '6': 1.04,
+};
+
+function fmtPrice(n) {
+  return Math.round(n).toLocaleString('ru') + ' ₽';
+}
+
+function calcVaganka() {
+  const sort = document.getElementById('v-sort').value;
+  const size = document.getElementById('v-size').value;
+  const len  = document.getElementById('v-len').value;
+  const vol  = parseFloat(document.getElementById('v-vol').value) || 1;
+
+  const base  = PRICES[sort + '_vaganka'] || null;
+  if (!base) { document.getElementById('v-price').textContent = '—'; return; }
+
+  const price = base * (SIZE_FACTOR[size] || 1) * (LEN_FACTOR[len] || 1);
+  document.getElementById('v-price').textContent = fmtPrice(price);
+  document.getElementById('v-price-unit').textContent =
+    vol > 1 ? `итого за ${vol} м³: ${fmtPrice(price * vol)}` : 'за 1 м³';
+}
+
+function calcImitation() {
+  const sort = document.getElementById('i-sort').value;
+  const size = document.getElementById('i-size').value;
+  const len  = document.getElementById('i-len').value;
+  const vol  = parseFloat(document.getElementById('i-vol').value) || 1;
+
+  const base  = PRICES[sort + '_imitation'] || null;
+  if (!base) { document.getElementById('i-price').textContent = '—'; return; }
+
+  const price = base * (SIZE_FACTOR[size] || 1) * (LEN_FACTOR[len] || 1);
+  document.getElementById('i-price').textContent = fmtPrice(price);
+  document.getElementById('i-price-unit').textContent =
+    vol > 1 ? `итого за ${vol} м³: ${fmtPrice(price * vol)}` : 'за 1 м³';
+}
+
+// ══════════════════════════════════════════
+// ОТКРЫТИЕ / ЗАКРЫТИЕ КАРТОЧЕК
+// ══════════════════════════════════════════
+function openProduct(id) {
+  const ov = document.getElementById('modal-' + id);
+  if (!ov) return;
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Инициализируем калькулятор сразу при открытии
+  if (id === 'vaganka') calcVaganka();
+  if (id === 'imitation') calcImitation();
+}
+
+function closeProduct(id) {
+  const ov = document.getElementById('modal-' + id);
+  if (!ov) return;
+  ov.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Клик по оверлею — закрыть
+document.querySelectorAll('.product-modal-overlay').forEach(ov => {
+  ov.addEventListener('click', e => {
+    if (e.target === ov) closeProduct(ov.id.replace('modal-', ''));
+  });
+});
+
+// ESC — закрыть всё
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    ['vaganka','imitation'].forEach(closeProduct);
+    closeModal && closeModal();
+    hideEasterEgg && hideEasterEgg();
+  }
+});
+</script>
 <script src="shared.js"></script>
-</body></html>
+</body>
+</html>
