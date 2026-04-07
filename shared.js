@@ -333,18 +333,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="modal-close" onclick="closeGlobalCartSend()">✕</button>
         <h3 style="font-family:var(--font-display);font-size:24px;letter-spacing:1px;">Отправить запрос</h3>
         <div id="global-cart-summary" style="background:var(--surface);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--text2);margin:12px 0 16px;white-space:pre-line;"></div>
-        <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-          <input type="hidden" name="_subject" value="Запрос из корзины — ОПТЭЛ">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="box">
-          <input type="hidden" name="_source" value="Корзина — страница продукции">
-          <input type="hidden" name="cart" id="global-cart-hidden">
-          <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
-          <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
-          <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
-          <div class="form-group"><label class="form-label">Комментарий</label><textarea name="comment" class="form-textarea" style="min-height:55px;" placeholder="Дополнительно..."></textarea></div>
-          <button type="submit" class="modal-submit">Отправить →</button>
-        </form>
+        <div class="form-group"><label class="form-label">Имя *</label><input type="text" id="gcart-name" class="form-input" placeholder="Иванов Иван"></div>
+        <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" id="gcart-phone" class="form-input" placeholder="+7 (___) ___-__-__"></div>
+        <div class="form-group"><label class="form-label">Компания</label><input type="text" id="gcart-company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+        <div class="form-group"><label class="form-label">Комментарий</label><textarea id="gcart-comment" class="form-textarea" style="min-height:55px;" placeholder="Дополнительно..."></textarea></div>
+        <button type="button" class="modal-submit" onclick="submitCartForm()">Отправить →</button>
         <div class="modal-note">Соглашаетесь с <a href="privacy.html" style="color:var(--lime);">политикой</a>.</div>
       </div>`;
     document.body.appendChild(ov);
@@ -354,6 +347,70 @@ document.addEventListener('DOMContentLoaded', () => {
     // Вешаем listeners на формы инжектированных модалок
     if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   }
+
+  window.submitCartForm = function() {
+    var name    = (document.getElementById('gcart-name')    || {}).value || '';
+    var phone   = (document.getElementById('gcart-phone')   || {}).value || '';
+    var company = (document.getElementById('gcart-company') || {}).value || '';
+    var comment = (document.getElementById('gcart-comment') || {}).value || '';
+    var summary = (document.getElementById('global-cart-summary') || {}).textContent || '';
+
+    if (!phone || phone.length < 6) {
+      var ph = document.getElementById('gcart-phone');
+      if (ph) { ph.style.borderColor = '#ff5555'; ph.focus(); }
+      return;
+    }
+
+    // Строим временную форму и сабмитим в скрытый iframe — как рабочие формы
+    var iframeName = 'cart_iframe_' + Date.now();
+    var iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    var form = document.createElement('form');
+    form.action  = 'https://formsubmit.co/non_86@mail.ru';
+    form.method  = 'POST';
+    form.target  = iframeName;
+    form.style.display = 'none';
+
+    var fields = {
+      '_subject':  'Запрос из корзины — ОПТЭЛ',
+      '_captcha':  'false',
+      '_template': 'box',
+      'Источник':  'Корзина сайта',
+      'Состав заказа': summary,
+      'Имя':       name,
+      'Телефон':   phone,
+      'Компания':  company,
+      'Комментарий': comment,
+    };
+    Object.keys(fields).forEach(function(k) {
+      var inp = document.createElement('input');
+      inp.type  = 'hidden';
+      inp.name  = k;
+      inp.value = fields[k];
+      form.appendChild(inp);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+
+    // Показываем тост и закрываем
+    if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
+    closeGlobalCartSend();
+
+    // Очищаем форму
+    ['gcart-name','gcart-phone','gcart-company','gcart-comment'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+
+    setTimeout(function() {
+      if (form.parentNode) document.body.removeChild(form);
+      if (iframe.parentNode) document.body.removeChild(iframe);
+    }, 5000);
+  };
 
   document.addEventListener('DOMContentLoaded', injectCartUI);
   // Слушаем изменения localStorage с других вкладок
