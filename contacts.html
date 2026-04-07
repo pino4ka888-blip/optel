@@ -49,26 +49,32 @@
   <div class="container">
     <div class="page-hero-inner">
       <div><div class="section-label">Связаться</div><h1 style="font-size:clamp(38px,6vw,72px);">Контакты</h1></div>
-      <div class="page-hero-icon"><svg width="170" height="150" viewBox="0 0 170 150" fill="none"><path d="M85 12C58 12 36 32 36 57c0 36 49 82 49 82s49-46 49-82C134 32 112 12 85 12z" fill="rgba(170,255,0,0.04)" stroke="rgba(170,255,0,0.15)" stroke-width="1.5"/><circle cx="85" cy="57" r="18" fill="rgba(170,255,0,0.07)" stroke="rgba(170,255,0,0.25)" stroke-width="1.5"/><circle cx="85" cy="57" r="5" fill="rgba(170,255,0,0.35)"/></svg></div>
+      <div class="page-hero-icon"><svg width="160" height="150" viewBox="0 0 160 150" fill="none">
+  <path d="M80 10C52 10 30 30 30 55c0 35 50 80 50 80s50-45 50-80C130 30 108 10 80 10z" fill="rgba(170,255,0,0.08)" stroke="#aaff00" stroke-width="1.8"/>
+  <circle cx="80" cy="55" r="18" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.8"/>
+  <circle cx="80" cy="55" r="6" fill="#aaff00" opacity="0.5"/>
+</svg></div>
     </div>
   </div>
 </div>
 
 <section><div class="container">
 
-  <div style="text-align:center;padding:44px 0 36px;border-bottom:1px solid var(--border);margin-bottom:36px;">
+  <div style="text-align:center;padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px;max-width:75%;margin-left:auto;margin-right:auto;">
     <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">Основной телефон</div>
     <a href="tel:+79999238888" class="contact-phone-hero">+7 9999-23-8888</a>
-    <div style="color:var(--text3);font-size:14px;margin-top:6px;margin-bottom:20px;">Пн–Пт 9:00–18:00, Сб 9:00–14:00 (МСК+2)</div>
+    <div style="color:var(--text3);font-size:14px;margin-top:6px;margin-bottom:20px;">Пн–Пт 9:00–18:00, Сб 9:00–14:00 (МСК+1)</div>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
       <a href="tel:+79999238888" class="btn btn-lime btn-lg"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>Позвонить</a>
-      <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>Telegram @pinkers5</a>
+      <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>Телеграм</a>
     </div>
   </div>
 
-  <div class="grid-2" style="margin-bottom:32px;">
-    <div class="contact-info-card reveal"><div class="contact-info-label">Адрес</div><div class="contact-info-val">г. Ижевск<br>Воткинское шоссе 204А</div></div>
-    <div class="contact-info-card reveal" style="transition-delay:.1s;"><div class="contact-info-label">Режим работы</div><div class="contact-info-val">Пн–Пт: 9:00–18:00<br>Суббота: 9:00–14:00</div></div>
+  <div style="display:flex;gap:28px;margin-bottom:28px;flex-wrap:wrap;">
+    <div class="contact-info-card reveal" style="flex:1;min-width:200px;">
+      <div class="contact-info-label">Адрес и режим работы</div>
+      <div class="contact-info-val">г. Ижевск, Воткинское шоссе 204А<br><span style="color:var(--text3);font-size:13px;">Пн–Пт: 9:00–18:00 &nbsp;·&nbsp; Сб: 9:00–14:00</span></div>
+    </div>
   </div>
 
   <!-- ФОРМА СЛЕВА, КАРТА СПРАВА -->
@@ -80,21 +86,13 @@
         <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
         <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
         <div class="form-group"><label class="form-label">Компания / Регион</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания", г. Казань'></div>
-        <div class="form-group"><label class="form-label">Удобное время звонка</label><input type="text" name="calltime" class="form-input" placeholder="напр. завтра с 10:00"></div>
         <div class="form-group"><label class="form-label">Комментарий</label><textarea name="message" class="form-textarea" placeholder="Что вас интересует?"></textarea></div>
         <button type="submit" class="btn btn-lime" style="width:100%;justify-content:center;padding:13px;">Отправить →</button>
         <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" style="color:var(--lime);">политикой конфиденциальности</a>. Свяжемся сразу.</p>
       </form>
     </div>
-    <div class="map-block reveal" style="transition-delay:.15s;min-height:420px;">
-      <svg width="48" height="56" viewBox="0 0 48 56" fill="none"><path d="M24 2C13.5 2 5 10.5 5 21c0 15 19 33 19 33s19-18 19-33C43 10.5 34.5 2 24 2z" stroke="#aaff00" stroke-width="2.5" fill="rgba(170,255,0,0.08)"/><circle cx="24" cy="21" r="7" stroke="#aaff00" stroke-width="2.5" fill="rgba(170,255,0,0.12)"/></svg>
-      <div style="font-size:16px;color:var(--text);font-weight:600;text-align:center;padding:0 20px;">г. Ижевск, Воткинское шоссе 204А</div>
-      <div style="font-size:12px;color:var(--text3);text-align:center;padding:0 24px;line-height:1.6;">Вставьте iframe Яндекс.Карт вместо этого блока</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-        <a href="https://yandex.ru/maps/?text=Ижевск+Воткинское+шоссе+204А" target="_blank" class="btn btn-outline" style="font-size:12px;">Яндекс.Карты</a>
-        <a href="https://maps.google.com/?q=Ижевск+Воткинское+шоссе+204А" target="_blank" class="btn btn-outline" style="font-size:12px;">Google Maps</a>
-      </div>
-      <!-- ЗАМЕНИТЬ НА: <iframe src="..." width="100%" height="420" frameborder="0" style="border:0;"></iframe> -->
+    <div class="map-block reveal" style="transition-delay:.15s;min-height:420px;padding:0;overflow:hidden;border-radius:var(--radius-lg);">
+      <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A39836bd4b7a947c9943b8e3ba04f9a6764744ab398b12ceb37702dcd46ace4bc&amp;width=500&amp;height=420&amp;lang=ru_RU&amp;scroll=true"></script>
     </div>
   </div>
 </div></section>

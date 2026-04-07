@@ -62,7 +62,18 @@
         <h1 style="font-size:clamp(38px,6vw,72px);">Калькулятор</h1>
         <p style="color:var(--text2);margin-top:10px;font-size:15px;">Рассчитайте объём, площадь или количество досок</p>
       </div>
-      <div class="page-hero-icon"><svg width="160" height="160" viewBox="0 0 160 160" fill="none"><rect x="20" y="10" width="120" height="140" rx="8" fill="rgba(170,255,0,0.04)" stroke="rgba(170,255,0,0.15)" stroke-width="1.5"/><rect x="32" y="22" width="96" height="32" rx="4" fill="rgba(170,255,0,0.08)" stroke="rgba(170,255,0,0.2)" stroke-width="1"/><text x="120" y="44" font-family="monospace" font-size="14" fill="rgba(170,255,0,0.5)" text-anchor="end">м³</text><rect x="32" y="66" width="26" height="22" rx="3" fill="rgba(170,255,0,0.06)" stroke="rgba(170,255,0,0.15)" stroke-width="1"/><rect x="67" y="66" width="26" height="22" rx="3" fill="rgba(170,255,0,0.06)" stroke="rgba(170,255,0,0.15)" stroke-width="1"/><rect x="102" y="66" width="26" height="22" rx="3" fill="rgba(170,255,0,0.06)" stroke="rgba(170,255,0,0.15)" stroke-width="1"/><rect x="32" y="98" width="26" height="22" rx="3" fill="rgba(170,255,0,0.06)" stroke="rgba(170,255,0,0.15)" stroke-width="1"/><rect x="67" y="98" width="26" height="22" rx="3" fill="rgba(170,255,0,0.06)" stroke="rgba(170,255,0,0.15)" stroke-width="1"/><rect x="102" y="98" width="26" height="44" rx="3" fill="rgba(170,255,0,0.12)" stroke="rgba(170,255,0,0.3)" stroke-width="1"/><rect x="32" y="130" width="61" height="22" rx="3" fill="rgba(170,255,0,0.06)" stroke="rgba(170,255,0,0.15)" stroke-width="1"/></svg></div>
+      <div class="page-hero-icon"><svg width="150" height="150" viewBox="0 0 150 150" fill="none">
+  <rect x="18" y="8" width="114" height="134" rx="10" fill="rgba(170,255,0,0.07)" stroke="#aaff00" stroke-width="1.8"/>
+  <rect x="30" y="20" width="90" height="30" rx="4" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1"/>
+  <text x="112" y="41" font-family="monospace" font-size="13" fill="#aaff00" text-anchor="end" opacity="0.8">м³</text>
+  <rect x="30" y="62" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="63" y="62" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="96" y="62" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="30" y="92" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="63" y="92" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="96" y="92" width="24" height="42" rx="3" fill="rgba(170,255,0,0.2)" stroke="#aaff00" stroke-width="1.5"/>
+  <rect x="30" y="122" width="57" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+</svg></div>
     </div>
   </div>
 </div>
@@ -89,7 +100,6 @@
         <div class="field-group"><label class="field-label">Площадь (м²)</label><input type="number" class="field-input" id="c2v" placeholder="напр. 50" step="1" min="0" oninput="c2calc()"></div>
         <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c2t" onchange="c2calc()"><option value="">— выберите —</option><option value="12.5">12,5 мм (штиль)</option><option value="13">13 мм (штиль)</option><option value="20">20 мм (брус)</option><option value="28">28 мм (брус)</option><option value="25">25 мм (половая доска)</option></select></div>
         <div class="field-group"><label class="field-label">Или толщина (мм)</label><input type="number" class="field-input" id="c2th" placeholder="напр. 20" step="0.5" min="1" oninput="c2calc()"></div>
-        <div class="field-group"><label class="field-label">Запас на подрезку</label><select class="field-select" id="c2r" onchange="c2calc()"><option value="0">Без запаса</option><option value="5" selected>5% — стандарт</option><option value="10">10% — сложная раскладка</option><option value="15">15% — диагональ</option></select></div>
         <button class="btn-calc" onclick="c2calc()">Рассчитать</button>
       </div>
       <div class="calc-result-box"><div class="calc-result-title">Результат</div><div class="result-row"><div class="result-num" id="r2a">—</div><div class="result-label">м³ с запасом</div></div><div class="result-row"><div class="result-num" id="r2b">—</div><div class="result-label">м³ чистый объём</div></div></div>
@@ -108,7 +118,6 @@
       <div>
         <div class="field-group"><label class="field-label">Площадь (м²)</label><input type="number" class="field-input" id="c4a" placeholder="напр. 80" step="1" min="0" oninput="c4calc()"></div>
         <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c4t" onchange="c4calc()"><option value="">— выберите —</option><option value="12.5,85,3">12,5×96, длина 3 м</option><option value="12.5,85,4">12,5×96, длина 4 м</option><option value="13,92,3">13×105, длина 3 м</option><option value="20,133,3">20×140, длина 3 м</option><option value="20,133,4">20×140, длина 4 м</option><option value="28,133,3">28×140, длина 3 м</option><option value="20,183,3">20×190, длина 3 м</option></select></div>
-        <div class="field-group"><label class="field-label">Запас</label><select class="field-select" id="c4r" onchange="c4calc()"><option value="5" selected>5%</option><option value="10">10%</option><option value="15">15%</option></select></div>
         <button class="btn-calc" onclick="c4calc()">Рассчитать</button>
         <div class="info-box" style="margin-top:12px;margin-bottom:0;font-size:12px;">Расчёт ориентировочный. Точную стоимость уточняйте по телефону.</div>
       </div>
