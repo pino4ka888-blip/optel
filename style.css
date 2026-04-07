@@ -861,7 +861,7 @@ footer {
   position: fixed;
   bottom: 28px;
   right: 28px;
-  z-index: 100;
+  z-index: 360;
   background: var(--lime);
   color: #000;
   border: none;
@@ -1083,3 +1083,10 @@ input[type="number"] { -moz-appearance: textfield; }
 body.cart-open { padding-bottom: 72px; }
 body.cart-open footer { margin-bottom: 0; }
 
+
+/* sticky-cta выше корзины */
+body.cart-open .sticky-cta { bottom: 90px; }
+
+/* Карта Яндекс — закруглить все края */
+.contacts-main-grid > .reveal iframe,
+.contacts-main-grid > .reveal > * { border-radius: var(--radius-lg) !important; }

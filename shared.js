@@ -208,3 +208,136 @@ function stopMatrix() {
 document.addEventListener('DOMContentLoaded', () => {
   initEasterEgg();
 });
+
+/* ═══════════════════════════════════════════════
+   ГЛОБАЛЬНАЯ КОРЗИНА — работает на всех страницах
+═══════════════════════════════════════════════ */
+(function() {
+  const CART_KEY = 'optel_cart';
+
+  function loadCart() {
+    try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; }
+  }
+  function saveCart(cart) {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e) {}
+  }
+  function fmtP(n) { return Math.round(n).toLocaleString('ru') + ' ₽'; }
+
+  function renderGlobalCart() {
+    const bar  = document.getElementById('global-cart-bar');
+    const list = document.getElementById('global-cart-list');
+    const cnt  = document.getElementById('global-cart-count');
+    if (!bar) return;
+    const cart = loadCart();
+    if (!cart.length) {
+      bar.classList.remove('visible');
+      document.body.classList.remove('cart-open');
+      return;
+    }
+    bar.classList.add('visible');
+    document.body.classList.add('cart-open');
+    if (cnt) cnt.textContent = cart.length;
+    if (list) {
+      list.innerHTML = cart.map(item =>
+        `<div class="cart-tag">
+          <span>${item.name} · ${item.size} · ${item.len} · ${item.sort} · ${item.vol} · <b>${item.price}</b></span>
+          <span class="cart-tag-remove" onclick="globalRemoveFromCart('${item.type}')">×</span>
+        </div>`
+      ).join('');
+    }
+  }
+
+  window.globalRemoveFromCart = function(type) {
+    let cart = loadCart().filter(i => i.type !== type);
+    saveCart(cart);
+    renderGlobalCart();
+  };
+
+  window.globalClearCart = function() {
+    saveCart([]);
+    renderGlobalCart();
+  };
+
+  window.globalSendCart = function() {
+    const cart = loadCart();
+    if (!cart.length) return;
+    const summary = cart.map(i =>
+      `${i.name}: ${i.size}, ${i.len}, ${i.sort}, ${i.vol}, цена: ${i.price}`
+    ).join('\n');
+    const ov = document.getElementById('global-cart-send-overlay');
+    const sf = document.getElementById('global-cart-summary');
+    const hf = document.getElementById('global-cart-hidden');
+    if (sf) sf.textContent = summary;
+    if (hf) hf.value = summary;
+    if (ov) { ov.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    const tel = document.querySelector('#global-cart-send-overlay input[type="tel"]');
+    if (tel) applyPhoneMask(tel);
+  };
+
+  window.closeGlobalCartSend = function() {
+    const ov = document.getElementById('global-cart-send-overlay');
+    if (ov) { ov.classList.remove('open'); document.body.style.overflow = ''; }
+  };
+
+  // Инжектируем HTML корзины на все страницы
+  function injectCartUI() {
+    // Не инжектировать если уже есть (страница products.html имеет свою)
+    if (document.getElementById('global-cart-bar')) return;
+    const bar = document.createElement('div');
+    bar.id = 'global-cart-bar';
+    bar.className = 'cart-bar';
+    bar.innerHTML = `
+      <div class="cart-bar-inner">
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;flex:1;">
+          <span class="cart-title">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;">
+              <path d="M1 1h2l2.4 7.4a1 1 0 00.9.6h6.2a1 1 0 00.9-.7L15 4H4" stroke="#aaff00" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <circle cx="6" cy="13.5" r="1" fill="#aaff00"/><circle cx="12" cy="13.5" r="1" fill="#aaff00"/>
+            </svg>
+            Корзина <span id="global-cart-count" style="background:var(--lime);color:#000;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-left:4px;"></span>
+          </span>
+          <div class="cart-items-list" id="global-cart-list"></div>
+        </div>
+        <button class="cart-clear" onclick="globalClearCart()">Очистить</button>
+        <a href="products.html" class="btn btn-ghost" style="font-size:13px;padding:8px 16px;white-space:nowrap;">Изменить</a>
+        <button class="cart-send-btn" onclick="globalSendCart()">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:4px;">
+            <path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/>
+          </svg>
+          Отправить запрос
+        </button>
+      </div>`;
+    document.body.appendChild(bar);
+
+    // Модалка отправки
+    const ov = document.createElement('div');
+    ov.className = 'modal-overlay';
+    ov.id = 'global-cart-send-overlay';
+    ov.innerHTML = `
+      <div class="modal">
+        <button class="modal-close" onclick="closeGlobalCartSend()">✕</button>
+        <h3 style="font-family:var(--font-display);font-size:24px;letter-spacing:1px;">Отправить запрос</h3>
+        <div id="global-cart-summary" style="background:var(--surface);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--text2);margin:12px 0 16px;white-space:pre-line;"></div>
+        <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
+          <input type="hidden" name="_subject" value="Запрос из корзины — ОПТЭЛ">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="cart" id="global-cart-hidden">
+          <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
+          <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
+          <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+          <div class="form-group"><label class="form-label">Комментарий</label><textarea name="comment" class="form-textarea" style="min-height:55px;" placeholder="Дополнительно..."></textarea></div>
+          <button type="submit" class="modal-submit">Отправить →</button>
+        </form>
+        <div class="modal-note">Соглашаетесь с <a href="privacy.html" style="color:var(--lime);">политикой</a>.</div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) closeGlobalCartSend(); });
+
+    renderGlobalCart();
+  }
+
+  document.addEventListener('DOMContentLoaded', injectCartUI);
+  // Слушаем изменения localStorage с других вкладок
+  window.addEventListener('storage', e => { if (e.key === 'optel_cart') renderGlobalCart(); });
+})();

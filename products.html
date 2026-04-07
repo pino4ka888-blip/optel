@@ -944,7 +944,13 @@ function removeFromCart(type) {
   renderCart();
 }
 
-function clearCart() { cart = []; saveCart(); renderCart(); }
+function clearCart() {
+  cart = [];
+  saveCart();
+  renderCart();
+  document.body.style.overflow = '';
+  document.body.classList.remove('cart-open');
+}
 
 function renderCart() {
   const bar  = document.getElementById('cart-bar');
