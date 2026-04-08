@@ -598,7 +598,12 @@ function updateVagankaPhoto(sort) {
   var src = V_SORT_PHOTOS[sort] || 'img/vaganka_a.jpg';
   var card  = document.getElementById('catalog-vaganka-img');
   var modal = document.getElementById('pm-vaganka-img');
-  if (card)  card.src  = src;
+  if (card) {
+    card.src = src;
+    card.style.objectPosition = (sort === 'prima' || sort === 'c')
+      ? 'center calc(40% - 30px)'
+      : 'center 40%';
+  }
   if (modal) modal.src = src;
 }
 
