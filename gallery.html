@@ -92,12 +92,16 @@
       <div id="empty-products" style="text-align:center;padding:80px 20px;"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="4" y="10" width="56" height="44" rx="4" stroke="rgba(170,255,0,0.3)" stroke-width="2" fill="none"/><circle cx="22" cy="26" r="6" stroke="rgba(170,255,0,0.3)" stroke-width="2" fill="none"/><path d="M4 44l14-10 10 8 10-12 22 14" stroke="rgba(170,255,0,0.3)" stroke-width="2" stroke-linecap="round"/></svg><p style="color:var(--text3);font-size:15px;margin-top:14px;">Фото продукции будут добавлены</p></div></div>
     <div class="gallery-section" id="g-storage"><div class="gallery-grid" id="grid-storage"></div>
       <div id="empty-storage" style="text-align:center;padding:80px 20px;"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="4" y="10" width="56" height="44" rx="4" stroke="rgba(170,255,0,0.3)" stroke-width="2" fill="none"/><circle cx="22" cy="26" r="6" stroke="rgba(170,255,0,0.3)" stroke-width="2" fill="none"/><path d="M4 44l14-10 10 8 10-12 22 14" stroke="rgba(170,255,0,0.3)" stroke-width="2" stroke-linecap="round"/></svg><p style="color:var(--text3);font-size:15px;margin-top:14px;">Фото склада будут добавлены</p></div></div>
-    <div class="info-box" style="margin-top:24px;"><strong>Как добавить фото:</strong> положите файлы в папку <code style="background:var(--bg3);padding:2px 6px;border-radius:3px;color:var(--lime);">img/gallery/</code> и заполните массив <code style="background:var(--bg3);padding:2px 6px;border-radius:3px;color:var(--lime);">PHOTOS</code> в коде страницы.</div>
   </div>
 </section>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="lightbox-close" onclick="closeLightbox()">✕</button><img id="lightbox-img" src="" alt=""></div>
 <script>
 const PHOTOS = [
+  { src: 'img/vaganka_extra.jpg',   caption: 'Вагонка Штиль — Сорт Экстра',  category: 'products' },
+  { src: 'img/vaganka_prima.jpg',   caption: 'Вагонка Штиль — Прима',         category: 'products' },
+  { src: 'img/vaganka_a.jpg',       caption: 'Вагонка Штиль — Сорт А',        category: 'products' },
+  { src: 'img/vaganka_b.jpg',       caption: 'Вагонка Штиль — Сорт В',        category: 'products' },
+  { src: 'img/vaganka_c.jpg',       caption: 'Вагонка Штиль — Сорт С',        category: 'products' },
   { src: 'img/imitation_extra.jpg', caption: 'Имитация бруса — Сорт Экстра', category: 'products' },
   { src: 'img/imitation_prima.jpg', caption: 'Имитация бруса — Прима',       category: 'products' },
   { src: 'img/imitation_a.jpg',     caption: 'Имитация бруса — Сорт А',      category: 'products' },
