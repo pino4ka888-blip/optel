@@ -51,6 +51,12 @@
   .suppliers-grid { grid-template-columns:1fr; }
   .suppliers-cards { grid-template-columns:1fr; }
 }
+@media(max-width:600px) {
+  /* Кнопки ТГ/MAX/Позвонить в столбик */
+  .suppliers-grid .btn { width: 100%; justify-content: center; }
+  /* Форма поставщика — убрать горизонтальный gap */
+  .suppliers-grid .form-compact .grid-2 { grid-template-columns: 1fr !important; }
+}
 </style>
 
 </head>
@@ -194,7 +200,7 @@
             <div class="file-upload-name" id="file-name-display" style="display:none;"></div>
           </div>
           <button type="submit" class="btn btn-lime btn-lg" style="width:100%;justify-content:center;margin-top:4px;">Отправить предложение →</button>
-          <div style="display:flex;gap:10px;margin-top:10px;">
+          <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;">
             <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg" style="flex:1;justify-content:center;">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
               Написать в ТГ

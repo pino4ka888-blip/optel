@@ -55,6 +55,15 @@
   .hero-card{display:none;}
   .hero{min-height:auto;padding:52px 0 40px;}
 }
+.section-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media(max-width: 900px) {
+  .section-grid-2 { grid-template-columns: 1fr !important; gap: 32px; }
+}
 </style>
 
 </head>
@@ -170,7 +179,7 @@
 <!-- ЗАЯВКА -->
 <section style="background:var(--bg2);">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+    <div class="section-grid-2">
       <div class="reveal">
         <div class="section-label">Получить предложение</div>
         <h2 style="margin-bottom:16px;">Свяжемся<br>сразу</h2>
@@ -277,6 +286,15 @@
   line-height: 1;
   will-change: transform, opacity;
   user-select: none;
+}
+.section-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media(max-width: 900px) {
+  .section-grid-2 { grid-template-columns: 1fr !important; gap: 32px; }
 }
 </style>
 <script>

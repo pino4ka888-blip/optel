@@ -21,6 +21,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Мобильный фикс таблиц */
+.teh-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.teh-block table { min-width: 480px; }
+/* Сводная таблица сортов — горизонтальный скролл */
+.teh-block table th, .teh-block table td { 
+  font-size: 13px; 
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+@media(max-width: 600px) {
+  .teh-block table th, .teh-block table td { 
+    font-size: 12px; 
+    padding: 6px 8px;
+  }
+  .teh-block { border-radius: 8px; }
+}
+</style>
 
 </head>
 <body>
@@ -70,9 +88,9 @@
 
 <section><div class="container">
 
-<div class="teh-block reveal" style="overflow-x:auto;">
+<div class="teh-block reveal">
   <h3 style="color:var(--lime);">Сводная таблица сортов</h3>
-  <table style="min-width:600px;">
+  <table>
     <thead><tr><th>Показатель</th><th><span class="sort-tag sort-extra">Экстра</span></th><th><span class="sort-tag sort-prima">Прима</span></th><th><span class="sort-tag sort-a">А</span></th><th><span class="sort-tag sort-b">В</span></th><th><span class="sort-tag sort-c">С</span></th></tr></thead>
     <tbody>
       <tr><td>Сучки сросшиеся</td><td>Не доп.</td><td>до 20мм ≤1/п.м.</td><td>до 30мм неогр.</td><td>Доп.</td><td>Доп.</td></tr>
