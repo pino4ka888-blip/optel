@@ -222,12 +222,12 @@
         <div class="catalog-info">
           <div class="catalog-name">Вагонка&nbsp;"Штиль"<br>из ангарской сосны</div>
           <div class="catalog-sub">Строганый пиломатериал · влажность не более 14%</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <span class="sort-tag sort-extra">Экстра</span>
-            <span class="sort-tag sort-prima">Прима</span>
-            <span class="sort-tag sort-a">А</span>
-            <span class="sort-tag sort-b">В</span>
-            <span class="sort-tag sort-c">С</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;" onclick="event.stopPropagation()">
+            <span class="sort-tag sort-extra" style="cursor:pointer;" onclick="setCatalogSort('imitation','extra')">Экстра</span>
+            <span class="sort-tag sort-prima" style="cursor:pointer;" onclick="setCatalogSort('imitation','prima')">Прима</span>
+            <span class="sort-tag sort-a" style="cursor:pointer;" onclick="setCatalogSort('imitation','a')">А</span>
+            <span class="sort-tag sort-b" style="cursor:pointer;" onclick="setCatalogSort('imitation','b')">В</span>
+            <span class="sort-tag sort-c" style="cursor:pointer;" onclick="setCatalogSort('imitation','c')">С</span>
           </div>
         </div>
         <span class="catalog-hint">Подробнее →</span>
@@ -236,17 +236,17 @@
       <!-- ИМИТАЦИЯ БРУСА -->
       <div class="catalog-card reveal" style="transition-delay:.1s;" onclick="openPM('imitation')">
         <div class="catalog-visual">
-          <img src="img/imitation.jpg" alt="Имитация бруса из ангарской сосны — сечение и профиль">
+          <img id="catalog-imitation-img" src="img/imitation_a.jpg" alt="Имитация бруса из ангарской сосны — сечение и профиль" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:all 0.3s;">
         </div>
         <div class="catalog-info">
           <div class="catalog-name">Имитация бруса<br>из ангарской сосны</div>
           <div class="catalog-sub">Строганый пиломатериал · влажность не более 14%</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <span class="sort-tag sort-extra">Экстра</span>
-            <span class="sort-tag sort-prima">Прима</span>
-            <span class="sort-tag sort-a">А</span>
-            <span class="sort-tag sort-b">В</span>
-            <span class="sort-tag sort-c">С</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;" onclick="event.stopPropagation()">
+            <span class="sort-tag sort-extra" style="cursor:pointer;" onclick="setCatalogSort('imitation','extra')">Экстра</span>
+            <span class="sort-tag sort-prima" style="cursor:pointer;" onclick="setCatalogSort('imitation','prima')">Прима</span>
+            <span class="sort-tag sort-a" style="cursor:pointer;" onclick="setCatalogSort('imitation','a')">А</span>
+            <span class="sort-tag sort-b" style="cursor:pointer;" onclick="setCatalogSort('imitation','b')">В</span>
+            <span class="sort-tag sort-c" style="cursor:pointer;" onclick="setCatalogSort('imitation','c')">С</span>
           </div>
         </div>
         <span class="catalog-hint">Подробнее →</span>
@@ -391,7 +391,7 @@
   <div class="pm-box">
     <button class="pm-close" onclick="closePM('imitation')">✕</button>
     <div class="pm-photo">
-      <img src="img/imitation.jpg" alt="Имитация бруса из ангарской сосны">
+      <img id="pm-imitation-img" src="img/imitation_a.jpg" alt="Имитация бруса из ангарской сосны">
     </div>
     <div class="pm-body">
       <div class="pm-title">Имитация бруса<br>из ангарской сосны</div>
@@ -581,6 +581,35 @@ const STOCK = {
   'c_20x140':'в наличии',    'c_28x140':'в наличии',   'c_20x190':'в наличии',
 };
 
+// ═══════════════════════════════
+// ФОТО ПО СОРТАМ — ИМИТАЦИЯ БРУСА
+// ═══════════════════════════════
+const I_SORT_PHOTOS = {
+  extra: 'img/imitation_extra.jpg',
+  prima: 'img/imitation_prima.jpg',
+  a:     'img/imitation_a.jpg',
+  b:     'img/imitation_b.jpg',
+  c:     'img/imitation_c.jpg',
+};
+
+function updateImitationPhoto(sort) {
+  var src = I_SORT_PHOTOS[sort] || 'img/imitation_a.jpg';
+  var card = document.getElementById('catalog-imitation-img');
+  var modal = document.getElementById('pm-imitation-img');
+  if (card)  card.src  = src;
+  if (modal) modal.src = src;
+}
+
+// Смена фото при клике на сорт в витрине (без открытия карточки)
+function setCatalogSort(type, sort) {
+  if (type === 'imitation') {
+    updateImitationPhoto(sort);
+    // Синхронизируем селект сорта в модалке
+    var sel = document.getElementById('i-sort');
+    if (sel) { sel.value = sort; calcI(); }
+  }
+}
+
 function fmt(n){ return Math.round(n).toLocaleString('ru') + ' ₽'; }
 
 function renderAvail(badgeId, noteId, sort, size) {
@@ -652,6 +681,7 @@ function calcI() {
   const el = document.getElementById('i-spec-len');
   if (el) el.textContent = len + ' м';
   renderAvail('i-avail-badge','i-avail-note', sort, size);
+  updateImitationPhoto(sort);
   updateGlobalCartItem('imitation');
 }
 
