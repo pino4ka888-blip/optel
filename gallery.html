@@ -97,7 +97,9 @@
 </section>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="lightbox-close" onclick="closeLightbox()">✕</button><img id="lightbox-img" src="" alt=""></div>
 <script>
-const PHOTOS = [];
+const PHOTOS = [
+  { src: 'img/gallery_imitation.jpg', caption: 'Имитация бруса из ангарской сосны — профиль и сечение', category: 'products' },
+];
 function renderGallery(){['all','products','storage'].forEach(cat=>{const grid=document.getElementById('grid-'+cat),empty=document.getElementById('empty-'+cat),photos=cat==='all'?PHOTOS:PHOTOS.filter(p=>p.category===cat);if(!photos.length){grid.style.display='none';return;}empty.style.display='none';grid.style.display='grid';grid.innerHTML=photos.map(p=>`<div class="gallery-item" onclick="openLightbox('${p.src}')"><img src="${p.src}" alt="${p.caption||''}" loading="lazy"></div>`).join('');});}
 function switchGallery(btn,id){document.querySelectorAll('.gallery-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.gallery-section').forEach(s=>s.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}
 function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
