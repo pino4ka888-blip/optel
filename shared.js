@@ -83,6 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ── CALCULATOR ── */
+function clearCalc(panelId) {
+  var panel = document.getElementById(panelId);
+  if (!panel) return;
+  panel.querySelectorAll('input[type="number"]').forEach(function(el) { el.value = ''; });
+  panel.querySelectorAll('select').forEach(function(el) { el.selectedIndex = 0; });
+  panel.querySelectorAll('.result-num').forEach(function(el) { el.textContent = '—'; });
+  // Сбросить подписи с динамическими значениями
+  var labels = { r1bl:'Штук досок', r2bl:'Штук досок', r3al:'Штук в 1 м³', r3bl:'Штук в партии' };
+  Object.keys(labels).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = labels[id];
+  });
+}
+
 function switchCalcTab(btn, panelId) {
   document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
