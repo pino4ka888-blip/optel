@@ -1237,3 +1237,33 @@ body.cart-open .sticky-cta { bottom: 90px; }
   /* Section текст не вылезает */
   section { overflow-x: hidden; }
 }
+
+/* ── КАЛЬКУЛЯТОР: кнопка Очистить ── */
+.btn-clear {
+  margin-top: 20px;
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text3);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+}
+.btn-clear:hover {
+  border-color: rgba(255,100,100,0.5);
+  color: #ff7070;
+  background: rgba(255,100,100,0.06);
+}
+/* calc-result-box — flex колонка чтобы кнопка была снизу */
+.calc-result-box {
+  display: flex !important;
+  flex-direction: column;
+}
