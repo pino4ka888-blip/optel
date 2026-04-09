@@ -95,38 +95,80 @@ function fmt(n, dec) {
   return n.toFixed(dec !== undefined ? dec : 2).replace(/\.?0+$/, '').replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
 }
 function c1calc() {
-  const m3=parseFloat(document.getElementById('c1v').value), tv=document.getElementById('c1t').value, thm=parseFloat(document.getElementById('c1th').value);
-  let th=tv?parseFloat(tv.split(',')[0]):(thm>0?thm:NaN), wb=tv?parseFloat(tv.split(',')[1]):NaN;
-  if(isNaN(m3)||m3<=0||isNaN(th)||th<=0){document.getElementById('r1a').textContent='—';document.getElementById('r1b').textContent='—';return;}
-  document.getElementById('r1a').textContent=fmt(m3/(th/1000))+' м²';
-  if(!isNaN(wb)){document.getElementById('r1b').textContent=fmt(m3/((th/1000)*(wb/1000)*3),0)+' шт';document.getElementById('r1bl').textContent='Штук досок (длина 3 м)';}
-  else document.getElementById('r1b').textContent='—';
+  const m3  = parseFloat(document.getElementById('c1v').value);
+  const tv  = document.getElementById('c1t').value;
+  const thm = parseFloat(document.getElementById('c1th').value);
+  const len = parseFloat(document.getElementById('c1len').value) || 3;
+  let th = tv ? parseFloat(tv.split(',')[0]) : (thm > 0 ? thm : NaN);
+  let wb = tv ? parseFloat(tv.split(',')[1]) : NaN;
+  if (isNaN(m3)||m3<=0||isNaN(th)||th<=0) {
+    document.getElementById('r1a').textContent='—';
+    document.getElementById('r1b').textContent='—';
+    return;
+  }
+  const m2 = m3 / (th / 1000);
+  document.getElementById('r1a').textContent = fmt(m2) + ' м²';
+  if (!isNaN(wb) && wb > 0) {
+    const qty = m3 / ((th/1000) * (wb/1000) * len);
+    document.getElementById('r1b').textContent = fmt(qty, 0) + ' шт';
+    document.getElementById('r1bl').textContent = 'Штук досок (длина ' + len + ' м)';
+  } else {
+    document.getElementById('r1b').textContent = '—';
+  }
 }
 function c2calc() {
-  const m2=parseFloat(document.getElementById('c2v').value), tv=document.getElementById('c2t').value, thm=parseFloat(document.getElementById('c2th').value), res=parseFloat(document.getElementById('c2r').value)/100;
-  let th=tv?parseFloat(tv):(thm>0?thm:NaN);
-  if(isNaN(m2)||m2<=0||isNaN(th)||th<=0){document.getElementById('r2a').textContent='—';document.getElementById('r2b').textContent='—';return;}
-  const m3c=m2*(th/1000);
-  document.getElementById('r2a').textContent=fmt(m3c*(1+res))+' м³';
-  document.getElementById('r2b').textContent=fmt(m3c)+' м³';
+  const m2  = parseFloat(document.getElementById('c2v').value);
+  const tv  = document.getElementById('c2t').value;
+  const thm = parseFloat(document.getElementById('c2th').value);
+  const len = parseFloat(document.getElementById('c2len').value) || 3;
+  let th = tv ? parseFloat(tv) : (thm > 0 ? thm : NaN);
+  if (isNaN(m2) || m2 <= 0 || isNaN(th) || th <= 0) {
+    document.getElementById('r2a').textContent = '—';
+    document.getElementById('r2b').textContent = '—';
+    return;
+  }
+  const m3 = m2 * (th / 1000);
+  document.getElementById('r2a').textContent = fmt(m3) + ' м³';
+  const lineal = m2 / len;
+  document.getElementById('r2b').textContent = fmt(lineal, 0) + ' пог.м';
+  document.getElementById('r2bl').textContent = 'Погонных метров досок (длина ' + len + ' м)';
 }
 function c3calc() {
-  const th=parseFloat(document.getElementById('c3a').value)/1000, wb=parseFloat(document.getElementById('c3b').value)/1000, len=parseFloat(document.getElementById('c3c').value), m3p=parseFloat(document.getElementById('c3d').value);
-  if(isNaN(th)||isNaN(wb)||isNaN(len)||th<=0||wb<=0){['r3a','r3b','r3c'].forEach(id=>document.getElementById(id).textContent='—');return;}
-  const per=1/(th*wb*len);
-  document.getElementById('r3a').textContent=fmt(per,0)+' шт';
-  document.getElementById('r3al').textContent='Штук в 1 м³ (длина '+len+' м)';
-  if(!isNaN(m3p)&&m3p>0){document.getElementById('r3b').textContent=fmt(per*m3p,0)+' шт';document.getElementById('r3bl').textContent='Штук в '+m3p+' м³';}
-  document.getElementById('r3c').textContent=fmt(1/th)+' м²';
+  const th  = parseFloat(document.getElementById('c3a').value) / 1000;
+  const wb  = parseFloat(document.getElementById('c3b').value) / 1000;
+  const len = parseFloat(document.getElementById('c3c').value);
+  const m3p = parseFloat(document.getElementById('c3d').value);
+  if (isNaN(th)||isNaN(wb)||isNaN(len)||th<=0||wb<=0) {
+    ['r3a','r3b','r3c'].forEach(id => document.getElementById(id).textContent='—');
+    return;
+  }
+  const per = 1 / (th * wb * len);
+  document.getElementById('r3a').textContent = fmt(per, 0) + ' шт';
+  document.getElementById('r3al').textContent = 'Штук в 1 м³ (длина ' + len + ' м)';
+  if (!isNaN(m3p) && m3p > 0) {
+    document.getElementById('r3b').textContent = fmt(per * m3p, 0) + ' шт';
+    document.getElementById('r3bl').textContent = 'Штук в ' + m3p + ' м³';
+  } else {
+    document.getElementById('r3b').textContent = '—';
+  }
+  document.getElementById('r3c').textContent = fmt(1 / th) + ' м²';
 }
 function c4calc() {
-  const area=parseFloat(document.getElementById('c4a').value), tv=document.getElementById('c4t').value, res=parseFloat(document.getElementById('c4r').value)/100;
-  if(!tv||isNaN(area)||area<=0){['r4a','r4b','r4c'].forEach(id=>document.getElementById(id).textContent='—');return;}
-  const p=tv.split(','), th=parseFloat(p[0])/1000, wb=parseFloat(p[1])/1000, len=parseFloat(p[2]);
-  const m3=area*th*(1+res);
-  document.getElementById('r4a').textContent=fmt(m3)+' м³';
-  document.getElementById('r4b').textContent=fmt(Math.ceil(m3/(th*wb*len)),0)+' шт';
-  document.getElementById('r4c').textContent='Уточните по телефону';
+  const area = parseFloat(document.getElementById('c4a').value);
+  const tv   = document.getElementById('c4t').value;
+  const len  = parseFloat(document.getElementById('c4len').value) || 3;
+  if (!tv || isNaN(area) || area <= 0) {
+    ['r4a','r4b','r4c'].forEach(id => document.getElementById(id).textContent='—');
+    return;
+  }
+  const p  = tv.split(',');
+  const th = parseFloat(p[0]) / 1000;
+  const wb = parseFloat(p[1]) / 1000;
+  const m3 = area * th;
+  const qty = Math.ceil(m3 / (th * wb * len));
+  document.getElementById('r4a').textContent = fmt(m3) + ' м³';
+  document.getElementById('r4b').textContent = fmt(qty, 0) + ' шт (длина ' + len + ' м)';
+  document.getElementById('r4c').textContent = 'Уточните по телефону';
 }
 
 /* ── EASTER EGG: тройной клик по логотипу ── */

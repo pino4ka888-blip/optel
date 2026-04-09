@@ -86,42 +86,71 @@
       <button class="calc-tab" onclick="switchCalcTab(this,'ctab-boards')">Штук в м³</button>
       <button class="calc-tab" onclick="switchCalcTab(this,'ctab-full')">Полный расчёт</button>
     </div>
+
+    <!-- ВКЛ 1: м³ → м² -->
     <div class="calc-panel active" id="ctab-m3m2">
       <div>
         <div class="field-group"><label class="field-label">Объём (м³)</label><input type="number" class="field-input" id="c1v" placeholder="напр. 2.5" step="0.1" min="0" oninput="c1calc()"></div>
-        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c1t" onchange="c1calc()"><option value="">— выберите —</option><option value="12.5,85">12,5×96 мм (профиль штиль)</option><option value="13,92">13×105 мм (профиль штиль)</option><option value="20,133">20×140 мм (профиль брус)</option><option value="28,133">28×140 мм (профиль брус)</option><option value="20,183">20×190 мм (профиль брус)</option></select></div>
+        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c1t" onchange="c1calc()"><option value="">— выберите —</option><option value="12.5,96">12,5×96 мм (штиль)</option><option value="13,105">13×105 мм (штиль)</option><option value="20,140">20×140 мм (имитация бруса)</option><option value="28,140">28×140 мм (имитация бруса)</option><option value="20,190">20×190 мм (имитация бруса)</option></select></div>
         <div class="field-group"><label class="field-label">Или толщина вручную (мм)</label><input type="number" class="field-input" id="c1th" placeholder="напр. 12.5" step="0.5" min="1" oninput="c1calc()"></div>
+        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c1len" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c1calc()"></div>
         <button class="btn-calc" onclick="c1calc()">Рассчитать</button>
       </div>
-      <div class="calc-result-box"><div class="calc-result-title">Результат</div><div class="result-row"><div class="result-num" id="r1a">—</div><div class="result-label">Квадратных метров (м²)</div></div><div class="result-row"><div class="result-num" id="r1b">—</div><div class="result-label" id="r1bl">Штук досок (длина 3 м)</div></div></div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r1a">—</div><div class="result-label">Квадратных метров (м²)</div></div>
+        <div class="result-row"><div class="result-num" id="r1b">—</div><div class="result-label" id="r1bl">Штук досок</div></div>
+      </div>
     </div>
+
+    <!-- ВКЛ 2: м² → м³ -->
     <div class="calc-panel" id="ctab-m2m3">
       <div>
         <div class="field-group"><label class="field-label">Площадь (м²)</label><input type="number" class="field-input" id="c2v" placeholder="напр. 50" step="1" min="0" oninput="c2calc()"></div>
-        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c2t" onchange="c2calc()"><option value="">— выберите —</option><option value="12.5">12,5 мм (штиль)</option><option value="13">13 мм (штиль)</option><option value="20">20 мм (брус)</option><option value="28">28 мм (брус)</option><option value="25">25 мм (половая доска)</option></select></div>
-        <div class="field-group"><label class="field-label">Или толщина (мм)</label><input type="number" class="field-input" id="c2th" placeholder="напр. 20" step="0.5" min="1" oninput="c2calc()"></div>
+        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c2t" onchange="c2calc()"><option value="">— выберите —</option><option value="12.5">12,5 мм (штиль)</option><option value="13">13 мм (штиль)</option><option value="20">20 мм (имитация бруса)</option><option value="28">28 мм (имитация бруса)</option><option value="25">25 мм (половая доска)</option></select></div>
+        <div class="field-group"><label class="field-label">Или толщина вручную (мм)</label><input type="number" class="field-input" id="c2th" placeholder="напр. 20" step="0.5" min="1" oninput="c2calc()"></div>
+        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c2len" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c2calc()"></div>
         <button class="btn-calc" onclick="c2calc()">Рассчитать</button>
       </div>
-      <div class="calc-result-box"><div class="calc-result-title">Результат</div><div class="result-row"><div class="result-num" id="r2a">—</div><div class="result-label">м³ с запасом</div></div><div class="result-row"><div class="result-num" id="r2b">—</div><div class="result-label">м³ чистый объём</div></div></div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r2a">—</div><div class="result-label">м³ (чистый объём)</div></div>
+        <div class="result-row"><div class="result-num" id="r2b">—</div><div class="result-label" id="r2bl">Штук досок</div></div>
+      </div>
     </div>
+
+    <!-- ВКЛ 3: Штук в м³ -->
     <div class="calc-panel" id="ctab-boards">
       <div>
         <div class="field-group"><label class="field-label">Толщина (мм)</label><input type="number" class="field-input" id="c3a" placeholder="напр. 12.5" step="0.5" min="1" oninput="c3calc()"></div>
         <div class="field-group"><label class="field-label">Ширина (мм)</label><input type="number" class="field-input" id="c3b" placeholder="напр. 96" step="1" min="1" oninput="c3calc()"></div>
-        <div class="field-group"><label class="field-label">Длина доски</label><select class="field-select" id="c3c" onchange="c3calc()"><option value="2">2 м</option><option value="3" selected>3 м</option><option value="4">4 м</option><option value="6">6 м</option></select></div>
+        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c3c" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c3calc()"></div>
         <div class="field-group"><label class="field-label">Объём партии (м³)</label><input type="number" class="field-input" id="c3d" placeholder="напр. 5" step="0.1" min="0" oninput="c3calc()"></div>
         <button class="btn-calc" onclick="c3calc()">Рассчитать</button>
       </div>
-      <div class="calc-result-box"><div class="calc-result-title">Результат</div><div class="result-row"><div class="result-num" id="r3a">—</div><div class="result-label" id="r3al">Штук в 1 м³</div></div><div class="result-row"><div class="result-num" id="r3b">—</div><div class="result-label" id="r3bl">Штук в партии</div></div><div class="result-row"><div class="result-num" id="r3c">—</div><div class="result-label">м² в 1 м³</div></div></div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r3a">—</div><div class="result-label" id="r3al">Штук в 1 м³</div></div>
+        <div class="result-row"><div class="result-num" id="r3b">—</div><div class="result-label" id="r3bl">Штук в партии</div></div>
+        <div class="result-row"><div class="result-num" id="r3c">—</div><div class="result-label">м² в 1 м³</div></div>
+      </div>
     </div>
+
+    <!-- ВКЛ 4: Полный расчёт -->
     <div class="calc-panel" id="ctab-full">
       <div>
         <div class="field-group"><label class="field-label">Площадь (м²)</label><input type="number" class="field-input" id="c4a" placeholder="напр. 80" step="1" min="0" oninput="c4calc()"></div>
-        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c4t" onchange="c4calc()"><option value="">— выберите —</option><option value="12.5,85,3">12,5×96, длина 3 м</option><option value="12.5,85,4">12,5×96, длина 4 м</option><option value="13,92,3">13×105, длина 3 м</option><option value="20,133,3">20×140, длина 3 м</option><option value="20,133,4">20×140, длина 4 м</option><option value="28,133,3">28×140, длина 3 м</option><option value="20,183,3">20×190, длина 3 м</option></select></div>
+        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c4t" onchange="c4calc()"><option value="">— выберите —</option><option value="12.5,96">12,5×96 мм (штиль)</option><option value="13,105">13×105 мм (штиль)</option><option value="20,140">20×140 мм (имитация бруса)</option><option value="28,140">28×140 мм (имитация бруса)</option><option value="20,190">20×190 мм (имитация бруса)</option></select></div>
+        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c4len" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c4calc()"></div>
         <button class="btn-calc" onclick="c4calc()">Рассчитать</button>
         <div class="info-box" style="margin-top:12px;margin-bottom:0;font-size:12px;">Расчёт ориентировочный. Точную стоимость уточняйте по телефону.</div>
       </div>
-      <div class="calc-result-box"><div class="calc-result-title">Результат</div><div class="result-row"><div class="result-num" id="r4a">—</div><div class="result-label">Кубометров с запасом</div></div><div class="result-row"><div class="result-num" id="r4b">—</div><div class="result-label">Количество досок</div></div><div class="result-row"><div class="result-num" id="r4c">—</div><div class="result-label">Стоимость</div></div></div>
+      <div class="calc-result-box">
+        <div class="calc-result-title">Результат</div>
+        <div class="result-row"><div class="result-num" id="r4a">—</div><div class="result-label">Кубометров</div></div>
+        <div class="result-row"><div class="result-num" id="r4b">—</div><div class="result-label">Штук досок</div></div>
+        <div class="result-row"><div class="result-num" id="r4c">—</div><div class="result-label">Стоимость</div></div>
+      </div>
     </div>
   </div>
 </section>
