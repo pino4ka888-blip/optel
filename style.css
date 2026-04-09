@@ -1241,26 +1241,27 @@ body.cart-open .sticky-cta { bottom: 90px; }
 /* ── КАЛЬКУЛЯТОР: кнопка Очистить ── */
 .btn-clear {
   margin-top: 20px;
-  padding: 8px 18px;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text3);
+  padding: 10px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--text2);
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   align-self: flex-start;
+  white-space: nowrap;
 }
 .btn-clear:hover {
-  border-color: rgba(255,100,100,0.5);
-  color: #ff7070;
-  background: rgba(255,100,100,0.06);
+  border-color: var(--border2);
+  color: var(--lime);
+  background: var(--surface2);
 }
 /* calc-result-box — flex колонка чтобы кнопка была снизу */
 .calc-result-box {
