@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://optel-les.ru/sitemap.xml
+Sitemap: https://optel18.ru/sitemap.xml
