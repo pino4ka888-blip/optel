@@ -183,7 +183,7 @@
       <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 10 м³"></div>
       <button type="submit" class="modal-submit">Отправить →</button>
     </form>
-    <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой</a>.</div>
+    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
   </div>
 </div>
 
@@ -192,11 +192,34 @@
     <p id="seo-calculator" style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Рассчитайте объём и площадь прямо в браузере — без звонков и ожидания. Переведите кубометры в квадратные метры, посчитайте количество досок в партии или подберите объём под конкретное помещение. Калькулятор учитывает рабочую ширину профиля — результат близок к реальному расходу материала. Данные для расчёта берите из карточки товара. После расчёта — звоните или пишите: подтвердим цену и наличие под ваш объём.</p>
   </div>
 </section>
+
+<div style="background:var(--bg2);border-top:1px solid var(--border);padding:12px 0;">
+  <div class="container">
+    <p style="font-size:11px;color:var(--text3);line-height:1.7;margin:0;max-width:960px;">Обращаем ваше внимание на то, что цены, представленные на сайте, носят исключительно информационный характер и ни при каких условиях не являются публичной офертой, определяемой положениями Статьи&nbsp;437 Гражданского кодекса РФ.</p>
+  </div>
+</div>
 <footer>
   <div class="footer-inner">
     <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
     <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
   </div>
 </footer>
+<script>
+// Разрешаем запятую как разделитель в полях калькулятора
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.calc-panel input[type="number"]').forEach(function(inp) {
+    inp.addEventListener('keypress', function(e) {
+      if (e.key === ',') {
+        e.preventDefault();
+        var pos = this.selectionStart;
+        var val = this.value;
+        this.value = val.slice(0, pos) + '.' + val.slice(pos);
+        this.setSelectionRange(pos+1, pos+1);
+        this.dispatchEvent(new Event('input'));
+      }
+    });
+  });
+});
+</script>
 <script src="shared.js"></script>
 </body></html>

@@ -108,11 +108,15 @@ function fmt(n, dec) {
   if (dec === 0) return Math.round(n).toLocaleString('ru');
   return n.toFixed(dec !== undefined ? dec : 2).replace(/\.?0+$/, '').replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
 }
+function parseNum(val) {
+  if (val === undefined || val === null) return NaN;
+  return parseFloat(String(val).replace(',', '.'));
+}
 function c1calc() {
-  const m3  = parseFloat(document.getElementById('c1v').value);
+  const m3  = parseNum(document.getElementById('c1v').value);
   const tv  = document.getElementById('c1t').value;
-  const thm = parseFloat(document.getElementById('c1th').value);
-  const len = parseFloat(document.getElementById('c1len').value) || 3;
+  const thm = parseNum(document.getElementById('c1th').value);
+  const len = parseNum(document.getElementById('c1len').value) || 3;
   let th = tv ? parseFloat(tv.split(',')[0]) : (thm > 0 ? thm : NaN);
   let wb = tv ? parseFloat(tv.split(',')[1]) : NaN;
   if (isNaN(m3)||m3<=0||isNaN(th)||th<=0) {
@@ -131,10 +135,10 @@ function c1calc() {
   }
 }
 function c2calc() {
-  const m2  = parseFloat(document.getElementById('c2v').value);
+  const m2  = parseNum(document.getElementById('c2v').value);
   const tv  = document.getElementById('c2t').value;
-  const thm = parseFloat(document.getElementById('c2th').value);
-  const len = parseFloat(document.getElementById('c2len').value) || 3;
+  const thm = parseNum(document.getElementById('c2th').value);
+  const len = parseNum(document.getElementById('c2len').value) || 3;
   let th = tv ? parseFloat(tv) : (thm > 0 ? thm : NaN);
   if (isNaN(m2) || m2 <= 0 || isNaN(th) || th <= 0) {
     document.getElementById('r2a').textContent = '—';
@@ -148,10 +152,10 @@ function c2calc() {
   document.getElementById('r2bl').textContent = 'Погонных метров досок (длина ' + len + ' м)';
 }
 function c3calc() {
-  const th  = parseFloat(document.getElementById('c3a').value) / 1000;
-  const wb  = parseFloat(document.getElementById('c3b').value) / 1000;
-  const len = parseFloat(document.getElementById('c3c').value);
-  const m3p = parseFloat(document.getElementById('c3d').value);
+  const th  = parseNum(document.getElementById('c3a').value) / 1000;
+  const wb  = parseNum(document.getElementById('c3b').value) / 1000;
+  const len = parseNum(document.getElementById('c3c').value);
+  const m3p = parseNum(document.getElementById('c3d').value);
   if (isNaN(th)||isNaN(wb)||isNaN(len)||th<=0||wb<=0) {
     ['r3a','r3b','r3c'].forEach(id => document.getElementById(id).textContent='—');
     return;
@@ -168,9 +172,9 @@ function c3calc() {
   document.getElementById('r3c').textContent = fmt(1 / th) + ' м²';
 }
 function c4calc() {
-  const area = parseFloat(document.getElementById('c4a').value);
+  const area = parseNum(document.getElementById('c4a').value);
   const tv   = document.getElementById('c4t').value;
-  const len  = parseFloat(document.getElementById('c4len').value) || 3;
+  const len  = parseNum(document.getElementById('c4len').value) || 3;
   if (!tv || isNaN(area) || area <= 0) {
     ['r4a','r4b','r4c'].forEach(id => document.getElementById(id).textContent='—');
     return;
@@ -394,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="form-group"><label class="form-label">Компания</label><input type="text" id="gcart-company" class="form-input" placeholder='ООО "Ваша компания"'></div>
         <div class="form-group"><label class="form-label">Комментарий</label><textarea id="gcart-comment" class="form-textarea" style="min-height:55px;" placeholder="Дополнительно..."></textarea></div>
         <button type="button" class="modal-submit" onclick="submitCartForm()">Отправить →</button>
-        <div class="modal-note">Соглашаетесь с <a href="privacy.html" style="color:var(--lime);">политикой</a>.</div>
+        <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
       </div>`;
     document.body.appendChild(ov);
     ov.addEventListener('click', e => { if (e.target === ov) closeGlobalCartSend(); });

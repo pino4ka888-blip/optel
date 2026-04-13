@@ -160,6 +160,38 @@
   .price-row    { flex-direction:column; align-items:flex-start; }
 }
 </style>
+<style>
+@media(max-width:600px) {
+  /* Теги сортов в витрине — крупнее на мобильном */
+  .sort-tag {
+    font-size: 13px !important;
+    padding: 6px 14px !important;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Кнопка Подробнее */
+  .catalog-hint {
+    font-size: 13px !important;
+    padding: 8px 14px !important;
+  }
+  /* Карточки в витрине — теги с большим gap */
+  .catalog-info > div[style*="flex-wrap"] {
+    gap: 8px !important;
+  }
+  /* Кнопки в карточке товара */
+  .pm-body .btn {
+    min-height: 44px;
+    padding: 12px 18px !important;
+    font-size: 14px !important;
+  }
+  /* Конфигуратор — поля крупнее */
+  .config-sel {
+    min-height: 44px;
+    font-size: 15px !important;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -314,7 +346,11 @@
           </div>
           <div class="config-field">
             <label>Кол-во, м³</label>
-            <input type="number" class="config-sel" id="v-vol" value="1" min="0.1" step="0.1" oninput="calcV()" style="font-family:var(--font-body);">
+            <select class="config-sel" id="v-vol" onchange="calcV()">
+              <option value="20">20 м³</option>
+              <option value="30">30 м³</option>
+              <option value="40">40 м³</option>
+            </select>
           </div>
         </div>
       </div>
@@ -433,7 +469,11 @@
           </div>
           <div class="config-field">
             <label>Кол-во, м³</label>
-            <input type="number" class="config-sel" id="i-vol" value="1" min="0.1" step="0.1" oninput="calcI()" style="font-family:var(--font-body);">
+            <select class="config-sel" id="i-vol" onchange="calcI()">
+              <option value="20">20 м³</option>
+              <option value="30">30 м³</option>
+              <option value="40">40 м³</option>
+            </select>
           </div>
         </div>
       </div>
@@ -539,7 +579,7 @@
       <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 10 м³"></div>
       <button type="submit" class="modal-submit">Отправить →</button>
     </form>
-    <div class="modal-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой</a>.</div>
+    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
   </div>
 </div>
 
@@ -549,6 +589,12 @@
     <p id="seo-products" style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Работаем с четырьмя породами: лиственница, ангарская сосна, кедр, ольха. Под каждую задачу — своя порода и профиль. Вагонка и полок — для бань и саун. Террасная и палубная доска, планкен прямой и косой — для фасадов и открытых площадок. Доска пола — для жилых и коммерческих помещений. Сорт определяется по лицевой стороне изделия. Фото каждого сорта — живые, сделаны прямо на нашем складе. Выберите изделие, укажите параметры — получите расчёт стоимости сразу на странице.</p>
   </div>
 </section>
+
+<div style="background:var(--bg2);border-top:1px solid var(--border);padding:12px 0;">
+  <div class="container">
+    <p style="font-size:11px;color:var(--text3);line-height:1.7;margin:0;max-width:960px;">Обращаем ваше внимание на то, что цены, представленные на сайте, носят исключительно информационный характер и ни при каких условиях не являются публичной офертой, определяемой положениями Статьи&nbsp;437 Гражданского кодекса РФ.</p>
+  </div>
+</div>
 <footer>
   <div class="footer-inner">
     <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
