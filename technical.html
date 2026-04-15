@@ -44,25 +44,24 @@
 </style>
 
 <style>
-/* Выравнивание таблиц ТУ — одинаковые колонки во всех блоках */
+/* ТУ — таблицы выровнены */
+.teh-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .teh-block table {
   table-layout: fixed;
   width: 100%;
   min-width: 360px;
+  border-collapse: collapse;
 }
-.teh-block table th:first-child,
-.teh-block table td:first-child {
-  width: 52%;
-}
-.teh-block table th:last-child,
-.teh-block table td:last-child {
-  width: 48%;
-}
-/* Сводная таблица сортов — больше колонок */
-.teh-block table.sorts-table th:first-child,
-.teh-block table.sorts-table td:first-child {
-  width: 28%;
-}
+/* Двухколоночные таблицы */
+.teh-block table:not(.sorts-table) th:first-child,
+.teh-block table:not(.sorts-table) td:first-child { width: 55%; }
+.teh-block table:not(.sorts-table) th:last-child,
+.teh-block table:not(.sorts-table) td:last-child  { width: 45%; }
+/* Сводная таблица сортов */
+.sorts-table { min-width: 600px !important; table-layout: auto !important; }
+.sorts-table th:first-child,
+.sorts-table td:first-child { width: 26%; min-width: 160px; }
+.sorts-table th, .sorts-table td { white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -276,7 +275,7 @@
     <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
 
   <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:10px;">
-    <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;white-space:normal;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
   </div>
   </div>
 </footer>
