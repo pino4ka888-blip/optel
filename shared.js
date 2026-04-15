@@ -109,85 +109,150 @@ function fmt(n, dec) {
   return n.toFixed(dec !== undefined ? dec : 2).replace(/\.?0+$/, '').replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
 }
 function parseNum(val) {
-  if (val === undefined || val === null) return NaN;
+  if (val === undefined || val === null || val === '') return NaN;
   return parseFloat(String(val).replace(',', '.'));
 }
-function c1calc() {
-  const m3  = parseNum(document.getElementById('c1v').value);
-  const tv  = document.getElementById('c1t').value;
-  const thm = parseNum(document.getElementById('c1th').value);
-  const len = parseNum(document.getElementById('c1len').value) || 3;
-  let th = tv ? parseFloat(tv.split(',')[0]) : (thm > 0 ? thm : NaN);
-  let wb = tv ? parseFloat(tv.split(',')[1]) : NaN;
-  if (isNaN(m3)||m3<=0||isNaN(th)||th<=0) {
-    document.getElementById('r1a').textContent='—';
-    document.getElementById('r1b').textContent='—';
-    return;
+
+function fmtN(n, dec) {
+  if (isNaN(n) || !isFinite(n) || n < 0) return '—';
+  if (dec === 0) return Math.round(n).toLocaleString('ru');
+  var s = n.toFixed(dec !== undefined ? dec : 4).replace(/\.?0+$/, '');
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+}
+function fmtM(n)    { return isNaN(n)||n<=0 ? '—' : fmtN(n,4)+' м²'; }
+function fmtM3(n)   { return isNaN(n)||n<=0 ? '—' : fmtN(n,4)+' м³'; }
+function fmtRub(n)  { return isNaN(n)||n<=0 ? '—' : Math.round(n).toLocaleString('ru')+' ₽'; }
+function fmtPcs(n)  { return isNaN(n)||n<=0 ? '—' : Math.round(n).toLocaleString('ru')+' шт'; }
+function fmtPog(n)  { return isNaN(n)||n<=0 ? '—' : fmtN(n,2)+' п.м.'; }
+
+function cuGet(id) { return parseNum(document.getElementById(id).value); }
+function cuSet(id, val) {
+  var el = document.getElementById(id);
+  if (el && val !== null) { el.value = val; }
+}
+function cuSetResult(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.textContent = val !== null ? val : '—';
+}
+
+function cuCalc(trigger) {
+  var w   = cuGet('cu-w')   / 1000;   // мм → м
+  var t   = cuGet('cu-t')   / 1000;   // мм → м
+  var l   = cuGet('cu-l');            // м
+  var qty = cuGet('cu-qty');          // штук
+  var m3  = cuGet('cu-m3');           // м³
+  var m2  = cuGet('cu-m2');           // м²
+  var pp  = cuGet('cu-price-pcs');    // цена за шт
+  var pm3 = cuGet('cu-price-m3');     // цена за м³
+  var tot = cuGet('cu-total-in');     // общая сумма
+
+  // Объём и площадь одной доски
+  var vol1  = (w>0 && t>0 && l>0) ? w*t*l : NaN;
+  var area1 = (w>0 && l>0) ? w*l : NaN;
+
+  // Пересчёт quantity из разных источников
+  if (!isNaN(vol1) && vol1>0) {
+    if (trigger === 'm3' && !isNaN(m3) && m3>0) {
+      qty = m3/vol1;
+      cuSet('cu-qty', fmtN(qty,0));
+    } else if (trigger === 'm2' && !isNaN(m2) && m2>0) {
+      qty = m2/area1;
+      m3  = qty*vol1;
+      cuSet('cu-qty', fmtN(qty,0));
+      cuSet('cu-m3', fmtN(m3,4));
+    } else if (!isNaN(qty) && qty>0) {
+      m3 = qty*vol1;
+      m2 = qty*area1;
+      cuSet('cu-m3', fmtN(m3,4));
+      cuSet('cu-m2', fmtN(m2,4));
+    }
   }
-  const m2 = m3 / (th / 1000);
-  document.getElementById('r1a').textContent = fmt(m2) + ' м²';
-  if (!isNaN(wb) && wb > 0) {
-    const qty = m3 / ((th/1000) * (wb/1000) * len);
-    document.getElementById('r1b').textContent = fmt(qty, 0) + ' шт';
-    document.getElementById('r1bl').textContent = 'Штук досок (длина ' + len + ' м)';
+
+  // Рассчитанные м3/м2 если qty известен
+  var calcM3  = (!isNaN(qty) && qty>0 && !isNaN(vol1))  ? qty*vol1  : m3;
+  var calcM2  = (!isNaN(qty) && qty>0 && !isNaN(area1)) ? qty*area1 : m2;
+  var calcPog = (!isNaN(qty) && qty>0 && l>0)           ? qty*l     : NaN;
+
+  // Цена: пересчёт между форматами
+  var calcTotal = NaN;
+  var calcPP    = NaN;
+  var calcPM3   = NaN;
+  var calcPM2   = NaN;
+
+  if (trigger === 'total' && !isNaN(tot) && tot>0) {
+    // Из общей суммы считаем цены
+    if (!isNaN(qty) && qty>0) calcPP  = tot/qty;
+    if (!isNaN(calcM3) && calcM3>0) calcPM3 = tot/calcM3;
+    if (!isNaN(calcM2) && calcM2>0) calcPM2 = tot/calcM2;
+    calcTotal = tot;
   } else {
-    document.getElementById('r1b').textContent = '—';
+    // Из цены считаем общую сумму
+    if (!isNaN(pp) && pp>0 && !isNaN(qty) && qty>0) {
+      calcTotal = pp*qty;
+      calcPP    = pp;
+      if (!isNaN(calcM3)  && calcM3>0)  calcPM3 = calcTotal/calcM3;
+      if (!isNaN(calcM2)  && calcM2>0)  calcPM2 = calcTotal/calcM2;
+    } else if (!isNaN(pm3) && pm3>0 && !isNaN(calcM3) && calcM3>0) {
+      calcTotal = pm3*calcM3;
+      calcPM3   = pm3;
+      if (!isNaN(qty)    && qty>0)    calcPP  = calcTotal/qty;
+      if (!isNaN(calcM2) && calcM2>0) calcPM2 = calcTotal/calcM2;
+    }
+  }
+
+  // Выводим результаты
+  cuSetResult('cr-area1', !isNaN(area1) ? fmtN(area1,4)+' м²' : '—');
+  cuSetResult('cr-vol1',  !isNaN(vol1)  ? fmtN(vol1,6)+' м³'  : '—');
+  cuSetResult('cr-qty',   !isNaN(qty)   ? fmtPcs(qty)          : '—');
+  cuSetResult('cr-m3',    fmtM3(calcM3));
+  cuSetResult('cr-m2',    fmtM(calcM2));
+  cuSetResult('cr-pog',   fmtPog(calcPog));
+  cuSetResult('cr-pcs',   fmtRub(calcPP));
+  cuSetResult('cr-pm2',   !isNaN(calcPM2) ? fmtRub(calcPM2)+' /м²' : '—');
+  cuSetResult('cr-pm3',   !isNaN(calcPM3) ? fmtRub(calcPM3)+' /м³' : '—');
+  cuSetResult('cr-total', fmtRub(calcTotal));
+
+  // Подсказка
+  var hint = document.getElementById('cu-hint');
+  var filled = [!isNaN(w),!isNaN(t),!isNaN(l),!isNaN(qty)||!isNaN(m3)||!isNaN(m2)].filter(Boolean).length;
+  if (hint) {
+    if (filled === 0) hint.textContent = 'Введите параметры изделия — калькулятор посчитает всё остальное.';
+    else if (isNaN(vol1)) hint.textContent = 'Укажите ширину, толщину и длину для расчёта объёма.';
+    else hint.textContent = '';
   }
 }
-function c2calc() {
-  const m2  = parseNum(document.getElementById('c2v').value);
-  const tv  = document.getElementById('c2t').value;
-  const thm = parseNum(document.getElementById('c2th').value);
-  const len = parseNum(document.getElementById('c2len').value) || 3;
-  let th = tv ? parseFloat(tv) : (thm > 0 ? thm : NaN);
-  if (isNaN(m2) || m2 <= 0 || isNaN(th) || th <= 0) {
-    document.getElementById('r2a').textContent = '—';
-    document.getElementById('r2b').textContent = '—';
-    return;
-  }
-  const m3 = m2 * (th / 1000);
-  document.getElementById('r2a').textContent = fmt(m3) + ' м³';
-  const lineal = m2 / len;
-  document.getElementById('r2b').textContent = fmt(lineal, 0) + ' пог.м';
-  document.getElementById('r2bl').textContent = 'Погонных метров досок (длина ' + len + ' м)';
+
+function cuClear() {
+  ['cu-w','cu-t','cu-l','cu-qty','cu-m3','cu-m2','cu-price-pcs','cu-price-m3','cu-total-in'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['cr-area1','cr-vol1','cr-qty','cr-m3','cr-m2','cr-pog','cr-pcs','cr-pm2','cr-pm3','cr-total'].forEach(function(id) {
+    cuSetResult(id, '—');
+  });
+  var hint = document.getElementById('cu-hint');
+  if (hint) hint.textContent = 'Введите параметры изделия — калькулятор посчитает всё остальное.';
 }
-function c3calc() {
-  const th  = parseNum(document.getElementById('c3a').value) / 1000;
-  const wb  = parseNum(document.getElementById('c3b').value) / 1000;
-  const len = parseNum(document.getElementById('c3c').value);
-  const m3p = parseNum(document.getElementById('c3d').value);
-  if (isNaN(th)||isNaN(wb)||isNaN(len)||th<=0||wb<=0) {
-    ['r3a','r3b','r3c'].forEach(id => document.getElementById(id).textContent='—');
-    return;
-  }
-  const per = 1 / (th * wb * len);
-  document.getElementById('r3a').textContent = fmt(per, 0) + ' шт';
-  document.getElementById('r3al').textContent = 'Штук в 1 м³ (длина ' + len + ' м)';
-  if (!isNaN(m3p) && m3p > 0) {
-    document.getElementById('r3b').textContent = fmt(per * m3p, 0) + ' шт';
-    document.getElementById('r3bl').textContent = 'Штук в ' + m3p + ' м³';
-  } else {
-    document.getElementById('r3b').textContent = '—';
-  }
-  document.getElementById('r3c').textContent = fmt(1 / th) + ' м²';
+
+// Разрешаем запятую как разделитель
+function cuInitComma() {
+  document.querySelectorAll('.cu-input').forEach(function(inp) {
+    inp.addEventListener('keypress', function(e) {
+      if (e.key === ',') {
+        e.preventDefault();
+        var pos = this.selectionStart;
+        this.value = this.value.slice(0,pos) + '.' + this.value.slice(pos);
+        this.setSelectionRange(pos+1,pos+1);
+        this.dispatchEvent(new Event('input'));
+      }
+    });
+  });
 }
-function c4calc() {
-  const area = parseNum(document.getElementById('c4a').value);
-  const tv   = document.getElementById('c4t').value;
-  const len  = parseNum(document.getElementById('c4len').value) || 3;
-  if (!tv || isNaN(area) || area <= 0) {
-    ['r4a','r4b','r4c'].forEach(id => document.getElementById(id).textContent='—');
-    return;
-  }
-  const p  = tv.split(',');
-  const th = parseFloat(p[0]) / 1000;
-  const wb = parseFloat(p[1]) / 1000;
-  const m3 = area * th;
-  const qty = Math.ceil(m3 / (th * wb * len));
-  document.getElementById('r4a').textContent = fmt(m3) + ' м³';
-  document.getElementById('r4b').textContent = fmt(qty, 0) + ' шт (длина ' + len + ' м)';
-  document.getElementById('r4c').textContent = 'Уточните по телефону';
-}
+
+document.addEventListener('DOMContentLoaded', function() {
+  cuInitComma();
+  cuClear();
+});
 
 /* ── EASTER EGG: тройной клик по логотипу ── */
 function initEasterEgg() {

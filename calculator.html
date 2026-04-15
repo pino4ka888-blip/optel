@@ -6,31 +6,179 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="theme-color" content="#0a0f0a">
 <title>Калькулятор строганых пиломатериалов | ОПТЭЛ</title>
-<meta name="description" content="Онлайн-калькулятор пиломатериалов: перевод м³ в м², расчёт количества досок, полный объём. Для вагонки, имитации бруса, террасной доски, планкена и других профилей.">
-<meta name="keywords" content="калькулятор пиломатериалов онлайн, перевести м3 в м2 вагонка, расчёт объёма пиломатериалов">
+<meta name="description" content="Онлайн-калькулятор пиломатериалов: рассчитайте штуки, площадь, объём, стоимость. Введите любые известные параметры — остальное посчитается автоматически.">
+<meta name="keywords" content="калькулятор пиломатериалов онлайн, перевести м3 в м2 вагонка, расчёт объёма пиломатериалов, сколько досок в кубе">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://optel18.ru/calculator.html">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://optel18.ru/calculator.html">
+<meta property="og:title" content="Калькулятор строганых пиломатериалов | ОПТЭЛ">
+<meta property="og:description" content="Умный калькулятор пиломатериалов: введите любые данные — остальное посчитается автоматически.">
 <meta property="og:image" content="https://optel18.ru/img/vaganka.jpg">
 <meta property="og:image:width" content="900">
 <meta property="og:image:height" content="480">
-<meta property="og:url" content="https://optel18.ru/calculator.html">
-<meta property="og:title" content="Калькулятор строганых пиломатериалов | ОПТЭЛ">
-<meta property="og:description" content="Онлайн-калькулятор пиломатериалов: м³ в м², м² в м³, штук в кубе, полный расчёт объёма.">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="ОПТЭЛ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Калькулятор строганых пиломатериалов | ОПТЭЛ">
-<meta name="twitter:description" content="Онлайн-калькулятор пиломатериалов: м³ в м², м² в м³, штук в кубе, полный расчёт объёма.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Калькулятор пиломатериалов ОПТЭЛ","url":"https://optel18.ru/calculator.html","description":"Онлайн-калькулятор: перевод м³ в м², расчёт количества досок.","isPartOf":{"@type":"WebSite","url":"https://optel18.ru/"}}
+{"@context":"https://schema.org","@type":"WebPage","name":"Калькулятор пиломатериалов ОПТЭЛ","url":"https://optel18.ru/calculator.html","description":"Умный калькулятор: введите любые параметры — остальное посчитается автоматически.","isPartOf":{"@type":"WebSite","url":"https://optel18.ru/"}}
 </script>
+<style>
+/* ══ КАЛЬКУЛЯТОР ══ */
+.smart-calc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Секции полей */
+.calc-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 0;
+}
+.calc-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Поле ввода */
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cf-row:last-child { border-bottom: none; }
+
+.cf-label {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.3;
+}
+.cf-unit {
+  font-size: 11px;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+.cf-input {
+  width: 130px;
+  padding: 7px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  transition: border-color 0.15s;
+  -moz-appearance: textfield;
+}
+.cf-input::-webkit-outer-spin-button,
+.cf-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.cf-input:focus {
+  outline: none;
+  border-color: var(--lime);
+}
+.cf-input.computed {
+  color: var(--lime);
+  border-color: rgba(170,255,0,0.3);
+  background: rgba(170,255,0,0.04);
+}
+.cf-input.computed:focus {
+  border-color: var(--lime);
+}
+
+/* Блок результатов */
+.calc-results {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+.calc-results::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lime), transparent);
+}
+.calc-results-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  padding: 18px 22px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.res-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 22px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.res-item:last-child { border-bottom: none; }
+.res-item-label {
+  font-size: 13px;
+  color: var(--text3);
+}
+.res-item-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--lime);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.res-item-val.na {
+  font-size: 16px;
+  color: var(--border2);
+}
+
+/* Кнопка очистки */
+.calc-clear-row {
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.hint-text {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* Мобильный */
+@media(max-width:900px) {
+  .smart-calc { grid-template-columns: 1fr; }
+}
+@media(max-width:480px) {
+  .cf-input { width: 110px; }
+  .res-item-val { font-size: 18px; }
+}
+</style>
 </head>
 <body>
 <header>
@@ -60,13 +208,14 @@
   <a href="contacts.html">Контакты</a>
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
+
 <div class="page-hero">
   <div class="container">
     <div class="page-hero-inner">
       <div>
         <div class="section-label">Онлайн-инструмент</div>
         <h1 style="font-size:clamp(38px,6vw,72px);">Калькулятор</h1>
-        <p style="color:var(--text2);margin-top:10px;font-size:15px;">Рассчитайте объём, площадь или количество досок</p>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;">Введите любые известные параметры — остальное посчитается автоматически</p>
       </div>
       <div class="page-hero-icon"><svg width="150" height="150" viewBox="0 0 150 150" fill="none">
   <rect x="18" y="8" width="114" height="134" rx="10" fill="rgba(170,255,0,0.07)" stroke="#aaff00" stroke-width="1.8"/>
@@ -86,83 +235,129 @@
 
 <section>
   <div class="container">
-    <div class="calc-tabs">
-      <button class="calc-tab active" onclick="switchCalcTab(this,'ctab-m3m2')">м³ → м²</button>
-      <button class="calc-tab" onclick="switchCalcTab(this,'ctab-m2m3')">м² → м³</button>
-      <button class="calc-tab" onclick="switchCalcTab(this,'ctab-boards')">Штук в м³</button>
-      <button class="calc-tab" onclick="switchCalcTab(this,'ctab-full')">Полный расчёт</button>
-    </div>
+    <div class="smart-calc">
 
-    <!-- ВКЛ 1: м³ → м² -->
-    <div class="calc-panel active" id="ctab-m3m2">
+      <!-- ЛЕВАЯ КОЛОНКА: поля ввода -->
       <div>
-        <div class="field-group"><label class="field-label">Объём (м³)</label><input type="number" class="field-input" id="c1v" placeholder="напр. 2.5" step="0.1" min="0" oninput="c1calc()"></div>
-        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c1t" onchange="c1calc()"><option value="">— выберите —</option><option value="12.5,96">12,5×96 мм (штиль)</option><option value="13,105">13×105 мм (штиль)</option><option value="20,140">20×140 мм (имитация бруса)</option><option value="28,140">28×140 мм (имитация бруса)</option><option value="20,190">20×190 мм (имитация бруса)</option></select></div>
-        <div class="field-group"><label class="field-label">Или толщина вручную (мм)</label><input type="number" class="field-input" id="c1th" placeholder="напр. 12.5" step="0.5" min="1" oninput="c1calc()"></div>
-        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c1len" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c1calc()"></div>
-      </div>
-      <div class="calc-result-box">
-        <div class="calc-result-title">Результат</div>
-        <div class="result-row"><div class="result-num" id="r1a">—</div><div class="result-label">Квадратных метров (м²)</div></div>
-        <div class="result-row"><div class="result-num" id="r1b">—</div><div class="result-label" id="r1bl">Штук досок</div></div>
-      <button class="btn-clear" onclick="clearCalc('ctab-m3m2')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="opacity:.7"><path d="M2 4h12M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Очистить</button>
-      </div>
-    </div>
+        <!-- Размеры доски -->
+        <div class="calc-section">
+          <div class="calc-section-title">Размеры одной доски</div>
+          <div class="cf-row">
+            <div><div class="cf-label">Толщина</div><div class="cf-unit">мм</div></div>
+            <input type="text" class="cf-input" id="f-thickness" placeholder="напр. 12.5" oninput="smartCalc('thickness')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Ширина</div><div class="cf-unit">мм</div></div>
+            <input type="text" class="cf-input" id="f-width" placeholder="напр. 96" oninput="smartCalc('width')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Длина</div><div class="cf-unit">м</div></div>
+            <input type="text" class="cf-input" id="f-length" placeholder="напр. 3" oninput="smartCalc('length')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Площадь одной доски</div><div class="cf-unit">м²</div></div>
+            <input type="text" class="cf-input" id="f-board-area" placeholder="авто" oninput="smartCalc('boardArea')">
+          </div>
+        </div>
 
-    <!-- ВКЛ 2: м² → м³ -->
-    <div class="calc-panel" id="ctab-m2m3">
-      <div>
-        <div class="field-group"><label class="field-label">Площадь (м²)</label><input type="number" class="field-input" id="c2v" placeholder="напр. 50" step="1" min="0" oninput="c2calc()"></div>
-        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c2t" onchange="c2calc()"><option value="">— выберите —</option><option value="12.5">12,5 мм (штиль)</option><option value="13">13 мм (штиль)</option><option value="20">20 мм (имитация бруса)</option><option value="28">28 мм (имитация бруса)</option><option value="25">25 мм (половая доска)</option></select></div>
-        <div class="field-group"><label class="field-label">Или толщина вручную (мм)</label><input type="number" class="field-input" id="c2th" placeholder="напр. 20" step="0.5" min="1" oninput="c2calc()"></div>
-        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c2len" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c2calc()"></div>
-      </div>
-      <div class="calc-result-box">
-        <div class="calc-result-title">Результат</div>
-        <div class="result-row"><div class="result-num" id="r2a">—</div><div class="result-label">м³ (чистый объём)</div></div>
-        <div class="result-row"><div class="result-num" id="r2b">—</div><div class="result-label" id="r2bl">Штук досок</div></div>
-      <button class="btn-clear" onclick="clearCalc('ctab-m2m3')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="opacity:.7"><path d="M2 4h12M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Очистить</button>
-      </div>
-    </div>
+        <!-- Партия -->
+        <div class="calc-section" style="margin-top:16px;">
+          <div class="calc-section-title">Партия</div>
+          <div class="cf-row">
+            <div><div class="cf-label">Количество досок</div><div class="cf-unit">шт</div></div>
+            <input type="text" class="cf-input" id="f-count" placeholder="напр. 200" oninput="smartCalc('count')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Общая площадь</div><div class="cf-unit">м²</div></div>
+            <input type="text" class="cf-input" id="f-total-area" placeholder="напр. 50" oninput="smartCalc('totalArea')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Общий объём</div><div class="cf-unit">м³</div></div>
+            <input type="text" class="cf-input" id="f-volume" placeholder="напр. 2.5" oninput="smartCalc('volume')">
+          </div>
+        </div>
 
-    <!-- ВКЛ 3: Штук в м³ -->
-    <div class="calc-panel" id="ctab-boards">
-      <div>
-        <div class="field-group"><label class="field-label">Толщина (мм)</label><input type="number" class="field-input" id="c3a" placeholder="напр. 12.5" step="0.5" min="1" oninput="c3calc()"></div>
-        <div class="field-group"><label class="field-label">Ширина (мм)</label><input type="number" class="field-input" id="c3b" placeholder="напр. 96" step="1" min="1" oninput="c3calc()"></div>
-        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c3c" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c3calc()"></div>
-        <div class="field-group"><label class="field-label">Объём партии (м³)</label><input type="number" class="field-input" id="c3d" placeholder="напр. 5" step="0.1" min="0" oninput="c3calc()"></div>
+        <!-- Цена -->
+        <div class="calc-section" style="margin-top:16px;">
+          <div class="calc-section-title">Стоимость</div>
+          <div class="cf-row">
+            <div><div class="cf-label">Цена за штуку</div><div class="cf-unit">₽</div></div>
+            <input type="text" class="cf-input" id="f-price-each" placeholder="напр. 250" oninput="smartCalc('priceEach')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Цена за м³</div><div class="cf-unit">₽</div></div>
+            <input type="text" class="cf-input" id="f-price-m3" placeholder="напр. 21000" oninput="smartCalc('priceM3')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Общая стоимость</div><div class="cf-unit">₽</div></div>
+            <input type="text" class="cf-input" id="f-total-price" placeholder="напр. 50000" oninput="smartCalc('totalPrice')">
+          </div>
+        </div>
       </div>
-      <div class="calc-result-box">
-        <div class="calc-result-title">Результат</div>
-        <div class="result-row"><div class="result-num" id="r3a">—</div><div class="result-label" id="r3al">Штук в 1 м³</div></div>
-        <div class="result-row"><div class="result-num" id="r3b">—</div><div class="result-label" id="r3bl">Штук в партии</div></div>
-        <div class="result-row"><div class="result-num" id="r3c">—</div><div class="result-label">м² в 1 м³</div></div>
-      <button class="btn-clear" onclick="clearCalc('ctab-boards')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="opacity:.7"><path d="M2 4h12M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Очистить</button>
-      </div>
-    </div>
 
-    <!-- ВКЛ 4: Полный расчёт -->
-    <div class="calc-panel" id="ctab-full">
+      <!-- ПРАВАЯ КОЛОНКА: результаты -->
       <div>
-        <div class="field-group"><label class="field-label">Площадь (м²)</label><input type="number" class="field-input" id="c4a" placeholder="напр. 80" step="1" min="0" oninput="c4calc()"></div>
-        <div class="field-group"><label class="field-label">Материал</label><select class="field-select" id="c4t" onchange="c4calc()"><option value="">— выберите —</option><option value="12.5,96">12,5×96 мм (штиль)</option><option value="13,105">13×105 мм (штиль)</option><option value="20,140">20×140 мм (имитация бруса)</option><option value="28,140">28×140 мм (имитация бруса)</option><option value="20,190">20×190 мм (имитация бруса)</option></select></div>
-        <div class="field-group"><label class="field-label">Длина изделия (м)</label><input type="number" class="field-input" id="c4len" placeholder="напр. 3" value="3" step="0.5" min="0.5" oninput="c4calc()"></div>
-        <div class="info-box" style="margin-top:12px;margin-bottom:0;font-size:12px;">Расчёт ориентировочный. Точную стоимость уточняйте по телефону.</div>
+        <div class="calc-results">
+          <div class="calc-results-title">Результат</div>
+          <div class="res-item">
+            <div class="res-item-label">Площадь одной доски</div>
+            <div class="res-item-val na" id="r-board-area">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Объём одной доски</div>
+            <div class="res-item-val na" id="r-board-vol">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Штук в 1 м³</div>
+            <div class="res-item-val na" id="r-per-m3">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Штук в партии</div>
+            <div class="res-item-val na" id="r-count">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Общая площадь партии</div>
+            <div class="res-item-val na" id="r-total-area">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Общий объём партии</div>
+            <div class="res-item-val na" id="r-volume">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Цена за штуку</div>
+            <div class="res-item-val na" id="r-price-each">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Цена за м³</div>
+            <div class="res-item-val na" id="r-price-m3">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Общая стоимость</div>
+            <div class="res-item-val na" id="r-total-price">—</div>
+          </div>
+          <div class="calc-clear-row">
+            <div class="hint-text">Зелёным — вычисленные значения. Введите любые поля — остальное посчитается.</div>
+            <button class="btn-clear" onclick="clearAll()">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="opacity:.7"><path d="M2 4h12M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Очистить
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="calc-result-box">
-        <div class="calc-result-title">Результат</div>
-        <div class="result-row"><div class="result-num" id="r4a">—</div><div class="result-label">Кубометров</div></div>
-        <div class="result-row"><div class="result-num" id="r4b">—</div><div class="result-label">Штук досок</div></div>
-        <div class="result-row"><div class="result-num" id="r4c">—</div><div class="result-label">Стоимость</div></div>
-      <button class="btn-clear" onclick="clearCalc('ctab-full')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="opacity:.7"><path d="M2 4h12M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Очистить</button>
-      </div>
+
     </div>
   </div>
 </section>
+
 <section style="padding:44px 0;border-bottom:none;">
-  <div class="container"><div class="call-strip reveal"><div><div class="call-strip-title">Рассчитали? Позвоните — подтвердим цену</div><div class="call-strip-sub">Скажем точную стоимость с НДС 22% для вашего объёма</div></div><a href="tel:+79999238888" class="call-strip-phone">+7 9999-23-8888</a></div></div>
+  <div class="container">
+    <div class="call-strip reveal">
+      <div><div class="call-strip-title">Рассчитали? Позвоните — подтвердим цену</div><div class="call-strip-sub">Скажем точную стоимость с НДС 22% для вашего объёма</div></div>
+      <a href="tel:+79999238888" class="call-strip-phone">+7 9999-23-8888</a>
+    </div>
+  </div>
 </section>
+
 <canvas id="matrix-canvas"></canvas>
 <div class="easter-egg-overlay" id="egg-overlay">
   <div class="easter-egg-text">ОПТЭЛ</div>
@@ -179,7 +374,9 @@
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
     <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
@@ -192,7 +389,7 @@
 
 <section style="padding:36px 0 40px;border-top:1px solid var(--border);">
   <div class="container">
-    <p id="seo-calculator" style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Рассчитайте объём и площадь прямо в браузере — без звонков и ожидания. Переведите кубометры в квадратные метры, посчитайте количество досок в партии или подберите объём под конкретное помещение. Калькулятор учитывает рабочую ширину профиля — результат близок к реальному расходу материала. Данные для расчёта берите из карточки товара. После расчёта — звоните или пишите: подтвердим цену и наличие под ваш объём.</p>
+    <p style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Рассчитайте объём, площадь, количество досок и стоимость прямо в браузере. Введите любые известные параметры — толщину, ширину, длину, количество штук или объём — калькулятор автоматически вычислит остальные значения. Для вагонки, имитации бруса, террасной доски, планкена и других профилей.</p>
   </div>
 </section>
 
@@ -207,16 +404,202 @@
     </div>
   </div>
 </footer>
+
 <script>
-// Разрешаем запятую как разделитель в полях калькулятора
+// ══════════════════════════════════════════
+// УМНЫЙ КАЛЬКУЛЯТОР ПИЛОМАТЕРИАЛОВ
+// Любое поле может быть введено, остальные вычисляются
+// ══════════════════════════════════════════
+
+// Последнее изменённое поле — не перезаписываем его
+var lastChanged = null;
+
+// Парсим число — принимаем запятую и точку
+function pn(id) {
+  var el = document.getElementById(id);
+  if (!el) return NaN;
+  var v = el.value.replace(',', '.').trim();
+  var n = parseFloat(v);
+  return (isNaN(n) || n <= 0) ? NaN : n;
+}
+
+// Форматируем число для вывода
+function fmt(n, dec) {
+  if (isNaN(n) || !isFinite(n) || n <= 0) return null;
+  if (dec === 0) return Math.round(n).toLocaleString('ru') + ' шт';
+  if (dec === 'price') return Math.round(n).toLocaleString('ru') + ' ₽';
+  return parseFloat(n.toFixed(dec !== undefined ? dec : 4))
+    .toString().replace('.', ',') + (dec === 'm3' ? ' м³' : dec === 'm2' ? ' м²' : '');
+}
+
+// Заполнить вычисленное значение (не перезаписывать если это lastChanged)
+function setField(id, val, skipIfLast) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (skipIfLast && lastChanged === id) return;
+  if (val !== null && val !== undefined && !isNaN(val) && isFinite(val) && val > 0) {
+    var fmtd;
+    // Округление в зависимости от поля
+    if (id === 'f-thickness') fmtd = parseFloat(val.toFixed(2)).toString().replace('.', ',');
+    else if (id === 'f-width') fmtd = parseFloat(val.toFixed(2)).toString().replace('.', ',');
+    else if (id === 'f-length') fmtd = parseFloat(val.toFixed(3)).toString().replace('.', ',');
+    else if (id === 'f-board-area') fmtd = parseFloat(val.toFixed(6)).toString().replace('.', ',');
+    else if (id === 'f-count') fmtd = Math.round(val).toString();
+    else if (id === 'f-total-area') fmtd = parseFloat(val.toFixed(4)).toString().replace('.', ',');
+    else if (id === 'f-volume') fmtd = parseFloat(val.toFixed(4)).toString().replace('.', ',');
+    else if (id === 'f-price-each') fmtd = Math.round(val).toString();
+    else if (id === 'f-price-m3') fmtd = Math.round(val).toString();
+    else if (id === 'f-total-price') fmtd = Math.round(val).toString();
+    else fmtd = val.toString();
+    el.value = fmtd;
+    el.classList.add('computed');
+  }
+}
+
+// Обновить блок результатов
+function setResult(id, val, type) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (val !== null && val !== undefined && !isNaN(val) && isFinite(val) && val > 0) {
+    var txt;
+    if (type === 'count') txt = Math.round(val).toLocaleString('ru') + ' шт';
+    else if (type === 'm2') txt = parseFloat(val.toFixed(4)).toString().replace('.', ',') + ' м²';
+    else if (type === 'm3') txt = parseFloat(val.toFixed(5)).toString().replace('.', ',') + ' м³';
+    else if (type === 'price') txt = Math.round(val).toLocaleString('ru') + ' ₽';
+    else txt = val;
+    el.textContent = txt;
+    el.classList.remove('na');
+  } else {
+    el.textContent = '—';
+    el.classList.add('na');
+  }
+}
+
+function smartCalc(changed) {
+  lastChanged = 'f-' + changed.replace(/([A-Z])/g, function(m) { return '-' + m.toLowerCase(); });
+  
+  // Снимаем класс computed со всех кроме только что изменённого
+  document.querySelectorAll('.cf-input').forEach(function(el) {
+    if (el.id !== lastChanged) el.classList.remove('computed');
+  });
+
+  // Читаем все введённые значения
+  var th  = pn('f-thickness');   // мм
+  var w   = pn('f-width');       // мм
+  var len = pn('f-length');      // м
+  var ba  = pn('f-board-area');  // м² — площадь 1 доски
+  var cnt = pn('f-count');       // шт
+  var ta  = pn('f-total-area');  // м² — общая площадь
+  var vol = pn('f-volume');      // м³ — общий объём
+  var pe  = pn('f-price-each'); // ₽/шт
+  var pm3 = pn('f-price-m3');   // ₽/м³
+  var tp  = pn('f-total-price');// ₽ общая
+
+  // ── ВЫВОД: вычисляем максимум из доступных данных ──
+
+  // Площадь одной доски = ширина(м) × длина
+  var boardArea = ba;
+  if (!boardArea && !isNaN(w) && !isNaN(len)) boardArea = (w / 1000) * len;
+  // Из общего и кол-ва
+  if (!boardArea && !isNaN(ta) && !isNaN(cnt)) boardArea = ta / cnt;
+
+  // Объём одной доски = т(м) × ш(м) × длина
+  var boardVol = NaN;
+  if (!isNaN(th) && !isNaN(w) && !isNaN(len)) boardVol = (th/1000) * (w/1000) * len;
+  if (isNaN(boardVol) && !isNaN(vol) && !isNaN(cnt)) boardVol = vol / cnt;
+
+  // Штук в 1 м³
+  var perM3 = NaN;
+  if (!isNaN(boardVol) && boardVol > 0) perM3 = 1 / boardVol;
+
+  // Количество досок
+  var count = cnt;
+  if (!count) {
+    if (!isNaN(vol) && !isNaN(boardVol) && boardVol > 0) count = vol / boardVol;
+    else if (!isNaN(ta) && !isNaN(boardArea) && boardArea > 0) count = ta / boardArea;
+    else if (!isNaN(tp) && !isNaN(pe) && pe > 0) count = tp / pe;
+  }
+
+  // Общая площадь
+  var totalArea = ta;
+  if (!totalArea) {
+    if (!isNaN(count) && !isNaN(boardArea)) totalArea = count * boardArea;
+    else if (!isNaN(vol) && !isNaN(th) && th > 0) totalArea = vol / (th/1000);
+  }
+
+  // Общий объём
+  var volume = vol;
+  if (!volume) {
+    if (!isNaN(count) && !isNaN(boardVol)) volume = count * boardVol;
+    else if (!isNaN(totalArea) && !isNaN(th) && th > 0) volume = totalArea * (th/1000);
+    else if (!isNaN(tp) && !isNaN(pm3) && pm3 > 0) volume = tp / pm3;
+  }
+
+  // Цена за штуку
+  var priceEach = pe;
+  if (!priceEach) {
+    if (!isNaN(tp) && !isNaN(count) && count > 0) priceEach = tp / count;
+    else if (!isNaN(pm3) && !isNaN(boardVol) && boardVol > 0) priceEach = pm3 * boardVol;
+  }
+
+  // Цена за м³
+  var priceM3 = pm3;
+  if (!priceM3) {
+    if (!isNaN(priceEach) && !isNaN(boardVol) && boardVol > 0) priceM3 = priceEach / boardVol;
+    else if (!isNaN(tp) && !isNaN(volume) && volume > 0) priceM3 = tp / volume;
+  }
+
+  // Общая стоимость
+  var totalPrice = tp;
+  if (!totalPrice) {
+    if (!isNaN(priceEach) && !isNaN(count)) totalPrice = priceEach * count;
+    else if (!isNaN(priceM3) && !isNaN(volume)) totalPrice = priceM3 * volume;
+  }
+
+  // Если площадь доски была посчитана — запишем обратно
+  if (isNaN(ba) && !isNaN(boardArea)) setField('f-board-area', boardArea, true);
+
+  // Запишем вычисленные значения в поля (если не были введены вручную)
+  if (isNaN(cnt) && !isNaN(count)) setField('f-count', count, true);
+  if (isNaN(ta)  && !isNaN(totalArea)) setField('f-total-area', totalArea, true);
+  if (isNaN(vol) && !isNaN(volume)) setField('f-volume', volume, true);
+  if (isNaN(pe)  && !isNaN(priceEach)) setField('f-price-each', priceEach, true);
+  if (isNaN(pm3) && !isNaN(priceM3)) setField('f-price-m3', priceM3, true);
+  if (isNaN(tp)  && !isNaN(totalPrice)) setField('f-total-price', totalPrice, true);
+
+  // Обновляем результаты
+  setResult('r-board-area',   boardArea,   'm2');
+  setResult('r-board-vol',    boardVol,    'm3');
+  setResult('r-per-m3',       perM3,       'count');
+  setResult('r-count',        count,       'count');
+  setResult('r-total-area',   totalArea,   'm2');
+  setResult('r-volume',       volume,      'm3');
+  setResult('r-price-each',   priceEach,   'price');
+  setResult('r-price-m3',     priceM3,     'price');
+  setResult('r-total-price',  totalPrice,  'price');
+}
+
+function clearAll() {
+  lastChanged = null;
+  document.querySelectorAll('.cf-input').forEach(function(el) {
+    el.value = '';
+    el.classList.remove('computed');
+  });
+  document.querySelectorAll('.res-item-val').forEach(function(el) {
+    el.textContent = '—';
+    el.classList.add('na');
+  });
+}
+
+// Принимаем запятую как разделитель
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.calc-panel input[type="number"]').forEach(function(inp) {
-    inp.addEventListener('keypress', function(e) {
+  document.querySelectorAll('.cf-input').forEach(function(inp) {
+    inp.addEventListener('keydown', function(e) {
       if (e.key === ',') {
         e.preventDefault();
         var pos = this.selectionStart;
         var val = this.value;
-        this.value = val.slice(0, pos) + '.' + val.slice(pos);
+        this.value = val.slice(0, pos) + '.' + val.slice(this.selectionEnd);
         this.setSelectionRange(pos+1, pos+1);
         this.dispatchEvent(new Event('input'));
       }
@@ -225,4 +608,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <script src="shared.js"></script>
-</body></html>
+</body>
+</html>
