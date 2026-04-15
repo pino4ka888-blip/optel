@@ -121,7 +121,9 @@ function fmt(n, unit, dec) {
 }
 function fmtRub(n) {
   if (isNaN(n) || n <= 0) return '—';
-  return Math.round(n).toLocaleString('ru') + ' ₽';
+  var vatOn = (typeof window.vatOn === 'undefined') ? true : window.vatOn;
+  var multiplier = vatOn ? 1 : 1/1.22;
+  return Math.round(n * multiplier).toLocaleString('ru') + ' ₽';
 }
 
 function getVal(id) {

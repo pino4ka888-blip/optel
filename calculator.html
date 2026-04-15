@@ -233,6 +233,24 @@
   </div>
 </div>
 
+<section style="padding:16px 0 0;border-bottom:none;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:rgba(170,255,0,0.06);border:1px solid rgba(170,255,0,0.3);border-radius:var(--radius-lg);padding:14px 20px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#aaff00" stroke-width="1.5"/><path d="M9 5v4l2.5 2.5" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span style="font-size:14px;font-weight:700;color:var(--lime);">Все цены указаны с НДС 22%</span>
+        <span style="font-size:13px;color:var(--text3);">— цена за штуку, за м², за м³ и общая стоимость</span>
+      </div>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;">
+        <span style="font-size:13px;color:var(--text2);">Показывать без НДС</span>
+        <div style="position:relative;width:40px;height:22px;flex-shrink:0;" onclick="toggleVat()">
+          <div id="vat-track" style="width:40px;height:22px;background:var(--border2);border-radius:11px;transition:background 0.2s;"></div>
+          <div id="vat-thumb" style="position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
+        </div>
+      </label>
+    </div>
+  </div>
+</section>
 <section>
   <div class="container">
     <div class="smart-calc">
@@ -324,15 +342,15 @@
             <div class="res-item-val na" id="r-volume">—</div>
           </div>
           <div class="res-item">
-            <div class="res-item-label">Цена за штуку</div>
+            <div class="res-item-label">Цена за штуку <span id="vat-label" style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:0.5px;">с НДС</span></div>
             <div class="res-item-val na" id="r-price-each">—</div>
           </div>
           <div class="res-item">
-            <div class="res-item-label">Цена за м³</div>
+            <div class="res-item-label">Цена за м³ <span style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:0.5px;" class="vat-tag">с НДС</span></div>
             <div class="res-item-val na" id="r-price-m3">—</div>
           </div>
           <div class="res-item">
-            <div class="res-item-label">Общая стоимость</div>
+            <div class="res-item-label">Общая стоимость <span style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:0.5px;" class="vat-tag">с НДС</span></div>
             <div class="res-item-val na" id="r-total-price">—</div>
           </div>
           <div class="calc-clear-row">
@@ -606,6 +624,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+</script>
+
+<script>
+var vatOn = true;
+var VAT = 1.22;
+
+function toggleVat() {
+  vatOn = !vatOn;
+  var track = document.getElementById('vat-track');
+  var thumb = document.getElementById('vat-thumb');
+  if (vatOn) {
+    track.style.background = 'var(--border2)';
+    thumb.style.left = '3px';
+  } else {
+    track.style.background = 'rgba(170,255,0,0.5)';
+    thumb.style.left = '21px';
+  }
+  document.querySelectorAll('.vat-tag').forEach(function(el) {
+    el.textContent = vatOn ? 'с НДС' : 'без НДС';
+    el.style.color = vatOn ? 'var(--lime)' : 'var(--text3)';
+  });
+  smartCalc('__vat__');
+}
 </script>
 <script src="shared.js"></script>
 </body>
