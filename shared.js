@@ -132,7 +132,12 @@ function setVal(id, n, dec) {
   var el = document.getElementById(id);
   if (!el) return;
   if (isNaN(n) || n <= 0) return;
-  el.value = parseFloat(n.toFixed(dec || 6)).toString().replace(/\.?0+$/,'');
+  var d = (dec === undefined) ? 6 : dec;
+  if (d === 0) {
+    el.value = Math.round(n).toString();
+  } else {
+    el.value = parseFloat(n.toFixed(d)).toString().replace(/\.?0+$/,'');
+  }
   el.classList.add('cf-computed');
 }
 function setRes(id, text) {
@@ -173,10 +178,10 @@ function smartCalc(trigger) {
     N = TA / BA;
     V = N * BV;
     setVal('f-count', N, 0);
-    setVal('f-volume', V, 4);
+    setVal('f-volume', V, 2);
   } else if (!isNaN(N)) {
     if (!isNaN(BA) && BA > 0) { TA = N * BA; setVal('f-total-area', TA, 4); }
-    if (!isNaN(BV) && BV > 0) { V  = N * BV; setVal('f-volume', V, 4); }
+    if (!isNaN(BV) && BV > 0) { V  = N * BV; setVal('f-volume', V, 2); }
   } else if (!isNaN(V) && !isNaN(BV) && BV > 0) {
     N  = V / BV;
     TA = !isNaN(BA) ? N * BA : NaN;
@@ -234,7 +239,7 @@ function smartCalc(trigger) {
   setRes('r-per-m3',     !isNaN(perM3) ? fmt(perM3,'шт',0) : '—');
   setRes('r-count',      !isNaN(N)  ? fmt(N, 'шт',0) : '—');
   setRes('r-total-area', !isNaN(TA) ? fmt(TA,'м²',4) : '—');
-  setRes('r-volume',     !isNaN(V)  ? fmt(V, 'м³',4) : '—');
+  setRes('r-volume',     !isNaN(V)  ? fmt(V, 'м³',0) : '—');
   setRes('r-price-each', !isNaN(PE) ? fmtRub(PE) : '—');
   setRes('r-price-m3',   !isNaN(PM) ? fmtRub(PM) + ' /м³' : '—');
   setRes('r-total-price',!isNaN(TP) ? fmtRub(TP) : '—');
