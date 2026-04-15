@@ -114,111 +114,112 @@ function parseNum(val) {
 }
 
 function fmtN(n, dec) {
-  if (isNaN(n) || !isFinite(n) || n < 0) return '—';
-  if (dec === 0) return Math.round(n).toLocaleString('ru');
+  if (isNaN(n) || !isFinite(n) || n <= 0) return '—';
   var s = n.toFixed(dec !== undefined ? dec : 4).replace(/\.?0+$/, '');
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
 }
-function fmtM(n)    { return isNaN(n)||n<=0 ? '—' : fmtN(n,4)+' м²'; }
-function fmtM3(n)   { return isNaN(n)||n<=0 ? '—' : fmtN(n,4)+' м³'; }
-function fmtRub(n)  { return isNaN(n)||n<=0 ? '—' : Math.round(n).toLocaleString('ru')+' ₽'; }
-function fmtPcs(n)  { return isNaN(n)||n<=0 ? '—' : Math.round(n).toLocaleString('ru')+' шт'; }
-function fmtPog(n)  { return isNaN(n)||n<=0 ? '—' : fmtN(n,2)+' п.м.'; }
+function fmtRub(n) { return (isNaN(n)||n<=0) ? '—' : Math.round(n).toLocaleString('ru')+' ₽'; }
 
-function cuGet(id) { return parseNum(document.getElementById(id).value); }
-function cuSet(id, val) {
+function cuGet(id) {
   var el = document.getElementById(id);
-  if (el && val !== null) { el.value = val; }
+  return el ? parseNum(el.value) : NaN;
 }
 function cuSetResult(id, val) {
   var el = document.getElementById(id);
-  if (el) el.textContent = val !== null ? val : '—';
+  if (el) el.textContent = (val !== null && val !== undefined) ? val : '—';
 }
 
-function cuCalc(trigger) {
-  var w   = cuGet('cu-w')   / 1000;   // мм → м
-  var t   = cuGet('cu-t')   / 1000;   // мм → м
-  var l   = cuGet('cu-l');            // м
-  var qty = cuGet('cu-qty');          // штук
-  var m3  = cuGet('cu-m3');           // м³
-  var m2  = cuGet('cu-m2');           // м²
-  var pp  = cuGet('cu-price-pcs');    // цена за шт
-  var pm3 = cuGet('cu-price-m3');     // цена за м³
-  var tot = cuGet('cu-total-in');     // общая сумма
+function cuCalc() {
+  // ── Блок 1: размеры одной доски ──────────────────────
+  var wMM = cuGet('cu-w');   // мм
+  var tMM = cuGet('cu-t');   // мм
+  var lM  = cuGet('cu-l');   // м
 
-  // Объём и площадь одной доски
-  var vol1  = (w>0 && t>0 && l>0) ? w*t*l : NaN;
-  var area1 = (w>0 && l>0) ? w*l : NaN;
+  var w = wMM / 1000;
+  var t = tMM / 1000;
 
-  // Пересчёт quantity из разных источников
-  if (!isNaN(vol1) && vol1>0) {
-    if (trigger === 'm3' && !isNaN(m3) && m3>0) {
-      qty = m3/vol1;
-      cuSet('cu-qty', fmtN(qty,0));
-    } else if (trigger === 'm2' && !isNaN(m2) && m2>0) {
-      qty = m2/area1;
-      m3  = qty*vol1;
-      cuSet('cu-qty', fmtN(qty,0));
-      cuSet('cu-m3', fmtN(m3,4));
-    } else if (!isNaN(qty) && qty>0) {
-      m3 = qty*vol1;
-      m2 = qty*area1;
-      cuSet('cu-m3', fmtN(m3,4));
-      cuSet('cu-m2', fmtN(m2,4));
-    }
+  var vol1  = (w>0 && t>0 && lM>0) ? w * t * lM : NaN;   // м³ одной доски
+  var area1 = (w>0 && lM>0)        ? w * lM      : NaN;   // м² одной доски
+
+  cuSetResult('cr-area1', !isNaN(area1) ? fmtN(area1,4)+' м²' : '—');
+  cuSetResult('cr-vol1',  !isNaN(vol1)  ? fmtN(vol1,6)+' м³'  : '—');
+
+  // ── Блок 2: партия ───────────────────────────────────
+  // Читаем только то что ввёл пользователь — НЕ пишем обратно в поля
+  var qtyIn = cuGet('cu-qty');   // введённые штуки
+  var m3In  = cuGet('cu-m3');    // введённые м³
+  var m2In  = cuGet('cu-m2');    // введённые м²
+
+  // Вычисляем qty из того что есть
+  var qty = NaN;
+  if (!isNaN(qtyIn) && qtyIn > 0) {
+    qty = qtyIn;
+  } else if (!isNaN(m3In) && m3In > 0 && !isNaN(vol1) && vol1 > 0) {
+    qty = m3In / vol1;
+  } else if (!isNaN(m2In) && m2In > 0 && !isNaN(area1) && area1 > 0) {
+    qty = m2In / area1;
   }
 
-  // Рассчитанные м3/м2 если qty известен
-  var calcM3  = (!isNaN(qty) && qty>0 && !isNaN(vol1))  ? qty*vol1  : m3;
-  var calcM2  = (!isNaN(qty) && qty>0 && !isNaN(area1)) ? qty*area1 : m2;
-  var calcPog = (!isNaN(qty) && qty>0 && l>0)           ? qty*l     : NaN;
+  // Вычисляем м³ и м² из qty
+  var calcM3  = (!isNaN(qty) && !isNaN(vol1))  ? qty * vol1  : NaN;
+  var calcM2  = (!isNaN(qty) && !isNaN(area1)) ? qty * area1 : NaN;
+  var calcPog = (!isNaN(qty) && lM > 0)        ? qty * lM    : NaN;
 
-  // Цена: пересчёт между форматами
+  cuSetResult('cr-qty',  !isNaN(qty)     ? Math.round(qty).toLocaleString('ru')+' шт'  : '—');
+  cuSetResult('cr-m3',   !isNaN(calcM3)  ? fmtN(calcM3,4)+' м³'  : '—');
+  cuSetResult('cr-m2',   !isNaN(calcM2)  ? fmtN(calcM2,4)+' м²'  : '—');
+  cuSetResult('cr-pog',  !isNaN(calcPog) ? fmtN(calcPog,2)+' п.м.' : '—');
+
+  // ── Блок 3: стоимость ────────────────────────────────
+  var ppIn  = cuGet('cu-price-pcs');   // цена за шт
+  var pm3In = cuGet('cu-price-m3');    // цена за м³
+  var totIn = cuGet('cu-total-in');    // общая сумма
+
   var calcTotal = NaN;
   var calcPP    = NaN;
   var calcPM3   = NaN;
   var calcPM2   = NaN;
 
-  if (trigger === 'total' && !isNaN(tot) && tot>0) {
-    // Из общей суммы считаем цены
-    if (!isNaN(qty) && qty>0) calcPP  = tot/qty;
-    if (!isNaN(calcM3) && calcM3>0) calcPM3 = tot/calcM3;
-    if (!isNaN(calcM2) && calcM2>0) calcPM2 = tot/calcM2;
-    calcTotal = tot;
-  } else {
-    // Из цены считаем общую сумму
-    if (!isNaN(pp) && pp>0 && !isNaN(qty) && qty>0) {
-      calcTotal = pp*qty;
-      calcPP    = pp;
-      if (!isNaN(calcM3)  && calcM3>0)  calcPM3 = calcTotal/calcM3;
-      if (!isNaN(calcM2)  && calcM2>0)  calcPM2 = calcTotal/calcM2;
-    } else if (!isNaN(pm3) && pm3>0 && !isNaN(calcM3) && calcM3>0) {
-      calcTotal = pm3*calcM3;
-      calcPM3   = pm3;
-      if (!isNaN(qty)    && qty>0)    calcPP  = calcTotal/qty;
-      if (!isNaN(calcM2) && calcM2>0) calcPM2 = calcTotal/calcM2;
+  if (!isNaN(ppIn) && ppIn > 0) {
+    // Цена за штуку → всё остальное
+    calcPP = ppIn;
+    if (!isNaN(qty) && qty > 0)       calcTotal = ppIn * qty;
+    if (!isNaN(calcM3) && calcM3 > 0) calcPM3   = (!isNaN(calcTotal)) ? calcTotal / calcM3 : NaN;
+    if (!isNaN(calcM2) && calcM2 > 0) calcPM2   = (!isNaN(calcTotal)) ? calcTotal / calcM2 : NaN;
+
+  } else if (!isNaN(pm3In) && pm3In > 0) {
+    // Цена за м³ → всё остальное
+    calcPM3 = pm3In;
+    if (!isNaN(calcM3) && calcM3 > 0) {
+      calcTotal = pm3In * calcM3;
+      if (!isNaN(qty) && qty > 0)       calcPP  = calcTotal / qty;
+      if (!isNaN(calcM2) && calcM2 > 0) calcPM2 = calcTotal / calcM2;
     }
+
+  } else if (!isNaN(totIn) && totIn > 0) {
+    // Общая сумма → раскладываем
+    calcTotal = totIn;
+    if (!isNaN(qty) && qty > 0)       calcPP  = totIn / qty;
+    if (!isNaN(calcM3) && calcM3 > 0) calcPM3 = totIn / calcM3;
+    if (!isNaN(calcM2) && calcM2 > 0) calcPM2 = totIn / calcM2;
   }
 
-  // Выводим результаты
-  cuSetResult('cr-area1', !isNaN(area1) ? fmtN(area1,4)+' м²' : '—');
-  cuSetResult('cr-vol1',  !isNaN(vol1)  ? fmtN(vol1,6)+' м³'  : '—');
-  cuSetResult('cr-qty',   !isNaN(qty)   ? fmtPcs(qty)          : '—');
-  cuSetResult('cr-m3',    fmtM3(calcM3));
-  cuSetResult('cr-m2',    fmtM(calcM2));
-  cuSetResult('cr-pog',   fmtPog(calcPog));
-  cuSetResult('cr-pcs',   fmtRub(calcPP));
-  cuSetResult('cr-pm2',   !isNaN(calcPM2) ? fmtRub(calcPM2)+' /м²' : '—');
-  cuSetResult('cr-pm3',   !isNaN(calcPM3) ? fmtRub(calcPM3)+' /м³' : '—');
+  cuSetResult('cr-pcs',   !isNaN(calcPP)    ? fmtRub(calcPP)+' /шт'  : '—');
+  cuSetResult('cr-pm3',   !isNaN(calcPM3)   ? fmtRub(calcPM3)+' /м³' : '—');
+  cuSetResult('cr-pm2',   !isNaN(calcPM2)   ? fmtRub(calcPM2)+' /м²' : '—');
   cuSetResult('cr-total', fmtRub(calcTotal));
 
   // Подсказка
   var hint = document.getElementById('cu-hint');
-  var filled = [!isNaN(w),!isNaN(t),!isNaN(l),!isNaN(qty)||!isNaN(m3)||!isNaN(m2)].filter(Boolean).length;
-  if (hint) {
-    if (filled === 0) hint.textContent = 'Введите параметры изделия — калькулятор посчитает всё остальное.';
-    else if (isNaN(vol1)) hint.textContent = 'Укажите ширину, толщину и длину для расчёта объёма.';
-    else hint.textContent = '';
+  if (!hint) return;
+  if (isNaN(wMM) && isNaN(tMM) && isNaN(lM)) {
+    hint.textContent = 'Введите ширину, толщину и длину доски — калькулятор посчитает объём и площадь.';
+  } else if (isNaN(vol1)) {
+    hint.textContent = 'Укажите все три размера (ширина, толщина, длина) для расчёта объёма.';
+  } else if (isNaN(qty)) {
+    hint.textContent = 'Укажите количество досок, объём м³ или площадь м² для расчёта партии.';
+  } else {
+    hint.textContent = '';
   }
 }
 
@@ -231,10 +232,9 @@ function cuClear() {
     cuSetResult(id, '—');
   });
   var hint = document.getElementById('cu-hint');
-  if (hint) hint.textContent = 'Введите параметры изделия — калькулятор посчитает всё остальное.';
+  if (hint) hint.textContent = 'Введите ширину, толщину и длину доски — калькулятор посчитает объём и площадь.';
 }
 
-// Разрешаем запятую как разделитель
 function cuInitComma() {
   document.querySelectorAll('.cu-input').forEach(function(inp) {
     inp.addEventListener('keypress', function(e) {
