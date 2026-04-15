@@ -191,6 +191,12 @@
   </div>
 </section>
 
+<canvas id="matrix-canvas"></canvas>
+<div class="easter-egg-overlay" id="egg-overlay">
+  <div class="easter-egg-text">ОПТЭЛ</div>
+  <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
+</div>
 <button class="sticky-cta" onclick="openModal('Заказать звонок')">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
   <span class="cta-text">Заказать звонок</span>
@@ -216,7 +222,11 @@
     <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
     <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
   </div>
-  <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:10px;"><p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p></div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
+  </div>
 </footer>
 <script src="shared.js"></script>
 </body>

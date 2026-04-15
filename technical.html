@@ -44,24 +44,27 @@
 </style>
 
 <style>
-/* ТУ — таблицы выровнены */
-.teh-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.teh-block table {
+/* ТУ — таблицы */
+.teh-block { overflow-x: auto; -webkit-overflow-scrolling: touch; display: block; }
+/* Обычные двухколоночные таблицы */
+.teh-block table:not(.sorts-table) {
   table-layout: fixed;
   width: 100%;
-  min-width: 360px;
-  border-collapse: collapse;
+  min-width: 320px;
 }
-/* Двухколоночные таблицы */
 .teh-block table:not(.sorts-table) th:first-child,
 .teh-block table:not(.sorts-table) td:first-child { width: 55%; }
 .teh-block table:not(.sorts-table) th:last-child,
 .teh-block table:not(.sorts-table) td:last-child  { width: 45%; }
-/* Сводная таблица сортов */
-.sorts-table { min-width: 600px !important; table-layout: auto !important; }
+/* Сводная таблица сортов — auto layout, скролл */
+.sorts-table {
+  table-layout: auto;
+  width: 100%;
+  min-width: 700px;
+}
 .sorts-table th:first-child,
-.sorts-table td:first-child { width: 26%; min-width: 160px; }
-.sorts-table th, .sorts-table td { white-space: nowrap; }
+.sorts-table td:first-child { min-width: 180px; }
+.sorts-table th, .sorts-table td { white-space: nowrap; min-width: 90px; }
 </style>
 </head>
 <body>
@@ -69,9 +72,13 @@
   <div class="header-wrap">
     <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
     <nav>
-      <a href="index.html">Главная</a><a href="products.html">Продукция</a><a href="gallery.html">Галерея</a>
-      <a href="calculator.html">Калькулятор</a><a href="technical.html">ТУ</a>
-      <a href="suppliers.html">Поставщикам</a><a href="contacts.html">Контакты</a>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="technical.html" class="active">ТУ</a>
+      <a href="contacts.html">Контакты</a>
     </nav>
     <span class="header-vat">НДС 22%</span>
     <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
@@ -117,7 +124,7 @@
 
 <div class="teh-block reveal">
   <h3 style="color:var(--lime);">Сводная таблица сортов</h3>
-  <table>
+  <table class="sorts-table">
     <thead><tr><th>Показатель</th><th><span class="sort-tag sort-extra">Экстра</span></th><th><span class="sort-tag sort-prima">Прима</span></th><th><span class="sort-tag sort-a">А</span></th><th><span class="sort-tag sort-b">В</span></th><th><span class="sort-tag sort-c">С</span></th></tr></thead>
     <tbody>
       <tr><td>Сучки сросшиеся</td><td>Не доп.</td><td>до 20мм ≤1/п.м.</td><td>до 30мм неогр.</td><td>Доп.</td><td>Доп.</td></tr>
@@ -273,10 +280,11 @@
   <div class="footer-inner">
     <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
     <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
-
-  <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:10px;">
-    <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
   </div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
   </div>
 </footer>
 <script src="shared.js"></script></body></html>
