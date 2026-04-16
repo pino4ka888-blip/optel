@@ -3,56 +3,43 @@
 (function() {
   var W3F_KEY = 'b7f51ee7-1983-4525-b03f-d5b1ff17d039';
 
-  function formatMessage(formData, pageTitle) {
-    var lines = [];
-    var LABELS = {
-      name:        'Имя',
-      phone:       'Телефон',
-      company:     'Компания / Регион',
-      volume:      'Объём (м³)',
-      email:       'E-mail',
-      region:      'Регион',
-      description: 'Описание',
-      message:     'Сообщение',
-      comment:     'Комментарий',
-      wood_types:  'Породы',
-      volume_month:'Объём в месяц',
-      'Состав заказа': 'Состав заказа',
-    };
-    var SKIP = ['access_key','subject','from_page','botcheck','_w3f'];
+  var LABELS = {
+    name:'Имя', phone:'Телефон', company:'Компания / Регион',
+    volume:'Объём (м³)', email:'E-mail', region:'Регион',
+    description:'Описание', message:'Сообщение', comment:'Комментарий',
+    wood_types:'Породы', volume_month:'Объём в месяц',
+    'Состав заказа':'Состав заказа'
+  };
+  var SKIP = ['access_key','subject','from_page','botcheck'];
 
-    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    lines.push('НОВАЯ ЗАЯВКА — ' + pageTitle.toUpperCase());
-    lines.push('Сайт: optel18.ru');
-    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    lines.push('');
-
-    for (var pair of formData.entries()) {
-      var k = pair[0], v = pair[1];
-      if (SKIP.includes(k)) continue;
-      if (!v || v.toString().trim() === '') continue;
-      var label = LABELS[k] || k;
+  function buildMessage(formData, pageTitle) {
+    var lines = [
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      'НОВАЯ ЗАЯВКА — ' + pageTitle.toUpperCase(),
+      'Сайт: optel18.ru  |  +7 9999-23-8888',
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      ''
+    ];
+    formData.forEach(function(v, k) {
+      if (SKIP.indexOf(k) !== -1 || !v || !v.toString().trim()) return;
       if (k === 'Состав заказа') {
         lines.push('📦 СОСТАВ ЗАКАЗА:');
         lines.push('──────────────────────────────');
         v.toString().split('
-').forEach(function(line) {
-          if (line.trim()) lines.push('  ' + line);
-        });
+').forEach(function(l){ if(l.trim()) lines.push('  '+l); });
         lines.push('──────────────────────────────');
       } else {
-        lines.push('▸ ' + label + ': ' + v);
+        lines.push('▸ ' + (LABELS[k] || k) + ': ' + v);
       }
-    }
-
+    });
     lines.push('');
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    lines.push('optel18.ru · +7 9999-23-8888');
-    return lines.join('\n');
+    return lines.join('
+');
   }
 
-  function handleW3FForm(form) {
-    form.addEventListener('submit', function(e) {
+  function handleForm(form) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       var btn = form.querySelector('[type=submit]');
       var origText = btn ? btn.textContent : '';
@@ -60,46 +47,46 @@
 
       var fd = new FormData(form);
       var pageTitle = fd.get('from_page') || document.title;
-      var subject   = fd.get('subject') || 'Заявка — ОПТЭЛ';
+      var subject   = fd.get('subject')   || 'Заявка — ОПТЭЛ';
 
-      var payload = {
-        access_key: W3F_KEY,
-        subject:    subject,
-        from_name:  'ОПТЭЛ — ' + pageTitle,
-        message:    formatMessage(fd, pageTitle),
-        email:      fd.get('email') || 'noreply@optel18.ru',
-      };
-      // Добавим имя и телефон для удобства в шапке письма
-      if (fd.get('name'))  payload['Имя']     = fd.get('name');
-      if (fd.get('phone')) payload['Телефон'] = fd.get('phone');
-      if (fd.get('company')) payload['Компания'] = fd.get('company');
+      // Добавляем ключ и форматированное сообщение
+      fd.set('access_key', W3F_KEY);
+      fd.set('subject',    subject);
+      fd.set('from_name',  'ОПТЭЛ — ' + pageTitle);
+      fd.set('message',    buildMessage(fd, pageTitle));
 
-      fetch('https://api.web3forms.com/submit', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body:    JSON.stringify(payload)
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data.success) {
-          if (btn) { btn.textContent = 'Отправлено ✓'; btn.style.background = '#aaff00'; btn.style.color = '#000'; }
+      try {
+        var response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: fd
+        });
+        var data = await response.json();
+        if (response.ok && data.success) {
+          if (btn) {
+            btn.textContent = '✓ Отправлено';
+            btn.style.cssText += ';background:#aaff00!important;color:#000!important;';
+          }
           form.reset();
           setTimeout(function() {
-            if (btn) { btn.textContent = origText; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
-          }, 4000);
-          if (typeof closeModal === 'function') setTimeout(closeModal, 2500);
+            if (btn) {
+              btn.textContent = origText;
+              btn.style.background = '';
+              btn.style.color = '';
+              btn.disabled = false;
+            }
+            if (typeof closeModal === 'function') closeModal();
+          }, 3000);
         } else {
           if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
         }
-      })
-      .catch(function() {
+      } catch(err) {
         if (btn) { btn.textContent = 'Ошибка соединения'; btn.disabled = false; }
-      });
+      }
     });
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('form[data-w3f]').forEach(handleW3FForm);
+    document.querySelectorAll('form[data-w3f]').forEach(handleForm);
   });
 })();
 /* ══ конец WEB3FORMS ══ */
