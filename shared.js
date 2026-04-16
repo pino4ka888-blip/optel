@@ -1,6 +1,7 @@
 
 /* ── ОТПРАВКА КОРЗИНЫ (products.html) ── */
 window.submitCartForm = function() {
+  alert('submitCartForm вызвана!');
   var nameVal    = (document.getElementById('gcart-name')    || {value:''}).value.trim();
   var phoneVal   = (document.getElementById('gcart-phone')   || {value:''}).value.trim();
   var companyVal = (document.getElementById('gcart-company') || {value:''}).value.trim();
