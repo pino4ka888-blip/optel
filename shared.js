@@ -609,11 +609,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var summaryEl  = document.getElementById('global-cart-summary');
     var summaryVal = summaryEl ? summaryEl.textContent.trim() : '';
 
-    if (!phoneVal || phoneVal.replace(/\D/g,'').length < 10) {
-      var ph = document.getElementById('gcart-phone');
-      if (ph) { ph.style.borderColor = '#ff5555'; ph.focus(); }
-      return;
-    }
+    // телефон необязателен — просто сбросим красную рамку если была
+    var ph = document.getElementById('gcart-phone');
+    if (ph) ph.style.borderColor = '';
 
     // Создаём форму с латинскими именами полей
     var fd = new FormData();
