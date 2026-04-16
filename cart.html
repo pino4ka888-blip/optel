@@ -68,25 +68,30 @@
       <div>
         <div class="section-label">Продукция</div>
         <h1 style="font-size:clamp(36px,5vw,64px);">Корзина</h1>
-        <p style="color:var(--text2);margin-top:10px;font-size:15px;max-width:460px;">Проверьте состав заказа и оставьте контакты — рассчитаем стоимость и свяжемся сразу</p>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;max-width:460px;">Проверьте состав заказа и оставьте контакты — свяжемся сразу</p>
       </div>
       <div class="page-hero-icon">
         <svg width="160" height="160" viewBox="0 0 160 160" fill="none">
-          <rect x="20" y="50" width="120" height="80" rx="8" fill="rgba(170,255,0,0.08)" stroke="#aaff00" stroke-width="1.5"/>
-          <path d="M20 70h120" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
-          <path d="M20 90h120" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
-          <path d="M20 110h120" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
-          <rect x="32" y="78" width="50" height="5" rx="2.5" fill="rgba(170,255,0,0.4)"/>
-          <rect x="32" y="98" width="70" height="5" rx="2.5" fill="rgba(170,255,0,0.4)"/>
-          <rect x="32" y="118" width="40" height="5" rx="2.5" fill="rgba(170,255,0,0.4)"/>
-          <rect x="100" y="76" width="28" height="8" rx="3" fill="rgba(170,255,0,0.2)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
-          <rect x="100" y="96" width="28" height="8" rx="3" fill="rgba(170,255,0,0.2)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
-          <rect x="100" y="116" width="28" height="8" rx="3" fill="rgba(170,255,0,0.2)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
-          <path d="M50 50 Q50 30 80 30 Q110 30 110 50" stroke="#aaff00" stroke-width="1.5" fill="none"/>
-          <circle cx="50" cy="50" r="4" fill="#aaff00"/>
-          <circle cx="110" cy="50" r="4" fill="#aaff00"/>
-          <circle cx="130" cy="148" r="6" fill="rgba(170,255,0,0.2)" stroke="#aaff00" stroke-width="1.5"/>
-          <circle cx="50" cy="148" r="6" fill="rgba(170,255,0,0.2)" stroke="#aaff00" stroke-width="1.5"/>
+          <!-- Корпус контейнера -->
+          <rect x="10" y="45" width="140" height="80" rx="4" fill="rgba(170,255,0,0.08)" stroke="#aaff00" stroke-width="1.5"/>
+          <!-- Вертикальные рёбра -->
+          <line x1="38" y1="45" x2="38" y2="125" stroke="rgba(170,255,0,0.35)" stroke-width="1.2"/>
+          <line x1="66" y1="45" x2="66" y2="125" stroke="rgba(170,255,0,0.35)" stroke-width="1.2"/>
+          <line x1="94" y1="45" x2="94" y2="125" stroke="rgba(170,255,0,0.35)" stroke-width="1.2"/>
+          <line x1="122" y1="45" x2="122" y2="125" stroke="rgba(170,255,0,0.35)" stroke-width="1.2"/>
+          <!-- Горизонтальные рёбра -->
+          <line x1="10" y1="85" x2="150" y2="85" stroke="rgba(170,255,0,0.25)" stroke-width="1"/>
+          <!-- Двери (правая сторона) -->
+          <rect x="125" y="50" width="20" height="70" rx="2" fill="rgba(170,255,0,0.05)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <line x1="135" y1="50" x2="135" y2="120" stroke="rgba(170,255,0,0.4)" stroke-width="0.8"/>
+          <circle cx="129" cy="85" r="3" fill="none" stroke="#aaff00" stroke-width="1.2"/>
+          <circle cx="141" cy="85" r="3" fill="none" stroke="#aaff00" stroke-width="1.2"/>
+          <!-- Колёса снизу -->
+          <rect x="25" y="125" width="14" height="8" rx="2" fill="rgba(170,255,0,0.15)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <rect x="70" y="125" width="14" height="8" rx="2" fill="rgba(170,255,0,0.15)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <rect x="115" y="125" width="14" height="8" rx="2" fill="rgba(170,255,0,0.15)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <!-- Надпись ОПТЭЛ -->
+          <text x="62" y="72" font-family="monospace" font-size="9" fill="rgba(170,255,0,0.6)" letter-spacing="3">ОПТЭЛ</text>
         </svg>
       </div>
     </div>
@@ -163,7 +168,7 @@
                   <label class="form-label">Комментарий</label>
                   <textarea name="comment" class="form-textarea" rows="2" placeholder="Дополнительные пожелания..."></textarea>
                 </div>
-                <button type="submit" class="btn btn-lime btn-lg" style="width:100%;">Отправить заявку →</button>
+                <button type="submit" class="btn btn-lime btn-lg" style="width:100%;text-align:center;justify-content:center;display:flex;align-items:center;">Отправить заявку →</button>
               </form>
               <div style="font-size:11px;color:var(--text3);margin-top:12px;text-align:center;line-height:1.5;">
                 Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.
@@ -219,19 +224,39 @@
 </footer>
 <script>
 var CART_KEY = 'optel_cart';
-
-function loadCart() {
+function loadCartData() {
   try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; }
 }
 
+function recalcAndRender() {
+  var cart = loadCartData();
+  var hiddenEl  = document.getElementById('cart-order-hidden');
+  var totalEl   = document.getElementById('cart-total-sum');
+  var summaryEl = document.getElementById('cart-summary-text');
+  var total = 0, lines = [];
+
+  cart.forEach(function(item, idx) {
+    var inputEl = document.getElementById('vol-input-'+idx);
+    var vol = inputEl ? (parseFloat(inputEl.value) || 0) : (parseFloat(item.vol) || 0);
+    if (inputEl) item.vol = vol; // обновим в памяти
+    var priceN = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
+    var sum = vol * priceN;
+    total += sum;
+    var sumEl = document.getElementById('row-sum-'+idx);
+    if (sumEl) sumEl.textContent = Math.round(sum).toLocaleString('ru') + ' ₽';
+    lines.push(item.name + ' | ' + (item.sort||'') + ' | ' + (item.size||'') + ' | Длина: ' + (item.len||'—') + ' | ' + vol + ' м³ | ' + item.price + ' /м³ = ' + Math.round(sum).toLocaleString('ru') + ' ₽');
+  });
+
+  if (totalEl)   totalEl.textContent = Math.round(total).toLocaleString('ru') + ' ₽';
+  if (summaryEl) summaryEl.textContent = cart.length + ' ' + (cart.length===1?'позиция':cart.length<5?'позиции':'позиций');
+  if (hiddenEl)  hiddenEl.value = lines.join('\n') + '\nИТОГО: ' + Math.round(total).toLocaleString('ru') + ' ₽';
+}
+
 function renderCartPage() {
-  var cart = loadCart();
+  var cart = loadCartData();
   var empty   = document.getElementById('cart-empty');
   var content = document.getElementById('cart-content');
   var itemsEl = document.getElementById('cart-items');
-  var totalEl = document.getElementById('cart-total-sum');
-  var summaryEl = document.getElementById('cart-summary-text');
-  var hiddenEl  = document.getElementById('cart-order-hidden');
 
   if (!cart.length) {
     if (empty)   empty.style.display   = 'block';
@@ -241,42 +266,44 @@ function renderCartPage() {
   if (empty)   empty.style.display   = 'none';
   if (content) content.style.display = 'block';
 
-  var total = 0;
-  var lines = [];
-
   itemsEl.innerHTML = cart.map(function(item, idx) {
     var vol    = parseFloat(item.vol) || 0;
     var priceN = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
     var sum    = vol * priceN;
-    total += sum;
-    lines.push(item.name + ' | ' + (item.sort||'') + ' | ' + (item.size||'') + ' | ' + (item.len||'') + ' | ' + item.vol + ' м³ | ' + item.price + ' /м³');
-    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap;">' +
-      '<div style="flex:1;min-width:0;">' +
-        '<div style="font-size:13px;color:var(--text);font-weight:600;line-height:1.4;">' + item.name + '</div>' +
-        '<div style="font-size:12px;color:var(--text3);margin-top:3px;">' +
-          (item.sort ? 'Сорт: ' + item.sort + ' &nbsp;·&nbsp; ' : '') +
-          (item.size ? item.size + ' &nbsp;·&nbsp; ' : '') +
-          'Длина: ' + (item.len||'—') + ' &nbsp;·&nbsp; ' +
-          'Объём: ' + item.vol + ' м³' +
+
+    // Подзаголовок позиции — без дублей слов
+    var meta = [];
+    if (item.sort) meta.push(item.sort);
+    if (item.size) meta.push(item.size);
+    if (item.len)  meta.push('Длина: ' + item.len);
+    var metaStr = meta.join(' &nbsp;·&nbsp; ');
+
+    return '<div style="padding:14px 18px;border-bottom:1px solid var(--border);">' +
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">' +
+        '<div style="flex:1;min-width:0;">' +
+          '<div style="font-size:13px;color:var(--text);font-weight:600;line-height:1.4;">' + item.name + '</div>' +
+          '<div style="font-size:11px;color:var(--text3);margin-top:3px;">' + metaStr + '</div>' +
         '</div>' +
+        '<button onclick="removeItem(' + idx + ')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Удалить">✕</button>' +
       '</div>' +
-      '<div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">' +
-        '<div style="text-align:right;">' +
-          '<div style="font-size:12px;color:var(--text3);">' + item.price + ' /м³</div>' +
-          '<div style="font-family:var(--font-display);font-size:16px;color:var(--lime);letter-spacing:0.5px;">' + Math.round(sum).toLocaleString('ru') + ' ₽</div>' +
+      '<div style="display:flex;align-items:center;gap:16px;margin-top:10px;flex-wrap:wrap;">' +
+        '<div style="display:flex;align-items:center;gap:8px;">' +
+          '<label style="font-size:11px;color:var(--text3);font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">м³</label>' +
+          '<input type="number" id="vol-input-' + idx + '" value="' + vol + '" min="0.1" step="0.1" ' +
+            'style="width:80px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 10px;color:var(--text);font-size:13px;font-family:var(--font-body);" ' +
+            'oninput="recalcAndRender()">' +
         '</div>' +
-        '<button onclick="removeItem(' + idx + ')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;padding:4px 6px;border-radius:4px;line-height:1;" title="Удалить">✕</button>' +
+        '<div style="font-size:12px;color:var(--text3);">Цена: <span style="color:var(--text2);font-weight:600;">' + item.price + ' /м³</span></div>' +
+        '<div style="margin-left:auto;font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:var(--lime);" id="row-sum-' + idx + '">' + Math.round(sum).toLocaleString('ru') + ' ₽</div>' +
       '</div>' +
     '</div>';
   }).join('');
 
-  if (totalEl)   totalEl.textContent   = Math.round(total).toLocaleString('ru') + ' ₽';
-  if (summaryEl) summaryEl.textContent = cart.length + ' ' + (cart.length===1?'позиция':cart.length<5?'позиции':'позиций');
-  if (hiddenEl)  hiddenEl.value = lines.join('\n') + '\nИТОГО: ' + Math.round(total).toLocaleString('ru') + ' ₽';
+  recalcAndRender();
 }
 
 function removeItem(idx) {
-  var cart = loadCart();
+  var cart = loadCartData();
   cart.splice(idx, 1);
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
   renderCartPage();
@@ -287,7 +314,6 @@ function clearCartPage() {
   renderCartPage();
 }
 
-// Мобильный стиль
 var style = document.createElement('style');
 style.textContent = '@media(max-width:800px){#cart-content>div{grid-template-columns:1fr!important;}#cart-content>div>div:last-child{position:static!important;}}';
 document.head.appendChild(style);
