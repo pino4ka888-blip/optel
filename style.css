@@ -1268,3 +1268,27 @@ body.cart-open .sticky-cta { bottom: 90px; }
   display: flex !important;
   flex-direction: column;
 }
+
+/* ── ДОПОЛНИТЕЛЬНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ ── */
+@media(max-width:768px){
+  .page-hero-inner { flex-direction: column; gap: 20px; }
+  .page-hero-icon  { display: none; }
+  .section-grid-3  { grid-template-columns: 1fr !important; }
+  .section-grid-2  { grid-template-columns: 1fr !important; }
+  .approach-grid   { grid-template-columns: 1fr !important; }
+  .smart-calc      { grid-template-columns: 1fr !important; }
+  .contacts-grid   { grid-template-columns: 1fr !important; }
+  .cf-row          { flex-direction: column; }
+  .calc-results    { position: static !important; }
+}
+@media(max-width:480px){
+  .hero-title      { font-size: clamp(32px,10vw,52px) !important; }
+  .step            { flex-direction: column; gap: 12px; }
+  .step-num        { font-size: 40px; }
+  .vs-block        { flex-direction: column; gap: 12px; }
+  .vs-col          { width: 100% !important; }
+  .footer-inner    { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links    { flex-wrap: wrap; justify-content: center; gap: 12px; }
+  section          { padding: 28px 0; }
+  .btn-lg          { width: 100%; justify-content: center; }
+}

@@ -76,6 +76,33 @@
   .td-nm{max-width:160px;font-size:12px;}
   .sf-label{width:auto;}
 }
+
+@media(max-width:768px){
+  .sale-banner h1{font-size:clamp(20px,6vw,32px);}
+  .sale-banner-sub{font-size:12px;}
+  .sf-row{gap:6px;}
+  .sf-chip{padding:5px 10px;font-size:11px;}
+  .sale-controls{flex-direction:column;}
+  .sale-controls input,.sale-controls select{width:100%;min-width:unset;}
+  .sale-wrap{border-radius:8px;}
+  .sale-tbl{min-width:420px;font-size:12px;}
+  .sale-tbl th{padding:8px 8px;font-size:9px;}
+  .sale-tbl td{padding:8px 8px;}
+  .td-nm{max-width:130px;font-size:12px;}
+  .p-new{font-size:13px;}
+  .btn-add{padding:6px 10px;font-size:11px;}
+  .cart-sticky{padding:10px 14px;}
+  .cs-text{font-size:15px;}
+  .cs-btns{flex-wrap:wrap;gap:6px;}
+  .btn-order,.btn-clr{padding:8px 12px;font-size:12px;}
+}
+@media(max-width:480px){
+  .sf-row{gap:4px;}
+  .sf-chip{padding:4px 8px;font-size:10px;}
+  .sale-tbl{min-width:360px;}
+  .dtag{display:none;}
+  .sale-pg{flex-direction:column;gap:6px;align-items:flex-start;}
+}
 </style>
 </head>
 <body>
@@ -89,7 +116,7 @@
       <a href="process.html">Не как все</a>
       <a href="approach.html">Меняем подход</a>
       <a href="technical.html">ТУ</a>
-      <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="sale.html" class="active" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
       <a href="contacts.html">Контакты</a>
     </nav>
     <span class="header-vat">НДС 22%</span>
@@ -104,7 +131,7 @@
   <a href="process.html">Не как все</a>
   <a href="approach.html">Меняем подход</a>
   <a href="technical.html">ТУ</a>
-  <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="sale.html" class="active" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
   <a href="contacts.html">Контакты</a>
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
@@ -127,7 +154,7 @@
     <span style="font-size:13px;color:var(--text3);margin-left:10px;">— кнопка «Оформить» станет активной при достижении суммы</span>
   </div>
 </div>
-    <div class="sf-row">
+    <div class="sf-row" id="sf-row-group">
       <span class="sf-label">Изделие</span>
       <button class="sf-chip on" onclick="fg('all',this)">Все</button>
       <button class="sf-chip" onclick="fg('Вагонка',this)">Вагонка</button>
@@ -141,7 +168,7 @@
       <button class="sf-chip" onclick="fg('Другое',this)">Другое</button>
     </div>
 
-    <div class="sf-row">
+    <div class="sf-row" id="sf-row-sort">
       <span class="sf-label">Сорт</span>
       <button class="sf-chip on" onclick="fs('all',this)">Все</button>
       <button class="sf-chip" onclick="fs('Экстра',this)">Экстра</button>
@@ -300,8 +327,8 @@ function renderPg(cur,pages,total){
 }
 
 function gp(p){pg=p;render();var el=document.getElementById('s-tbody');if(el){var y=el.getBoundingClientRect().top+window.scrollY-120;window.scrollTo({top:y,behavior:'smooth'});}}
-function fg(g,el){cg=g;pg=1;document.querySelectorAll('.sf-row:first-of-type .sf-chip').forEach(b=>b.classList.remove('on'));el.classList.add('on');render();}
-function fs(s,el){cs=s;pg=1;document.querySelectorAll('.sf-row:nth-of-type(2) .sf-chip').forEach(b=>b.classList.remove('on'));el.classList.add('on');render();}
+function fg(g,el){cg=g;pg=1;document.querySelectorAll('#sf-row-group .sf-chip').forEach(b=>b.classList.remove('on'));el.classList.add('on');render();}
+function fs(s,el){cs=s;pg=1;document.querySelectorAll('#sf-row-sort .sf-chip').forEach(b=>b.classList.remove('on'));el.classList.add('on');render();}
 function doSearch(){csr=document.getElementById('s-search').value;pg=1;render();}
 function doSort(){csm=document.getElementById('s-sort').value;pg=1;render();}
 

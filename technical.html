@@ -25,21 +25,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-/* Мобильный фикс таблиц */
-.teh-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.teh-block table { min-width: 480px; }
-/* Сводная таблица сортов — горизонтальный скролл */
-.teh-block table th, .teh-block table td { 
-  font-size: 13px; 
-  padding: 8px 10px;
-  white-space: nowrap;
+.teh-block { overflow-x: auto; -webkit-overflow-scrolling: touch; display: block; }
+.teh-block table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 320px;
+  border-collapse: collapse;
 }
-@media(max-width: 600px) {
-  .teh-block table th, .teh-block table td { 
-    font-size: 12px; 
+.teh-block table th:first-child,
+.teh-block table td:first-child { width: 60%; word-wrap: break-word; }
+.teh-block table th:last-child,
+.teh-block table td:last-child  { width: 40%; word-wrap: break-word; }
+.teh-block table th, .teh-block table td {
+  font-size: 13px;
+  padding: 8px 12px;
+  word-break: break-word;
+  hyphens: auto;
+}
+.sorts-table {
+  table-layout: auto !important;
+  min-width: 600px !important;
+  width: 100%;
+}
+.sorts-table th, .sorts-table td {
+  white-space: nowrap;
+  min-width: 80px;
+}
+.sorts-table th:first-child,
+.sorts-table td:first-child { min-width: 160px; }
+@media(max-width:600px){
+  .teh-block table th, .teh-block table td {
+    font-size: 12px;
     padding: 6px 8px;
   }
-  .teh-block { border-radius: 8px; }
 }
 </style>
 
@@ -266,12 +284,12 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
-    <form action="https://formsubmit.co/non_86@mail.ru" method="POST" id="modal-form">
+    <form method="POST" id="modal-form">
       <input type="hidden" name="_subject" value="Заявка — ТУ — ОПТЭЛ">
       <input type="hidden" name="_source" value="ТУ">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="box">
-      <input type="hidden" name="_next" value="https://optel18.ru/?sent=1">
+      
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>

@@ -28,6 +28,29 @@
 .cart-form-title{font-family:var(--font-display);font-size:28px;letter-spacing:1px;margin-bottom:20px;}
 .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 @media(max-width:600px){.form-row-2{grid-template-columns:1fr;}}
+
+@media(max-width:860px){
+  #cart-content>div{grid-template-columns:1fr!important;}
+  #cart-content>div>div:last-child{position:static!important;}
+}
+@media(max-width:600px){
+  .page-hero-inner{flex-direction:column;}
+  .page-hero-icon{display:none;}
+  #cart-items>div{flex-wrap:wrap;gap:8px;}
+  #cart-items>div>div:first-child{flex:1 1 100%;}
+}
+@media(max-width:480px){
+  /* Скрыть заголовки колонок на маленьком экране */
+  #cart-col-headers{display:none!important;}
+  #cart-items>div{
+    display:grid!important;
+    grid-template-columns:1fr auto;
+    gap:4px 12px;
+    padding:12px 14px!important;
+  }
+  #cart-items>div>div:first-child{grid-column:1 / -1;}
+  #cart-items>div>div:nth-child(4){margin-left:0!important;}
+}
 </style>
 </head>
 <body>
@@ -115,7 +138,7 @@
           </div>
 
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
-            <div style="display:flex;align-items:center;gap:0;padding:8px 18px;background:var(--bg);">
+            <div id="cart-col-headers" style="display:flex;align-items:center;gap:0;padding:8px 18px;background:var(--bg);">
               <div style="flex:1;min-width:150px;padding-right:16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Наименование</div>
               <div style="width:130px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">₽/м³</div>
               <div style="width:110px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Объём</div>
