@@ -616,47 +616,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Создаём форму с латинскими именами полей
-    var form = document.createElement('form');
-    form.method  = 'POST';
-    form.action  = 'https://formsubmit.co/non_86@mail.ru';
-    form.style.cssText = 'position:absolute;left:-9999px;top:-9999px;visibility:hidden;';
+    var fd = new FormData();
+    Object.keys(data).forEach(function(k) { if (k !== '_next') fd.append(k, data[k]); });
 
-    var data = {
-      '_subject':  'Заявка из корзины ОПТЭЛ',
-      '_captcha':  'false',
-      '_template': 'box',
-      '_next':     window.location.href,
-      'source':    'Корзина',
-      'cart':      summaryVal,
-      'name':      nameVal || 'Не указано',
-      'phone':     phoneVal,
-      'company':   companyVal,
-      'comment':   commentVal,
-    };
-
-    Object.keys(data).forEach(function(key) {
-      var inp = document.createElement('input');
-      inp.type = 'hidden';
-      inp.name = key;
-      inp.value = data[key];
-      form.appendChild(inp);
+    fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success === 'true' || d.success === true) {
+        if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
+        closeGlobalCartSend();
+        saveCart([]);
+        renderGlobalCart();
+      } else {
+        if (window.showFormToast) showFormToast('Ошибка отправки — попробуйте ещё раз', true);
+      }
+    })
+    .catch(function() {
+      if (window.showFormToast) showFormToast('Ошибка соединения', true);
     });
-
-    document.body.appendChild(form);
-
-    // Отправляем в скрытый iframe
-    var iframeId = 'optel_cart_frame';
-    var existing = document.getElementById(iframeId);
-    if (existing) existing.parentNode.removeChild(existing);
-
-    var iframe = document.createElement('iframe');
-    iframe.id   = iframeId;
-    iframe.name = iframeId;
-    iframe.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;';
-    document.body.appendChild(iframe);
-
-    form.target = iframeId;
-    form.submit();
 
     // Уведомление пользователю
     if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
