@@ -115,6 +115,13 @@
           </div>
 
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:0;padding:8px 18px;background:var(--bg);">
+              <div style="flex:1;min-width:150px;padding-right:16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Наименование</div>
+              <div style="width:130px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">₽/м³</div>
+              <div style="width:110px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Объём</div>
+              <div style="width:110px;text-align:right;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Стоимость</div>
+              <div style="width:32px;"></div>
+            </div>
             <div id="cart-items"></div>
             <div style="padding:14px 18px;border-top:2px solid var(--border2);display:flex;justify-content:space-between;align-items:center;">
               <span style="font-size:13px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;">Итого</span>
@@ -267,20 +274,20 @@ function renderCartPage() {
     if (item.len)  meta.push('Длина: ' + item.len);
     var metaStr = meta.join(' &nbsp;·&nbsp; ');
 
-    return '<div style="display:flex;align-items:center;gap:16px;padding:12px 18px;border-bottom:1px solid var(--border);flex-wrap:wrap;">' +
-      '<div style="flex:1;min-width:200px;">' +
+    return '<div style="display:flex;align-items:center;gap:0;padding:12px 18px;border-bottom:1px solid var(--border);">' +
+      '<div style="flex:1;min-width:150px;padding-right:16px;">' +
         '<div style="font-size:13px;color:var(--text);font-weight:600;">' + item.name + '</div>' +
         '<div style="font-size:11px;color:var(--text3);margin-top:2px;">' + metaStr + '</div>' +
       '</div>' +
-      '<div style="font-size:13px;color:var(--text2);white-space:nowrap;font-weight:600;">' + item.price + ' ₽/м³</div>' +
-      '<div style="display:flex;align-items:center;gap:6px;">' +
+      '<div style="width:130px;text-align:center;font-size:13px;color:var(--text2);font-weight:600;white-space:nowrap;">' + item.price + '/м³</div>' +
+      '<div style="width:110px;display:flex;align-items:center;justify-content:center;gap:6px;">' +
         '<input type="number" id="vol-input-' + idx + '" value="' + vol + '" min="0.1" step="0.1" ' +
-          'style="width:76px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 10px;color:var(--text);font-size:13px;font-family:var(--font-body);" ' +
+          'style="width:70px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--font-body);text-align:center;" ' +
           'oninput="recalcAndRender()">' +
         '<span style="font-size:11px;color:var(--text3);">м³</span>' +
       '</div>' +
-      '<div style="font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:var(--lime);white-space:nowrap;min-width:100px;text-align:right;" id="row-sum-' + idx + '">' + Math.round(sum).toLocaleString('ru') + ' ₽</div>' +
-      '<button onclick="removeItem(' + idx + ')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Удалить">✕</button>' +
+      '<div style="width:110px;text-align:right;font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:var(--lime);white-space:nowrap;" id="row-sum-' + idx + '">' + Math.round(sum).toLocaleString('ru') + ' ₽</div>' +
+      '<button onclick="removeItem(' + idx + ')" style="width:32px;text-align:center;background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Удалить">✕</button>' +
     '</div>';
   }).join('');
 
@@ -303,7 +310,18 @@ var style = document.createElement('style');
 style.textContent = '@media(max-width:800px){#cart-content>div{grid-template-columns:1fr!important;}#cart-content>div>div:last-child{position:static!important;}}';
 document.head.appendChild(style);
 
-document.addEventListener('DOMContentLoaded', renderCartPage);
+document.addEventListener('DOMContentLoaded', function() {
+  // Очистить старые записи с /м³ в price
+  try {
+    var cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    cart = cart.map(function(item) {
+      if (item.price) item.price = item.price.replace('/м³','').replace('/м3','').trim();
+      return item;
+    });
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  } catch(e) {}
+  renderCartPage();
+});
 </script>
 <script src="shared.js"></script>
 </body>
