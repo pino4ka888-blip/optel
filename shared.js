@@ -69,9 +69,6 @@ function initModal() {
   ov.addEventListener('click', e => { if (e.target === ov) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   ov.querySelectorAll('input[type="tel"]').forEach(applyPhoneMask);
-
-    });
-  });
 }
 
 /* ── SCROLL REVEAL ── */
