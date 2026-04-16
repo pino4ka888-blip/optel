@@ -68,9 +68,14 @@
   <div class="header-wrap">
     <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
     <nav>
-      <a href="index.html">Главная</a><a href="products.html">Продукция</a><a href="gallery.html">Галерея</a>
-      <a href="calculator.html">Калькулятор</a><a href="technical.html">Тех. условия</a>
-      <a href="suppliers.html">Поставщикам</a><a href="contacts.html">Контакты</a>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="technical.html">ТУ</a>
+      <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="contacts.html">Контакты</a>
     </nav>
     <span class="header-vat">НДС 22%</span>
     <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
@@ -78,9 +83,14 @@
   </div>
 </header>
 <nav class="mobile-nav" id="mobileNav">
-  <a href="index.html">Главная</a><a href="products.html">Продукция</a><a href="gallery.html">Галерея</a>
-  <a href="calculator.html">Калькулятор</a><a href="technical.html">Тех. условия</a>
-  <a href="suppliers.html" class="active">Поставщикам</a><a href="contacts.html">Контакты</a>
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="process.html">Не как все</a>
+  <a href="approach.html">Меняем подход</a>
+  <a href="technical.html">ТУ</a>
+  <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="contacts.html">Контакты</a>
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
 <div class="page-hero">
@@ -166,10 +176,11 @@
 
       <div class="form-card reveal" style="transition-delay:.12s;">
         <h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:1px;margin-bottom:16px;">Предложить товар</h3>
-        <form action="https://formsubmit.co/non_86@mail.ru" method="POST" enctype="multipart/form-data" class="form-compact">
-          <input type="hidden" name="_subject" value="Предложение поставщика — ОПТЭЛ">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="box">
+        <form data-w3f enctype="multipart/form-data" class="form-compact">
+      <input type="hidden" name="subject" value="Предложение поставщика — ОПТЭЛ"><input type="hidden" name="from_page" value="Поставщикам">
+          
+          
+          
           <div class="form-group">
             <label class="form-label">Телефон *</label>
             <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
@@ -235,8 +246,9 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
-    <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ"><input type="hidden" name="_source" value="Страница Поставщикам — модальная форма"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+    <form data-w3f>
+      <input type="hidden" name="subject" value="Предложение поставщика — ОПТЭЛ"><input type="hidden" name="from_page" value="Поставщикам">
+      
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
@@ -257,10 +269,11 @@
   <div class="footer-inner">
     <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
     <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
-
-  <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:10px;">
-    <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;white-space:normal;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
   </div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
   </div>
 </footer>
 <script>

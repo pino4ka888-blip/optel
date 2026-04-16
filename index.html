@@ -221,10 +221,11 @@
       </div>
       <div class="form-card reveal" style="transition-delay:.12s">
         <h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:1px;margin-bottom:18px;">Оставить заявку</h3>
-        <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-          <input type="hidden" name="_subject" value="Заявка с главной страницы — ОПТЭЛ"><input type="hidden" name="_source" value="Главная страница">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="box">
+        <form data-w3f>
+      <input type="hidden" name="subject" value="Заявка с главной страницы — ОПТЭЛ"><input type="hidden" name="from_page" value="Главная страница">
+          
+          
+          
           <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
           <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
           <div class="form-group"><label class="form-label">Компания / Регион</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания", г. Казань'></div>
@@ -268,8 +269,9 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
-    <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка с главной страницы — ОПТЭЛ"><input type="hidden" name="_source" value="Главная страница"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+    <form data-w3f>
+      <input type="hidden" name="subject" value="Заявка с главной страницы — ОПТЭЛ"><input type="hidden" name="from_page" value="Главная страница">
+      
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
