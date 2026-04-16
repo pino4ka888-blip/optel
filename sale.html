@@ -352,16 +352,22 @@ function updCart(){
 }
 function clearCart(){cart={};updCart();render();}
 function orderCart(){
-  var lines=Object.values(cart).map(function(p){
-    var qty=p.orderQty||0;
-    if(!qty) return null;
-    return p.n+' | Сорт: '+(p.s||'—')+' | '+qty+' шт x '+p.pa.toLocaleString('ru')+' = '+(qty*p.pa).toLocaleString('ru')+' руб.';
-  }).filter(Boolean);
-  var total=Object.values(cart).reduce(function(s,p){return s+(p.pa*(p.orderQty||0));},0);
-  if(total>0) lines.push('ИТОГО: '+total.toLocaleString('ru')+' руб. (скидка 30%)');
-  var cartField=document.getElementById('sale-cart-hidden');
-  if(cartField) cartField.value=lines.join('\n');
-  if(typeof openModal==='function') openModal('Оформить заявку');
+  var lines=[];
+  var total=0;
+  Object.values(cart).forEach(function(p){
+    var qty=parseInt(p.orderQty)||0;
+    if(qty>0){
+      total+=p.pa*qty;
+      lines.push(p.n+' | '+p.s+' | '+qty+' шт x '+p.pa+' = '+(p.pa*qty)+' руб.');
+    }
+  });
+  if(lines.length>0) lines.push('ИТОГО: '+total+' руб. (скидка 30%)');
+  var cf=document.getElementById('sale-cart-hidden');
+  if(cf) cf.value=lines.join('\n');
+  var ov=document.getElementById('modal-overlay');
+  var mt=document.getElementById('modal-title');
+  if(mt) mt.textContent='Оформить заявку';
+  if(ov){ ov.classList.add('open'); document.body.style.overflow='hidden'; }
 }
 
 render();
