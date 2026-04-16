@@ -66,6 +66,46 @@ function initModal() {
   ov.addEventListener('click', e => { if (e.target === ov) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   ov.querySelectorAll('input[type="tel"]').forEach(applyPhoneMask);
+
+  // Перехватываем все формы в модале — отправляем через fetch
+  ov.querySelectorAll('form').forEach(function(form) {
+    if (form._fsHandled) return;
+    form._fsHandled = true;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('[type=submit]');
+      var orig = btn ? btn.textContent : '';
+      if (btn) { btn.textContent = 'Отправляем…'; btn.disabled = true; }
+
+      var fd = new FormData(form);
+      // Удаляем _next чтобы formsubmit не делал редирект
+      fd.delete('_next');
+
+      fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.success === 'true' || d.success === true) {
+          if (btn) { btn.textContent = '✓ Отправлено'; btn.style.background = '#aaff00'; btn.style.color = '#000'; }
+          form.reset();
+          setTimeout(function() {
+            if (btn) { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
+            closeModal();
+          }, 2500);
+        } else {
+          if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
+        }
+      })
+      .catch(function() {
+        // Fallback — обычная отправка если fetch не сработал
+        form.removeEventListener('submit', arguments.callee);
+        form.submit();
+      });
+    });
+  });
 }
 
 /* ── SCROLL REVEAL ── */
