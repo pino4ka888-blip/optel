@@ -19,7 +19,9 @@
 <meta property="og:description" content="Живые фото строганых пиломатериалов из ангарской сосны.">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="ОПТЭЛ">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -225,6 +227,18 @@
   }
 }
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108577886', 'ym');
+    ym(108577886, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108577886" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -317,23 +331,12 @@
   <span class="cta-text">Заказать звонок</span>
 </button>
 <div class="modal-overlay" id="modal-overlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h3 id="modal-title">Заказать звонок</h3>
-    <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
-    <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ">
-      <input type="hidden" name="_source" value="Галерея">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="box">
-      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
-      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
-      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
-      <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 10 м³"></div>
-      <button type="submit" class="modal-submit">Отправить →</button>
-    </form>
-    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
+  <div class="modal" style="max-width:700px;padding:0;overflow:hidden;">
+    <button class="modal-close" onclick="closeModal()" style="position:absolute;top:12px;right:16px;z-index:10;">✕</button>
+    <script src="https://forms.yandex.ru/_static/embed.js"></script>
+    <iframe src="https://forms.yandex.ru/u/69e097d15056905d5ce783e1?iframe=1" frameborder="0" name="ya-form-69e097d15056905d5ce783e1" width="100%" style="min-height:420px;display:block;border:none;"></iframe>
   </div>
+</div>
 </div>
 
 
