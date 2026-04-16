@@ -70,43 +70,6 @@ function initModal() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   ov.querySelectorAll('input[type="tel"]').forEach(applyPhoneMask);
 
-  // Перехватываем все формы в модале — отправляем через fetch
-  ov.querySelectorAll('form').forEach(function(form) {
-    if (form._fsHandled) return;
-    form._fsHandled = true;
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = form.querySelector('[type=submit]');
-      var orig = btn ? btn.textContent : '';
-      if (btn) { btn.textContent = 'Отправляем…'; btn.disabled = true; }
-
-      var fd = new FormData(form);
-      // Удаляем _next чтобы formsubmit не делал редирект
-      fd.delete('_next');
-
-      fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
-        method: 'POST',
-        body: fd,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        if (d.success === 'true' || d.success === true) {
-          if (btn) { btn.textContent = '✓ Отправлено'; btn.style.background = '#aaff00'; btn.style.color = '#000'; }
-          form.reset();
-          setTimeout(function() {
-            if (btn) { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
-            closeModal();
-          }, 2500);
-        } else {
-          if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
-        }
-      })
-      .catch(function() {
-        // Fallback — обычная отправка если fetch не сработал
-        form.removeEventListener('submit', arguments.callee);
-        form.submit();
-      });
     });
   });
 }
@@ -504,14 +467,12 @@ document.addEventListener('DOMContentLoaded', () => {
     saveCart(cart);
     renderGlobalCart();
     // Вешаем listeners на формы инжектированных модалок
-    if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   };
 
   window.globalClearCart = function() {
     saveCart([]);
     renderGlobalCart();
     // Вешаем listeners на формы инжектированных модалок
-    if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   };
 
   window.globalSendCart = function() {
@@ -571,11 +532,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="cart-bar-actions">
           <button class="cart-clear" onclick="globalClearCart()">Очистить</button>
           <a href="products.html" class="btn btn-ghost" style="font-size:12px;padding:7px 14px;white-space:nowrap;">Изменить</a>
-          <button class="cart-send-btn" onclick="globalSendCart()">
+          <button class="cart-send-btn" onclick="window.location.href='cart.html'">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:-1px;margin-right:4px;">
               <path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/>
             </svg>
-            Отправить запрос
+            Перейти в корзину →
           </button>
         </div>
       </div>`;
@@ -586,7 +547,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderGlobalCart();
     // Вешаем listeners на формы инжектированных модалок
-    if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   }
 
   
@@ -647,64 +607,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.initFormListeners = initFormListeners;
-  function initFormListeners() {
-    document.querySelectorAll('form[action*="formsubmit"]').forEach(function(form) {
-      if (form._sentListenerAdded) return;
-      form._sentListenerAdded = true;
-      form.addEventListener('submit', function(e) {
-        // FormSubmit отправляет через fetch или redirect.
-        // Мы используем обычный POST — браузер уходит на страницу формсабмита.
-        // Чтобы перехватить и показать уведомление — используем fetch.
-        e.preventDefault();
-        const data = new FormData(form);
-        // Добавим _next чтобы FormSubmit не редиректил
-        data.set('_next', window.location.href + '?sent=1');
-
-        // Добавим служебные поля
-        if (!data.get('_source')) {
-          data.set('_source', document.title || window.location.pathname);
-        }
-
-        // 1. Сразу показываем уведомление и закрываем форму
-        showFormToast('✓ Сообщение отправлено — свяжемся сразу!', false);
-        form.reset();
-
-        // 2. Закрыть модалку
-        var modal = form.closest('.modal-overlay, .pm-overlay');
-        if (modal) {
-          setTimeout(function() {
-            if (modal.id === 'modal-overlay' && window.closeModal) closeModal();
-            else if (modal.classList.contains('pm-overlay') && window.closePM) {
-              closePM(modal.id.replace('pm-',''));
-            }
-            // Для global-cart-send-overlay
-            else if (modal.id === 'global-cart-send-overlay' && window.closeGlobalCartSend) {
-              closeGlobalCartSend();
-            }
-          }, 400);
-        }
-
-        // 3. Отправляем через скрытый iframe (обходит CORS)
-        var iframeName = 'submit_iframe_' + Date.now();
-        var iframe = document.createElement('iframe');
-        iframe.name = iframeName;
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-        form.target = iframeName;
-        // Временно ставим action без _next чтобы FormSubmit принял
-        var origAction = form.action;
-        form.submit();
-        setTimeout(function() {
-          form.target = '';
-          document.body.removeChild(iframe);
-        }, 5000);
-      });
-    });
-  }
 
   // Вешаем на DOMContentLoaded и повторно через MutationObserver
   // (для форм, добавленных динамически — корзина и т.д.)
-  document.addEventListener('DOMContentLoaded', initFormListeners);
   // Для форм внутри динамически инжектированных модалок
-  window.addEventListener('load', initFormListeners);
 })();

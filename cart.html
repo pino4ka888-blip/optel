@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Корзина — ОПТЭЛ</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.cart-page{max-width:960px;margin:0 auto;}
+.cart-empty{text-align:center;padding:80px 20px;color:var(--text3);}
+.cart-table{width:100%;border-collapse:collapse;}
+.cart-table th{background:var(--bg);padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);text-align:left;}
+.cart-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2);vertical-align:middle;}
+.cart-table tr:last-child td{border-bottom:none;}
+.cart-table tr:hover td{background:rgba(170,255,0,0.03);}
+.cart-name{color:var(--text);font-size:13px;}
+.cart-qty{width:70px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--font-body);text-align:center;}
+.cart-qty:focus{outline:none;border-color:rgba(170,255,0,0.4);}
+.cart-remove{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:4px;}
+.cart-remove:hover{color:#ff5555;background:rgba(255,85,85,0.08);}
+.cart-total-row td{font-weight:700;font-size:14px;color:var(--text);border-top:2px solid var(--border2);}
+.cart-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin-top:32px;}
+.cart-form-title{font-family:var(--font-display);font-size:28px;letter-spacing:1px;margin-bottom:20px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:600px){.form-row-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html" class="active">Продукция</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="technical.html">ТУ</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html" class="active">Продукция</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="process.html">Не как все</a>
+  <a href="approach.html">Меняем подход</a>
+  <a href="technical.html">ТУ</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="section-label">Продукция</div>
+        <h1 style="font-size:clamp(36px,5vw,64px);">Корзина</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="cart-page">
+
+      <div id="cart-empty" class="cart-empty" style="display:none;">
+        <div class="cart-empty-icon">🛒</div>
+        <div style="font-size:18px;color:var(--text2);margin-bottom:12px;">Корзина пуста</div>
+        <a href="products.html" class="btn btn-lime">← Вернуться к продукции</a>
+      </div>
+
+      <div id="cart-content">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+          <div id="cart-summary-text" style="font-size:14px;color:var(--text2);"></div>
+          <div style="display:flex;gap:10px;">
+            <a href="products.html" class="btn btn-outline" style="font-size:12px;padding:8px 16px;">← Добавить ещё</a>
+            <button onclick="clearCartPage()" class="btn btn-outline" style="font-size:12px;padding:8px 16px;color:var(--text3);">Очистить корзину</button>
+          </div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;overflow-x:auto;">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th style="width:40%">Наименование</th>
+                <th>Сорт</th>
+                <th>Размер</th>
+                <th>Длина</th>
+                <th>Объём, м³</th>
+                <th style="text-align:center;">Кол-во</th>
+                <th>Цена/м³</th>
+                <th>Сумма</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cart-tbody"></tbody>
+            <tfoot>
+              <tr class="cart-total-row">
+                <td colspan="7" style="text-align:right;color:var(--text3);">Итого:</td>
+                <td id="cart-total-sum" style="color:var(--lime);font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;">—</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Форма заявки прямо на странице -->
+        <div class="cart-form-wrap">
+          <div class="cart-form-title">Оформить заявку</div>
+          <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Укажите контакты — рассчитаем стоимость и свяжемся сразу.</p>
+          <form action="https://formsubmit.co/non_86@mail.ru" method="POST" data-w3f>
+            <input type="hidden" name="_subject" value="Заявка из корзины — ОПТЭЛ">
+            <input type="hidden" name="_source" value="Страница Корзина">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="box">
+            <textarea name="Состав заказа" id="cart-order-hidden" style="display:none;" rows="1"></textarea>
+            <div class="form-row" style="margin-bottom:14px;">
+              <div class="form-group">
+                <label class="form-label">Имя *</label>
+                <input type="text" name="name" class="form-input" placeholder="Иванов Иван" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Телефон *</label>
+                <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+              </div>
+            </div>
+            <div class="form-row" style="margin-bottom:14px;">
+              <div class="form-group">
+                <label class="form-label">Компания</label>
+                <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Регион доставки</label>
+                <input type="text" name="region" class="form-input" placeholder="напр. Москва">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+              <label class="form-label">Комментарий</label>
+              <textarea name="comment" class="form-textarea" rows="2" placeholder="Дополнительные пожелания..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-lime btn-lg" style="min-width:220px;">Отправить заявку →</button>
+          </form>
+          <div class="modal-note" style="margin-top:14px;">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="easter-egg-overlay" id="egg-overlay">
+  <div class="easter-egg-text">ОПТЭЛ</div>
+  <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
+</div>
+<button class="sticky-cta" onclick="openModal('Заказать звонок')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+  <span class="cta-text">Заказать звонок</span>
+</button>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Заказать звонок</h3>
+    <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
+    <form action="https://formsubmit.co/non_86@mail.ru" method="POST" id="modal-form" data-w3f>
+      <input type="hidden" name="_subject" value="Заявка — Корзина — ОПТЭЛ">
+      <input type="hidden" name="_source" value="Корзина">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
+      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+      <button type="submit" class="modal-submit">Отправить →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
+  </div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
+    <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
+  </div>
+</footer>
+<script>
+// Рендер корзины на странице cart.html
+function renderCartPage() {
+  var CART_KEY = 'optel_cart';
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) {}
+
+  var empty = document.getElementById('cart-empty');
+  var content = document.getElementById('cart-content');
+  var tbody = document.getElementById('cart-tbody');
+  var totalEl = document.getElementById('cart-total-sum');
+  var summaryEl = document.getElementById('cart-summary-text');
+  var hiddenEl = document.getElementById('cart-order-hidden');
+
+  if (!cart.length) {
+    if (empty) empty.style.display = 'block';
+    if (content) content.style.display = 'none';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  if (content) content.style.display = 'block';
+
+  var total = 0;
+  var lines = [];
+
+  tbody.innerHTML = cart.map(function(item, idx) {
+    var vol = parseFloat(item.vol) || 0;
+    var priceM3 = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
+    var sum = vol * priceM3;
+    total += sum;
+    lines.push(item.name + ' | ' + item.sort + ' | ' + item.size + ' | ' + item.len + ' | ' + item.vol + ' м³ | ' + item.price + '/м³ = ' + Math.round(sum).toLocaleString('ru') + ' ₽');
+    return '<tr>' +
+      '<td class="cart-name">' + item.name + '</td>' +
+      '<td>' + (item.sort || '—') + '</td>' +
+      '<td>' + (item.size || '—') + '</td>' +
+      '<td>' + (item.len || '—') + '</td>' +
+      '<td>' + item.vol + '</td>' +
+      '<td style="text-align:center;"><input type="number" class="cart-qty" value="1" min="1" data-idx="' + idx + '" onchange="updateCartQty(' + idx + ', this.value)"></td>' +
+      '<td>' + item.price + '</td>' +
+      '<td style="color:var(--lime);font-weight:700;" id="cart-row-sum-' + idx + '">' + Math.round(sum).toLocaleString('ru') + ' ₽</td>' +
+      '<td><button class="cart-remove" onclick="removeCartItem(' + idx + ')" title="Удалить">✕</button></td>' +
+    '</tr>';
+  }).join('');
+
+  if (totalEl) totalEl.textContent = Math.round(total).toLocaleString('ru') + ' ₽';
+  if (summaryEl) summaryEl.textContent = cart.length + ' ' + (cart.length===1?'позиция':cart.length<5?'позиции':'позиций') + ' на сумму ' + Math.round(total).toLocaleString('ru') + ' ₽';
+  if (hiddenEl) hiddenEl.value = lines.join('\n') + '\nИТОГО: ' + Math.round(total).toLocaleString('ru') + ' ₽';
+}
+
+function removeCartItem(idx) {
+  var CART_KEY = 'optel_cart';
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) {}
+  cart.splice(idx, 1);
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  renderCartPage();
+}
+
+function clearCartPage() {
+  localStorage.removeItem('optel_cart');
+  renderCartPage();
+}
+
+function updateCartQty(idx, qty) {
+  // Пересчитать строку (упрощённо - просто обновляем отображение)
+  renderCartPage();
+}
+
+document.addEventListener('DOMContentLoaded', renderCartPage);
+</script>
+<script src="shared.js"></script>
+</body>
+</html>
