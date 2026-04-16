@@ -60,13 +60,16 @@
 .pg-b:hover:not(:disabled){border-color:var(--border2);color:var(--text);}
 .pg-b.on{background:var(--lime);color:#000;border-color:var(--lime);font-weight:700;}
 .pg-b:disabled{opacity:0.3;cursor:default;}
-.cart-sticky{background:var(--lime);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:fixed;bottom:0;left:0;right:0;z-index:300;box-shadow:0 -4px 24px rgba(0,0,0,0.4);}
+.cart-sticky{background:#0a1a00;border-top:3px solid var(--lime);padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:fixed;bottom:0;left:0;right:0;z-index:300;box-shadow:0 -4px 24px rgba(0,0,0,0.6);}
 .cart-sticky.show{display:flex;}
-.cs-text{font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:#000;}
-.cs-sub{font-size:12px;color:rgba(0,0,0,0.55);margin-top:2px;}
+.cs-text{font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:var(--lime);}
+.cs-sub{font-size:12px;color:var(--text3);margin-top:2px;}
 .cs-btns{display:flex;gap:8px;}
-.btn-order{background:#000;color:var(--lime);border:none;border-radius:6px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font-body);transition:opacity 0.2s;}
+.btn-order{background:var(--lime);color:#000;border:none;border-radius:6px;padding:11px 20px;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font-body);transition:background 0.2s,opacity 0.2s;position:relative;z-index:1;}
+.btn-order:hover{background:#fff;}
 .btn-order.disabled{opacity:0.35;cursor:not-allowed;}
+.btn-clr{background:transparent;border:1px solid rgba(170,255,0,0.3);color:var(--text3);border-radius:6px;padding:11px 14px;font-size:12px;cursor:pointer;font-family:var(--font-body);}
+.btn-clr:hover{border-color:var(--lime);color:var(--lime);}
 .btn-clr{background:transparent;border:1px solid rgba(0,0,0,0.25);color:#000;border-radius:6px;padding:10px 14px;font-size:12px;cursor:pointer;font-family:var(--font-body);}
 @media(max-width:640px){
   .sale-tbl{min-width:500px;}
@@ -340,11 +343,11 @@ function updCart(){
   var barEl=document.getElementById('s-cart-bar');
   if(total>=MIN_ORDER){
     sub.textContent='Минимальная сумма достигнута — можно оформлять';
-    orderBtn.classList.remove('disabled'); orderBtn.style.background='#aaff00'; orderBtn.style.color='#000';
+    orderBtn.classList.remove('disabled');
   } else {
     var need=(MIN_ORDER-total).toLocaleString('ru');
     sub.textContent='Ещё '+need+' ₽ до минимального заказа';
-    orderBtn.classList.add('disabled'); orderBtn.style.background=''; orderBtn.style.color='';
+    orderBtn.classList.add('disabled');
   }
   if(barEl) barEl.style.width=pct+'%';
   bar.classList.toggle('show',n>0);
