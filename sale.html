@@ -60,7 +60,7 @@
 .pg-b:hover:not(:disabled){border-color:var(--border2);color:var(--text);}
 .pg-b.on{background:var(--lime);color:#000;border-color:var(--lime);font-weight:700;}
 .pg-b:disabled{opacity:0.3;cursor:default;}
-.cart-sticky{background:#0a1a00;border-top:3px solid var(--lime);padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:fixed;bottom:0;left:0;right:0;z-index:300;box-shadow:0 -4px 24px rgba(0,0,0,0.6);}
+.cart-sticky{background:#0d1f00;border-top:3px solid var(--lime);padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:fixed;bottom:0;left:0;right:0;z-index:550;box-shadow:0 -4px 24px rgba(0,0,0,0.6);}
 .cart-sticky.show{display:flex;}
 .cs-text{font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:var(--lime);}
 .cs-sub{font-size:12px;color:var(--text3);margin-top:2px;}
@@ -194,7 +194,7 @@
       </div>
       <div class="cs-btns">
         <button class="btn-clr" onclick="clearCart()">Очистить</button>
-        <button class="btn-order" id="s-order-btn" onclick="orderCart()">Оформить заявку →</button>
+        <button id="s-order-btn" onclick="orderCart()" style="background:var(--lime);color:#000;border:none;border-radius:6px;padding:11px 22px;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font-body);white-space:nowrap;">Оформить заявку →</button>
       </div>
     </div>
 
@@ -343,11 +343,11 @@ function updCart(){
   var barEl=document.getElementById('s-cart-bar');
   if(total>=MIN_ORDER){
     sub.textContent='Минимальная сумма достигнута — можно оформлять';
-    orderBtn.classList.remove('disabled');
+    orderBtn.style.opacity='1'; orderBtn.style.cursor='pointer';
   } else {
     var need=(MIN_ORDER-total).toLocaleString('ru');
     sub.textContent='Ещё '+need+' ₽ до минимального заказа';
-    orderBtn.classList.add('disabled');
+    orderBtn.style.opacity='0.35'; orderBtn.style.cursor='not-allowed';
   }
   if(barEl) barEl.style.width=pct+'%';
   bar.classList.toggle('show',n>0);
@@ -371,7 +371,7 @@ function orderCart(){
 }
 
 render();
-document.getElementById('s-order-btn').classList.add('disabled');
+var _ob=document.getElementById('s-order-btn'); if(_ob){_ob.style.opacity='0.35';_ob.style.cursor='not-allowed';}
 </script>
 <script src="shared.js"></script>
 </body>
