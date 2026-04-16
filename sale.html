@@ -341,28 +341,24 @@ function updCart(){
   var barEl=document.getElementById('s-cart-bar');
   if(total>=MIN_ORDER){
     sub.textContent='Минимальная сумма достигнута — можно оформлять';
-    orderBtn.style.opacity='1';
+    orderBtn.style.opacity='1'; orderBtn.style.background='#aaff00';
   } else {
     var need=(MIN_ORDER-total).toLocaleString('ru');
     sub.textContent='Ещё '+need+' ₽ до минимального заказа';
-    orderBtn.style.opacity='0.4';
+    orderBtn.style.opacity='1';
   }
   if(barEl) barEl.style.width=pct+'%';
   bar.style.display = n>0 ? 'flex' : 'none';
 }
 function clearCart(){cart={};updCart();render();}
 function orderCart(){
-  var total=Object.values(cart).reduce(function(s,p){return s+(p.pa*(p.orderQty||0));},0);
-  if(total<MIN_ORDER){
-    var need=(MIN_ORDER-total).toLocaleString('ru');
-    alert('Для оформления заявки наберите ещё '+need+' ₽');
-    return;
-  }
   var lines=Object.values(cart).map(function(p){
     var qty=p.orderQty||0;
-    return p.n+' | Сорт: '+(p.s||'—')+' | '+qty+' шт × '+p.pa.toLocaleString('ru')+' ₽ = '+(qty*p.pa).toLocaleString('ru')+' ₽';
-  });
-  lines.push('ИТОГО: '+total.toLocaleString('ru')+' ₽ (скидка 30%)');
+    if(!qty) return null;
+    return p.n+' | Сорт: '+(p.s||'—')+' | '+qty+' шт x '+p.pa.toLocaleString('ru')+' = '+(qty*p.pa).toLocaleString('ru')+' руб.';
+  }).filter(Boolean);
+  var total=Object.values(cart).reduce(function(s,p){return s+(p.pa*(p.orderQty||0));},0);
+  if(total>0) lines.push('ИТОГО: '+total.toLocaleString('ru')+' руб. (скидка 30%)');
   var cartField=document.getElementById('sale-cart-hidden');
   if(cartField) cartField.value=lines.join('\n');
   if(typeof openModal==='function') openModal('Оформить заявку');
