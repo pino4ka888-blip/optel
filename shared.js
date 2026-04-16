@@ -581,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   };
 
-  document.addEventListener('DOMContentLoaded', injectCartUI);
+  document.addEventListener('DOMContentLoaded', function() { if (!document.querySelector('.sale-banner')) injectCartUI(); });
   // Слушаем изменения localStorage с других вкладок
   window.addEventListener('storage', e => { if (e.key === 'optel_cart') renderGlobalCart(); });
 })();
