@@ -571,18 +571,21 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
-    <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка со страницы Продукция — ОПТЭЛ"><input type="hidden" name="_source" value="Страница Продукция">
+    <form action="https://formsubmit.co/non_86@mail.ru" method="POST" id="modal-form">
+      <input type="hidden" name="_subject" value="Заявка со страницы Продукция — ОПТЭЛ">
+      <input type="hidden" name="_source" value="Продукция">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_next" value="https://optel18.ru/?sent=1">
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
-      <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 10 м³"></div>
+      <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 30 м³"></div>
       <button type="submit" class="modal-submit">Отправить →</button>
     </form>
     <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
   </div>
+</div>
 </div>
 
 
