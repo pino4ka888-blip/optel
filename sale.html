@@ -60,7 +60,7 @@
 .pg-b:hover:not(:disabled){border-color:var(--border2);color:var(--text);}
 .pg-b.on{background:var(--lime);color:#000;border-color:var(--lime);font-weight:700;}
 .pg-b:disabled{opacity:0.3;cursor:default;}
-.cart-sticky{background:var(--lime);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:fixed;bottom:0;left:0;right:0;z-index:200;box-shadow:0 -4px 24px rgba(0,0,0,0.4);}
+.cart-sticky{background:var(--lime);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:fixed;bottom:0;left:0;right:0;z-index:300;box-shadow:0 -4px 24px rgba(0,0,0,0.4);}
 .cart-sticky.show{display:flex;}
 .cs-text{font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:#000;}
 .cs-sub{font-size:12px;color:rgba(0,0,0,0.55);margin-top:2px;}
@@ -206,14 +206,13 @@
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <h3 id="modal-title">Заказать звонок</h3>
-    <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
+    <h3 id="modal-title">Оформить заявку</h3>
+    <p class="modal-desc">Укажите контакты — свяжемся и уточним состав заказа.</p>
     <form action="https://formsubmit.co/non_86@mail.ru" method="POST">
-      <input type="hidden" name="_subject" value="Заявка — ОПТЭЛ"><input type="hidden" name="_source" value="Главная страница — модальная форма"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_subject" value="Заявка с Распродажи — ОПТЭЛ"><input type="hidden" name="_source" value="Страница Распродажа"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box"><textarea id="sale-cart-hidden" name="Состав заказа" style="display:none;" rows="1"></textarea>
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
-      <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 10 м³"></div>
       <button type="submit" class="modal-submit">Отправить →</button>
     </form>
     <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
@@ -304,14 +303,14 @@ function add(idx,btn){
     if(row){var inp=row.querySelector('.qty-inp');if(inp)inp.remove();}
     btn.textContent='+ Добавить';btn.classList.remove('in');
   } else {
-    cart[idx]={...PRODS[idx],orderQty:1};
+    cart[idx]={...PRODS[idx],orderQty:0};
     btn.textContent='✓ В заявке';btn.classList.add('in');
     var row=btn.closest('tr');
     if(row){
       var td=btn.parentNode;
       var inp=document.createElement('input');
       inp.type='number';inp.className='qty-inp';
-      inp.min=1;inp.max=PRODS[idx].qty;inp.value=1;
+      inp.min=1;inp.max=PRODS[idx].qty;inp.value='';
       inp.title='Количество (макс. '+PRODS[idx].qty+')';
       inp.style.cssText='width:70px;margin-right:6px;height:30px;font-size:12px;border:1px solid rgba(170,255,0,0.4);border-radius:5px;background:var(--bg);color:var(--text);padding:0 6px;font-family:var(--font-body);';
       inp.addEventListener('input',function(){
@@ -330,7 +329,7 @@ function add(idx,btn){
 function updCart(){
   var items=Object.values(cart);
   var n=items.length;
-  var total=items.reduce(function(s,p){return s+(p.pa*(p.orderQty||1));},0);
+  var total=items.reduce(function(s,p){return s+(p.pa*(p.orderQty||0));},0);
   var bar=document.getElementById('s-cart');
   var pct=Math.min(100,Math.round(total/MIN_ORDER*100));
   document.getElementById('s-cart-txt').textContent=n+' '+(n===1?'позиция':n>=2&&n<=4?'позиции':'позиций')+' · '+total.toLocaleString('ru')+' ₽';
@@ -349,7 +348,17 @@ function updCart(){
   bar.classList.toggle('show',n>0);
 }
 function clearCart(){cart={};updCart();render();}
-function orderCart(){if(!Object.keys(cart).length||Object.values(cart).reduce(function(s,p){return s+(p.pa*(p.orderQty||1));},0)<MIN_ORDER)return;if(window.openModal)openModal('Заявка на распродажные товары');}
+function orderCart(){
+  var total=Object.values(cart).reduce(function(s,p){return s+(p.pa*(p.orderQty||0));},0);
+  if(!Object.keys(cart).length||total<MIN_ORDER)return;
+  var lines=Object.values(cart).map(function(p){
+    return p.n+' | Сорт: '+(p.s||'—')+' | '+( p.orderQty||0)+' шт × '+p.pa.toLocaleString('ru')+' ₽ = '+(( p.orderQty||0)*p.pa).toLocaleString('ru')+' ₽';
+  });
+  lines.push('ИТОГО: '+total.toLocaleString('ru')+' ₽ (скидка 30%)');
+  var cartField=document.getElementById('sale-cart-hidden');
+  if(cartField) cartField.value=lines.join('\n');
+  if(window.openModal)openModal('Оформить заявку');
+}
 
 render();
 </script>
