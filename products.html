@@ -829,7 +829,7 @@ function getItemConfig(type) {
   const p1m3 = (PRICES[key] || 0) * (SIZE_FACTOR[size]||1) * (LEN_FACTOR[len]||1);
   const name = type === 'vaganka' ? 'Вагонка "Штиль"' : 'Имитация бруса';
   return { type, name, sort:SORT_LABEL[sort], size, len:len+' м', vol:vol+' м³',
-           price: p1m3 ? fmt(p1m3)+'/м³' : 'уточнить' };
+           price: p1m3 ? fmt(p1m3) : 'уточнить', priceRaw: p1m3 };
 }
 
 function addToCart(type) {
