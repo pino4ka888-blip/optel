@@ -205,8 +205,8 @@
       <a href="process.html">Не как все</a>
       <a href="approach.html">Меняем подход</a>
       <a href="technical.html">ТУ</a>
-      <a href="contacts.html">Контакты</a>
       <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="contacts.html">Контакты</a>
     </nav>
     <span class="header-vat">НДС 22%</span>
     <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
@@ -220,8 +220,8 @@
   <a href="process.html">Не как все</a>
   <a href="approach.html">Меняем подход</a>
   <a href="technical.html">ТУ</a>
-  <a href="contacts.html">Контакты</a>
   <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="contacts.html">Контакты</a>
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
 
@@ -834,8 +834,17 @@ function getItemConfig(type) {
 
 function addToCart(type) {
   let cart = loadSaved();
-  cart = cart.filter(i => i.type !== type);
-  cart.push(getItemConfig(type));
+  const newItem = getItemConfig(type);
+  // Уникальный ключ — тип + сорт + размер + длина
+  const itemKey = type + '_' + newItem.sort + '_' + newItem.size + '_' + newItem.len;
+  newItem.key = itemKey;
+  // Если такая же позиция уже есть — заменяем, иначе добавляем новую
+  const exists = cart.findIndex(i => i.key === itemKey);
+  if (exists >= 0) {
+    cart[exists] = newItem;
+  } else {
+    cart.push(newItem);
+  }
   saveCurrent(cart);
   // Обновляем глобальную корзину из shared.js
   // Если shared.js ещё не инжектировал UI — дождёмся

@@ -37,13 +37,13 @@
     <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
     <nav>
       <a href="index.html">Главная</a>
-      <a href="products.html" class="active">Продукция</a>
+      <a href="products.html">Продукция</a>
       <a href="calculator.html">Калькулятор</a>
       <a href="process.html">Не как все</a>
       <a href="approach.html">Меняем подход</a>
       <a href="technical.html">ТУ</a>
-      <a href="contacts.html">Контакты</a>
       <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="contacts.html">Контакты</a>
     </nav>
     <span class="header-vat">НДС 22%</span>
     <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
@@ -52,13 +52,13 @@
 </header>
 <nav class="mobile-nav" id="mobileNav">
   <a href="index.html">Главная</a>
-  <a href="products.html" class="active">Продукция</a>
+  <a href="products.html">Продукция</a>
   <a href="calculator.html">Калькулятор</a>
   <a href="process.html">Не как все</a>
   <a href="approach.html">Меняем подход</a>
   <a href="technical.html">ТУ</a>
-  <a href="contacts.html">Контакты</a>
   <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="contacts.html">Контакты</a>
   <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
 </nav>
 
@@ -68,97 +68,113 @@
       <div>
         <div class="section-label">Продукция</div>
         <h1 style="font-size:clamp(36px,5vw,64px);">Корзина</h1>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;max-width:460px;">Проверьте состав заказа и оставьте контакты — рассчитаем стоимость и свяжемся сразу</p>
+      </div>
+      <div class="page-hero-icon">
+        <svg width="160" height="160" viewBox="0 0 160 160" fill="none">
+          <rect x="20" y="50" width="120" height="80" rx="8" fill="rgba(170,255,0,0.08)" stroke="#aaff00" stroke-width="1.5"/>
+          <path d="M20 70h120" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+          <path d="M20 90h120" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+          <path d="M20 110h120" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+          <rect x="32" y="78" width="50" height="5" rx="2.5" fill="rgba(170,255,0,0.4)"/>
+          <rect x="32" y="98" width="70" height="5" rx="2.5" fill="rgba(170,255,0,0.4)"/>
+          <rect x="32" y="118" width="40" height="5" rx="2.5" fill="rgba(170,255,0,0.4)"/>
+          <rect x="100" y="76" width="28" height="8" rx="3" fill="rgba(170,255,0,0.2)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <rect x="100" y="96" width="28" height="8" rx="3" fill="rgba(170,255,0,0.2)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <rect x="100" y="116" width="28" height="8" rx="3" fill="rgba(170,255,0,0.2)" stroke="rgba(170,255,0,0.5)" stroke-width="1"/>
+          <path d="M50 50 Q50 30 80 30 Q110 30 110 50" stroke="#aaff00" stroke-width="1.5" fill="none"/>
+          <circle cx="50" cy="50" r="4" fill="#aaff00"/>
+          <circle cx="110" cy="50" r="4" fill="#aaff00"/>
+          <circle cx="130" cy="148" r="6" fill="rgba(170,255,0,0.2)" stroke="#aaff00" stroke-width="1.5"/>
+          <circle cx="50" cy="148" r="6" fill="rgba(170,255,0,0.2)" stroke="#aaff00" stroke-width="1.5"/>
+        </svg>
       </div>
     </div>
+  </div>
+</div>
   </div>
 </div>
 
 <section>
   <div class="container">
-    <div class="cart-page">
 
-      <div id="cart-empty" class="cart-empty" style="display:none;">
-        <div class="cart-empty-icon">🛒</div>
-        <div style="font-size:18px;color:var(--text2);margin-bottom:12px;">Корзина пуста</div>
-        <a href="products.html" class="btn btn-lime">← Вернуться к продукции</a>
+    <div id="cart-empty" style="display:none;text-align:center;padding:80px 20px;">
+      <div style="font-size:48px;opacity:0.2;margin-bottom:16px;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="var(--text3)" stroke-width="1.5"/><line x1="3" y1="6" x2="21" y2="6" stroke="var(--text3)" stroke-width="1.5"/><path d="M16 10a4 4 0 01-8 0" stroke="var(--text3)" stroke-width="1.5"/></svg>
       </div>
+      <div style="font-size:18px;color:var(--text2);margin-bottom:8px;">Корзина пуста</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:24px;">Добавьте товары на странице продукции</div>
+      <a href="products.html" class="btn btn-lime">← Перейти к продукции</a>
+    </div>
 
-      <div id="cart-content">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
-          <div id="cart-summary-text" style="font-size:14px;color:var(--text2);"></div>
-          <div style="display:flex;gap:10px;">
-            <a href="products.html" class="btn btn-outline" style="font-size:12px;padding:8px 16px;">← Добавить ещё</a>
-            <button onclick="clearCartPage()" class="btn btn-outline" style="font-size:12px;padding:8px 16px;color:var(--text3);">Очистить корзину</button>
+    <div id="cart-content" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;">
+
+        <!-- ЛЕВАЯ КОЛОНКА: список товаров -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <div id="cart-summary-text" style="font-size:13px;color:var(--text3);"></div>
+            <div style="display:flex;gap:8px;">
+              <a href="products.html" class="btn btn-outline" style="font-size:12px;padding:7px 14px;">← Добавить ещё</a>
+              <button onclick="clearCartPage()" style="background:transparent;border:1px solid var(--border);border-radius:6px;padding:7px 14px;font-size:12px;color:var(--text3);cursor:pointer;font-family:var(--font-body);">Очистить</button>
+            </div>
+          </div>
+
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+            <div id="cart-items"></div>
+            <div style="padding:14px 18px;border-top:2px solid var(--border2);display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:13px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;">Итого</span>
+              <span id="cart-total-sum" style="font-family:var(--font-display);font-size:24px;letter-spacing:1px;color:var(--lime);">—</span>
+            </div>
           </div>
         </div>
 
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;overflow-x:auto;">
-          <table class="cart-table">
-            <thead>
-              <tr>
-                <th style="width:40%">Наименование</th>
-                <th>Сорт</th>
-                <th>Размер</th>
-                <th>Длина</th>
-                <th>Объём, м³</th>
-                <th style="text-align:center;">Кол-во</th>
-                <th>Цена/м³</th>
-                <th>Сумма</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="cart-tbody"></tbody>
-            <tfoot>
-              <tr class="cart-total-row">
-                <td colspan="7" style="text-align:right;color:var(--text3);">Итого:</td>
-                <td id="cart-total-sum" style="color:var(--lime);font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;">—</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
+        <!-- ПРАВАЯ КОЛОНКА: форма -->
+        <div style="position:sticky;top:90px;">
+          <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;">
+            <div style="padding:20px 22px;border-bottom:1px solid var(--border);">
+              <div style="font-family:var(--font-display);font-size:22px;letter-spacing:1px;">Оформить заявку</div>
+              <div style="font-size:13px;color:var(--text3);margin-top:4px;">Свяжемся и рассчитаем стоимость</div>
+            </div>
+            <div style="padding:20px 22px;">
+              <form action="https://formsubmit.co/non_86@mail.ru" method="POST" data-w3f>
+                <input type="hidden" name="_subject" value="Заявка из корзины — ОПТЭЛ">
+                <input type="hidden" name="_source" value="Страница Корзина">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                <textarea name="Состав заказа" id="cart-order-hidden" style="display:none;" rows="1"></textarea>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Имя *</label>
+                  <input type="text" name="name" class="form-input" placeholder="Иванов Иван" required>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Телефон *</label>
+                  <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Компания</label>
+                  <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Регион доставки</label>
+                  <input type="text" name="region" class="form-input" placeholder="напр. Москва">
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                  <label class="form-label">Комментарий</label>
+                  <textarea name="comment" class="form-textarea" rows="2" placeholder="Дополнительные пожелания..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-lime btn-lg" style="width:100%;">Отправить заявку →</button>
+              </form>
+              <div style="font-size:11px;color:var(--text3);margin-top:12px;text-align:center;line-height:1.5;">
+                Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Форма заявки прямо на странице -->
-        <div class="cart-form-wrap">
-          <div class="cart-form-title">Оформить заявку</div>
-          <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Укажите контакты — рассчитаем стоимость и свяжемся сразу.</p>
-          <form action="https://formsubmit.co/non_86@mail.ru" method="POST" data-w3f>
-            <input type="hidden" name="_subject" value="Заявка из корзины — ОПТЭЛ">
-            <input type="hidden" name="_source" value="Страница Корзина">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="box">
-            <textarea name="Состав заказа" id="cart-order-hidden" style="display:none;" rows="1"></textarea>
-            <div class="form-row" style="margin-bottom:14px;">
-              <div class="form-group">
-                <label class="form-label">Имя *</label>
-                <input type="text" name="name" class="form-input" placeholder="Иванов Иван" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Телефон *</label>
-                <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
-              </div>
-            </div>
-            <div class="form-row" style="margin-bottom:14px;">
-              <div class="form-group">
-                <label class="form-label">Компания</label>
-                <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Регион доставки</label>
-                <input type="text" name="region" class="form-input" placeholder="напр. Москва">
-              </div>
-            </div>
-            <div class="form-group" style="margin-bottom:20px;">
-              <label class="form-label">Комментарий</label>
-              <textarea name="comment" class="form-textarea" rows="2" placeholder="Дополнительные пожелания..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-lime btn-lg" style="min-width:220px;">Отправить заявку →</button>
-          </form>
-          <div class="modal-note" style="margin-top:14px;">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
-        </div>
       </div>
-
     </div>
+
   </div>
 </section>
 
@@ -202,72 +218,79 @@
   </div>
 </footer>
 <script>
-// Рендер корзины на странице cart.html
-function renderCartPage() {
-  var CART_KEY = 'optel_cart';
-  var cart = [];
-  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) {}
+var CART_KEY = 'optel_cart';
 
-  var empty = document.getElementById('cart-empty');
+function loadCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; }
+}
+
+function renderCartPage() {
+  var cart = loadCart();
+  var empty   = document.getElementById('cart-empty');
   var content = document.getElementById('cart-content');
-  var tbody = document.getElementById('cart-tbody');
+  var itemsEl = document.getElementById('cart-items');
   var totalEl = document.getElementById('cart-total-sum');
   var summaryEl = document.getElementById('cart-summary-text');
-  var hiddenEl = document.getElementById('cart-order-hidden');
+  var hiddenEl  = document.getElementById('cart-order-hidden');
 
   if (!cart.length) {
-    if (empty) empty.style.display = 'block';
+    if (empty)   empty.style.display   = 'block';
     if (content) content.style.display = 'none';
     return;
   }
-  if (empty) empty.style.display = 'none';
+  if (empty)   empty.style.display   = 'none';
   if (content) content.style.display = 'block';
 
   var total = 0;
   var lines = [];
 
-  tbody.innerHTML = cart.map(function(item, idx) {
-    var vol = parseFloat(item.vol) || 0;
-    var priceM3 = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
-    var sum = vol * priceM3;
+  itemsEl.innerHTML = cart.map(function(item, idx) {
+    var vol    = parseFloat(item.vol) || 0;
+    var priceN = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
+    var sum    = vol * priceN;
     total += sum;
-    lines.push(item.name + ' | ' + item.sort + ' | ' + item.size + ' | ' + item.len + ' | ' + item.vol + ' м³ | ' + item.price + '/м³ = ' + Math.round(sum).toLocaleString('ru') + ' ₽');
-    return '<tr>' +
-      '<td class="cart-name">' + item.name + '</td>' +
-      '<td>' + (item.sort || '—') + '</td>' +
-      '<td>' + (item.size || '—') + '</td>' +
-      '<td>' + (item.len || '—') + '</td>' +
-      '<td>' + item.vol + '</td>' +
-      '<td style="text-align:center;"><input type="number" class="cart-qty" value="1" min="1" data-idx="' + idx + '" onchange="updateCartQty(' + idx + ', this.value)"></td>' +
-      '<td>' + item.price + '</td>' +
-      '<td style="color:var(--lime);font-weight:700;" id="cart-row-sum-' + idx + '">' + Math.round(sum).toLocaleString('ru') + ' ₽</td>' +
-      '<td><button class="cart-remove" onclick="removeCartItem(' + idx + ')" title="Удалить">✕</button></td>' +
-    '</tr>';
+    lines.push(item.name + ' | ' + (item.sort||'') + ' | ' + (item.size||'') + ' | ' + (item.len||'') + ' | ' + item.vol + ' м³ | ' + item.price + ' /м³');
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap;">' +
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="font-size:13px;color:var(--text);font-weight:600;line-height:1.4;">' + item.name + '</div>' +
+        '<div style="font-size:12px;color:var(--text3);margin-top:3px;">' +
+          (item.sort ? 'Сорт: ' + item.sort + ' &nbsp;·&nbsp; ' : '') +
+          (item.size ? item.size + ' &nbsp;·&nbsp; ' : '') +
+          'Длина: ' + (item.len||'—') + ' &nbsp;·&nbsp; ' +
+          'Объём: ' + item.vol + ' м³' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">' +
+        '<div style="text-align:right;">' +
+          '<div style="font-size:12px;color:var(--text3);">' + item.price + ' /м³</div>' +
+          '<div style="font-family:var(--font-display);font-size:16px;color:var(--lime);letter-spacing:0.5px;">' + Math.round(sum).toLocaleString('ru') + ' ₽</div>' +
+        '</div>' +
+        '<button onclick="removeItem(' + idx + ')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;padding:4px 6px;border-radius:4px;line-height:1;" title="Удалить">✕</button>' +
+      '</div>' +
+    '</div>';
   }).join('');
 
-  if (totalEl) totalEl.textContent = Math.round(total).toLocaleString('ru') + ' ₽';
-  if (summaryEl) summaryEl.textContent = cart.length + ' ' + (cart.length===1?'позиция':cart.length<5?'позиции':'позиций') + ' на сумму ' + Math.round(total).toLocaleString('ru') + ' ₽';
-  if (hiddenEl) hiddenEl.value = lines.join('\n') + '\nИТОГО: ' + Math.round(total).toLocaleString('ru') + ' ₽';
+  if (totalEl)   totalEl.textContent   = Math.round(total).toLocaleString('ru') + ' ₽';
+  if (summaryEl) summaryEl.textContent = cart.length + ' ' + (cart.length===1?'позиция':cart.length<5?'позиции':'позиций');
+  if (hiddenEl)  hiddenEl.value = lines.join('\n') + '\nИТОГО: ' + Math.round(total).toLocaleString('ru') + ' ₽';
 }
 
-function removeCartItem(idx) {
-  var CART_KEY = 'optel_cart';
-  var cart = [];
-  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) {}
+function removeItem(idx) {
+  var cart = loadCart();
   cart.splice(idx, 1);
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
   renderCartPage();
 }
 
 function clearCartPage() {
-  localStorage.removeItem('optel_cart');
+  localStorage.removeItem(CART_KEY);
   renderCartPage();
 }
 
-function updateCartQty(idx, qty) {
-  // Пересчитать строку (упрощённо - просто обновляем отображение)
-  renderCartPage();
-}
+// Мобильный стиль
+var style = document.createElement('style');
+style.textContent = '@media(max-width:800px){#cart-content>div{grid-template-columns:1fr!important;}#cart-content>div>div:last-child{position:static!important;}}';
+document.head.appendChild(style);
 
 document.addEventListener('DOMContentLoaded', renderCartPage);
 </script>
