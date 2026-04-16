@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /gallery.html
 Disallow: /delivery.html
+Disallow: /cart.html
 
 Sitemap: https://optel18.ru/sitemap.xml
