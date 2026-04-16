@@ -1,12 +1,50 @@
 
 /* ── ОТПРАВКА КОРЗИНЫ (products.html) ── */
 window.submitCartForm = function() {
-  var form = document.querySelector('#cart-form, .cart-form, form[name="cart"]');
-  // Корзина products.html использует injectCartUI — найдём её форму
-  var cartForm = document.querySelector('#global-cart-send-overlay form');
-  if (cartForm) {
-    cartForm.dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}));
-  }
+  var nameVal    = (document.getElementById('gcart-name')    || {value:''}).value.trim();
+  var phoneVal   = (document.getElementById('gcart-phone')   || {value:''}).value.trim();
+  var companyVal = (document.getElementById('gcart-company') || {value:''}).value.trim();
+  var commentVal = (document.getElementById('gcart-comment') || {value:''}).value.trim();
+  var summaryEl  = document.getElementById('global-cart-summary');
+  var summaryVal = summaryEl ? summaryEl.textContent.trim() : '';
+
+  var btn = document.querySelector('#global-cart-send-overlay .modal-submit');
+  var orig = btn ? btn.textContent : '';
+  if (btn) { btn.textContent = 'Отправляем…'; btn.disabled = true; }
+
+  var fd = new FormData();
+  fd.append('_subject',  'Заявка из корзины — ОПТЭЛ');
+  fd.append('_captcha',  'false');
+  fd.append('_template', 'box');
+  fd.append('Источник',  'Корзина продукции');
+  fd.append('Имя',       nameVal || 'Не указано');
+  fd.append('Телефон',   phoneVal);
+  fd.append('Компания',  companyVal);
+  fd.append('Комментарий', commentVal);
+  fd.append('Состав заказа', summaryVal);
+
+  fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
+    method: 'POST',
+    body: fd,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.success === 'true' || d.success === true) {
+      if (btn) { btn.textContent = '✓ Отправлено'; btn.style.background = '#aaff00'; btn.style.color = '#000'; }
+      if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
+      setTimeout(function() {
+        if (typeof closeGlobalCartSend === 'function') closeGlobalCartSend();
+        if (typeof saveCart === 'function') { saveCart([]); renderGlobalCart(); }
+        if (btn) { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
+      }, 2000);
+    } else {
+      if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
+    }
+  })
+  .catch(function() {
+    if (btn) { btn.textContent = 'Ошибка соединения'; btn.disabled = false; }
+  });
 };
 
 
