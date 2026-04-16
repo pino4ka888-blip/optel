@@ -1,4 +1,15 @@
 
+/* ── ОТПРАВКА КОРЗИНЫ (products.html) ── */
+window.submitCartForm = function() {
+  var form = document.querySelector('#cart-form, .cart-form, form[name="cart"]');
+  // Корзина products.html использует injectCartUI — найдём её форму
+  var cartForm = document.querySelector('#global-cart-send-overlay form');
+  if (cartForm) {
+    cartForm.dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}));
+  }
+};
+
+
 
 
 /* shared.js */
@@ -117,11 +128,55 @@ function initReveal() {
 }
 
 /* ── INIT ── */
+
+/* ── ОБРАБОТЧИК ФОРМ FormSubmit (все формы на сайте) ── */
+function initAllForms() {
+  document.querySelectorAll('form[data-w3f], form#modal-form').forEach(function(form) {
+    if (form._handled) return;
+    form._handled = true;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('[type=submit]');
+      var orig = btn ? btn.textContent : '';
+      if (btn) { btn.textContent = 'Отправляем…'; btn.disabled = true; }
+
+      var fd = new FormData(form);
+
+      fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.success === 'true' || d.success === true) {
+          if (btn) {
+            btn.textContent = '✓ Отправлено';
+            btn.style.cssText += ';background:#aaff00!important;color:#000!important;';
+          }
+          form.reset();
+          setTimeout(function() {
+            if (btn) { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
+            if (typeof closeModal === 'function') closeModal();
+          }, 2500);
+        } else {
+          if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
+        }
+      })
+      .catch(function() {
+        if (btn) { btn.textContent = 'Ошибка соединения'; btn.disabled = false; }
+      });
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initBurger();
   setActiveNav();
   initModal();
   initReveal();
+  initAllForms();
   document.querySelectorAll('input[type="tel"]').forEach(applyPhoneMask);
 });
 
