@@ -184,17 +184,15 @@
       <div class="sale-pg" id="s-pg"></div>
     </div>
 
-    <div class="cart-sticky" id="s-cart">
+    <div id="s-cart" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1a3300;border-top:3px solid #aaff00;padding:14px 20px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
       <div style="flex:1;min-width:0;">
-        <div class="cs-text" id="s-cart-txt">0 позиций в заявке</div>
-        <div class="cs-sub" id="s-cart-sub">Добавьте товары на сумму от 250 000 ₽</div>
-        <div style="margin-top:8px;height:4px;background:rgba(0,0,0,0.15);border-radius:2px;overflow:hidden;">
-          <div id="s-cart-bar" style="height:4px;background:#000;border-radius:2px;width:0%;transition:width 0.3s;"></div>
-        </div>
+        <div id="s-cart-txt" style="font-size:18px;font-weight:800;color:#aaff00;font-family:Bebas Neue,sans-serif;letter-spacing:1px;">0 позиций в заявке</div>
+        <div id="s-cart-sub" style="font-size:12px;color:#8aaa78;margin-top:3px;">Добавьте товары на сумму от 250 000 ₽</div>
+        <div style="margin-top:8px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;"><div id="s-cart-bar" style="height:4px;background:#aaff00;border-radius:2px;width:0%;transition:width 0.3s;"></div></div>
       </div>
-      <div class="cs-btns">
-        <button class="btn-clr" onclick="clearCart()">Очистить</button>
-        <button id="s-order-btn" onclick="orderCart()" style="background:var(--lime);color:#000;border:none;border-radius:6px;padding:11px 22px;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font-body);white-space:nowrap;">Оформить заявку →</button>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="clearCart()" style="background:transparent;border:1px solid rgba(170,255,0,0.3);color:#8aaa78;border-radius:6px;padding:10px 14px;font-size:12px;cursor:pointer;font-family:Manrope,sans-serif;">Очистить</button>
+        <button id="s-order-btn" onclick="orderCart()" style="background:#aaff00;color:#000;border:none;border-radius:6px;padding:10px 20px;font-size:13px;font-weight:800;cursor:pointer;font-family:Manrope,sans-serif;">Оформить заявку →</button>
       </div>
     </div>
 
@@ -343,14 +341,14 @@ function updCart(){
   var barEl=document.getElementById('s-cart-bar');
   if(total>=MIN_ORDER){
     sub.textContent='Минимальная сумма достигнута — можно оформлять';
-    orderBtn.style.opacity='1'; orderBtn.style.cursor='pointer';
+    orderBtn.style.opacity='1';
   } else {
     var need=(MIN_ORDER-total).toLocaleString('ru');
     sub.textContent='Ещё '+need+' ₽ до минимального заказа';
-    orderBtn.style.opacity='0.35'; orderBtn.style.cursor='not-allowed';
+    orderBtn.style.opacity='0.4';
   }
   if(barEl) barEl.style.width=pct+'%';
-  bar.classList.toggle('show',n>0);
+  bar.style.display = n>0 ? 'flex' : 'none';
 }
 function clearCart(){cart={};updCart();render();}
 function orderCart(){
@@ -371,7 +369,7 @@ function orderCart(){
 }
 
 render();
-var _ob=document.getElementById('s-order-btn'); if(_ob){_ob.style.opacity='0.35';_ob.style.cursor='not-allowed';}
+
 </script>
 <script src="shared.js"></script>
 </body>
