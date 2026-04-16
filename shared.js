@@ -1,52 +1,5 @@
 
-/* ── ОТПРАВКА КОРЗИНЫ (products.html) ── */
-window.submitCartForm = function() {
-  alert('submitCartForm вызвана!');
-  var nameVal    = (document.getElementById('gcart-name')    || {value:''}).value.trim();
-  var phoneVal   = (document.getElementById('gcart-phone')   || {value:''}).value.trim();
-  var companyVal = (document.getElementById('gcart-company') || {value:''}).value.trim();
-  var commentVal = (document.getElementById('gcart-comment') || {value:''}).value.trim();
-  var summaryEl  = document.getElementById('global-cart-summary');
-  var summaryVal = summaryEl ? summaryEl.textContent.trim() : '';
 
-  var btn = document.querySelector('#global-cart-send-overlay .modal-submit');
-  var orig = btn ? btn.textContent : '';
-  if (btn) { btn.textContent = 'Отправляем…'; btn.disabled = true; }
-
-  var fd = new FormData();
-  fd.append('_subject',  'Заявка из корзины — ОПТЭЛ');
-  fd.append('_captcha',  'false');
-  fd.append('_template', 'box');
-  fd.append('Источник',  'Корзина продукции');
-  fd.append('Имя',       nameVal || 'Не указано');
-  fd.append('Телефон',   phoneVal);
-  fd.append('Компания',  companyVal);
-  fd.append('Комментарий', commentVal);
-  fd.append('Состав заказа', summaryVal);
-
-  fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
-    method: 'POST',
-    body: fd,
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(d) {
-    if (d.success === 'true' || d.success === true) {
-      if (btn) { btn.textContent = '✓ Отправлено'; btn.style.background = '#aaff00'; btn.style.color = '#000'; }
-      if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
-      setTimeout(function() {
-        if (typeof closeGlobalCartSend === 'function') closeGlobalCartSend();
-        if (typeof saveCart === 'function') { saveCart([]); renderGlobalCart(); }
-        if (btn) { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
-      }, 2000);
-    } else {
-      if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
-    }
-  })
-  .catch(function() {
-    if (btn) { btn.textContent = 'Ошибка соединения'; btn.disabled = false; }
-  });
-};
 
 
 
@@ -564,17 +517,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.globalSendCart = function() {
     const cart = loadCart();
     if (!cart.length) return;
-    const summary = cart.map(i =>
-      `${i.name}: ${i.size}, ${i.len}, ${i.sort}, ${i.vol}, цена: ${i.price}`
-    ).join('\n');
-    const ov = document.getElementById('global-cart-send-overlay');
-    const sf = document.getElementById('global-cart-summary');
-    const hf = document.getElementById('global-cart-hidden');
-    if (sf) sf.textContent = summary;
+
+    // Формируем состав заказа
+    const lines = cart.map(i =>
+      i.name + (i.sort ? ' | ' + i.sort : '') +
+      (i.size ? ' | ' + i.size : '') +
+      (i.len  ? ', ' + i.len  : '') +
+      (i.vol  ? ', ' + i.vol  : '') +
+      (i.price ? ' | ' + i.price : '')
+    );
+    const summary = lines.join('\n');
+
+    // Записываем состав в скрытое поле модала
+    const hf = document.getElementById('modal-cart-hidden') ||
+               document.getElementById('sale-cart-hidden');
     if (hf) hf.value = summary;
+
+    // Меняем заголовок модала
+    const mt = document.getElementById('modal-title');
+    if (mt) mt.textContent = 'Оформить заявку';
+
+    // Открываем стандартный modal-overlay
+    const ov = document.getElementById('modal-overlay');
     if (ov) { ov.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    const tel = document.querySelector('#global-cart-send-overlay input[type="tel"]');
-    if (tel) applyPhoneMask(tel);
   };
 
   window.closeGlobalCartSend = function() {
@@ -616,23 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     document.body.appendChild(bar);
 
-    // Модалка отправки
-    const ov = document.createElement('div');
-    ov.className = 'modal-overlay';
-    ov.id = 'global-cart-send-overlay';
-    ov.innerHTML = `
-      <div class="modal">
-        <button class="modal-close" onclick="closeGlobalCartSend()">✕</button>
-        <h3 style="font-family:var(--font-display);font-size:24px;letter-spacing:1px;">Отправить запрос</h3>
-        <div id="global-cart-summary" style="background:var(--surface);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--text2);margin:12px 0 16px;white-space:pre-line;"></div>
-        <div class="form-group"><label class="form-label">Имя *</label><input type="text" id="gcart-name" class="form-input" placeholder="Иванов Иван"></div>
-        <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" id="gcart-phone" class="form-input" placeholder="+7 (___) ___-__-__"></div>
-        <div class="form-group"><label class="form-label">Компания</label><input type="text" id="gcart-company" class="form-input" placeholder='ООО "Ваша компания"'></div>
-        <div class="form-group"><label class="form-label">Комментарий</label><textarea id="gcart-comment" class="form-textarea" style="min-height:55px;" placeholder="Дополнительно..."></textarea></div>
-        <button type="button" class="modal-submit" onclick="submitCartForm()">Отправить →</button>
-        <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
-      </div>`;
-    document.body.appendChild(ov);
+    
     ov.addEventListener('click', e => { if (e.target === ov) closeGlobalCartSend(); });
 
     renderGlobalCart();
@@ -640,62 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.initFormListeners) setTimeout(window.initFormListeners, 100);
   }
 
-  window.submitCartForm = function() {
-    var nameVal    = document.getElementById('gcart-name')    ? document.getElementById('gcart-name').value.trim()    : '';
-    var phoneVal   = document.getElementById('gcart-phone')   ? document.getElementById('gcart-phone').value.trim()   : '';
-    var companyVal = document.getElementById('gcart-company') ? document.getElementById('gcart-company').value.trim() : '';
-    var commentVal = document.getElementById('gcart-comment') ? document.getElementById('gcart-comment').value.trim() : '';
-    var summaryEl  = document.getElementById('global-cart-summary');
-    var summaryVal = summaryEl ? summaryEl.textContent.trim() : '';
-
-    // телефон необязателен — просто сбросим красную рамку если была
-    var ph = document.getElementById('gcart-phone');
-    if (ph) ph.style.borderColor = '';
-
-    // Создаём форму с латинскими именами полей
-    var fd = new FormData();
-    Object.keys(data).forEach(function(k) { if (k !== '_next') fd.append(k, data[k]); });
-
-    fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
-      method: 'POST',
-      body: fd,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.success === 'true' || d.success === true) {
-        if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
-        closeGlobalCartSend();
-        saveCart([]);
-        renderGlobalCart();
-      } else {
-        if (window.showFormToast) showFormToast('Ошибка отправки — попробуйте ещё раз', true);
-      }
-    })
-    .catch(function() {
-      if (window.showFormToast) showFormToast('Ошибка соединения', true);
-    });
-
-    // Уведомление пользователю
-    if (window.showFormToast) showFormToast('✓ Запрос отправлен — свяжемся сразу!', false);
-    closeGlobalCartSend();
-
-    // Очищаем поля
-    ['gcart-name','gcart-phone','gcart-company','gcart-comment'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) { el.value = ''; el.style.borderColor = ''; }
-    });
-
-    // Удаляем форму через паузу
-    setTimeout(function() {
-      if (form.parentNode) form.parentNode.removeChild(form);
-      // iframe оставляем — нужен для завершения запроса
-      setTimeout(function() {
-        var fr = document.getElementById(iframeId);
-        if (fr) fr.parentNode.removeChild(fr);
-      }, 10000);
-    }, 1000);
-  };
+  
 
   document.addEventListener('DOMContentLoaded', function() { if (!document.querySelector('.sale-banner')) injectCartUI(); });
   // Слушаем изменения localStorage с других вкладок
