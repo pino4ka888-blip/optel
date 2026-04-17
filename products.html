@@ -411,11 +411,11 @@ function initProdTabs() {
   if (!el) return;
   el.innerHTML = GROUPS.map(function(g) {
     var cnt = g.id==='all' ? PROD_DATA.length : PROD_DATA.filter(function(p){return p.g===g.id;}).length;
-    return '<button class="prod-tab'+(g.id==='all'?' on':'')+'" onclick="setGroup(''+g.id+'',this)">'+g.label+' ('+cnt+')</button>';
+    return '<button class="prod-tab'+(g.id==='all'?' on':''+'"')+' data-gid="'+g.id+'" onclick="setGroup(this.dataset.gid,this)">'+g.label+' ('+cnt+')</button>';
   }).join('');
 }
 
-function setGroup(g, el) {
+function setGroup(g, el) { if (!el) el = document.querySelector('[data-gid="'+g+'"]');
   curGroup = g;
   document.querySelectorAll('.prod-tab').forEach(function(b){b.classList.remove('on');});
   el.classList.add('on');

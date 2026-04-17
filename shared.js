@@ -540,7 +540,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(bar);
 
     
-    ov.addEventListener('click', e => { if (e.target === ov) closeGlobalCartSend(); });
 
     renderGlobalCart();
     // Вешаем listeners на формы инжектированных модалок
@@ -603,7 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
     el._t = setTimeout(() => { el.style.display = 'none'; }, 4500);
   }
 
-  window.initFormListeners = initFormListeners;
 
   // Вешаем на DOMContentLoaded и повторно через MutationObserver
   // (для форм, добавленных динамически — корзина и т.д.)
