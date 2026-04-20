@@ -95,14 +95,8 @@ function initAllForms() {
 
       var fd = new FormData(form);
 
-      fetch('https://formsubmit.co/ajax/non_86@mail.ru', {
-        method: 'POST',
-        body: fd,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        if (d.success === 'true' || d.success === true) {
+      emailjs.sendForm('service_idw8nfk', 'template_cur511a', form)
+      .then(function() {
           if (btn) {
             btn.textContent = '✓ Отправлено';
             btn.style.cssText += ';background:#aaff00!important;color:#000!important;';
@@ -112,13 +106,10 @@ function initAllForms() {
             if (btn) { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }
             if (typeof closeModal === 'function') closeModal();
           }, 2500);
-        } else {
-          if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
-        }
-      })
+        })
       .catch(function() {
-        if (btn) { btn.textContent = 'Ошибка соединения'; btn.disabled = false; }
-      });
+          if (btn) { btn.textContent = 'Ошибка — попробуйте ещё раз'; btn.disabled = false; }
+        });
     });
   });
 }
