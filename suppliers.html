@@ -192,7 +192,7 @@
 
       <div class="form-card reveal" style="transition-delay:.12s;">
         <h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:1px;margin-bottom:16px;">Предложить товар</h3>
-        <form action="https://formsubmit.co/non_86@mail.ru" data-w3f enctype="multipart/form-data" class="form-compact">
+        <form data-w3f enctype="multipart/form-data" class="form-compact">
       <input type="hidden" name="subject" value="Предложение поставщика — ОПТЭЛ"><input type="hidden" name="from_page" value="Поставщикам">
           
           
@@ -262,11 +262,8 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h3 id="modal-title">Заказать звонок</h3>
     <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
-    <form method="POST" id="modal-form">
-      <input type="hidden" name="_subject" value="Предложение поставщика — ОПТЭЛ">
-      <input type="hidden" name="_source" value="Поставщикам">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="box">
+    <form id="modal-form" data-w3f>
+      <input type="hidden" name="from_page" value="Поставщики">
       
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>

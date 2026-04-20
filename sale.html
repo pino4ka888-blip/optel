@@ -24,6 +24,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("G_FF3G0Nkhi04p4XQ");</script>
 <style>
 .sale-banner{background:var(--lime);padding:16px 0 14px;text-align:center;}
 .sale-banner h1{font-family:var(--font-display);font-size:clamp(26px,5vw,54px);letter-spacing:2px;color:#000;line-height:1.1;margin:0;}
@@ -252,13 +254,9 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h3 id="modal-title">Оформить заявку</h3>
     <p class="modal-desc">Укажите контакты — свяжемся и уточним состав заказа.</p>
-    <form method="POST" id="modal-form">
-      <input type="hidden" name="_subject" value="Заявка с Распродажи — ОПТЭЛ">
-      <input type="hidden" name="_source" value="Распродажа">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="box">
-      
+    <form data-w3f id="modal-form">
       <textarea id="sale-cart-hidden" name="Состав заказа" style="display:none;" rows="1"></textarea>
+      <input type="hidden" name="from_page" value="Распродажа">
       <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
       <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
