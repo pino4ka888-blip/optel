@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Корзина — ОПТЭЛ</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.cart-page{max-width:960px;margin:0 auto;}
+.cart-empty{text-align:center;padding:80px 20px;color:var(--text3);}
+.cart-table{width:100%;border-collapse:collapse;}
+.cart-table th{background:var(--bg);padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);text-align:left;}
+.cart-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2);vertical-align:middle;}
+.cart-table tr:last-child td{border-bottom:none;}
+.cart-table tr:hover td{background:rgba(170,255,0,0.03);}
+.cart-name{color:var(--text);font-size:13px;}
+.cart-qty{width:70px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--font-body);text-align:center;}
+.cart-qty:focus{outline:none;border-color:rgba(170,255,0,0.4);}
+.cart-remove{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:4px;}
+.cart-remove:hover{color:#ff5555;background:rgba(255,85,85,0.08);}
+.cart-total-row td{font-weight:700;font-size:14px;color:var(--text);border-top:2px solid var(--border2);}
+.cart-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin-top:32px;}
+.cart-form-title{font-family:var(--font-display);font-size:28px;letter-spacing:1px;margin-bottom:20px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:600px){.form-row-2{grid-template-columns:1fr;}}
+
+@media(max-width:860px){
+  #cart-content>div{grid-template-columns:1fr!important;}
+  #cart-content>div>div:last-child{position:static!important;}
+}
+@media(max-width:600px){
+  .page-hero-inner{flex-direction:column;}
+  .page-hero-icon{display:none;}
+  #cart-items>div{flex-wrap:wrap;gap:8px;}
+  #cart-items>div>div:first-child{flex:1 1 100%;}
+}
+@media(max-width:480px){
+  /* Скрыть заголовки колонок на маленьком экране */
+  #cart-col-headers{display:none!important;}
+  #cart-items>div{
+    display:grid!important;
+    grid-template-columns:1fr auto;
+    gap:4px 12px;
+    padding:12px 14px!important;
+  }
+  #cart-items>div>div:first-child{grid-column:1 / -1;}
+  #cart-items>div>div:nth-child(4){margin-left:0!important;}
+}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108577886', 'ym');
+    ym(108577886, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108577886" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="technical.html">ТУ</a>
+      <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="process.html">Не как все</a>
+  <a href="approach.html">Меняем подход</a>
+  <a href="technical.html">ТУ</a>
+  <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="section-label">Продукция</div>
+        <h1 style="font-size:clamp(36px,5vw,64px);">Корзина</h1>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;max-width:460px;">Проверьте состав заказа и оставьте контакты — свяжемся сразу</p>
+      </div>
+      <div class="page-hero-icon">
+        <svg width="160" height="160" viewBox="0 0 160 160" fill="none">
+          <!-- Корзина -->
+          <path d="M30 35 L40 100 H120 L130 35" stroke="#aaff00" stroke-width="2" fill="rgba(170,255,0,0.08)" stroke-linejoin="round"/>
+          <path d="M55 35 Q55 15 80 15 Q105 15 105 35" stroke="#aaff00" stroke-width="2" fill="none"/>
+          <circle cx="50" cy="112" r="9" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
+          <circle cx="110" cy="112" r="9" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
+          <line x1="55" y1="55" x2="58" y2="95" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+          <line x1="80" y1="52" x2="80" y2="95" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+          <line x1="105" y1="55" x2="102" y2="95" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+          <line x1="38" y1="70" x2="122" y2="70" stroke="rgba(170,255,0,0.3)" stroke-width="1"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+
+    <div id="cart-empty" style="display:none;text-align:center;padding:80px 20px;">
+      <div style="font-size:48px;opacity:0.2;margin-bottom:16px;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="var(--text3)" stroke-width="1.5"/><line x1="3" y1="6" x2="21" y2="6" stroke="var(--text3)" stroke-width="1.5"/><path d="M16 10a4 4 0 01-8 0" stroke="var(--text3)" stroke-width="1.5"/></svg>
+      </div>
+      <div style="font-size:18px;color:var(--text2);margin-bottom:8px;">Корзина пуста</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:24px;">Добавьте товары на странице продукции</div>
+      <a href="products.html" class="btn btn-lime">← Перейти к продукции</a>
+    </div>
+
+    <div id="cart-content" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;">
+
+        <!-- ЛЕВАЯ КОЛОНКА: список товаров -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <div id="cart-summary-text" style="font-size:13px;color:var(--text3);"></div>
+            <div style="display:flex;gap:8px;">
+              <a href="products.html" class="btn btn-outline" style="font-size:12px;padding:7px 14px;">← Добавить ещё</a>
+              <button onclick="clearCartPage()" style="background:transparent;border:1px solid var(--border);border-radius:6px;padding:7px 14px;font-size:12px;color:var(--text3);cursor:pointer;font-family:var(--font-body);">Очистить</button>
+            </div>
+          </div>
+
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+            <div id="cart-col-headers" style="display:flex;align-items:center;gap:0;padding:8px 18px;background:var(--bg);">
+              <div style="flex:1;min-width:150px;padding-right:16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Наименование</div>
+              <div style="width:130px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">₽/м³</div>
+              <div style="width:110px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Объём</div>
+              <div style="width:110px;text-align:right;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Стоимость</div>
+              <div style="width:32px;"></div>
+            </div>
+            <div id="cart-items"></div>
+            <div style="padding:14px 18px;border-top:2px solid var(--border2);display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:13px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;">Итого</span>
+              <span id="cart-total-sum" style="font-family:var(--font-display);font-size:24px;letter-spacing:1px;color:var(--lime);">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: форма -->
+        <div style="position:sticky;top:90px;">
+          <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;">
+            <div style="padding:20px 22px;border-bottom:1px solid var(--border);">
+              <div style="font-family:var(--font-display);font-size:22px;letter-spacing:1px;">Оформить заявку</div>
+              <div style="font-size:13px;color:var(--text3);margin-top:4px;">Свяжемся и рассчитаем стоимость</div>
+            </div>
+            <div style="padding:20px 22px;">
+              <form action="https://formsubmit.co/non_86@mail.ru" method="POST" data-w3f>
+                <input type="hidden" name="_subject" value="Заявка из корзины — ОПТЭЛ">
+                <input type="hidden" name="_source" value="Страница Корзина">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                <textarea name="Состав заказа" id="cart-order-hidden" style="display:none;" rows="1"></textarea>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Имя *</label>
+                  <input type="text" name="name" class="form-input" placeholder="Иванов Иван" required>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Телефон *</label>
+                  <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Компания</label>
+                  <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label">Регион доставки</label>
+                  <input type="text" name="region" class="form-input" placeholder="напр. Москва">
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                  <label class="form-label">Комментарий</label>
+                  <textarea name="comment" class="form-textarea" rows="2" placeholder="Дополнительные пожелания..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-lime btn-lg" style="width:100%;text-align:center;justify-content:center;display:flex;align-items:center;">Отправить заявку →</button>
+              </form>
+              <div style="font-size:11px;color:var(--text3);margin-top:12px;text-align:center;line-height:1.5;">
+                Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="easter-egg-overlay" id="egg-overlay">
+  <div class="easter-egg-text">ОПТЭЛ</div>
+  <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
+</div>
+<button class="sticky-cta" onclick="openModal('Заказать звонок')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+  <span class="cta-text">Заказать звонок</span>
+</button>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Заказать звонок</h3>
+    <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
+    <form action="https://formsubmit.co/non_86@mail.ru" method="POST" id="modal-form" data-w3f>
+      <input type="hidden" name="_subject" value="Заявка — Корзина — ОПТЭЛ">
+      <input type="hidden" name="_source" value="Корзина">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
+      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+      <button type="submit" class="modal-submit">Отправить →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
+  </div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
+    <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
+  </div>
+</footer>
+<script>
+var CART_KEY = 'optel_cart';
+function loadCartData() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; }
+}
+
+function recalcAndRender() {
+  var cart = loadCartData();
+  var hiddenEl  = document.getElementById('cart-order-hidden');
+  var totalEl   = document.getElementById('cart-total-sum');
+  var summaryEl = document.getElementById('cart-summary-text');
+  var total = 0, lines = [];
+
+  cart.forEach(function(item, idx) {
+    var inputEl = document.getElementById('vol-input-'+idx);
+    var vol = inputEl ? (parseFloat(inputEl.value) || 0) : (parseFloat(item.vol) || 0);
+    if (inputEl) item.vol = vol; // обновим в памяти
+    var priceN = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
+    var sum = vol * priceN;
+    total += sum;
+    var sumEl = document.getElementById('row-sum-'+idx);
+    if (sumEl) sumEl.textContent = Math.round(sum).toLocaleString('ru') + ' ₽';
+    lines.push(item.name + ' | ' + (item.sort||'') + ' | ' + (item.size||'') + ' | Длина: ' + (item.len||'—') + ' | ' + vol + ' м³ | ' + item.price + ' /м³ = ' + Math.round(sum).toLocaleString('ru') + ' ₽');
+  });
+
+  if (totalEl)   totalEl.textContent = Math.round(total).toLocaleString('ru') + ' ₽';
+  if (summaryEl) summaryEl.textContent = cart.length + ' ' + (cart.length===1?'позиция':cart.length<5?'позиции':'позиций');
+  if (hiddenEl)  hiddenEl.value = lines.join('\n') + '\nИТОГО: ' + Math.round(total).toLocaleString('ru') + ' ₽';
+}
+
+function renderCartPage() {
+  var cart = loadCartData();
+  var empty   = document.getElementById('cart-empty');
+  var content = document.getElementById('cart-content');
+  var itemsEl = document.getElementById('cart-items');
+
+  if (!cart.length) {
+    if (empty)   empty.style.display   = 'block';
+    if (content) content.style.display = 'none';
+    return;
+  }
+  if (empty)   empty.style.display   = 'none';
+  if (content) content.style.display = 'block';
+
+  itemsEl.innerHTML = cart.map(function(item, idx) {
+    var vol    = parseFloat(item.vol) || 0;
+    var priceN = parseFloat(String(item.price).replace(/[^\d.]/g,'')) || 0;
+    var sum    = vol * priceN;
+
+    // Подзаголовок позиции — без дублей слов
+    var meta = [];
+    if (item.sort) meta.push(item.sort);
+    if (item.size) meta.push(item.size);
+    if (item.len)  meta.push('Длина: ' + item.len);
+    var metaStr = meta.join(' &nbsp;·&nbsp; ');
+
+    return '<div style="display:flex;align-items:center;gap:0;padding:12px 18px;border-bottom:1px solid var(--border);">' +
+      '<div style="flex:1;min-width:150px;padding-right:16px;">' +
+        '<div style="font-size:13px;color:var(--text);font-weight:600;">' + item.name + '</div>' +
+        '<div style="font-size:11px;color:var(--text3);margin-top:2px;">' + metaStr + '</div>' +
+      '</div>' +
+      '<div style="width:130px;text-align:center;font-size:13px;color:var(--text2);font-weight:600;white-space:nowrap;">' + item.price + '</div>' +
+      '<div style="width:110px;display:flex;align-items:center;justify-content:center;gap:6px;">' +
+        '<input type="number" id="vol-input-' + idx + '" value="' + vol + '" min="0.1" step="0.1" ' +
+          'style="width:70px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--font-body);text-align:center;" ' +
+          'oninput="recalcAndRender()">' +
+        '<span style="font-size:11px;color:var(--text3);">м³</span>' +
+      '</div>' +
+      '<div style="width:110px;text-align:right;font-family:var(--font-display);font-size:18px;letter-spacing:0.5px;color:var(--lime);white-space:nowrap;" id="row-sum-' + idx + '">' + Math.round(sum).toLocaleString('ru') + ' ₽</div>' +
+      '<button onclick="removeItem(' + idx + ')" style="width:32px;text-align:center;background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Удалить">✕</button>' +
+    '</div>';
+  }).join('');
+
+  recalcAndRender();
+}
+
+function removeItem(idx) {
+  var cart = loadCartData();
+  cart.splice(idx, 1);
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  renderCartPage();
+}
+
+function clearCartPage() {
+  localStorage.removeItem(CART_KEY);
+  renderCartPage();
+}
+
+var style = document.createElement('style');
+style.textContent = '@media(max-width:800px){#cart-content>div{grid-template-columns:1fr!important;}#cart-content>div>div:last-child{position:static!important;}}';
+document.head.appendChild(style);
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Очистить старые записи с /м³ в price
+  try {
+    var cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    cart = cart.map(function(item) {
+      if (item.price) item.price = item.price.replace('/м³','').replace('/м3','').trim();
+      return item;
+    });
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  } catch(e) {}
+  renderCartPage();
+});
+</script>
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#0a0f0a">
+<title>Калькулятор строганых пиломатериалов | ОПТЭЛ</title>
+<meta name="description" content="Онлайн-калькулятор пиломатериалов: рассчитайте штуки, площадь, объём, стоимость. Введите любые известные параметры — остальное посчитается автоматически.">
+<meta name="keywords" content="калькулятор пиломатериалов онлайн, перевести м3 в м2 вагонка, расчёт объёма пиломатериалов, сколько досок в кубе">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://optel18.ru/calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optel18.ru/calculator.html">
+<meta property="og:title" content="Калькулятор строганых пиломатериалов | ОПТЭЛ">
+<meta property="og:description" content="Умный калькулятор пиломатериалов: введите любые данные — остальное посчитается автоматически.">
+<meta property="og:image" content="https://optel18.ru/img/vaganka.jpg">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="480">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="ОПТЭЛ">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Калькулятор пиломатериалов ОПТЭЛ","url":"https://optel18.ru/calculator.html","description":"Умный калькулятор: введите любые параметры — остальное посчитается автоматически.","isPartOf":{"@type":"WebSite","url":"https://optel18.ru/"}}
+</script>
+<style>
+/* ══ КАЛЬКУЛЯТОР ══ */
+.smart-calc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Секции полей */
+.calc-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 0;
+}
+.calc-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Поле ввода */
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cf-row:last-child { border-bottom: none; }
+
+.cf-label {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.3;
+}
+.cf-unit {
+  font-size: 11px;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+.cf-input {
+  width: 130px;
+  padding: 7px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  transition: border-color 0.15s;
+  -moz-appearance: textfield;
+}
+.cf-input::-webkit-outer-spin-button,
+.cf-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.cf-input:focus {
+  outline: none;
+  border-color: var(--lime);
+}
+.cf-input.computed {
+  color: var(--lime);
+  border-color: rgba(170,255,0,0.3);
+  background: rgba(170,255,0,0.04);
+}
+.cf-input.computed:focus {
+  border-color: var(--lime);
+}
+
+/* Блок результатов */
+.calc-results {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+.calc-results::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lime), transparent);
+}
+.calc-results-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  padding: 18px 22px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.res-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 22px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.res-item:last-child { border-bottom: none; }
+.res-item-label {
+  font-size: 13px;
+  color: var(--text3);
+}
+.res-item-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--lime);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.res-item-val.na {
+  font-size: 16px;
+  color: var(--border2);
+}
+
+/* Кнопка очистки */
+.calc-clear-row {
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.hint-text {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* Мобильный */
+@media(max-width:900px) {
+  .smart-calc { grid-template-columns: 1fr; }
+}
+@media(max-width:480px) {
+  .cf-input { width: 110px; }
+  .res-item-val { font-size: 18px; }
+}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108577886', 'ym');
+    ym(108577886, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108577886" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="calculator.html" class="active">Калькулятор</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="technical.html">ТУ</a>
+      <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="calculator.html" class="active">Калькулятор</a>
+  <a href="process.html">Не как все</a>
+  <a href="approach.html">Меняем подход</a>
+  <a href="technical.html">ТУ</a>
+  <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="section-label">Онлайн-инструмент</div>
+        <h1 style="font-size:clamp(38px,6vw,72px);">Калькулятор</h1>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;">Введите любые известные параметры — остальное посчитается автоматически</p>
+      </div>
+      <div class="page-hero-icon"><svg width="150" height="150" viewBox="0 0 150 150" fill="none">
+  <rect x="18" y="8" width="114" height="134" rx="10" fill="rgba(170,255,0,0.07)" stroke="#aaff00" stroke-width="1.8"/>
+  <rect x="30" y="20" width="90" height="30" rx="4" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1"/>
+  <text x="112" y="41" font-family="monospace" font-size="13" fill="#aaff00" text-anchor="end" opacity="0.8">м³</text>
+  <rect x="30" y="62" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="63" y="62" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="96" y="62" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="30" y="92" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="63" y="92" width="24" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+  <rect x="96" y="92" width="24" height="42" rx="3" fill="rgba(170,255,0,0.2)" stroke="#aaff00" stroke-width="1.5"/>
+  <rect x="30" y="122" width="57" height="20" rx="3" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1"/>
+</svg></div>
+    </div>
+  </div>
+</div>
+
+<section style="padding:16px 0 0;border-bottom:none;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:rgba(170,255,0,0.06);border:1px solid rgba(170,255,0,0.3);border-radius:var(--radius-lg);padding:14px 20px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#aaff00" stroke-width="1.5"/><path d="M9 5v4l2.5 2.5" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span style="font-size:14px;font-weight:700;color:var(--lime);">Все цены указаны с НДС 22%</span>
+        <span style="font-size:13px;color:var(--text3);">— цена за штуку, за м², за м³ и общая стоимость</span>
+      </div>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;">
+        <span style="font-size:13px;color:var(--text2);">Показывать без НДС</span>
+        <div style="position:relative;width:40px;height:22px;flex-shrink:0;" onclick="toggleVat()">
+          <div id="vat-track" style="width:40px;height:22px;background:var(--border2);border-radius:11px;transition:background 0.2s;"></div>
+          <div id="vat-thumb" style="position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
+        </div>
+      </label>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="smart-calc">
+
+      <!-- ЛЕВАЯ КОЛОНКА: поля ввода -->
+      <div>
+        <!-- Размеры доски -->
+        <div class="calc-section">
+          <div class="calc-section-title">Размеры одной доски</div>
+          <div class="cf-row">
+            <div><div class="cf-label">Толщина</div><div class="cf-unit">мм</div></div>
+            <input type="text" class="cf-input" id="f-thickness" placeholder="напр. 12.5" oninput="smartCalc('thickness')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Ширина</div><div class="cf-unit">мм</div></div>
+            <input type="text" class="cf-input" id="f-width" placeholder="напр. 96" oninput="smartCalc('width')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Длина</div><div class="cf-unit">м</div></div>
+            <input type="text" class="cf-input" id="f-length" placeholder="напр. 3" oninput="smartCalc('length')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Площадь одной доски</div><div class="cf-unit">м²</div></div>
+            <input type="text" class="cf-input" id="f-board-area" placeholder="авто" oninput="smartCalc('boardArea')">
+          </div>
+        </div>
+
+        <!-- Партия -->
+        <div class="calc-section" style="margin-top:16px;">
+          <div class="calc-section-title">Партия</div>
+          <div class="cf-row">
+            <div><div class="cf-label">Количество досок</div><div class="cf-unit">шт</div></div>
+            <input type="text" class="cf-input" id="f-count" placeholder="напр. 200" oninput="smartCalc('count')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Общая площадь</div><div class="cf-unit">м²</div></div>
+            <input type="text" class="cf-input" id="f-total-area" placeholder="напр. 50" oninput="smartCalc('totalArea')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Общий объём</div><div class="cf-unit">м³</div></div>
+            <input type="text" class="cf-input" id="f-volume" placeholder="напр. 2.5" oninput="smartCalc('volume')">
+          </div>
+        </div>
+
+        <!-- Цена -->
+        <div class="calc-section" style="margin-top:16px;">
+          <div class="calc-section-title">Стоимость</div>
+          <div class="cf-row">
+            <div><div class="cf-label">Цена за штуку</div><div class="cf-unit">₽</div></div>
+            <input type="text" class="cf-input" id="f-price-each" placeholder="напр. 250" oninput="smartCalc('priceEach')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Цена за м³</div><div class="cf-unit">₽</div></div>
+            <input type="text" class="cf-input" id="f-price-m3" placeholder="напр. 21000" oninput="smartCalc('priceM3')">
+          </div>
+          <div class="cf-row">
+            <div><div class="cf-label">Общая стоимость</div><div class="cf-unit">₽</div></div>
+            <input type="text" class="cf-input" id="f-total-price" placeholder="напр. 50000" oninput="smartCalc('totalPrice')">
+          </div>
+        </div>
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА: результаты -->
+      <div>
+        <div class="calc-results">
+          <div class="calc-results-title">Результат</div>
+          <div class="res-item">
+            <div class="res-item-label">Площадь одной доски</div>
+            <div class="res-item-val na" id="r-board-area">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Объём одной доски</div>
+            <div class="res-item-val na" id="r-board-vol">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Штук в 1 м³</div>
+            <div class="res-item-val na" id="r-per-m3">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Штук в партии</div>
+            <div class="res-item-val na" id="r-count">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Общая площадь партии</div>
+            <div class="res-item-val na" id="r-total-area">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Общий объём партии</div>
+            <div class="res-item-val na" id="r-volume">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Цена за штуку <span id="vat-label" style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:0.5px;">с НДС</span></div>
+            <div class="res-item-val na" id="r-price-each">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Цена за м³ <span style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:0.5px;" class="vat-tag">с НДС</span></div>
+            <div class="res-item-val na" id="r-price-m3">—</div>
+          </div>
+          <div class="res-item">
+            <div class="res-item-label">Общая стоимость <span style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:0.5px;" class="vat-tag">с НДС</span></div>
+            <div class="res-item-val na" id="r-total-price">—</div>
+          </div>
+          <div class="calc-clear-row">
+            <div class="hint-text">Зелёным — вычисленные значения. Введите любые поля — остальное посчитается.</div>
+            <button class="btn-clear" onclick="clearAll()">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="opacity:.7"><path d="M2 4h12M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Очистить
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="padding:44px 0;border-bottom:none;">
+  <div class="container">
+    <div class="call-strip reveal">
+      <div><div class="call-strip-title">Рассчитали? Позвоните — подтвердим цену</div><div class="call-strip-sub">Скажем точную стоимость с НДС 22% для вашего объёма</div></div>
+      <a href="tel:+79999238888" class="call-strip-phone">+7 9999-23-8888</a>
+    </div>
+  </div>
+</section>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="easter-egg-overlay" id="egg-overlay">
+  <div class="easter-egg-text">ОПТЭЛ</div>
+  <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
+</div>
+<button class="sticky-cta" onclick="openModal('Заказать звонок')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+  <span class="cta-text">Заказать звонок</span>
+</button>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Заказать звонок</h3>
+    <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
+    <form method="POST" id="modal-form">
+      <input type="hidden" name="_subject" value="Заявка с Калькулятора — ОПТЭЛ">
+      <input type="hidden" name="_source" value="Калькулятор">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      
+      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
+      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+      <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 30 м³"></div>
+      <button type="submit" class="modal-submit">Отправить →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
+  </div>
+</div>
+</div>
+
+<section style="padding:36px 0 40px;border-top:1px solid var(--border);">
+  <div class="container">
+    <p style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Рассчитайте объём, площадь, количество досок и стоимость прямо в браузере. Введите любые известные параметры — толщину, ширину, длину, количество штук или объём — калькулятор автоматически вычислит остальные значения. Для вагонки, имитации бруса, террасной доски, планкена и других профилей.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
+    <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════
+// УМНЫЙ КАЛЬКУЛЯТОР ПИЛОМАТЕРИАЛОВ
+// Любое поле может быть введено, остальные вычисляются
+// ══════════════════════════════════════════
+
+// Последнее изменённое поле — не перезаписываем его
+var lastChanged = null;
+
+// Парсим число — принимаем запятую и точку
+function pn(id) {
+  var el = document.getElementById(id);
+  if (!el) return NaN;
+  var v = el.value.replace(',', '.').trim();
+  var n = parseFloat(v);
+  return (isNaN(n) || n <= 0) ? NaN : n;
+}
+
+// Форматируем число для вывода
+function fmt(n, dec) {
+  if (isNaN(n) || !isFinite(n) || n <= 0) return null;
+  if (dec === 0) return Math.round(n).toLocaleString('ru') + ' шт';
+  if (dec === 'price') return Math.round(n).toLocaleString('ru') + ' ₽';
+  return parseFloat(n.toFixed(dec !== undefined ? dec : 4))
+    .toString().replace('.', ',') + (dec === 'm3' ? ' м³' : dec === 'm2' ? ' м²' : '');
+}
+
+// Заполнить вычисленное значение (не перезаписывать если это lastChanged)
+function setField(id, val, skipIfLast) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (skipIfLast && lastChanged === id) return;
+  if (val !== null && val !== undefined && !isNaN(val) && isFinite(val) && val > 0) {
+    var fmtd;
+    // Округление в зависимости от поля
+    if (id === 'f-thickness') fmtd = parseFloat(val.toFixed(2)).toString().replace('.', ',');
+    else if (id === 'f-width') fmtd = parseFloat(val.toFixed(2)).toString().replace('.', ',');
+    else if (id === 'f-length') fmtd = parseFloat(val.toFixed(3)).toString().replace('.', ',');
+    else if (id === 'f-board-area') fmtd = parseFloat(val.toFixed(6)).toString().replace('.', ',');
+    else if (id === 'f-count') fmtd = Math.round(val).toString();
+    else if (id === 'f-total-area') fmtd = parseFloat(val.toFixed(4)).toString().replace('.', ',');
+    else if (id === 'f-volume') fmtd = parseFloat(val.toFixed(4)).toString().replace('.', ',');
+    else if (id === 'f-price-each') fmtd = Math.round(val).toString();
+    else if (id === 'f-price-m3') fmtd = Math.round(val).toString();
+    else if (id === 'f-total-price') fmtd = Math.round(val).toString();
+    else fmtd = val.toString();
+    el.value = fmtd;
+    el.classList.add('computed');
+  }
+}
+
+// Обновить блок результатов
+function setResult(id, val, type) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (val !== null && val !== undefined && !isNaN(val) && isFinite(val) && val > 0) {
+    var txt;
+    if (type === 'count') txt = Math.round(val).toLocaleString('ru') + ' шт';
+    else if (type === 'm2') txt = parseFloat(val.toFixed(4)).toString().replace('.', ',') + ' м²';
+    else if (type === 'm3') txt = parseFloat(val.toFixed(5)).toString().replace('.', ',') + ' м³';
+    else if (type === 'price') txt = Math.round(val).toLocaleString('ru') + ' ₽';
+    else txt = val;
+    el.textContent = txt;
+    el.classList.remove('na');
+  } else {
+    el.textContent = '—';
+    el.classList.add('na');
+  }
+}
+
+function smartCalc(changed) {
+  lastChanged = 'f-' + changed.replace(/([A-Z])/g, function(m) { return '-' + m.toLowerCase(); });
+  
+  // Снимаем класс computed со всех кроме только что изменённого
+  document.querySelectorAll('.cf-input').forEach(function(el) {
+    if (el.id !== lastChanged) el.classList.remove('computed');
+  });
+
+  // Читаем все введённые значения
+  var th  = pn('f-thickness');   // мм
+  var w   = pn('f-width');       // мм
+  var len = pn('f-length');      // м
+  var ba  = pn('f-board-area');  // м² — площадь 1 доски
+  var cnt = pn('f-count');       // шт
+  var ta  = pn('f-total-area');  // м² — общая площадь
+  var vol = pn('f-volume');      // м³ — общий объём
+  var pe  = pn('f-price-each'); // ₽/шт
+  var pm3 = pn('f-price-m3');   // ₽/м³
+  var tp  = pn('f-total-price');// ₽ общая
+
+  // ── ВЫВОД: вычисляем максимум из доступных данных ──
+
+  // Площадь одной доски = ширина(м) × длина
+  var boardArea = ba;
+  if (!boardArea && !isNaN(w) && !isNaN(len)) boardArea = (w / 1000) * len;
+  // Из общего и кол-ва
+  if (!boardArea && !isNaN(ta) && !isNaN(cnt)) boardArea = ta / cnt;
+
+  // Объём одной доски = т(м) × ш(м) × длина
+  var boardVol = NaN;
+  if (!isNaN(th) && !isNaN(w) && !isNaN(len)) boardVol = (th/1000) * (w/1000) * len;
+  if (isNaN(boardVol) && !isNaN(vol) && !isNaN(cnt)) boardVol = vol / cnt;
+
+  // Штук в 1 м³
+  var perM3 = NaN;
+  if (!isNaN(boardVol) && boardVol > 0) perM3 = 1 / boardVol;
+
+  // Количество досок
+  var count = cnt;
+  if (!count) {
+    if (!isNaN(vol) && !isNaN(boardVol) && boardVol > 0) count = vol / boardVol;
+    else if (!isNaN(ta) && !isNaN(boardArea) && boardArea > 0) count = ta / boardArea;
+    else if (!isNaN(tp) && !isNaN(pe) && pe > 0) count = tp / pe;
+  }
+
+  // Общая площадь
+  var totalArea = ta;
+  if (!totalArea) {
+    if (!isNaN(count) && !isNaN(boardArea)) totalArea = count * boardArea;
+    else if (!isNaN(vol) && !isNaN(th) && th > 0) totalArea = vol / (th/1000);
+  }
+
+  // Общий объём
+  var volume = vol;
+  if (!volume) {
+    if (!isNaN(count) && !isNaN(boardVol)) volume = count * boardVol;
+    else if (!isNaN(totalArea) && !isNaN(th) && th > 0) volume = totalArea * (th/1000);
+    else if (!isNaN(tp) && !isNaN(pm3) && pm3 > 0) volume = tp / pm3;
+  }
+
+  // Цена за штуку
+  var priceEach = pe;
+  if (!priceEach) {
+    if (!isNaN(tp) && !isNaN(count) && count > 0) priceEach = tp / count;
+    else if (!isNaN(pm3) && !isNaN(boardVol) && boardVol > 0) priceEach = pm3 * boardVol;
+  }
+
+  // Цена за м³
+  var priceM3 = pm3;
+  if (!priceM3) {
+    if (!isNaN(priceEach) && !isNaN(boardVol) && boardVol > 0) priceM3 = priceEach / boardVol;
+    else if (!isNaN(tp) && !isNaN(volume) && volume > 0) priceM3 = tp / volume;
+  }
+
+  // Общая стоимость
+  var totalPrice = tp;
+  if (!totalPrice) {
+    if (!isNaN(priceEach) && !isNaN(count)) totalPrice = priceEach * count;
+    else if (!isNaN(priceM3) && !isNaN(volume)) totalPrice = priceM3 * volume;
+  }
+
+  // Если площадь доски была посчитана — запишем обратно
+  if (isNaN(ba) && !isNaN(boardArea)) setField('f-board-area', boardArea, true);
+
+  // Запишем вычисленные значения в поля (если не были введены вручную)
+  if (isNaN(cnt) && !isNaN(count)) setField('f-count', count, true);
+  if (isNaN(ta)  && !isNaN(totalArea)) setField('f-total-area', totalArea, true);
+  if (isNaN(vol) && !isNaN(volume)) setField('f-volume', volume, true);
+  if (isNaN(pe)  && !isNaN(priceEach)) setField('f-price-each', priceEach, true);
+  if (isNaN(pm3) && !isNaN(priceM3)) setField('f-price-m3', priceM3, true);
+  if (isNaN(tp)  && !isNaN(totalPrice)) setField('f-total-price', totalPrice, true);
+
+  // Обновляем результаты
+  setResult('r-board-area',   boardArea,   'm2');
+  setResult('r-board-vol',    boardVol,    'm3');
+  setResult('r-per-m3',       perM3,       'count');
+  setResult('r-count',        count,       'count');
+  setResult('r-total-area',   totalArea,   'm2');
+  setResult('r-volume',       volume,      'm3');
+  setResult('r-price-each',   priceEach,   'price');
+  setResult('r-price-m3',     priceM3,     'price');
+  setResult('r-total-price',  totalPrice,  'price');
+}
+
+function clearAll() {
+  lastChanged = null;
+  document.querySelectorAll('.cf-input').forEach(function(el) {
+    el.value = '';
+    el.classList.remove('computed');
+  });
+  document.querySelectorAll('.res-item-val').forEach(function(el) {
+    el.textContent = '—';
+    el.classList.add('na');
+  });
+}
+
+// Принимаем запятую как разделитель
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.cf-input').forEach(function(inp) {
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === ',') {
+        e.preventDefault();
+        var pos = this.selectionStart;
+        var val = this.value;
+        this.value = val.slice(0, pos) + '.' + val.slice(this.selectionEnd);
+        this.setSelectionRange(pos+1, pos+1);
+        this.dispatchEvent(new Event('input'));
+      }
+    });
+  });
+});
+</script>
+
+<script>
+var vatOn = true;
+var VAT = 1.22;
+
+function toggleVat() {
+  vatOn = !vatOn;
+  var track = document.getElementById('vat-track');
+  var thumb = document.getElementById('vat-thumb');
+  if (vatOn) {
+    track.style.background = 'var(--border2)';
+    thumb.style.left = '3px';
+  } else {
+    track.style.background = 'rgba(170,255,0,0.5)';
+    thumb.style.left = '21px';
+  }
+  document.querySelectorAll('.vat-tag').forEach(function(el) {
+    el.textContent = vatOn ? 'с НДС' : 'без НДС';
+    el.style.color = vatOn ? 'var(--lime)' : 'var(--text3)';
+  });
+  smartCalc('__vat__');
+}
+</script>
+<script src="shared.js"></script>
+</body>
+</html>

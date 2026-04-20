@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#0a0f0a">
+<title>Доставка пиломатериалов по России | ОПТЭЛ</title>
+<meta name="description" content="Доставка строганых пиломатериалов по всей России. Расчёт стоимости доставки вагонки, имитации бруса, террасной доски. Страхование груза. г. Ижевск.">
+<meta name="keywords" content="доставка пиломатериалов, доставка вагонки по России, стоимость доставки пиломатериалов, СДЭК пиломатериалы">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://optel18.ru/delivery.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optel18.ru/delivery.html">
+<meta property="og:title" content="Доставка пиломатериалов по России | ОПТЭЛ">
+<meta property="og:description" content="Доставка строганых пиломатериалов по всей России. Страхование груза. Расчёт стоимости онлайн.">
+<meta property="og:image" content="https://optel18.ru/img/vaganka.jpg">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="480">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="ОПТЭЛ">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Доставка пиломатериалов по России","url":"https://optel18.ru/delivery.html","description":"Расчёт стоимости и условия доставки строганых пиломатериалов по России.","isPartOf":{"@type":"WebSite","url":"https://optel18.ru/"}}
+</script>
+<style>
+.delivery-notice {
+  background: rgba(170,255,0,0.06);
+  border: 1px solid rgba(170,255,0,0.25);
+  border-left: 3px solid var(--lime);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.delivery-notice-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: var(--lime);
+  margin-bottom: 6px;
+}
+.delivery-notice-text {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.calc-delivery-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.calc-delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.calc-delivery-result {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.calc-delivery-result::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lime), transparent);
+}
+.res-block {}
+.res-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.res-val { font-family: var(--font-display); font-size: 36px; color: var(--lime); line-height: 1; }
+.res-sub { font-size: 12px; color: var(--text3); margin-top: 4px; }
+.delivery-features {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.delivery-feat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+.delivery-feat-icon {
+  width: 36px; height: 36px;
+  background: rgba(170,255,0,0.1);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.delivery-feat-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.delivery-feat-text { font-size: 13px; color: var(--text3); line-height: 1.6; }
+.stock-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 6px;
+  font-size: 12px; font-weight: 700;
+  margin-bottom: 16px;
+}
+.stock-yes { background: rgba(170,255,0,0.12); border: 1px solid rgba(170,255,0,0.4); color: var(--lime); }
+.stock-no  { background: rgba(255,184,48,0.1); border: 1px solid rgba(255,184,48,0.3); color: #ffb830; }
+.disclaimer-del {
+  font-size: 12px; color: var(--text3); line-height: 1.7;
+  background: var(--surface); border-radius: var(--radius);
+  padding: 12px 16px; margin-top: 16px;
+  border-left: 2px solid var(--border2);
+}
+@media(max-width:768px) {
+  .calc-delivery-grid { grid-template-columns: 1fr 1fr; }
+  .calc-delivery-result { grid-template-columns: 1fr; }
+  .delivery-features { grid-template-columns: 1fr; }
+}
+@media(max-width:480px) {
+  .calc-delivery-grid { grid-template-columns: 1fr; }
+  .calc-delivery-card { padding: 18px; }
+}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108577886', 'ym');
+    ym(108577886, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108577886" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="delivery.html" class="active">Доставка</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="tu.html">ТУ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="delivery.html" class="active">Доставка</a>
+  <a href="process.html">Не как все</a>
+  <a href="approach.html">Меняем подход</a>
+  <a href="tu.html">ТУ</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="section-label">Логистика</div>
+        <h1 style="font-size:clamp(38px,6vw,72px);">Доставка</h1>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;">По всей России · Страхование груза · Сопровождение до двери</p>
+      </div>
+      <div class="page-hero-icon">
+        <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+          <rect x="4" y="55" width="130" height="70" rx="6" fill="rgba(170,255,0,0.07)" stroke="#aaff00" stroke-width="1.5"/>
+          <rect x="4" y="55" width="50" height="70" rx="6" fill="rgba(170,255,0,0.12)" stroke="#aaff00" stroke-width="1.5"/>
+          <path d="M134 80h30l20 20v25h-50V80z" fill="rgba(170,255,0,0.08)" stroke="#aaff00" stroke-width="1.5"/>
+          <circle cx="30"  cy="135" r="12" fill="rgba(170,255,0,0.15)" stroke="#aaff00" stroke-width="1.5"/>
+          <circle cx="160" cy="135" r="12" fill="rgba(170,255,0,0.15)" stroke="#aaff00" stroke-width="1.5"/>
+          <line x1="4" y1="90" x2="134" y2="90" stroke="#aaff00" stroke-width="0.8" opacity="0.4"/>
+          <path d="M20 72l10-12 10 12" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section style="padding:0 0 0;">
+  <div class="container">
+    <div style="background:rgba(170,255,0,0.06);border:1px solid rgba(170,255,0,0.3);border-left:4px solid var(--lime);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:40px;">
+      <div style="font-family:var(--font-display);font-size:20px;letter-spacing:0.5px;color:var(--lime);margin-bottom:10px;">Важно знать о расчёте стоимости</div>
+      <p style="font-size:15px;color:var(--text2);line-height:1.75;margin:0;">Расчёт стоимости доставки предоставляется сервисом СДЭК на основании их официальных тарифов. Итоговая цена является <strong style="color:var(--text);">ориентировочной</strong> — реальная стоимость может быть <strong style="color:var(--lime);">значительно ниже</strong>.</p>
+      <p style="font-size:15px;color:var(--text2);line-height:1.75;margin:12px 0 0;">Мы всегда ищем автомобили самостоятельно и стараемся снизить стоимость доставки за счёт прямых договорённостей с перевозчиками — это часть нашего подхода к работе. Точную стоимость доставки для вашего объёма и маршрута уточняйте по телефону.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+
+    <div class="delivery-notice">
+      <div class="delivery-notice-title">Важно знать</div>
+      <div class="delivery-notice-text">
+        Расчёт стоимости доставки предоставляет транспортная компания СДЭК на основании тарифов.
+        Мы всегда стремимся снизить стоимость доставки за счёт самостоятельного поиска транспорта — 
+        частные перевозчики и попутный транспорт могут стоить значительно дешевле. 
+        Финальную стоимость доставки под ваш объём и маршрут мы уточняем при оформлении заявки.
+      </div>
+    </div>
+
+    <div class="calc-delivery-card reveal">
+      <h2 style="font-family:var(--font-display);font-size:28px;letter-spacing:1px;margin-bottom:20px;">Расчёт стоимости доставки</h2>
+      <div class="calc-delivery-grid">
+        <div class="field-group">
+          <label class="field-label">Товар</label>
+          <select class="field-select" id="d-product" onchange="dCalc()">
+            <option value="vaganka">Вагонка "Штиль"</option>
+            <option value="imitation">Имитация бруса</option>
+            <option value="terrace">Террасная доска</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Сорт</label>
+          <select class="field-select" id="d-sort" onchange="dCalc()">
+            <option value="extra">Экстра</option>
+            <option value="prima">Прима</option>
+            <option value="a">Сорт А</option>
+            <option value="b">Сорт В</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Объём (м³)</label>
+          <select class="field-select" id="d-vol" onchange="dCalc()">
+            <option value="20">20 м³</option>
+            <option value="30" selected>30 м³</option>
+            <option value="40">40 м³</option>
+          </select>
+        </div>
+        <div class="field-group" style="grid-column:1/-1">
+          <label class="field-label">Город доставки</label>
+          <select class="field-select" id="d-city" onchange="dCalc()">
+            <optgroup label="Центральный ФО">
+              <option value="msk">Москва</option>
+              <option value="nnov">Нижний Новгород</option>
+              <option value="vrn">Воронеж</option>
+            </optgroup>
+            <optgroup label="Северо-Западный ФО">
+              <option value="spb">Санкт-Петербург</option>
+            </optgroup>
+            <optgroup label="Приволжский ФО">
+              <option value="kzn">Казань</option>
+              <option value="sam">Самара</option>
+              <option value="ufa">Уфа</option>
+            </optgroup>
+            <optgroup label="Уральский ФО">
+              <option value="ekb">Екатеринбург</option>
+              <option value="chel">Челябинск</option>
+              <option value="tum">Тюмень</option>
+            </optgroup>
+            <optgroup label="Сибирский ФО">
+              <option value="nsk">Новосибирск</option>
+              <option value="krs">Красноярск</option>
+              <option value="omsk">Омск</option>
+            </optgroup>
+            <optgroup label="Южный ФО">
+              <option value="krd">Краснодар</option>
+              <option value="rost">Ростов-на-Дону</option>
+              <option value="vlg">Волгоград</option>
+            </optgroup>
+            <optgroup label="Дальневосточный ФО">
+              <option value="khb">Хабаровск</option>
+              <option value="vlad">Владивосток</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <div id="d-stock-badge"></div>
+
+      <div class="calc-delivery-result">
+        <div class="res-block">
+          <div class="res-label">Стоимость товара</div>
+          <div class="res-val" id="d-goods">—</div>
+          <div class="res-sub">без НДС</div>
+        </div>
+        <div class="res-block">
+          <div class="res-label">Доставка СДЭК</div>
+          <div class="res-val" id="d-delivery">—</div>
+          <div class="res-sub" id="d-days">ориентировочно</div>
+        </div>
+        <div class="res-block">
+          <div class="res-label">Итого с НДС 22%</div>
+          <div class="res-val" id="d-total" style="color:var(--lime)">—</div>
+          <div class="res-sub" id="d-perm3">за партию</div>
+        </div>
+      </div>
+
+      <div class="disclaimer-del">
+        Расчёт носит информационный характер. Фактическая стоимость доставки может быть ниже — 
+        мы самостоятельно ищем выгодный транспорт для каждого заказа. 
+        Тарифы СДЭК актуальны для отправок из г. Ижевска.
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;">
+        <button class="btn btn-lime btn-lg" onclick="openModal('Уточнить стоимость доставки')">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+          Уточнить стоимость
+        </button>
+        <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg btn-lg">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
+          Написать в ТГ
+        </a>
+      </div>
+    </div>
+
+    <div class="delivery-features">
+      <div class="delivery-feat reveal">
+        <div class="delivery-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.3L10 14.5 5.1 17l.9-5.3L2 7.8l5.6-.8L10 2z" stroke="#aaff00" stroke-width="1.5" fill="none" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="delivery-feat-title">Страхование груза</div>
+        <div class="delivery-feat-text">Каждая партия застрахована на полную стоимость при перевозке. При наступлении страхового случая сопровождаем весь процесс урегулирования.</div>
+      </div>
+      <div class="delivery-feat reveal" style="transition-delay:.1s">
+        <div class="delivery-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#aaff00" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="delivery-feat-title">Поиск выгодного транспорта</div>
+        <div class="delivery-feat-text">Не ограничиваемся одной ТК. Ищем попутный транспорт и частных перевозчиков — это снижает стоимость доставки на 20–40% от тарифа СДЭК.</div>
+      </div>
+      <div class="delivery-feat reveal" style="transition-delay:.2s">
+        <div class="delivery-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M3 3h14v10H3zM7 17h6M10 13v4" stroke="#aaff00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="delivery-feat-title">Фотоотчёт при отгрузке</div>
+        <div class="delivery-feat-text">До отправки предоставляем фото партии: упаковка, маркировка, транспортные пакеты. Видите товар до того как он тронется в путь.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:36px 0 40px;border-top:1px solid var(--border);">
+  <div class="container">
+    <p id="seo-delivery" style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Организуем доставку строганых пиломатериалов по всей России: вагонка штиль, имитация бруса, террасная доска, планкен, доска пола. Работаем с транспортными компаниями и частными перевозчиками — выбираем оптимальный вариант под ваш объём и регион. Груз застрахован на полную стоимость. Отправляем из г. Ижевска, НДС 22%.</p>
+  </div>
+</section>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="easter-egg-overlay" id="egg-overlay">
+  <div class="easter-egg-text">ОПТЭЛ</div>
+  <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
+</div>
+<button class="sticky-cta" onclick="openModal('Заказать звонок')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+  <span class="cta-text">Заказать звонок</span>
+</button>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" style="max-width:700px;padding:0;overflow:hidden;">
+    <button class="modal-close" onclick="closeModal()" style="position:absolute;top:12px;right:16px;z-index:10;">✕</button>
+    <script src="https://forms.yandex.ru/_static/embed.js"></script>
+    <iframe src="https://forms.yandex.ru/u/69e097d15056905d5ce783e1?iframe=1" frameborder="0" name="ya-form-69e097d15056905d5ce783e1" width="100%" style="min-height:420px;display:block;border:none;"></iframe>
+  </div>
+</div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
+    <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
+  <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:10px;">
+    <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+  </div>
+  </div>
+</footer>
+<script>
+const D_PRICES = {
+  vaganka:   {extra:26000,prima:24000,a:21000,b:18000},
+  imitation: {extra:24000,prima:22000,a:19000,b:16500},
+  terrace:   {extra:28000,prima:25000,a:22000,b:19000},
+};
+const D_DELIVERY = {
+  msk:{base:42000,days:'4–6 дней'},spb:{base:50000,days:'5–7 дней'},
+  ekb:{base:36000,days:'3–5 дней'},nsk:{base:60000,days:'6–8 дней'},
+  krd:{base:40000,days:'4–6 дней'},kzn:{base:32000,days:'2–4 дня'},
+  nnov:{base:38000,days:'4–5 дней'},chel:{base:34000,days:'3–4 дня'},
+  tum:{base:37000,days:'3–5 дней'},krs:{base:65000,days:'7–9 дней'},
+  omsk:{base:55000,days:'5–7 дней'},vrn:{base:45000,days:'4–6 дней'},
+  sam:{base:33000,days:'3–4 дня'},ufa:{base:30000,days:'2–3 дня'},
+  rost:{base:44000,days:'4–6 дней'},vlg:{base:43000,days:'4–5 дней'},
+  khb:{base:90000,days:'10–14 дней'},vlad:{base:95000,days:'11–15 дней'},
+};
+const D_STOCK = {
+  vaganka_extra:true,vaganka_prima:true,vaganka_a:true,vaganka_b:true,
+  imitation_extra:true,imitation_prima:false,imitation_a:true,imitation_b:true,
+  terrace_extra:false,terrace_prima:true,terrace_a:true,terrace_b:true,
+};
+function fmtD(n){return Math.round(n).toLocaleString('ru')+' ₽';}
+function dCalc(){
+  var prod=document.getElementById('d-product').value;
+  var sort=document.getElementById('d-sort').value;
+  var vol=parseInt(document.getElementById('d-vol').value);
+  var city=document.getElementById('d-city').value;
+  var ppm3=D_PRICES[prod][sort]||21000;
+  var goods=ppm3*vol;
+  var dc=D_DELIVERY[city]||{base:50000,days:'уточните'};
+  var delivery=dc.base+(vol-20)*900;
+  var total=(goods+delivery)*1.22;
+  var inStock=D_STOCK[prod+'_'+sort];
+  var badge=document.getElementById('d-stock-badge');
+  badge.innerHTML=inStock
+    ?'<span class="stock-badge stock-yes">В наличии — отгрузка 1–2 дня</span>'
+    :'<span class="stock-badge stock-no">Под заказ — до 3 недель</span>';
+  document.getElementById('d-goods').textContent=fmtD(goods);
+  document.getElementById('d-delivery').textContent=fmtD(delivery);
+  document.getElementById('d-days').textContent=dc.days;
+  document.getElementById('d-total').textContent=fmtD(total);
+  document.getElementById('d-perm3').textContent=fmtD(total/vol)+' / м³';
+}
+dCalc();
+</script>
+<script src="shared.js"></script>
+</body>
+</html>

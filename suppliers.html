@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#0a0f0a">
+<title>Поставщикам — Предложить товар | ОПТЭЛ</title>
+<meta name="description" content="Поставщикам строганых пиломатериалов. ОПТЭЛ закупает лиственницу, кедр, ольху, сосну. Официальный договор, оплата в срок, долгосрочное сотрудничество. г. Ижевск.">
+<meta name="keywords" content="строганые пиломатериалы дилер оптом, стать дилером пиломатериалы">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://optel18.ru/suppliers.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://optel18.ru/img/vaganka.jpg">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="480">
+<meta property="og:url" content="https://optel18.ru/suppliers.html">
+<meta property="og:title" content="Поставщикам — Партнёрская программа | ОПТЭЛ">
+<meta property="og:description" content="Условия сотрудничества для оптовых покупателей и дилеров строганых пиломатериалов ОПТЭЛ. Отсрочка платежа, личный менеджер.">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="ОПТЭЛ">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.file-upload-wrapper { position: relative; }
+.file-upload-wrapper input[type="file"] { position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer; }
+.file-upload-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: var(--surface2);
+  border: 1.5px dashed var(--border2);
+  border-radius: var(--radius);
+  color: var(--text2);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+.file-upload-btn:hover { border-color: var(--lime); color: var(--lime); }
+.file-upload-btn svg { flex-shrink: 0; }
+.file-upload-name { font-size: 11px; color: var(--lime); margin-top: 4px; }
+</style>
+<style>
+/* suppliers grid fix */
+.suppliers-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+.suppliers-grid > * { min-width:0; }
+.suppliers-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.suppliers-cards > * { min-width:0; }
+@media(max-width:960px){
+  .suppliers-grid { grid-template-columns:1fr; }
+  .suppliers-cards { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+  /* Кнопки ТГ/MAX/Позвонить в столбик */
+  .suppliers-grid .btn { width: 100%; justify-content: center; }
+  /* Форма поставщика — убрать горизонтальный gap */
+  .suppliers-grid .form-compact .grid-2 { grid-template-columns: 1fr !important; }
+}
+</style>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108577886', 'ym');
+    ym(108577886, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108577886" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <a href="index.html" class="logo-text">ОПТ<span class="accent">ЭЛ</span></a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="process.html">Не как все</a>
+      <a href="approach.html">Меняем подход</a>
+      <a href="technical.html">ТУ</a>
+      <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <span class="header-vat">НДС 22%</span>
+    <a href="tel:+79999238888" class="header-phone">+7 9999-23-8888</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Главная</a>
+  <a href="products.html">Продукция</a>
+  <a href="calculator.html">Калькулятор</a>
+  <a href="process.html">Не как все</a>
+  <a href="approach.html">Меняем подход</a>
+  <a href="technical.html">ТУ</a>
+  <a href="sale.html" style="color:#ff4d00;font-weight:800;">ГОРЯЧО</a>
+  <a href="contacts.html">Контакты</a>
+  <a href="tel:+79999238888" class="mob-phone">+7 9999-23-8888</a>
+</nav>
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="section-label">Для поставщиков</div>
+        <h1 style="font-size:clamp(38px,6vw,72px);">Поставщикам</h1>
+        <p style="color:var(--text2);margin-top:10px;font-size:15px;">Формируем базу ответственных поставщиков строганых пиломатериалов</p>
+      </div>
+      <div class="page-hero-icon"><svg width="180" height="150" viewBox="0 0 180 150" fill="none">
+  <path d="M90 10L165 48V96L90 134L15 96V48Z" fill="rgba(170,255,0,0.05)" stroke="#aaff00" stroke-width="1.8"/>
+  <path d="M90 10V134" stroke="rgba(170,255,0,0.2)" stroke-width="1"/>
+  <path d="M165 48L15 96" stroke="rgba(170,255,0,0.15)" stroke-width="1"/>
+  <path d="M15 48L165 96" stroke="rgba(170,255,0,0.15)" stroke-width="1"/>
+  <circle cx="90" cy="72" r="22" fill="rgba(170,255,0,0.1)" stroke="#aaff00" stroke-width="1.8"/>
+  <path d="M82 72l6 6 10-12" stroke="#aaff00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+
+    <!-- ЧТО МЫ ИЩЕМ -->
+    <div style="margin-bottom:32px;">
+      <div class="section-label">Что нас интересует</div>
+      <h2 style="margin-bottom:28px;">Ищем качественный<br>и уникальный товар</h2>
+      <div class="suppliers-cards">
+        <div class="card reveal">
+          <div style="margin-bottom:14px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="rgba(170,255,0,0.3)" stroke-width="1.5" fill="rgba(170,255,0,0.04)"/>
+              <path d="M13 20l5 5 9-9" stroke="#aaff00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <h3>Качественный товар</h3>
+          <p>Строганые пиломатериалы с подтверждённым качеством, стабильными характеристиками и правильной геометрией досок.</p>
+        </div>
+        <div class="card reveal" style="transition-delay:.08s">
+          <div style="margin-bottom:14px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <path d="M20 4l4 8 9 1.3-6.5 6.3 1.5 9L20 24l-8 4.6 1.5-9L7 13.3 16 12z" stroke="rgba(170,255,0,0.3)" stroke-width="1.5" fill="rgba(170,255,0,0.04)"/>
+              <path d="M20 4l4 8 9 1.3-6.5 6.3 1.5 9L20 24l-8 4.6 1.5-9L7 13.3 16 12z" stroke="#aaff00" stroke-width="1.2" fill="none"/>
+            </svg>
+          </div>
+          <h3>Редкий товар</h3>
+          <p>Редкие породы, нестандартные сечения, уникальные профили — то, что сложно найти у других поставщиков.</p>
+        </div>
+        <div class="card reveal" style="transition-delay:.16s">
+          <div style="margin-bottom:14px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect x="6" y="10" width="28" height="22" rx="4" stroke="rgba(170,255,0,0.3)" stroke-width="1.5" fill="rgba(170,255,0,0.04)"/>
+              <path d="M14 21h12M20 15v12" stroke="#aaff00" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Интересный товар</h3>
+          <p>Нестандартные предложения, новые виды отделочных материалов, сопутствующие товары для строительства и отделки.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ФОРМА + ОПИСАНИЕ -->
+    <div class="suppliers-grid">
+      <div class="reveal">
+        <div class="section-label">Почему работать с нами</div>
+        <h2 style="margin-bottom:16px;font-size:clamp(28px,4vw,44px);">Ответственный<br>покупатель</h2>
+        <p style="font-size:15px;margin-bottom:20px;">Формируем долгосрочную базу надёжных поставщиков. Работаем честно, платим вовремя.</p>
+        <ul class="check-list">
+          <li>Оплата по договору, чёткие условия без сюрпризов</li>
+          <li>Работаем с НДС 22% — полный документооборот, всё официально</li>
+          <li>Долгосрочное сотрудничество при стабильном качестве товара</li>
+          <li>Быстрое рассмотрение предложений — ответ в течение суток</li>
+          <li>Обратная связь по каждому обращению, не теряемся</li>
+          <li>Платим вовремя — ни одной просрочки за 5 лет работы</li>
+          <li>Принимаем пробные партии для оценки качества</li>
+          <li>Готовы к регулярным поставкам большими объёмами</li>
+          <li>Заключаем долгосрочные договоры с фиксированными ценами</li>
+        </ul>
+
+      </div>
+
+      <div class="form-card reveal" style="transition-delay:.12s;">
+        <h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:1px;margin-bottom:16px;">Предложить товар</h3>
+        <form action="https://formsubmit.co/non_86@mail.ru" data-w3f enctype="multipart/form-data" class="form-compact">
+      <input type="hidden" name="subject" value="Предложение поставщика — ОПТЭЛ"><input type="hidden" name="from_page" value="Поставщикам">
+          
+          
+          
+          <div class="form-group">
+            <label class="form-label">Телефон *</label>
+            <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-input" placeholder="your@company.ru" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Компания / ИП</label>
+            <input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Регион поставки</label>
+            <input type="text" name="region" class="form-input" placeholder="г. Иркутск">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Описание товара</label>
+            <textarea name="description" class="form-textarea" placeholder="Что предлагаете: порода, профиль, сечения, объём, цена..." required style="min-height:80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Прайс-лист или фото (необязательно)</label>
+            <div class="file-upload-wrapper">
+              <input type="file" name="attachment" id="supplier-file" accept=".pdf,.xlsx,.xls,.doc,.docx,.jpg,.jpeg,.png" onchange="showFileName(this)">
+              <div class="file-upload-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Загрузить файл
+                <span style="font-size:11px;color:var(--text3);margin-left:auto;">PDF, Excel, Word, фото · до 10 МБ</span>
+              </div>
+            </div>
+            <div class="file-upload-name" id="file-name-display" style="display:none;"></div>
+          </div>
+          <button type="submit" class="btn btn-lime btn-lg" style="width:100%;justify-content:center;margin-top:4px;">Отправить предложение →</button>
+          <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;">
+            <a href="https://t.me/pinkers5" target="_blank" class="btn btn-tg" style="flex:1;justify-content:center;">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.4 4.8l-1.2 5.5c-.1.4-.4.5-.7.3L7.8 10l-.9.9c-.1.1-.2.1-.4.1l.1-1.5 2.8-2.5c.1-.1 0-.2-.2-.1L4.3 9.7 2.8 9.2c-.4-.1-.4-.4.1-.6l8.2-3.2c.4-.1.7.1.3.4z" fill="white"/></svg>
+              Написать в ТГ
+            </a>
+            <a href="https://max.ru/chat/+79999238888" target="_blank" class="btn" style="flex:1;justify-content:center;background:#5856D6;color:#fff;">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.3" fill="none"/><path d="M5 8.5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Написать в MAX
+            </a>
+          </div>
+          <p class="form-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</p>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+<canvas id="matrix-canvas"></canvas>
+<div class="easter-egg-overlay" id="egg-overlay">
+  <div class="easter-egg-text">ОПТЭЛ</div>
+  <div class="easter-egg-sub">г. Ижевск · Воткинское шоссе 204А · +7 9999-23-8888</div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">нажмите куда угодно, чтобы закрыть</div>
+</div>
+<button class="sticky-cta" onclick="openModal('Заказать звонок')">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2h3.5L7 6l-1.5 1A7 7 0 009 10.5L10 9l4 1.5V14a1 1 0 01-1 1C5.4 15 1 10.6 1 5a1 1 0 011-1z" fill="currentColor"/></svg>
+  <span class="cta-text">Заказать звонок</span>
+</button>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Заказать звонок</h3>
+    <p class="modal-desc">Свяжемся сразу — рассчитаем стоимость.</p>
+    <form method="POST" id="modal-form">
+      <input type="hidden" name="_subject" value="Предложение поставщика — ОПТЭЛ">
+      <input type="hidden" name="_source" value="Поставщикам">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      
+      <div class="form-group"><label class="form-label">Имя *</label><input type="text" name="name" class="form-input" placeholder="Иванов Иван" required></div>
+      <div class="form-group"><label class="form-label">Телефон *</label><input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label class="form-label">Компания</label><input type="text" name="company" class="form-input" placeholder='ООО "Ваша компания"'></div>
+      <div class="form-group"><label class="form-label">Объём (м³)</label><input type="text" name="volume" class="form-input" placeholder="напр. 30 м³"></div>
+      <button type="submit" class="modal-submit">Отправить →</button>
+    </form>
+    <div class="modal-note">Нажимая кнопку, вы принимаете <a href="privacy.html" style="color:var(--lime);">политику конфиденциальности</a> и даёте согласие на <a href="data-policy.html" style="color:var(--lime);">обработку персональных данных</a>.</div>
+  </div>
+</div>
+</div>
+
+<section style="padding:36px 0 40px;border-top:1px solid var(--border);">
+  <div class="container">
+    <p id="seo-suppliers" style="font-size:14px;line-height:1.85;color:var(--text3);max-width:860px;">Постоянно расширяем базу поставщиков и рассматриваем предложения по строганым пиломатериалам из хвойных и лиственных пород. Интересует качественный товар с правильной геометрией, редкие сечения и нестандартные профили. Особенно востребованы лиственница, кедр и ольха — если работаете с этими породами, пишите в первую очередь. Работаем официально: договор, полный документооборот, оплата в срок. Долгосрочное сотрудничество — наш приоритет. Заполните форму или свяжитесь напрямую.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">ОПТ<span>ЭЛ</span></div><div class="footer-info" style="margin-top:6px;">г. Ижевск, Воткинское шоссе 204А · <a href="tel:+79999238888" style="color:var(--text3);">+7 9999-23-8888</a></div></div>
+    <div class="footer-links"><span class="footer-vat">НДС 22%</span><a href="privacy.html">Конфиденциальность</a><a href="data-policy.html">Политика данных</a><span style="color:var(--text3);font-size:12px;">© ОПТЭЛ 2026</span></div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:10px 0;margin-top:4px;">
+    <div class="container">
+      <p style="font-size:10px;color:var(--text3);line-height:1.4;margin:0;">Цены на сайте носят исключительно информационный характер и не являются публичной офертой (ст.&nbsp;437 ГК РФ).</p>
+    </div>
+  </div>
+</footer>
+<script>
+function showFileName(input) {
+  const el = document.getElementById('file-name-display');
+  if (!el) return;
+  if (input.files && input.files[0]) {
+    el.textContent = '✓ ' + input.files[0].name;
+    el.style.display = 'block';
+  }
+}
+</script>
+<script src="shared.js"></script></body></html>
