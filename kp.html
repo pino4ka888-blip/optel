@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>КП — ОПТЭЛ</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@page { margin: 0; background: #0a0f0a; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0f0a;
+  --bg2: #152015;
+  --lime: #aaff00;
+  --border: rgba(130,200,80,0.2);
+  --text: #e8f5e0;
+  --text2: #8aaa78;
+}
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 10px;
+  line-height: 1.35;
+  padding: 12mm;
+  max-width: 210mm;
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--lime);
+  margin-bottom: 4px;
+}
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--lime);
+  margin: 12px 0 6px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+}
+h3 { font-size: 10px; font-weight: 700; margin-bottom: 3px; }
+p { margin-bottom: 5px; color: var(--text2); }
+ul { margin: 5px 0 5px 12px; }
+li { margin-bottom: 2px; color: var(--text2); }
+.header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-end;
+  margin-bottom: 10px; 
+  padding-bottom: 8px; 
+  border-bottom: 2px solid var(--lime); 
+}
+.header-contacts { text-align: right; }
+.header-phone { 
+  display: block;
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 22px; 
+  color: var(--lime); 
+  text-decoration: none;
+}
+.header-site { 
+  display: block;
+  font-size: 12px; 
+  color: var(--text2); 
+  text-decoration: none;
+}
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--lime); letter-spacing: 4px; }
+.logo span { color: #ffb830; }
+.subtitle { font-size: 10px; color: #4d6644; }
+.table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+.table th, .table td { border: 1px solid var(--border); padding: 4px 6px; text-align: left; }
+.table th { background: var(--bg2); font-weight: 700; font-size: 9px; color: var(--text2); }
+.table td { font-size: 9px; }
+.price { font-weight: 700; color: var(--lime); }
+.col3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.adv { border-left: 3px solid var(--lime); padding: 4px 8px; font-size: 9px; color: var(--text2); }
+.adv::before { content: '✓ '; color: var(--lime); font-weight: 700; }
+.contacts { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); text-align: center; }
+.phone { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--lime); text-decoration: none; }
+.note { font-size: 8px; color: #4d6644; margin-top: 4px; }
+@media print { 
+  body { padding: 8mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+  @page { margin: 0; background: #0a0f0a !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo">ОПТ<span>ЭЛ</span></div>
+    <div class="subtitle">Коммерческое предложение</div>
+  </div>
+  <div class="header-contacts">
+    <a class="header-phone" href="tel:+79999238888">+7 9999-23-8888</a>
+    <a class="header-site" href="https://optel18.ru">optel18.ru</a>
+  </div>
+</div>
+
+<p><strong>ОПТЭЛ</strong> — прямой поставщик строганых пиломатериалов. 5 лет на рынке. НДС 22%. Свой склад: г. Ижевск.</p>
+
+<h2>📦 Продукция и цены</h2>
+
+<table class="table">
+<tr><th>Наименование</th><th>Порода</th><th>Сорта</th><th>Размеры</th><th>Цена</th></tr>
+<tr><td>Вагонка Штиль</td><td>Сосна</td><td>Экстра, Прима, А, В, С</td><td>14×110, 14×138 × 2000–4000</td><td class="price">от 23 000 ₽/м³</td></tr>
+<tr><td>Вагонка Штиль</td><td>Лиственница</td><td>Экстра, Прима, А, В, С</td><td>14×110, 14×138 × 2000–4000</td><td class="price">от 42 000 ₽/м³</td></tr>
+<tr><td>Имитация бруса</td><td>Сосна, Лиственница</td><td>Экстра, Прима, А, В, С</td><td>20×90–140 × до 6000</td><td class="price">от 35 000 ₽/м³</td></tr>
+<tr><td>Террасная доска</td><td>Лиственница</td><td>Прима, А</td><td>27×140 × 2000–4000</td><td class="price">от 65 000 ₽/м³</td></tr>
+<tr><td>Планкен к��сой</td><td>Лиственница</td><td>В, ВС</td><td>20×90, 20×120 × 6000</td><td class="price">от 33 500 ₽/м³</td></tr>
+<tr><td>Планкен прямой</td><td>Лиственница</td><td>Экстра, Прима, В</td><td>20×120, 20×140 × 6000</td><td class="price">от 41 000 ₽/м³</td></tr>
+<tr><td>Палубная доска</td><td>Лиственница</td><td>Прима</td><td>27×140 × 2000–2500</td><td class="price">от 91 000 ₽/м³</td></tr>
+<tr><td>Доска пола</td><td>Сосна, Лиственница</td><td>Экстра, Прима, А, В</td><td>35×90–110 × до 6000</td><td class="price">от 28 000 ₽/м³</td></tr>
+<tr><td>Полок банный</td><td>Лиственница, Ольха, Кедр</td><td>—</td><td>25×90–110 × до 3000</td><td class="price">от 45 000 ₽/м³</td></tr>
+</table>
+
+<h2>✅ Преимущества</h2>
+
+<div class="col3">
+<div class="adv">Ручная переборка</div>
+<div class="adv">Свой склад</div>
+<div class="adv">Мелкий опт</div>
+<div class="adv">Доставка по России</div>
+<div class="adv">Страхуем груз</div>
+<div class="adv">Документы НДС</div>
+<div class="adv">Фотоотчёт</div>
+<div class="adv">5 сортов</div>
+<div class="adv">Гарантия 99,9%</div>
+</div>
+
+<h2>📋 Условия</h2>
+<ul>
+<li>📦 <strong>от 20 м³</strong></li>
+<li>💰 НДС 22%</li>
+<li>🚚 Доставка по РФ</li>
+</ul>
+
+<div class="contacts">
+<a class="phone">+7 9999-23-8888</a>
+<p>г. Ижевск, Воткинское шоссе 204А</p>
+<p class="note">Цены носят информационный характер (ст. 437 ГК РФ)</p>
+</div>
+
+</body>
+</html>
