@@ -324,7 +324,7 @@
             </div>
             <div style="background:var(--bg);border-radius:6px;padding:8px 10px;">
               <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Штук</div>
-              <div id="det-qty" style="font-size:15px;color:var(--text2);font-weight:700;">—</div>
+              <input type="number" id="det-qty-input" value="1" min="1" style="width:100%;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:15px;color:var(--lime);font-weight:700;text-align:center;" onchange="updateDetCalculation()" oninput="updateDetCalculation()">
             </div>
             <div style="background:var(--bg);border-radius:6px;padding:8px 10px;">
               <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Сумма</div>
@@ -458,23 +458,43 @@ function selectProd(idx) {
   document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · в наличии ' + p.qty.toLocaleString('ru') + ' шт';
   document.getElementById('det-vol').textContent = p.m3.toFixed(2) + ' м³';
   document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽';
-  document.getElementById('det-qty').textContent = p.qty.toLocaleString('ru') + ' шт';
-  document.getElementById('det-sum').textContent = p.sum.toLocaleString('ru') + ' ₽';
+  document.getElementById('det-qty-input').value = 1;
+  document.getElementById('det-qty-input').max = p.qty;
+  document.getElementById('det-sum').textContent = p.price.toLocaleString('ru') + ' ₽';
+  document.getElementById('det-sum').dataset.volSingle = p.m3;
+  document.getElementById('det-sum').dataset.priceEach = p.price;
   document.getElementById('det-grid').style.display = 'grid';
   document.getElementById('det-cart-btn').style.display = 'block';
   document.getElementById('det-order-btn').style.display = 'block';
   document.getElementById('det-preorder').style.display = 'none';
 }
 
+function updateDetCalculation() {
+  if (curSel < 0) return;
+  var p = PROD_DATA[curSel];
+  var qtyInput = document.getElementById('det-qty-input');
+  var qty = parseInt(qtyInput.value) || 1;
+  if (qty < 1) qty = 1;
+  if (qty > p.qty) qty = p.qty;
+  qtyInput.value = qty;
+  var vol = p.m3 * qty;
+  var sum = p.price * qty;
+  document.getElementById('det-vol').textContent = vol.toFixed(2) + ' м³';
+  document.getElementById('det-sum').textContent = sum.toLocaleString('ru') + ' ₽';
+}
+
 function addToCartFromDetail() {
   if (curSel < 0) return;
   var p = PROD_DATA[curSel];
+  var qty = parseInt(document.getElementById('det-qty-input').value) || 1;
+  var vol = (p.m3 * qty).toFixed(2);
+  var price = (p.price * qty).toLocaleString('ru');
   var CART_KEY = 'optel_cart';
   var cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) {}
   var item = { type: p.g, name: p.label + ' ' + p.name, sort: p.sort, size: p.name,
-    len: p.name.split('×')[2] ? p.name.split('×')[2] + ' мм' : '', vol: p.m3.toFixed(2),
-    price: p.price.toLocaleString('ru'), key: p.g+'_'+p.sort+'_'+p.name };
+    len: p.name.split('×')[2] ? p.name.split('×')[2] + ' мм' : '', vol: vol,
+    price: price, qty: qty, key: p.g+'_'+p.sort+'_'+p.name };
   var exists = cart.findIndex(function(c){return c.key===item.key;});
   if (exists>=0) cart[exists]=item; else cart.push(item);
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
