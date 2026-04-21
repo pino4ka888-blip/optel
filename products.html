@@ -455,13 +455,16 @@ function selectProd(idx) {
   var p = PROD_DATA[idx];
   var m3PerPiece = p.qty > 0 ? p.m3 / p.qty : p.m3;
   p.m3PerPiece = m3PerPiece;
+  p.pricePerPiece = p.price * m3PerPiece;
   renderProdList();
   document.getElementById('det-title').textContent = p.label + ' ' + p.name;
   document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · в наличии ' + p.qty.toLocaleString('ru') + ' шт';
-  document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽/м³';
-  document.getElementById('det-qty-input').value = 1;
+  document.getElementById('det-qty-input').value = '';
+  document.getElementById('det-qty-input').placeholder = '1-' + p.qty;
   document.getElementById('det-qty-input').max = p.qty;
-  updateDetCalculation();
+  document.getElementById('det-price').textContent = p.pricePerPiece.toLocaleString('ru') + ' ₽/шт';
+  document.getElementById('det-vol').textContent = m3PerPiece.toFixed(4) + ' м³';
+  document.getElementById('det-sum').textContent = p.pricePerPiece.toLocaleString('ru') + ' ₽';
   document.getElementById('det-grid').style.display = 'grid';
   document.getElementById('det-cart-btn').style.display = 'block';
   document.getElementById('det-order-btn').style.display = 'block';
@@ -472,23 +475,37 @@ function updateDetCalculation() {
   if (curSel < 0) return;
   var p = PROD_DATA[curSel];
   var qtyInput = document.getElementById('det-qty-input');
-  var qty = parseInt(qtyInput.value) || 1;
+  var qtyVal = qtyInput.value;
+  var m3PerPiece = p.m3PerPiece || (p.qty > 0 ? p.m3 / p.qty : p.m3);
+  if (!qtyVal || qtyVal.trim() === '') {
+    var pricePerPiece = p.pricePerPiece || (p.price * m3PerPiece);
+    document.getElementById('det-vol').textContent = m3PerPiece.toFixed(4) + ' м³';
+    document.getElementById('det-price').textContent = pricePerPiece.toLocaleString('ru') + ' ₽/шт';
+    document.getElementById('det-sum').textContent = pricePerPiece.toLocaleString('ru') + ' ₽';
+    return;
+  }
+  var qty = parseInt(qtyVal) || 1;
   if (qty < 1) qty = 1;
   if (qty > p.qty) qty = p.qty;
   qtyInput.value = qty;
-  var m3PerPiece = p.m3PerPiece || (p.qty > 0 ? p.m3 / p.qty : p.m3);
   var vol = m3PerPiece * qty;
   var sum = p.price * vol;
   document.getElementById('det-vol').textContent = vol.toFixed(4) + ' м³';
+  document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽/м³';
   document.getElementById('det-sum').textContent = Math.round(sum).toLocaleString('ru') + ' ₽';
 }
 
 function addToCartFromDetail() {
   if (curSel < 0) return;
   var p = PROD_DATA[curSel];
-  var qty = parseInt(document.getElementById('det-qty-input').value) || 1;
-  var vol = (p.m3 * qty).toFixed(2);
-  var price = (p.price * qty).toLocaleString('ru');
+  var qtyVal = document.getElementById('det-qty-input').value;
+  var qty = (!qtyVal || qtyVal.trim() === '') ? 1 : parseInt(qtyVal);
+  if (qty < 1) qty = 1;
+  if (qty > p.qty) qty = p.qty;
+  var m3PerPiece = p.m3PerPiece || (p.qty > 0 ? p.m3 / p.qty : p.m3);
+  var vol = (m3PerPiece * qty).toFixed(4);
+  var sum = p.price * m3PerPiece * qty;
+  var price = Math.round(sum).toLocaleString('ru');
   var CART_KEY = 'optel_cart';
   var cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) {}
