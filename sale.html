@@ -199,11 +199,11 @@
       <input type="text" id="s-search" placeholder="Поиск по названию…" oninput="doSearch()" class="field-input">
       <select id="s-sort" onchange="doSort()">
         <option value="">По умолчанию</option>
-        <option value="pa">Цена акц. ↑</option>
-        <option value="pa_d">Цена акц. ↓</option>
-        <option value="qty">Кол-во ↑</option>
-        <option value="qty_d">Кол-во ↓</option>
-        <option value="m2">М² ↓</option>
+        <option value="pa">Акц. цена/шт ↑</option>
+        <option value="pa_d">Акц. цена/шт ↓</option>
+        <option value="qty">Кол-во в наличии ↑</option>
+        <option value="qty_d">Кол-во в наличии ↓</option>
+        <option value="m2">М² в наличии ↓</option>
       </select>
     </div>
 
@@ -214,11 +214,11 @@
             <tr>
               <th style="width:36%">Наименование</th>
               <th>Сорт</th>
-              <th style="text-align:right">Кол-во</th>
-              <th style="text-align:right">М²</th>
-              <th>Цена</th>
+              <th style="text-align:right">Кол-во в наличии</th>
+              <th style="text-align:right">М² в наличии</th>
+              <th>Цена/шт</th>
               <th>Скидка</th>
-              <th>Акц. цена</th>
+              <th>Акц. цена/шт</th>
               <th></th>
             </tr>
           </thead>
