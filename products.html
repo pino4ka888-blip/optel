@@ -290,8 +290,14 @@
       <!-- Список товаров -->
       <div class="prod-table-wrap">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
-          <!-- Top header removed; using internal header for all widths -->
-          <!-- Removed top header; use grid header only -->
+          <!-- Reintroduced grid header for all widths -->
+          <div class="prod-col-header" style="display:grid;grid-template-columns:1fr 80px 70px 90px 80px;padding:9px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Позиция</div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Сорт</div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">М³</div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">₽/м³</div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">Штук</div>
+          </div>
           <div id="prod-list"></div>
         </div>
       </div>

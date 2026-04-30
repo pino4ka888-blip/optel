@@ -388,7 +388,8 @@ section:last-child { border-bottom: none; }
 
 /* Desktop: internal header is visible by default in the DOM (no extra rule) */
 @media(min-width: 769px){
-  .prod-col-header { display:grid; }
+  .prod-col-header { display:grid !important; grid-template-columns:1fr 80px 70px 90px 80px; }
+  .prod-col-header > div { color: var(--text); font-weight: 700; font-size: 11px; text-transform: uppercase; }
 }
 
  /* ── SORT TAGS ── */
