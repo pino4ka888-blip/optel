@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Торговое объединение — ОПТЭЛ</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0f0a;
+  --bg2: #152015;
+  --lime: #aaff00;
+  --border: rgba(130,200,80,0.2);
+  --text: #e8f5e0;
+  --text2: #8aaa78;
+}
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 10px;
+  line-height: 1.35;
+  padding: 12mm;
+  max-width: 210mm;
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--lime);
+  margin-bottom: 4px;
+}
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  color: var(--lime);
+  margin: 10px 0 5px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+}
+h3 { font-size: 10px; font-weight: 700; margin-bottom: 3px; }
+p { margin-bottom: 5px; color: var(--text2); }
+ul { margin: 5px 0 5px 12px; }
+li { margin-bottom: 2px; color: var(--text2); }
+.header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-end;
+  margin-bottom: 10px; 
+  padding-bottom: 8px; 
+  border-bottom: 2px solid var(--lime); 
+}
+.header-contacts { text-align: right; }
+.header-phone { 
+  display: block;
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 24px; 
+  color: var(--lime); 
+  text-decoration: none;
+}
+.header-site { 
+  display: block;
+  font-size: 12px; 
+  color: var(--text2); 
+  text-decoration: none;
+}
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--lime); letter-spacing: 4px; }
+.logo span { color: #ffb830; }
+.subtitle { font-size: 10px; color: #4d6644; }
+
+.quote {
+  background: rgba(170,255,0,0.08);
+  border-left: 3px solid var(--lime);
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 10px;
+  color: var(--text);
+}
+.quote strong { color: var(--lime); }
+
+.box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.box-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  color: var(--lime);
+  margin-bottom: 6px;
+}
+
+.col2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.col3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+
+.item { border: 1px solid var(--border); padding: 8px; }
+.item-title { font-weight: 700; font-size: 10px; margin-bottom: 4px; }
+
+.adv {
+  border-left: 3px solid var(--lime);
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  font-size: 9px;
+  color: var(--text2);
+}
+.adv::before { content: '✓ '; color: var(--lime); font-weight: 700; }
+
+.benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.benefit {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 6px;
+  font-size: 8px;
+}
+.benefit-title {
+  color: var(--lime);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.cta {
+  background: rgba(170,255,0,0.1);
+  border: 2px solid var(--lime);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+  text-align: center;
+}
+.cta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--lime);
+  margin-bottom: 5px;
+}
+.cta p { font-size: 9px; margin-bottom: 0; }
+
+.contacts { 
+  margin-top: 12px; 
+  padding-top: 8px; 
+  border-top: 1px solid var(--border); 
+  text-align: center; 
+}
+.phone { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 20px; 
+  color: var(--lime); 
+  text-decoration: none; 
+}
+.site {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--lime);
+  text-decoration: none;
+}
+.note { font-size: 8px; color: #4d6644; margin-top: 5px; }
+
+.table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+.table th, .table td { border: 1px solid var(--border); padding: 4px 5px; text-align: left; }
+.table th { background: var(--bg2); font-weight: 700; font-size: 8px; color: var(--text2); }
+.table td { font-size: 8px; }
+.price { font-weight: 700; color: var(--lime); }
+
+@media print { 
+  body { padding: 8mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+  @page { margin: 0; background: #0a0f0a !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo">ОПТ<span>ЭЛ</span></div>
+    <div class="subtitle">Торговое объединение</div>
+  </div>
+  <div class="header-contacts">
+    <a class="header-phone" href="tel:+79999238888">+7 9999-23-8888</a>
+    <a class="header-site" href="https://optel18.ru">optel18.ru</a>
+  </div>
+</div>
+
+<div class="quote">
+<strong>Мы в поисках партнёра именно в вашем регионе.</strong><br>
+Хватит пытаться пробиться в одиночку — мы предлагаем расти вместе!<br>
+Не согласитесь вы — скорее всего согласятся ваши конкуренты.<br>
+Наша цель — сформировать торговое объединение отрасли.<br>
+<strong>Мы хотим, чтобы на наш союз ровнялись конкуренты!</strong>
+</div>
+
+<h2>Что мы предлагаем</h2>
+
+<div class="box">
+<div class="box-title">Торговое объединение</div>
+<p>Просто предлагаете наш товар, мы предлагаем ваш в вашем регионе — зарабатывают все с каждой сделки. Главное — это захват рынка!</p>
+</div>
+
+<h2>Почему это выгодно</h2>
+
+<div class="benefits">
+<div class="benefit">
+<div class="benefit-title">✓ Расширение ассортимента</div>
+Добавляете 17+ позиций пиломатериалов без закупки и складирования
+</div>
+<div class="benefit">
+<div class="benefit-title">✓ Дополнительный доход</div>
+Получаем комиссию с каждой сделки — без затрат на склад и персонал
+</div>
+<div class="benefit">
+<div class="benefit-title">✓ Взаимная реклама</div>
+Мы рекомендуем вас клиентам, вы — нас. Оба получаем новых покупателей
+</div>
+<div class="benefit">
+<div class="benefit-title">✓ Информирование строителей</div>
+Информирование строителей и застройщиков — ценные контакты для роста взаимных продаж
+</div>
+<div class="benefit">
+<div class="benefit-title">✓ Диктуем условия рынку</div>
+Возможность формирования цен для максимальной выгоды партнёров
+</div>
+<div class="benefit">
+<div class="benefit-title">✓ Репутационный рост</div>
+Предлагаете полный комплекс — клиенты видят экспертизу и надёжность
+</div>
+</div>
+
+<h2>Что входит в партнёрство</h2>
+
+<div class="col2">
+<div class="item">
+<div class="item-title">📦 Продукция</div>
+Вагонка, имитация бруса, террасная доска, планкен, палубная доска, доска пола. 5 сортов
+</div>
+<div class="item">
+<div class="item-title">📷 Начинаем с малого</div>
+Минимальная партия отгрузки по любым позициям от 200 000 рублей
+</div>
+<div class="item">
+<div class="item-title">🚚 Доставка</div>
+Организация доставки груза до двери. Груз страхуется на 100%
+</div>
+<div class="item">
+<div class="item-title">📞 Поддержка</div>
+Персональный менеджер для партнёров. Помогаем с расчётами и документами
+</div>
+</div>
+
+<h2>Основной прайс-лист</h2>
+
+<table class="table">
+<tr><th>Позиция</th><th>Сорт</th><th>М³</th><th>₽/м³</th><th>Наличие</th></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×4000</td><td>В</td><td>3.09</td><td class="price">38 000</td><td>400 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×4000</td><td>А</td><td>6.18</td><td class="price">57 000</td><td>800 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×2000</td><td>В</td><td>5.80</td><td class="price">37 267</td><td>1500 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×2000</td><td>С</td><td>1.55</td><td class="price">23 000</td><td>400 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×3000</td><td>Прима</td><td>1.85</td><td class="price">92 000</td><td>400 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×4000</td><td>Экстра</td><td>3.08</td><td class="price">138 000</td><td>500 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×4000</td><td>Прима</td><td>3.08</td><td class="price">92 000</td><td>500 шт</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×2000</td><td>С</td><td>1.08</td><td class="price">23 000</td><td>350 шт</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×138×3000</td><td>В</td><td>2.32</td><td class="price">42 000</td><td>400 шт</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×138×2500</td><td>В</td><td>1.45</td><td class="price">42 000</td><td>300 шт</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×138×4000</td><td>В</td><td>2.32</td><td class="price">42 000</td><td>300 шт</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×110×3000</td><td>В</td><td>0.92</td><td class="price">42 000</td><td>200 шт</td></tr>
+<tr><td>Планкен косой, Лиственница, 20×120×6000</td><td>В</td><td>7.20</td><td class="price">41 000</td><td>500 шт</td></tr>
+<tr><td>Планкен косой, Лиственница, 20×90×6000</td><td>В</td><td>3.24</td><td class="price">41 000</td><td>300 шт</td></tr>
+<tr><td>Планкен косой, Лиственница, 20×120×6000</td><td>ВС</td><td>5.04</td><td class="price">33 500</td><td>350 шт</td></tr>
+<tr><td>Палубная доска, Лиственница, 27×140×2500</td><td>Прима</td><td>2.36</td><td class="price">91 000</td><td>250 шт</td></tr>
+<tr><td>Палубная доска, Лиственница, 27×140×2000</td><td>Прима</td><td>3.02</td><td class="price">91 000</td><td>400 шт</td></tr>
+</table>
+
+<h2>Стоковые цены для мелкого опта на сегодняшний день</h2>
+
+<table class="table">
+<tr><th>Наименование</th><th>Сорт</th><th>Кол-во</th><th>Цена/шт</th></tr>
+<tr><td>Планкен косой, лиственница, 20×140×3000, Сорт Прима</td><td>Прима</td><td>311</td><td class="price">817 ₽</td></tr>
+<tr><td>Планкен косой, лиственница, 20×120×6000, Сорт Прима</td><td>Прима</td><td>21</td><td class="price">1 527 ₽</td></tr>
+<tr><td>Вагонка, лиственница, 15×110×3000, сорт А</td><td>А</td><td>50</td><td class="price">228 ₽</td></tr>
+<tr><td>Вагонка, лиственница, 14×135×3000, Сорт А</td><td>А</td><td>20</td><td class="price">309 ₽</td></tr>
+<tr><td>Планкен прямой, лиственница, 21×140×2500, Сорт А</td><td>А</td><td>33</td><td class="price">310 ₽</td></tr>
+<tr><td>Планкен прямой, лиственница, 21×140×4000, Сорт А</td><td>А</td><td>14</td><td class="price">576 ₽</td></tr>
+<tr><td>Террасная доска, лиственница, 27×142×3000, Сорт В</td><td>В</td><td>23</td><td class="price">253 ₽</td></tr>
+<tr><td>Террасная доска, лиственница, 27×140×1000, Сорт А</td><td>А</td><td>46</td><td class="price">98 ₽</td></tr>
+<tr><td>Имитация бруса, Кедр Ангарский, 21×135×3000, Сорт А</td><td>А</td><td>273</td><td class="price">550 ₽</td></tr>
+<tr><td>Имитация бруса, сосна Ангарская, 21×165×6000, Сорт С</td><td>С</td><td>143</td><td class="price">509 ₽</td></tr>
+</table>
+
+<h2>О компании</h2>
+
+<ul>
+<li>🏭 5 лет на рынке пиломатериалов</li>
+<li>📍 Свой склад в г. Ижевск</li>
+<li>💰 Работаем с НДС 22%</li>
+<li>✓ Ручная переборка — гарантия сортности 99,9%</li>
+<li>🚚 Доставка по России</li>
+<li>📷 Фотоотчёт перед каждой отгрузкой</li>
+<li>📋 Свои технические условия для контроля качества: https://optel18.ru/technical.html</li>
+</ul>
+
+<div class="cta">
+<div class="cta-title">Присоединяйтесь к объединению</div>
+<p>Сделаем работу отрасли комфортной и продуктивной</p>
+</div>
+
+<div class="contacts">
+<a class="phone" href="tel:+79999238888">+7 9999-23-8888</a>
+<br>
+<a class="site" href="https://optel18.ru">optel18.ru</a>
+<p>г. Ижевск, Воткинское шоссе 204А</p>
+<p class="note">ОПТЭЛ © 2026 | Предложение не является публичной офертой</p>
+</div>
+
+</body>
+</html>

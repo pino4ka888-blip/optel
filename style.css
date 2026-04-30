@@ -365,15 +365,27 @@ section:last-child { border-bottom: none; }
   display: block;
 }
 .stat-label {
-  font-size: 12px;
-  color: var(--text3);
-  letter-spacing: 0.5px;
-  margin-top: 6px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
+   font-size: 12px;
+   color: var(--text3);
+   letter-spacing: 0.5px;
+   margin-top: 6px;
+   font-weight: 600;
+   text-transform: uppercase;
+ }
 
-/* ── SORT TAGS ── */
+ /* ── PROD TABLE MOBILE ── */
+ @media (max-width: 600px) {
+ .prod-table-wrap {
+   overflow-x: auto;
+   -webkit-overflow-scrolling: touch;
+ }
+ .prod-table-wrap .prod-col-header,
+ .prod-table-wrap .prod-row {
+   min-width: 440px;
+ }
+ }
+
+ /* ── SORT TAGS ── */
 .sort-tag {
   display: inline-block;
   padding: 4px 10px;
@@ -1218,8 +1230,9 @@ body.cart-open .sticky-cta { bottom: 90px; }
 /* ── GLOBAL MOBILE FIXES ── */
 @media(max-width:600px) {
   /* Все таблицы — скролл */
-  .teh-block, .spec-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .teh-block, .spec-table-wrap, .prod-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
   table { min-width:360px; }
+  .prod-table-wrap { min-width:420px; }
 
   /* Кнопки — не вылезают */
   .btn { white-space:nowrap; }
