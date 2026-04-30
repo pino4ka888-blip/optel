@@ -382,15 +382,11 @@ section:last-child { border-bottom: none; }
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
   }
-  /* show mobile header row, hide desktop header */
-  .prod-mobile-header { display:flex !important; }
+  /* Top header (prod-col-header) hidden globally; internal header used for all widths */
   .prod-col-header { display:none !important; }
 }
 
-/* Desktop: hide mobile header */
-@media(min-width: 769px){
-  .prod-mobile-header { display:none !important; }
-}
+/* Desktop: internal header is visible by default in the DOM (no extra rule) */
 
  /* ── SORT TAGS ── */
 .sort-tag {
