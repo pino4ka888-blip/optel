@@ -291,11 +291,11 @@
       <div class="prod-table-wrap">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
           <div class="prod-col-header" style="display:grid;grid-template-columns:1fr 80px 70px 90px 80px;padding:9px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Позиция</div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Сорт</div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">М³</div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">₽/м³</div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">Наличие</div>
+            <div style="min-width:140px;flex:1;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Позиция</div>
+            <div style="width:50px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);flex-shrink:0;">Сорт</div>
+            <div style="width:55px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;flex-shrink:0;">М³</div>
+            <div style="width:65px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;flex-shrink:0;">₽/м³</div>
+            <div style="width:70px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;flex-shrink:0;">Штук</div>
           </div>
           <div id="prod-list"></div>
         </div>
@@ -366,27 +366,14 @@
 .sb-vs{background:rgba(255,255,255,0.05);color:var(--text3);}
 @media(max-width:800px){
   #prod-detail{position:static!important;}
-  .prod-row{grid-template-columns:1fr 80px 70px 90px!important;}
-  .pr-qty{display:none!important;}
   [style*="grid-template-columns:1fr 320px"]{grid-template-columns:1fr!important;}
-  .prod-col-header{grid-template-columns:1fr 80px 70px 90px!important;}
 }
-@media(max-width:560px){
-  .prod-row{grid-template-columns:1fr 90px!important;}
-  .pr-num{display:none!important;}
-  [style*="grid-template-columns:1fr 70px 90px 80px"]{grid-template-columns:1fr 90px 80px!important;}
-  .prod-tab{padding:5px 10px!important;font-size:11px!important;}
-  #prod-tabs{gap:5px!important;}
-}
-@media(max-width:400px){
-  .prod-row{grid-template-columns:1fr 80px!important;}
-  .pr-price{font-size:12px!important;}
-}
-/* Mobile table flex layout */
+/* Mobile table - show all columns */
 @media(max-width:768px){
   .prod-col-header, .prod-row {
     display: flex !important;
     flex-wrap: nowrap;
+    overflow-x: auto;
   }
   .prod-col-header > div, .prod-row > div {
     flex-shrink: 0;
@@ -394,12 +381,16 @@
   }
   .prod-col-header > div, .prod-row > div:first-child {
     flex: 1;
-    min-width: 120px;
+    min-width: 140px;
   }
   .prod-col-header > div:nth-child(2), .prod-row > div:nth-child(2) { width: 50px; }
   .prod-col-header > div:nth-child(3), .prod-row > div:nth-child(3) { width: 55px; }
   .prod-col-header > div:nth-child(4), .prod-row > div:nth-child(4) { width: 65px; }
   .prod-col-header > div:nth-child(5), .prod-row > div:nth-child(5) { width: 70px; }
+}
+@media(max-width:560px){
+  .prod-tab{padding:5px 10px!important;font-size:11px!important;}
+  #prod-tabs{gap:5px!important;}
 }
 </style>
 
@@ -460,11 +451,11 @@ function renderProdList() {
     var sc = SORT_CLS[p.sort]||'sb-a';
     var sel = idx===curSel?' sel':'';
     return '<div class="prod-row'+sel+'" onclick="selectProd('+idx+')">' +
-      '<div style="align-self:center;"><div class="pr-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.label+', '+p.name+'</div></div>' +
-      '<div style="align-self:center;"><span class="sb '+sc+'">'+p.sort+'</span></div>' +
-      '<div class="pr-num">'+p.m3.toFixed(2)+'</div>' +
-      '<div class="pr-price">'+p.price.toLocaleString('ru')+'</div>' +
-      '<div class="pr-qty">'+p.qty.toLocaleString('ru')+' шт</div>' +
+      '<div style="align-self:center;flex:1;min-width:140px;"><div class="pr-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.label+', '+p.name+'</div></div>' +
+      '<div style="align-self:center;width:50px;flex-shrink:0;"><span class="sb '+sc+'">'+p.sort+'</span></div>' +
+      '<div class="pr-num" style="width:55px;flex-shrink:0;">'+p.m3.toFixed(2)+'</div>' +
+      '<div class="pr-price" style="width:65px;flex-shrink:0;">'+p.price.toLocaleString('ru')+'</div>' +
+      '<div class="pr-qty" style="width:70px;flex-shrink:0;">'+p.qty.toLocaleString('ru')+' шт</div>' +
     '</div>';
   }).join('');
 }
