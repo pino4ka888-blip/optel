@@ -354,7 +354,7 @@
 .prod-row:last-child{border-bottom:none;}
 .prod-row:hover,.prod-row.sel{background:rgba(170,255,0,0.05);}
 .prod-row.sel{background:rgba(170,255,0,0.08);}
-.pr-name{font-size:13px;color:#fff!important;line-height:1.3;}
+.pr-name{font-size:13px;color:#fff!important;line-height:1.3; display:-webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
 .pr-sub{font-size:11px;color:var(--text3);margin-top:2px;}
 .pr-num{text-align:right;font-size:13px;color:var(--text2);align-self:center;}
 .pr-price{text-align:right;font-size:13px;font-weight:700;color:var(--lime);align-self:center;}
@@ -449,12 +449,12 @@ function renderProdList() {
   var items = curGroup==='all' ? PROD_DATA : PROD_DATA.filter(function(p){return p.g===curGroup;});
   var el = document.getElementById('prod-list');
   if (!el) return;
-  el.innerHTML = items.map(function(p) {
+    el.innerHTML = items.map(function(p) {
     var idx = PROD_DATA.indexOf(p);
     var sc = SORT_CLS[p.sort]||'sb-a';
     var sel = idx===curSel?' sel':'';
     return '<div class="prod-row'+sel+'" onclick="selectProd('+idx+')">' +
-      '<div style="align-self:center;flex:1;min-width:140px;"><div class="pr-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.label+', '+p.name+'</div></div>' +
+      '<div style="align-self:center;flex:1;min-width:140px;"><div class="pr-name">'+p.label+', '+p.name+'</div></div>' +
       '<div style="align-self:center;width:50px;flex-shrink:0;"><span class="sb '+sc+'">'+p.sort+'</span></div>' +
       '<div class="pr-num" style="width:55px;flex-shrink:0;">'+p.m3.toFixed(2)+'</div>' +
       '<div class="pr-price" style="width:65px;flex-shrink:0;">'+p.price.toLocaleString('ru')+'</div>' +
