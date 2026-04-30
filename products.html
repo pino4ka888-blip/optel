@@ -382,6 +382,25 @@
   .prod-row{grid-template-columns:1fr 80px!important;}
   .pr-price{font-size:12px!important;}
 }
+/* Mobile table flex layout */
+@media(max-width:768px){
+  .prod-col-header, .prod-row {
+    display: flex !important;
+    flex-wrap: nowrap;
+  }
+  .prod-col-header > div, .prod-row > div {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .prod-col-header > div, .prod-row > div:first-child {
+    flex: 1;
+    min-width: 120px;
+  }
+  .prod-col-header > div:nth-child(2), .prod-row > div:nth-child(2) { width: 50px; }
+  .prod-col-header > div:nth-child(3), .prod-row > div:nth-child(3) { width: 55px; }
+  .prod-col-header > div:nth-child(4), .prod-row > div:nth-child(4) { width: 65px; }
+  .prod-col-header > div:nth-child(5), .prod-row > div:nth-child(5) { width: 70px; }
+}
 </style>
 
 <script>
