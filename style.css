@@ -382,9 +382,14 @@ section:last-child { border-bottom: none; }
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
   }
-  /* show alternative mobile header and hide desktop header */
-  .prod-header-mobile { display:flex !important; }
+  /* show mobile header row, hide desktop header */
+  .prod-mobile-header { display:flex !important; }
   .prod-col-header { display:none !important; }
+}
+
+/* Desktop: hide mobile header */
+@media(min-width: 769px){
+  .prod-mobile-header { display:none !important; }
 }
 
  /* ── SORT TAGS ── */
