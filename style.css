@@ -378,9 +378,13 @@ section:last-child { border-bottom: none; }
  .prod-table-wrap {
    overflow-x: auto;
    -webkit-overflow-scrolling: touch;
+   width: 100vw;
  }
- .prod-table-wrap .prod-col-header,
- .prod-table-wrap .prod-row {
+ .prod-table-wrap > div {
+   border-radius: 0;
+ }
+ .prod-col-header,
+ .prod-row {
    min-width: 440px;
  }
  }
@@ -1229,11 +1233,6 @@ body.cart-open .sticky-cta { bottom: 90px; }
 
 /* ── GLOBAL MOBILE FIXES ── */
 @media(max-width:600px) {
-  /* Все таблицы — скролл */
-  .teh-block, .spec-table-wrap, .prod-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  table { min-width:360px; }
-  .prod-table-wrap { min-width:420px; }
-
   /* Кнопки — не вылезают */
   .btn { white-space:nowrap; }
   
