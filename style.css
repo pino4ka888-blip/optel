@@ -373,16 +373,19 @@ section:last-child { border-bottom: none; }
    text-transform: uppercase;
  }
 
- /* ── PROD TABLE MOBILE ── */
- @media (max-width: 768px) {
- #prod-grid, [style*="grid-template-columns:1fr 320px"] {
-   display: block !important;
- }
- .prod-table-wrap {
-   overflow-x: auto !important;
-   -webkit-overflow-scrolling: touch;
- }
- }
+/* ── PROD TABLE MOBILE ── */
+@media (max-width: 768px) {
+  #prod-grid, [style*="grid-template-columns:1fr 320px"] {
+    display: block !important;
+  }
+  .prod-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* show alternative mobile header and hide desktop header */
+  .prod-header-mobile { display:flex !important; }
+  .prod-col-header { display:none !important; }
+}
 
  /* ── SORT TAGS ── */
 .sort-tag {
