@@ -290,6 +290,7 @@
       <!-- Список товаров -->
       <div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
           <div class="prod-col-header" style="display:grid;grid-template-columns:1fr 80px 70px 90px 80px;padding:9px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Позиция</div>
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Сорт</div>
@@ -297,7 +298,9 @@
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">₽/м³</div>
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">Наличие</div>
           </div>
-          <div id="prod-list"></div>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+            <div id="prod-list"></div>
+          </div>
         </div>
       </div>
 
@@ -383,6 +386,7 @@
   .pr-price{display:block!important;}
   .pr-num{display:block!important;}
 }
+.prod-list-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 </style>
 
 <script>
