@@ -454,7 +454,7 @@ function renderProdList() {
     var sc = SORT_CLS[p.sort]||'sb-a';
     var sel = idx===curSel?' sel':'';
     return '<div class="prod-row'+sel+'" onclick="selectProd('+idx+')">' +
-      '<div style="align-self:center;flex:1;min-width:140px;"><div class="pr-name">'+p.label+', '+p.name+'</div></div>' +
+      '<div style="align-self:center;flex:1;min-width:140px;"><div class="pr-name" style="white-space:normal;">'+p.label+'<br>'+p.name+'</div></div>' +
       '<div style="align-self:center;width:50px;flex-shrink:0;"><span class="sb '+sc+'">'+p.sort+'</span></div>' +
       '<div class="pr-num" style="width:55px;flex-shrink:0;">'+p.m3.toFixed(2)+'</div>' +
       '<div class="pr-price" style="width:65px;flex-shrink:0;">'+p.price.toLocaleString('ru')+'</div>' +
