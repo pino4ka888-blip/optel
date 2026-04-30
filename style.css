@@ -373,7 +373,7 @@ section:last-child { border-bottom: none; }
    text-transform: uppercase;
  }
 
-/* ── PROD TABLE MOBILE ── */
+/* PROD TABLE MOBILE */
 @media (max-width: 768px) {
   #prod-grid, [style*="grid-template-columns:1fr 320px"] {
     display: block !important;
@@ -382,11 +382,14 @@ section:last-child { border-bottom: none; }
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
   }
-  /* Top header (prod-col-header) hidden globally; internal header used for all widths */
-  .prod-col-header { display:none !important; }
+  /* Keep grid header visible on mobile as alignment with columns */ 
+  .prod-col-header { display:grid; }
 }
 
 /* Desktop: internal header is visible by default in the DOM (no extra rule) */
+@media(min-width: 769px){
+  .prod-col-header { display:grid; }
+}
 
  /* ── SORT TAGS ── */
 .sort-tag {

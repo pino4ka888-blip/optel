@@ -291,14 +291,7 @@
       <div class="prod-table-wrap">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
           <!-- Top header removed; using internal header for all widths -->
-          <!-- Mobile header row aligned with data columns -->
-          <div class="prod-row header" style="display:flex; padding:9px 14px; border-bottom:1px solid var(--border); background:var(--bg);">
-            <div style="flex:1; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3);">Позиция</div>
-            <div style="width:50px; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3);">Сорт</div>
-            <div style="width:55px; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); text-align:right;">М³</div>
-            <div style="width:65px; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); text-align:right;">₽/м³</div>
-            <div style="width:70px; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); text-align:right;">Штук</div>
-          </div>
+          <!-- Removed top header; use grid header only -->
           <div id="prod-list"></div>
         </div>
       </div>
@@ -354,7 +347,10 @@
 .prod-row:last-child{border-bottom:none;}
 .prod-row:hover,.prod-row.sel{background:rgba(170,255,0,0.05);}
 .prod-row.sel{background:rgba(170,255,0,0.08);}
-.pr-name{font-size:13px;color:#fff!important;line-height:1.3; display:-webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+.pr-name{font-size:13px;color:#fff!important;line-height:1.3;}
+@media(max-width:768px){
+  .pr-name{display:-webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+}
 .pr-sub{font-size:11px;color:var(--text3);margin-top:2px;}
 .pr-num{text-align:right;font-size:13px;color:var(--text2);align-self:center;}
 .pr-price{text-align:right;font-size:13px;font-weight:700;color:var(--lime);align-self:center;}
