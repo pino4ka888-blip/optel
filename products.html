@@ -164,7 +164,6 @@
 </style>
 <style>
 @media(max-width:600px) {
-  /* Теги сортов в витрине — крупнее на мобильном */
   .sort-tag {
     font-size: 13px !important;
     padding: 6px 14px !important;
@@ -172,22 +171,18 @@
     display: inline-flex;
     align-items: center;
   }
-  /* Кнопка Подробнее */
   .catalog-hint {
     font-size: 13px !important;
     padding: 8px 14px !important;
   }
-  /* Карточки в витрине — теги с большим gap */
   .catalog-info > div[style*="flex-wrap"] {
     gap: 8px !important;
   }
-  /* Кнопки в карточке товара */
   .pm-body .btn {
     min-height: 44px;
     padding: 12px 18px !important;
     font-size: 14px !important;
   }
-  /* Конфигуратор — поля крупнее */
   .config-sel {
     min-height: 44px;
     font-size: 15px !important;
@@ -265,7 +260,6 @@
 <section>
   <div class="container">
 
-    <!-- Инфо-плашки -->
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:8px;">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#aaff00" stroke-width="1.2"/><path d="M8 4v4l2.5 2" stroke="#aaff00" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -281,28 +275,22 @@
       </div>
     </div>
 
-    <!-- Фильтры по группам -->
     <div class="prod-tabs" id="prod-tabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"></div>
 
-    <!-- Двухколоночный layout -->
     <div id="prod-grid" style="display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;">
 
-      <!-- Список товаров -->
       <div class="prod-table-wrap">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
-          <!-- Reintroduced grid header for all widths -->
-          <div class="prod-col-header" style="display:grid;grid-template-columns:1fr 80px 70px 90px 80px;padding:9px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
+          <div class="prod-col-header" style="display:grid;grid-template-columns:1fr 80px 70px 90px;padding:9px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Позиция</div>
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);">Сорт</div>
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">М³</div>
             <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">₽/м³</div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-align:right;">Штук</div>
           </div>
           <div id="prod-list"></div>
         </div>
       </div>
 
-      <!-- Карточка детали -->
       <div id="prod-detail" style="position:sticky;top:90px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;">
         <div id="det-photo" style="height:160px;background:var(--bg);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);">
           <svg width="80" height="60" viewBox="0 0 80 60" fill="none">
@@ -322,10 +310,6 @@
             <div style="background:var(--bg);border-radius:6px;padding:8px 10px;">
               <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">₽/м³ с НДС</div>
               <div id="det-price" style="font-size:15px;color:var(--lime);font-weight:700;">—</div>
-            </div>
-            <div style="background:var(--bg);border-radius:6px;padding:8px 10px;">
-              <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Штук</div>
-              <input type="number" id="det-qty-input" placeholder="1" min="1" style="width:100%;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:13px;color:var(--text);" onchange="updateDetCalculation()" oninput="updateDetCalculation()">
             </div>
             <div style="background:var(--bg);border-radius:6px;padding:8px 10px;">
               <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Сумма</div>
@@ -349,7 +333,7 @@
 .prod-tab{padding:7px 16px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text3);font-size:12px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:all 0.15s;}
 .prod-tab:hover{border-color:var(--border2);color:var(--text);}
 .prod-tab.on{background:var(--lime);color:#000;border-color:var(--lime);}
-.prod-row{display:grid;grid-template-columns:1fr 80px 70px 90px 80px;padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;gap:0;}
+.prod-row{display:grid;grid-template-columns:1fr 80px 70px 90px;padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;gap:0;}
 .prod-row:last-child{border-bottom:none;}
 .prod-row:hover,.prod-row.sel{background:rgba(170,255,0,0.05);}
 .prod-row.sel{background:rgba(170,255,0,0.08);}
@@ -360,7 +344,6 @@
 .pr-sub{font-size:11px;color:var(--text3);margin-top:2px;}
 .pr-num{text-align:right;font-size:13px;color:var(--text2);align-self:center;}
 .pr-price{text-align:right;font-size:13px;font-weight:700;color:var(--lime);align-self:center;}
-.pr-qty{text-align:right;font-size:12px;color:var(--text3);align-self:center;}
 .sb{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;vertical-align:middle;}
 .sb-ex{background:rgba(170,255,0,0.15);color:var(--lime);}
 .sb-pr{background:rgba(100,200,255,0.1);color:#80d0ff;}
@@ -372,7 +355,6 @@
   #prod-detail{position:static!important;}
   [style*="grid-template-columns:1fr 320px"]{grid-template-columns:1fr!important;}
 }
-/* Mobile table - show all columns */
 @media(max-width:768px){
   .prod-col-header, .prod-row {
     display: flex !important;
@@ -391,7 +373,6 @@
   .prod-col-header > div:nth-child(2), .prod-row > div:nth-child(2) { width: 50px; }
   .prod-col-header > div:nth-child(3), .prod-row > div:nth-child(3) { width: 55px; }
   .prod-col-header > div:nth-child(4), .prod-row > div:nth-child(4) { width: 65px; }
-  .prod-col-header > div:nth-child(5), .prod-row > div:nth-child(5) { width: 70px; }
 }
 @media(max-width:560px){
   .prod-tab{padding:5px 10px!important;font-size:11px!important;}
@@ -401,7 +382,6 @@
 
 <script>
 var PROD_DATA = [
-  /* ===== ИСХОДНЫЕ ТОВАРЫ ===== */
   {g:'vaganka_sosna', label:'Вагонка Штиль, Сосна', name:'14×138×4000', sort:'В', m3:3.0912, price:38000, qty:400, sum:117466},
   {g:'vaganka_sosna', label:'Вагонка Штиль, Сосна', name:'14×138×4000', sort:'А', m3:6.1824, price:57000, qty:800, sum:352397},
   {g:'vaganka_sosna', label:'Вагонка Штиль, Сосна', name:'14×138×2000', sort:'В', m3:5.796, price:37267, qty:1500, sum:216000},
@@ -419,13 +399,12 @@ var PROD_DATA = [
   {g:'planken', label:'Планкен косой, Лиственница', name:'20×120×6000', sort:'ВС', m3:5.04, price:33500, qty:350, sum:168840},
   {g:'paluba', label:'Палубная доска, Лиственница', name:'27×140×2500', sort:'Прима', m3:2.3625, price:91000, qty:250, sum:214988},
   {g:'paluba', label:'Палубная доска, Лиственница', name:'27×140×2000', sort:'Прима', m3:3.024, price:91000, qty:400, sum:275184},
-  
-  /* ===== НОВЫЕ ТОВАРЫ ===== */
+
   {g:'vaganka_sosna', label:'Вагонка Штиль Сосна ангарская', name:'14×88×4000', sort:'АВ', m3:24.6, price:32500, qty:1, sum:798900},
   {g:'vaganka_sosna', label:'Вагонка Штиль Сосна ангарская', name:'14×110×4000', sort:'АВ', m3:68.88, price:33500, qty:1, sum:2307360},
   {g:'vaganka_sosna', label:'Вагонка Штиль Сосна ангарская', name:'14×138×4000', sort:'АВ', m3:180.14, price:32500, qty:1, sum:5854550},
   {g:'vaganka_sosna', label:'Вагонка Штиль Сосна ангарская', name:'14×138×3000', sort:'АВ', m3:22.33, price:32500, qty:1, sum:725725},
-  {g:'paluba', label:'Палубная доска лиственница', name:'40×140×6000', sort:'А', m3:20, price:66500, qty:999999, sum:66499500},
+  {g:'paluba', label:'Палубная доска лиственница', name:'40×140×6000', sort:'А', m3:999999, price:66500, qty:999999, sum:66499500},
   {g:'paluba', label:'Палубная доска лиственница', name:'40×140×5000', sort:'А', m3:999999, price:66500, qty:999999, sum:66499500},
   {g:'paluba', label:'Палубная доска лиственница', name:'40×140×4000', sort:'А', m3:999999, price:61500, qty:999999, sum:61499500},
   {g:'paluba', label:'Палубная доска лиственница', name:'40×140×3000', sort:'А', m3:999999, price:61500, qty:999999, sum:61499500},
@@ -450,6 +429,10 @@ var GROUPS = [
 var SORT_CLS = {Экстра:'sb-ex',Прима:'sb-pr',А:'sb-a',В:'sb-b',С:'sb-c',АВ:'sb-a',ВС:'sb-vs'};
 var curGroup = 'all', curSel = -1;
 
+function formatM3(val) {
+  return val === 999999 ? 'есть' : Number(val).toFixed(2);
+}
+
 function initProdTabs() {
   var el = document.getElementById('prod-tabs');
   if (!el) return;
@@ -459,7 +442,8 @@ function initProdTabs() {
   }).join('');
 }
 
-function setGroup(g, el) { if (!el) el = document.querySelector('[data-gid="'+g+'"]');
+function setGroup(g, el) {
+  if (!el) el = document.querySelector('[data-gid="'+g+'"]');
   curGroup = g;
   document.querySelectorAll('.prod-tab').forEach(function(b){b.classList.remove('on');});
   el.classList.add('on');
@@ -470,16 +454,15 @@ function renderProdList() {
   var items = curGroup==='all' ? PROD_DATA : PROD_DATA.filter(function(p){return p.g===curGroup;});
   var el = document.getElementById('prod-list');
   if (!el) return;
-    el.innerHTML = items.map(function(p) {
+  el.innerHTML = items.map(function(p) {
     var idx = PROD_DATA.indexOf(p);
     var sc = SORT_CLS[p.sort]||'sb-a';
     var sel = idx===curSel?' sel':'';
     return '<div class="prod-row'+sel+'" onclick="selectProd('+idx+')">' +
       '<div style="align-self:center;flex:1;min-width:140px;"><div class="pr-name" style="white-space:normal;">'+p.label+'<br>'+p.name+'</div></div>' +
       '<div style="align-self:center;width:50px;flex-shrink:0;"><span class="sb '+sc+'">'+p.sort+'</span></div>' +
-      '<div class="pr-num" style="width:55px;flex-shrink:0;">'+p.m3.toFixed(2)+'</div>' +
+      '<div class="pr-num" style="width:55px;flex-shrink:0;">'+formatM3(p.m3)+'</div>' +
       '<div class="pr-price" style="width:65px;flex-shrink:0;">'+p.price.toLocaleString('ru')+'</div>' +
-      '<div class="pr-qty" style="width:70px;flex-shrink:0;">'+p.qty.toLocaleString('ru')+' шт</div>' +
     '</div>';
   }).join('');
 }
@@ -492,10 +475,7 @@ function selectProd(idx) {
   p.pricePerPiece = p.price * m3PerPiece;
   renderProdList();
   document.getElementById('det-title').textContent = p.label + ' ' + p.name;
-  document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · в наличии ' + p.qty.toLocaleString('ru') + ' шт';
-  document.getElementById('det-qty-input').value = '';
-  document.getElementById('det-qty-input').placeholder = '1-' + p.qty;
-  document.getElementById('det-qty-input').max = p.qty;
+  document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · ' + (p.qty === 999999 ? 'есть' : ('в наличии ' + p.qty.toLocaleString('ru') + ' шт'));
   document.getElementById('det-price').textContent = p.pricePerPiece.toLocaleString('ru') + ' ₽/шт';
   document.getElementById('det-vol').textContent = m3PerPiece.toFixed(4) + ' м³';
   document.getElementById('det-sum').textContent = p.pricePerPiece.toLocaleString('ru') + ' ₽';
@@ -505,33 +485,8 @@ function selectProd(idx) {
   document.getElementById('det-preorder').style.display = 'none';
 }
 
-function updateDetCalculation() {
-  if (curSel < 0) return;
-  var p = PROD_DATA[curSel];
-  var qtyInput = document.getElementById('det-qty-input');
-  var qtyVal = qtyInput.value;
-  var m3PerPiece = p.m3PerPiece || (p.qty > 0 ? p.m3 / p.qty : p.m3);
-  if (!qtyVal || qtyVal.trim() === '') {
-    var pricePerPiece = p.pricePerPiece || (p.price * m3PerPiece);
-    document.getElementById('det-vol').textContent = m3PerPiece.toFixed(4) + ' м³';
-    document.getElementById('det-price').textContent = pricePerPiece.toLocaleString('ru') + ' ₽/шт';
-    document.getElementById('det-sum').textContent = pricePerPiece.toLocaleString('ru') + ' ₽';
-    return;
-  }
-  var qty = parseInt(qtyVal) || 1;
-  if (qty < 1) qty = 1;
-  if (qty > p.qty) qty = p.qty;
-  qtyInput.value = qty;
-  var vol = m3PerPiece * qty;
-  var sum = p.price * vol;
-  document.getElementById('det-vol').textContent = vol.toFixed(4) + ' м³';
-  document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽/м³';
-  document.getElementById('det-sum').textContent = Math.round(sum).toLocaleString('ru') + ' ₽';
-}
-
 function addToCartFromDetail() {
   if (curSel < 0) return;
-  var p = PROD_DATA[curSel];
   var btn = document.getElementById('det-cart-btn');
   btn.textContent = '✓ Добавлено';
   btn.style.background = 'var(--text)';
