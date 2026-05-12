@@ -323,8 +323,8 @@
               <div id="det-price" style="font-size:15px;color:var(--lime);font-weight:700;">—</div>
             </div>
             <div id="det-qty-wrap" style="background:var(--bg);border-radius:6px;padding:8px 10px;">
-              <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Штук</div>
-              <input type="number" id="det-qty-input" placeholder="1" min="1" style="width:100%;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:15px;color:var(--lime);font-weight:700;text-align:center;" oninput="updateDetCalculation()">
+              <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Кол-во м³</div>
+              <input type="number" id="det-qty-input" placeholder="" min="0.01" step="0.01" style="width:100%;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:15px;color:var(--lime);font-weight:700;text-align:center;" oninput="updateDetCalculation()">
             </div>
             <div style="background:var(--bg);border-radius:6px;padding:8px 10px;">
               <div style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Сумма</div>
@@ -540,22 +540,21 @@ function selectProd(idx) {
   preorderEl.style.display = 'none';
   if (qw) qw.style.display = '';
 
-  var m3PerPiece = p.qty > 0 ? p.m3 / p.qty : p.m3;
-  p.m3PerPiece = m3PerPiece;
-  p.pricePerPiece = p.price * m3PerPiece;
-
   if (!p.piecesKnown) {
-    document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · на складе ' + p.m3.toLocaleString('ru', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' м³ (партия)';
+    document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · на складе до ' + p.m3.toLocaleString('ru', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' м³';
   } else {
-    document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · в наличии ' + p.qty.toLocaleString('ru') + ' шт';
+    document.getElementById('det-sub').textContent = 'Сорт ' + p.sort + ' · на складе до ' + p.m3.toLocaleString('ru', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' м³ (' + p.qty.toLocaleString('ru') + ' шт)';
   }
 
-  document.getElementById('det-qty-input').value = '';
-  document.getElementById('det-qty-input').placeholder = '1–' + p.qty;
-  document.getElementById('det-qty-input').max = p.qty;
-  document.getElementById('det-price').textContent = p.pricePerPiece.toLocaleString('ru') + ' ₽/шт';
-  document.getElementById('det-vol').textContent = m3PerPiece.toFixed(4) + ' м³';
-  document.getElementById('det-sum').textContent = p.pricePerPiece.toLocaleString('ru') + ' ₽';
+  var qIn = document.getElementById('det-qty-input');
+  qIn.value = '';
+  qIn.placeholder = 'макс. ' + p.m3.toLocaleString('ru', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' м³';
+  qIn.max = p.m3;
+  qIn.min = 0.01;
+  qIn.step = 0.01;
+  document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽/м³';
+  document.getElementById('det-vol').textContent = '—';
+  document.getElementById('det-sum').textContent = '—';
   document.getElementById('det-grid').style.display = 'grid';
   cartBtn.style.display = 'block';
   orderBtn.style.display = 'block';
@@ -568,24 +567,25 @@ function updateDetCalculation() {
   var p = PROD_DATA[curSel];
   if (p.needsQuote) return;
   var qtyInput = document.getElementById('det-qty-input');
-  var qtyVal = qtyInput.value;
-  var m3PerPiece = p.m3PerPiece || (p.qty > 0 ? p.m3 / p.qty : p.m3);
-  if (!qtyVal || qtyVal.trim() === '') {
-    var pricePerPiece = p.pricePerPiece || (p.price * m3PerPiece);
-    document.getElementById('det-vol').textContent = m3PerPiece.toFixed(4) + ' м³';
-    document.getElementById('det-price').textContent = pricePerPiece.toLocaleString('ru') + ' ₽/шт';
-    document.getElementById('det-sum').textContent = pricePerPiece.toLocaleString('ru') + ' ₽';
+  var raw = String(qtyInput.value || '').replace(',', '.').trim();
+  document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽/м³';
+
+  if (!raw) {
+    document.getElementById('det-vol').textContent = '—';
+    document.getElementById('det-sum').textContent = '—';
     return;
   }
-  var qty = parseInt(qtyVal) || 1;
-  if (qty < 1) qty = 1;
-  if (qty > p.qty) qty = p.qty;
-  qtyInput.value = qty;
-  var vol = m3PerPiece * qty;
-  var sum = p.price * vol;
-  document.getElementById('det-vol').textContent = vol.toFixed(4) + ' м³';
-  document.getElementById('det-price').textContent = p.price.toLocaleString('ru') + ' ₽/м³';
-  document.getElementById('det-sum').textContent = Math.round(sum).toLocaleString('ru') + ' ₽';
+  var vol = parseFloat(raw);
+  if (isNaN(vol) || vol <= 0) {
+    document.getElementById('det-vol').textContent = '—';
+    document.getElementById('det-sum').textContent = '—';
+    return;
+  }
+  if (vol > p.m3) vol = p.m3;
+  qtyInput.value = String(Math.round(vol * 100) / 100);
+  var sumRub = Math.round(p.price * vol);
+  document.getElementById('det-vol').textContent = vol.toLocaleString('ru', {minimumFractionDigits: 0, maximumFractionDigits: 4}) + ' м³';
+  document.getElementById('det-sum').textContent = sumRub.toLocaleString('ru') + ' ₽';
 }
 
 function addToCartFromDetail() {
@@ -595,22 +595,22 @@ function addToCartFromDetail() {
     openModal('Заявка на расчёт');
     return;
   }
-  var qtyVal = document.getElementById('det-qty-input').value;
-  var qty = (!qtyVal || qtyVal.trim() === '') ? 1 : parseInt(qtyVal);
-  if (qty < 1) qty = 1;
-  if (qty > p.qty) qty = p.qty;
-  var m3PerPiece = p.m3PerPiece || (p.qty > 0 ? p.m3 / p.qty : p.m3);
-  var vol = (m3PerPiece * qty).toFixed(4);
-  var sum = p.price * m3PerPiece * qty;
-  var price = Math.round(sum).toLocaleString('ru');
+  var raw = String(document.getElementById('det-qty-input').value || '').replace(',', '.').trim();
+  var vol = parseFloat(raw);
+  if (isNaN(vol) || vol <= 0) vol = Math.min(1, p.m3);
+  if (vol > p.m3) vol = p.m3;
+  vol = Math.round(vol * 10000) / 10000;
+  var sumRub = Math.round(p.price * vol);
+  var volStr = vol.toFixed(4).replace(/\.?0+$/, '');
+  var pricePerM3 = p.price.toLocaleString('ru');
   var CART_KEY = 'optel_cart';
   var cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) {}
   var parts = (p.name || '').split('×');
   var lenStr = parts.length >= 3 ? parts[parts.length - 1] + ' мм' : '';
   var item = { type: p.g, name: (p.label + ' ' + p.name).trim(), sort: p.sort, size: p.name,
-    len: lenStr, vol: vol,
-    price: price, qty: qty, key: p.sku || (p.g + '_' + p.sort + '_' + p.name) };
+    len: lenStr, vol: volStr,
+    price: pricePerM3, key: p.sku || (p.g + '_' + p.sort + '_' + p.name) };
   var exists = cart.findIndex(function(c){return c.key===item.key;});
   if (exists>=0) cart[exists]=item; else cart.push(item);
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
