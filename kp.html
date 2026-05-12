@@ -42,26 +42,26 @@ h3 { font-size: 10px; font-weight: 700; margin-bottom: 3px; }
 p { margin-bottom: 5px; color: var(--text2); }
 ul { margin: 5px 0 5px 12px; }
 li { margin-bottom: 2px; color: var(--text2); }
-.header { 
-  display: flex; 
-  justify-content: space-between; 
+.header {
+  display: flex;
+  justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 10px; 
-  padding-bottom: 8px; 
-  border-bottom: 2px solid var(--lime); 
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--lime);
 }
 .header-contacts { text-align: right; }
-.header-phone { 
+.header-phone {
   display: block;
-  font-family: 'Bebas Neue', sans-serif; 
-  font-size: 22px; 
-  color: var(--lime); 
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--lime);
   text-decoration: none;
 }
-.header-site { 
+.header-site {
   display: block;
-  font-size: 12px; 
-  color: var(--text2); 
+  font-size: 12px;
+  color: var(--text2);
   text-decoration: none;
 }
 .logo { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--lime); letter-spacing: 4px; }
@@ -78,8 +78,16 @@ li { margin-bottom: 2px; color: var(--text2); }
 .contacts { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); text-align: center; }
 .phone { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--lime); text-decoration: none; }
 .note { font-size: 8px; color: #4d6644; margin-top: 4px; }
-@media print { 
-  body { padding: 8mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+.group-header td {
+  background: #1a2e1a;
+  color: var(--lime);
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  padding: 5px 6px;
+}
+@media print {
+  body { padding: 8mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @page { margin: 0; background: #0a0f0a !important; }
 }
 </style>
@@ -102,24 +110,59 @@ li { margin-bottom: 2px; color: var(--text2); }
 <h2>📦 Продукция и цены</h2>
 
 <table class="table">
-<tr><th>Позиция</th><th>Сорт</th><th>М³</th><th>₽/м³</th><th>Наличие</th></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×138×4000</td><td>В</td><td>3.09</td><td class="price">38 000</td><td>400 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×138×4000</td><td>А</td><td>6.18</td><td class="price">57 000</td><td>800 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×138×2000</td><td>В</td><td>5.80</td><td class="price">37 267</td><td>1500 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×138×2000</td><td>С</td><td>1.55</td><td class="price">23 000</td><td>400 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×110×3000</td><td>Прима</td><td>1.85</td><td class="price">92 000</td><td>400 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×110×4000</td><td>Экстра</td><td>3.08</td><td class="price">138 000</td><td>500 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×110×4000</td><td>Прима</td><td>3.08</td><td class="price">92 000</td><td>500 шт</td></tr>
-<tr><td>Вагонка Штиль, Сосна, 14×110×2000</td><td>С</td><td>1.08</td><td class="price">23 000</td><td>350 шт</td></tr>
-<tr><td>Вагонка Штиль, Лиственница, 14×138×3000</td><td>В</td><td>2.32</td><td class="price">42 000</td><td>400 шт</td></tr>
-<tr><td>Вагонка Штиль, Лиственница, 14×138×2500</td><td>В</td><td>1.45</td><td class="price">42 000</td><td>300 шт</td></tr>
-<tr><td>Вагонка Штиль, Лиственница, 14×138×4000</td><td>В</td><td>2.32</td><td class="price">42 000</td><td>300 шт</td></tr>
-<tr><td>Вагонка Штиль, Лиственница, 14×110×3000</td><td>В</td><td>0.92</td><td class="price">42 000</td><td>200 шт</td></tr>
-<tr><td>Планкен косой, Лиственница, 20×120×6000</td><td>В</td><td>7.20</td><td class="price">41 000</td><td>500 шт</td></tr>
-<tr><td>Планкен косой, Лиственница, 20×90×6000</td><td>В</td><td>3.24</td><td class="price">41 000</td><td>300 шт</td></tr>
-<tr><td>Планкен косой, Лиственница, 20×120×6000</td><td>ВС</td><td>5.04</td><td class="price">33 500</td><td>350 шт</td></tr>
-<tr><td>Палубная доска, Лиственница, 27×140×2500</td><td>Прима</td><td>2.36</td><td class="price">91 000</td><td>250 шт</td></tr>
-<tr><td>Палубная доска, Лиственница, 27×140×2000</td><td>Прима</td><td>3.02</td><td class="price">91 000</td><td>400 шт</td></tr>
+<tr><th>Позиция</th><th>Сорт</th><th>М³ / Кол-во</th><th>₽/м³</th></tr>
+
+<!-- Вагонка Штиль — Сосна ангарская -->
+<tr class="group-header"><td colspan="4">Вагонка Штиль — Сосна ангарская</td></tr>
+<tr><td>Вагонка Штиль, Сосна ангарская, 14×88×4000</td><td>АВ</td><td>24,6 м³</td><td class="price">32 500</td></tr>
+<tr><td>Вагонка Штиль, Сосна ангарская, 14×110×4000</td><td>АВ</td><td>68,88 м³</td><td class="price">33 500</td></tr>
+<tr><td>Вагонка Штиль, Сосна ангарская, 14×138×4000</td><td>АВ</td><td>180,14 м³</td><td class="price">32 500</td></tr>
+<tr><td>Вагонка Штиль, Сосна ангарская, 14×138×3000</td><td>АВ</td><td>22,33 м³</td><td class="price">32 500</td></tr>
+
+<!-- Вагонка Штиль — Сосна -->
+<tr class="group-header"><td colspan="4">Вагонка Штиль — Сосна</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×4000</td><td>В</td><td>3,09 м³ (400 шт)</td><td class="price">38 000</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×4000</td><td>А</td><td>6,18 м³ (800 шт)</td><td class="price">57 000</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×2000</td><td>В</td><td>5,80 м³ (1500 шт)</td><td class="price">37 267</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×138×2000</td><td>С</td><td>1,55 м³ (400 шт)</td><td class="price">23 000</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×3000</td><td>Прима</td><td>1,85 м³ (400 шт)</td><td class="price">92 000</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×4000</td><td>Экстра</td><td>3,08 м³ (500 шт)</td><td class="price">138 000</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×4000</td><td>Прима</td><td>3,08 м³ (500 шт)</td><td class="price">92 000</td></tr>
+<tr><td>Вагонка Штиль, Сосна, 14×110×2000</td><td>С</td><td>1,08 м³ (350 шт)</td><td class="price">23 000</td></tr>
+
+<!-- Вагонка Штиль — Лиственница -->
+<tr class="group-header"><td colspan="4">Вагонка Штиль — Лиственница</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×138×3000</td><td>В</td><td>2,32 м³ (400 шт)</td><td class="price">42 000</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×138×2500</td><td>В</td><td>1,45 м³ (300 шт)</td><td class="price">42 000</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×138×4000</td><td>В</td><td>2,32 м³ (300 шт)</td><td class="price">42 000</td></tr>
+<tr><td>Вагонка Штиль, Лиственница, 14×110×3000</td><td>В</td><td>0,92 м³ (200 шт)</td><td class="price">42 000</td></tr>
+
+<!-- Планкен косой — Лиственница -->
+<tr class="group-header"><td colspan="4">Планкен косой — Лиственница</td></tr>
+<tr><td>Планкен косой, Лиственница, 20×120×6000</td><td>В</td><td>7,20 м³ (500 шт)</td><td class="price">41 000</td></tr>
+<tr><td>Планкен косой, Лиственница, 20×90×6000</td><td>В</td><td>3,24 м³ (300 шт)</td><td class="price">41 000</td></tr>
+<tr><td>Планкен косой, Лиственница, 20×120×6000</td><td>ВС</td><td>5,04 м³ (350 шт)</td><td class="price">33 500</td></tr>
+
+<!-- Палубная доска — Лиственница 40×140 -->
+<tr class="group-header"><td colspan="4">Палубная доска — Лиственница 40×140</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×6000</td><td>А</td><td>есть</td><td class="price">66 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×5000</td><td>А</td><td>есть</td><td class="price">66 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×4000</td><td>А</td><td>есть</td><td class="price">61 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×3000</td><td>А</td><td>есть</td><td class="price">61 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×2500</td><td>А</td><td>есть</td><td class="price">61 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×2000</td><td>А</td><td>есть</td><td class="price">61 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×6000</td><td>В</td><td>есть</td><td class="price">48 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×5000</td><td>В</td><td>есть</td><td class="price">48 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×4000</td><td>В</td><td>есть</td><td class="price">43 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×3000</td><td>В</td><td>есть</td><td class="price">43 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×2500</td><td>В</td><td>есть</td><td class="price">43 500</td></tr>
+<tr><td>Палубная доска, Лиственница, 40×140×2000</td><td>В</td><td>есть</td><td class="price">43 500</td></tr>
+
+<!-- Палубная доска — Лиственница 27×140 -->
+<tr class="group-header"><td colspan="4">Палубная доска — Лиственница 27×140</td></tr>
+<tr><td>Палубная доска, Лиственница, 27×140×2500</td><td>Прима</td><td>2,36 м³ (250 шт)</td><td class="price">91 000</td></tr>
+<tr><td>Палубная доска, Лиственница, 27×140×2000</td><td>Прима</td><td>3,02 м³ (400 шт)</td><td class="price">91 000</td></tr>
+
 </table>
 
 <h2>✅ Преимущества</h2>
